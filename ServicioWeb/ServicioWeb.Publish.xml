@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\Users\admin\Desktop\Publicacion" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Perfil1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="bin/ServicioWeb.pdb" publishTime="05/25/2017 15:45:30" />
+    <file relUrl="ServiceMail.asmx" publishTime="09/16/2016 10:59:27" />
+    <file relUrl="bin/ServicioWeb.dll" publishTime="05/25/2017 15:45:30" />
+    <file relUrl="WebForm1.aspx" publishTime="12/06/2016 11:06:49" />
+    <file relUrl="Web.config" publishTime="05/02/2017 09:42:18" />
+  </publishProfile>
+</publishData>

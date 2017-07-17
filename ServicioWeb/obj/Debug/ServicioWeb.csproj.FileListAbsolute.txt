@@ -1,0 +1,35 @@
+C:\Users\admin\Desktop\Version 29 Intranet\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29 Intranet\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\Version 29.1 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\Version 29.1 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.1 Intranet\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.1 Intranet\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29.1 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29.2 Intranet\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.2 Intranet\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29.2 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\Version 29.2 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.2 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29.3 Intranet\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.3 Intranet\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29.3 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\Version 29.3 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.3 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
+C:\Users\Admin\Desktop\Combinacion\Version 29.3 Intranet\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\Admin\Desktop\Combinacion\Version 29.3 Intranet\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\Admin\Desktop\Combinacion\Version 29.3 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Combinacion\Version 29.3 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\Admin\Desktop\Combinacion\Version 29.3 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29.4 Intranet\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.4 Intranet\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\admin\Desktop\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\admin\Desktop\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
+C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
