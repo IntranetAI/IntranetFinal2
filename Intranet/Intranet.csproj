@@ -24,6 +24,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -2756,6 +2761,7 @@
     <None Include="ModuloDespacho\View\UploadDocumentsDistribuccion.xlsx" />
     <None Include="ModuloDespacho\View\UploadDocumentsLibro1.xlsx" />
     <None Include="PDF\ejemplo saxoprint.pdf" />
+    <None Include="Properties\PublishProfiles\Perfil1.pubxml" />
     <None Include="Scripts\jquery-2.0.2.min.map" />
     <None Include="Scripts\jtable\themes\basic\jtable_basic.less" />
     <None Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.less" />
