@@ -404,7 +404,7 @@ namespace Intranet.ModuloFacturacion.Controller
                         query = query + " INSERT INTO Factura_Electronica.dbo.DTE_DETA_PRSE(CODI_EMPR,TIPO_DOCU,FOLI_DOCU,NUME_LINE,INDI_EXEN,NOMB_ITEM,CANT_ITEM,PREC_ITEM,NETO_ITEM,DESC_ITEM)" +
                                         " VALUES(1," + reader["id_tipo_documento"] + "," + id_folio_factura
                                         + "," + contador + ",'" + reader["IndExen"] + "','" + reader["nombre_producto"] + " (N°OT " + reader["referencia_ot"] + ")'," +
-                                        reader["cantidad"] + "," + reader["valor_producto"] + "," + reader["neto_Item"] + ",'');";
+                                        reader["cantidad"].ToString().Replace(",",".") + "," + reader["valor_producto"].ToString().Replace(",", ".") + "," + reader["neto_Item"] + ",'');";
                         contadorEspacios++;
                         Glosa = reader["glosa"].ToString();
                         if (Glosa != "")
