@@ -98,6 +98,7 @@
     <Content Include="ModuloProduccion\View\IndicadorOEE.aspx" />
     <Content Include="ModuloProduccion\View\pagina de prueba.html" />
     <Content Include="ModuloProduccion\View\WebForm1.aspx" />
+    <Content Include="paginaprueba.html" />
     <Content Include="Test3.aspx" />
     <Content Include="Testing.aspx" />
     <Content Include="Web.config" />
