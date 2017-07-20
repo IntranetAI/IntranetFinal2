@@ -185,7 +185,7 @@ $RECYCLE.BIN/
 # Visual Studio 2014 CTP
 **/*.sln.ide
 
-# Visual Studio temp something
+# Visual Studio temp something#
 .vs/
 
 # VS 2015+
@@ -199,7 +199,7 @@ $RECYCLE.BIN/
 **/node_modules/*
 **/wwwroot/*
 
-#ignorar los archivos suo
+#ignorar los archivos suo#
 **/*.suo
 
 #####
