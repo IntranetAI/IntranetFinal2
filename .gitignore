@@ -200,7 +200,9 @@ $RECYCLE.BIN/
 **/wwwroot/*
 
 #ignorar los archivos suo#
+*.suo
 **/*.suo
+**/**/**/.suo
 
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
