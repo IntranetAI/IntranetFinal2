@@ -20,6 +20,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,6 +96,7 @@
     <Content Include="Estructura\Js\modernizr.custom.js" />
     <Content Include="Estructura\Js\pace.min.js" />
     <Content Include="ModuloProduccion\View\IndicadorOEE.aspx" />
+    <Content Include="ModuloProduccion\View\pagina de prueba.html" />
     <Content Include="ModuloProduccion\View\WebForm1.aspx" />
     <Content Include="Testing.aspx" />
     <Content Include="Web.config" />
