@@ -5042,7 +5042,11 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
 
 
+        public string algo(int valor)
+        {
+            return valor.ToString();
 
+        }
 
     }
 }
