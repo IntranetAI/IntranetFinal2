@@ -67,9 +67,9 @@
             </tr>
         </table>
     </asp:Panel>
-    <asp:Panel ID="Panel1" runat="server" Height="600px" Width="100%" Direction="NotSet" ClientIDMode="Inherit">
+    <div style="min-height:500px;">
         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         <br />
-        <br />
-    </asp:Panel>
+
+    </div>
 </asp:Content>

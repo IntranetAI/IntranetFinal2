@@ -94,15 +94,6 @@ namespace Intranet.ModuloEncuadernacion.View {
         protected global::System.Web.UI.WebControls.Button btnFiltro;
         
         /// <summary>
-        /// Control Panel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
-        
-        /// <summary>
         /// Control divGrilla.
         /// </summary>
         /// <remarks>

@@ -111,13 +111,13 @@ namespace Intranet.ModuloEncuadernacion.View
             HtmlForm form = new HtmlForm();
             Label la = new Label();
 
-            la.Text = "<div align='center'>Estadistica Producción Diaria</div><div align='center'>" + Contenido.Replace("<espacio>", "<div>&nbsp;</div>");
+            la.Text = "<div align='center'>Estadistica Producción ENC</div><div align='center'>" + Contenido.Replace("<espacio>", "<div>&nbsp;</div>");
             form.Controls.Add(la);
             pageToRender.Controls.Add(form);
             response.Clear();
             response.Buffer = true;
             response.ContentType = "application/vnd.ms-excel";
-            response.AddHeader("Content-Disposition", "attachment;filename=" + nameReport + ".xls");
+            response.AddHeader("Content-Disposition", "attachment;filename=" + nameReport + " " + ddlSector.SelectedValue.ToString() + " " + ddlMes.SelectedValue.ToString() + "/" + ddlAño.SelectedValue.ToString() + ".xls");
             response.Charset = "UTF-8";
             response.ContentEncoding = Encoding.Default;
             pageToRender.RenderControl(htw);

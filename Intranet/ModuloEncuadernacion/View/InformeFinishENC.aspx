@@ -1,25 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/View/Aplicaciones.Master" AutoEventWireup="true" CodeBehind="InformeFinishENC.aspx.cs" Inherits="Intranet.ModuloEncuadernacion.View.InformeFinishENC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .style2
-        {
-            width: 100;
-            height: 142px;
-        }
-        .style3
-        {
-            height: 142px;
-        }
-        .style4
-        {
-            width: 100;
-            height: 50px;
-        }
-        .style5
-        {
-            height: 50px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <div runat="server" id="divbotones" style="text-align: right; width: 100%;">
@@ -71,11 +51,9 @@
             </tr>
         </table>
     </asp:Panel>
-    <asp:Panel ID="Panel1" runat="server" Height="600px" Width="100%" Direction="NotSet" ClientIDMode="Inherit">
-    <div runat="server" id="divGrilla" style="height:70%;width:101%; overflow:auto;border:1px; ">
+       <div runat="server" id="divGrilla" style="min-height:500px;"><%--style="height:90%;min-height:500px;width:101%; overflow:auto;border:1px;--%>
         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-        </div>
+
+   </div>
         <br />
-        <br />
-    </asp:Panel>
 </asp:Content>

@@ -224,7 +224,7 @@ namespace Intranet.ModuloEncuadernacion.Controller
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                             PorcMalosvsBuenos + "</td> " +
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
-                                            "??</td> " +
+                                            "-</td> " +
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                             Velocidad + "</td> " +
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
@@ -330,7 +330,7 @@ namespace Intranet.ModuloEncuadernacion.Controller
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                           "<b>" + PorcMalosvsBuenos + "</b></td> " +
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
-                                          "<b>" + "??</b></td> " +
+                                          "<b>" + "-</b></td> " +
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                           "<b>" + Velocidad + "</b></td> " +
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
@@ -457,7 +457,7 @@ namespace Intranet.ModuloEncuadernacion.Controller
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                             PorcMalosvsBuenos + "</td> " +
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
-                                            "??</td> " +
+                                            "-</td> " +
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                             Velocidad + "</td> " +
                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
@@ -562,7 +562,7 @@ namespace Intranet.ModuloEncuadernacion.Controller
                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                       "<b>" + PorcMalosvsBuenos + "</b></td> " +
                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
-                                      "<b>" + "??</b></td> " +
+                                      "<b>" + "-</b></td> " +
                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                       "<b>" + Velocidad + "</b></td> " +
                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
@@ -756,7 +756,7 @@ namespace Intranet.ModuloEncuadernacion.Controller
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                           "<b>" + MalosVsBuenos + "</b></td> " +
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
-                                          "<b>" + "??</b></td> " +
+                                          "<b>" + "-</b></td> " +
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +
                                           "<b>" + Velocidad + "</b></td> " +
                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;'> " +

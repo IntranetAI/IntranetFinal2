@@ -3222,6 +3222,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             }
         }
 
+        //INICIO CORREO SEMANAL ENC
         public string Produccion_SemanalENC(DateTime FechaInicio, DateTime FechaTermino, int Procedimiento)
         {
             string Contenido = ""; string SectorAnt = ""; double TotalEntradas = 0; double TotalHorasPreparacion = 0; double TotalHorasTiraje = 0; double TotalHorasImproductivas = 0; double TotalBuenos = 0; string Velocidad = "";
@@ -3455,7 +3456,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             "</tr>";
                         SectorAnt = reader["CodSetor"].ToString();
                     }
-                } if (reader.Read() == false)
+                }
+                if (reader.Read() == false)
                 {
                     TimeSpan t12 = TimeSpan.FromSeconds(TotalHPromedioPreparacion);
                     int Dias12 = t12.Days * 24;
@@ -3512,10 +3514,10 @@ namespace ServicioWeb.ModuloProduccion.Controller
         public string Produccion_SemanalxTurnosENC(DateTime FechaInicio, DateTime FechaTermino, int Procedimiento)
         {
             string Contenido = ""; string SectorAnt = "";
-            double Noche = 0; double Mañana = 0; double Tarde = 0; double TotalNoche = 0; double TotalMañana = 0; double TotalTarde = 0; double TotalTurnos = 0; double TotalGeneralTurnos = 0;
+            double Noche = 0; double Mañana = 0; double Tarde = 0; double TotalNoche = 0; double TotalMañana = 0; double TotalTarde = 0; double TotalTurnos = 0; double TotalGeneralTurnos = 0; double TotalMensual = 0;
             string PorcNoche = ""; string PorcMañana = ""; string PorcTarde = "";
             #region Encabezado;
-            string Encabezado = "<table id='tblRegistro' runat='server' cellspacing='0' cellpadding='0' style='border: 1px solid #CCC; margin: 0 auto; margin-top: 0px; margin-bottom: 15px; width:750px;margin-left:3px;'> " +
+            string Encabezado = "<table id='tblRegistro' runat='server' cellspacing='0' cellpadding='0' style='border: 1px solid #CCC; margin: 0 auto; margin-top: 0px; margin-bottom: 15px; width:850px;margin-left:3px;'> " +
           "<tbody>" +
               "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'>" +
             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:150px;' rowspan='2'>" +
@@ -3523,7 +3525,9 @@ namespace ServicioWeb.ModuloProduccion.Controller
             "<td style='font-size:14px;font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;' colspan='3'> " +
                 "Producción por Turnos</td>  " +
             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:100px;' rowspan='2'> " +
-                "Totales Generales</td>  " +
+                "Total Semanal</td>  " +
+            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:100px;' rowspan='2'> " +
+                "Total Mensual<br/>(Últimos 30 días)</td>  " +
           "</tr>" +
           "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'>  " +
             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:86px;'> " +
@@ -3558,17 +3562,18 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         TotalTarde += Tarde;
                         TotalTurnos = Convert.ToDouble(reader["TotalTurnos"].ToString());
                         TotalGeneralTurnos += TotalTurnos;
+                        TotalMensual += Convert.ToDouble(reader["BuenosMensual"].ToString());
                         if (TotalTurnos > 0)
                         {
-                            PorcNoche = Noche.ToString("N0").Replace(",", ".") + "(" + ((Noche / TotalTurnos) * 100).ToString("N2") + "%)";
-                            PorcMañana = Mañana.ToString("N0").Replace(",", ".") + "(" + ((Mañana / TotalTurnos) * 100).ToString("N2") + "%)";
-                            PorcTarde = Tarde.ToString("N0").Replace(",", ".") + "(" + ((Tarde / TotalTurnos) * 100).ToString("N2") + "%)";
+                            PorcNoche = Noche.ToString("N0").Replace(",", ".") + " (" + ((Noche / TotalTurnos) * 100).ToString("N2") + "%)";
+                            PorcMañana = Mañana.ToString("N0").Replace(",", ".") + " (" + ((Mañana / TotalTurnos) * 100).ToString("N2") + "%)";
+                            PorcTarde = Tarde.ToString("N0").Replace(",", ".") + " (" + ((Tarde / TotalTurnos) * 100).ToString("N2") + "%)";
                         }
                         else
                         {
-                            PorcNoche = "0(0,00%)";
-                            PorcMañana = "0(0,00%)";
-                            PorcTarde = "0(0,00%)";
+                            PorcNoche = "0 (0,00%)";
+                            PorcMañana = "0 (0,00%)";
+                            PorcTarde = "0 (0,00%)";
                         }
                         Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:150px;'> " +
@@ -3581,6 +3586,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                            PorcTarde + "</td> " +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
                            TotalTurnos.ToString("N0").Replace(",", ".") + "</td> " +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
+                           Convert.ToInt32(reader["BuenosMensual"].ToString()).ToString("N0").Replace(",", ".") + "</td> " +
                          "</tr>";
                         SectorAnt = reader["CodSetor"].ToString();
                     }
@@ -3588,15 +3595,15 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     {
                         if (TotalGeneralTurnos > 0)
                         {
-                            PorcNoche = TotalNoche.ToString("N0").Replace(",", ".") + "(" + ((TotalNoche / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
-                            PorcMañana = TotalMañana.ToString("N0").Replace(",", ".") + "(" + ((TotalMañana / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
-                            PorcTarde = TotalTarde.ToString("N0").Replace(",", ".") + "(" + ((TotalTarde / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
+                            PorcNoche = TotalNoche.ToString("N0").Replace(",", ".") + " (" + ((TotalNoche / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
+                            PorcMañana = TotalMañana.ToString("N0").Replace(",", ".") + " (" + ((TotalMañana / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
+                            PorcTarde = TotalTarde.ToString("N0").Replace(",", ".") + " (" + ((TotalTarde / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
                         }
                         else
                         {
-                            PorcNoche = "0(0,00%)";
-                            PorcMañana = "0(0,00%)";
-                            PorcTarde = "0(0,00%)";
+                            PorcNoche = "0 (0,00%)";
+                            PorcMañana = "0 (0,00%)";
+                            PorcTarde = "0 (0,00%)";
                         }
                         Contenido = Contenido + "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
                             "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:150px;'> " +
@@ -3609,6 +3616,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             "<b>" + PorcTarde + "</b></td> " +
                             "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
                             "<b>" + TotalGeneralTurnos.ToString("N0").Replace(",", ".") + "</b></td> " +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
+                            "<b>" + TotalMensual.ToString("N0").Replace(",", ".") + "</b></td> " +
                           "</tr>";
                         //FIN TOTALES
                         Noche = Convert.ToDouble(reader["Noche"].ToString());
@@ -3619,17 +3628,18 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         TotalTarde = 0; TotalTarde += Tarde;
                         TotalTurnos = Convert.ToDouble(reader["TotalTurnos"].ToString());
                         TotalGeneralTurnos = 0; TotalGeneralTurnos += TotalTurnos;
+                        TotalMensual = 0; TotalMensual += Convert.ToDouble(reader["BuenosMensual"].ToString());
                         if (TotalTurnos > 0)
                         {
-                            PorcNoche = Noche.ToString("N0").Replace(",", ".") + "(" + ((Noche / TotalTurnos) * 100).ToString("N2") + "%)";
-                            PorcMañana = Mañana.ToString("N0").Replace(",", ".") + "(" + ((Mañana / TotalTurnos) * 100).ToString("N2") + "%)";
-                            PorcTarde = Tarde.ToString("N0").Replace(",", ".") + "(" + ((Tarde / TotalTurnos) * 100).ToString("N2") + "%)";
+                            PorcNoche = Noche.ToString("N0").Replace(",", ".") + " (" + ((Noche / TotalTurnos) * 100).ToString("N2") + "%)";
+                            PorcMañana = Mañana.ToString("N0").Replace(",", ".") + " (" + ((Mañana / TotalTurnos) * 100).ToString("N2") + "%)";
+                            PorcTarde = Tarde.ToString("N0").Replace(",", ".") + " (" + ((Tarde / TotalTurnos) * 100).ToString("N2") + "%)";
                         }
                         else
                         {
-                            PorcNoche = "0(0,00%)";
-                            PorcMañana = "0(0,00%)";
-                            PorcTarde = "0(0,00%)";
+                            PorcNoche = "0 (0,00%)";
+                            PorcMañana = "0 (0,00%)";
+                            PorcTarde = "0 (0,00%)";
                         }
                         Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:150px;'> " +
@@ -3642,22 +3652,25 @@ namespace ServicioWeb.ModuloProduccion.Controller
                            PorcTarde + "</td> " +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
                            TotalTurnos.ToString("N0").Replace(",", ".") + "</td> " +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
+                            Convert.ToInt32(reader["BuenosMensual"].ToString()).ToString("N0").Replace(",", ".") + "</td> " +
                          "</tr>";
                         SectorAnt = reader["CodSetor"].ToString();
                     }
-                } if (reader.Read() == false)
+                }
+                if (reader.Read() == false)
                 {
                     if (TotalGeneralTurnos > 0)
                     {
-                        PorcNoche = TotalNoche.ToString("N0").Replace(",", ".") + "(" + ((TotalNoche / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
-                        PorcMañana = TotalMañana.ToString("N0").Replace(",", ".") + "(" + ((TotalMañana / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
-                        PorcTarde = TotalTarde.ToString("N0").Replace(",", ".") + "(" + ((TotalTarde / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
+                        PorcNoche = TotalNoche.ToString("N0").Replace(",", ".") + " (" + ((TotalNoche / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
+                        PorcMañana = TotalMañana.ToString("N0").Replace(",", ".") + " (" + ((TotalMañana / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
+                        PorcTarde = TotalTarde.ToString("N0").Replace(",", ".") + " (" + ((TotalTarde / TotalGeneralTurnos) * 100).ToString("N2") + "%)";
                     }
                     else
                     {
-                        PorcNoche = "0(0,00%)";
-                        PorcMañana = "0(0,00%)";
-                        PorcTarde = "0(0,00%)";
+                        PorcNoche = "0 (0,00%)";
+                        PorcMañana = "0 (0,00%)";
+                        PorcTarde = "0 (0,00%)";
                     }
                     Contenido = Contenido + "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:150px;'> " +
@@ -3670,6 +3683,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         "<b>" + PorcTarde + "</b></td> " +
                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
                         "<b>" + TotalGeneralTurnos.ToString("N0").Replace(",", ".") + "</b></td> " +
+                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:100px;'> " +
+                        "<b>" + TotalMensual.ToString("N0").Replace(",", ".") + "</b></td> " +
                       "</tr>";
                     //FIN TOTALES
                 }
@@ -3738,6 +3753,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             }
         }
 
+        //FIN CORREO SEMANAL ENC
         public string GenerarCorreoInformeFacturacion(string año, string mes, string dia)
         {
             try
