@@ -233,25 +233,25 @@ namespace Intranet.ModuloProduccion.View
                 {
                     string CantidadDifNeg = (CantProdBajo - CantPlanBajo).ToString();
                     string PorcenProdNeg = (Convert.ToDouble(Convert.ToDouble(CantidadDifNeg) / Convert.ToDouble(CantPlanBajo)) * 100).ToString("N2") + "%";
-                    Negativo = "<tr><td colspan ='8'></td><td style='border:1px solid black;'>Cant. Plan. Bajo</td>" +
+                    Negativo = "<tr><td colspan ='6'></td><td style='border:1px solid black;'>Cant. Plan. Bajo</td>" +
                                         "<td style='border:1px solid black;'>" + CantPlanBajo.ToString() + "</td></tr><tr>" +
-                                        "<td colspan ='8'></td><td style='border:1px solid black;'>Cant. Prod. Bajo</td>" +
+                                        "<td colspan ='6'></td><td style='border:1px solid black;'>Cant. Prod. Bajo</td>" +
                                         "<td style='border:1px solid black;'>" + CantProdBajo.ToString() + "</td></tr><tr>" +
-                                        "<td colspan ='8'></td><td style='border:1px solid black;'>Diferencia Bajo</td>" +
+                                        "<td colspan ='6'></td><td style='border:1px solid black;'>Diferencia Bajo</td>" +
                                         "<td style='border:1px solid black;'>" + CantidadDifNeg + "</td></tr><tr>" +
-                                        "<td colspan ='8'></td><td style='border:1px solid black;'>% Bajo</td>" +
+                                        "<td colspan ='6'></td><td style='border:1px solid black;'>% Bajo</td>" +
                                         "<td style='border:1px solid black;'>" + PorcenProdNeg + "</td></tr>";
                 }
                 TablaMaquinaTotal.Text = "<br/><div align='right'><table><tr>" +
-                                    "<td colspan ='8'></td><td  style='border:1px solid black;'>Total Cant. Plan.</td>" +
+                                    "<td colspan ='6'></td><td  style='border:1px solid black;'>Total Cant. Plan.</td>" +
                                     "<td style='border:1px solid black;'>" + TotalPlanificado.ToString() + "</div></td></tr><tr>" +
-                                    "<td colspan ='8'></td><td  style='border:1px solid black;'>Cant. Plan. Sobre</td>" +
+                                    "<td colspan ='6'></td><td  style='border:1px solid black;'>Cant. Plan. Sobre</td>" +
                                     "<td style='border:1px solid black;'>" + CantPlanSobre.ToString() + "</div></td></tr><tr>" +
-                                    "<td colspan ='8'></td><td style='border:1px solid black;'>Cant. Prod. Sobre</td>" +
+                                    "<td colspan ='6'></td><td style='border:1px solid black;'>Cant. Prod. Sobre</td>" +
                                     "<td style='border:1px solid black;'>" + CantProdSobre.ToString() + "</td></tr><tr>" +
-                                    "<td colspan ='8'></td><td style='border:1px solid black;'>Diferencia Sobre</td>" +
+                                    "<td colspan ='6'></td><td style='border:1px solid black;'>Diferencia Sobre</td>" +
                                     "<td style='border:1px solid black;'>" + CantidadDif+ "</td></tr><tr>" +
-                                    "<td colspan ='8'></td><td style='border:1px solid black;'>% Sobre</td>" +
+                                    "<td colspan ='6'></td><td style='border:1px solid black;'>% Sobre</td>" +
                                     "<td style='border:1px solid black;'>" + PorcenProd.Replace("NaN", "0") + "</td></tr>" + Negativo + "</table></div>";
 
                 Label Maquina1 = new Label();
@@ -279,26 +279,26 @@ namespace Intranet.ModuloProduccion.View
             if (TotalRotCantDifBajo > 0)
             {
                 RotPorceCantDifBajo = Convert.ToDouble(Convert.ToDouble(TotalRotCantDifBajo) / Convert.ToDouble(TotalRotCantPlanBajo)) * 100;
-                RotNegativoBajo = "<tr><td colspan ='8'></td><td  style='border:1px solid black;'>Cant. Plan. Bajo</td>" +
+                RotNegativoBajo = "<tr><td colspan ='6'></td><td  style='border:1px solid black;'>Cant. Plan. Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + TotalRotCantPlanBajo.ToString() + "</td></tr><tr>"+
-                                  "<td colspan ='8'></td><td  style='border:1px solid black;'>Cant. Prod. Bajo</td>" +
+                                  "<td colspan ='6'></td><td  style='border:1px solid black;'>Cant. Prod. Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + TotalRotCantProdBajo.ToString() + "</td></tr><tr>"+
-                                  "<td colspan ='8'></td><td  style='border:1px solid black;'>Diferencia Bajo</td>" +
+                                  "<td colspan ='6'></td><td  style='border:1px solid black;'>Diferencia Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + TotalRotCantDifBajo.ToString() + "</td></tr><tr>" +
-                                  "<td colspan ='8'></td><td  style='border:1px solid black;'>% Bajo</td>" +
+                                  "<td colspan ='6'></td><td  style='border:1px solid black;'>% Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + RotPorceCantDifBajo.ToString() + "%</td></tr>";
             }
             TablaMaquinaRot.Text = "<br/><br/><br/><div align='right'><table><tr>" +
-                                "<td colspan ='8'></td><td  style='border:1px solid black;'colspan ='2'>Rotativa</td></tr><tr>" +
-                                "<td colspan ='8'></td><td  style='border:1px solid black;'>Total Cant. Plan.</td>" +
+                                "<td colspan ='6'></td><td  style='border:1px solid black;'colspan ='2'>Rotativa</td></tr><tr>" +
+                                "<td colspan ='6'></td><td  style='border:1px solid black;'>Total Cant. Plan.</td>" +
                                 "<td style='border:1px solid black;'>" + TotalRotCantPlan.ToString() + "</td></tr><tr>" +
-                                "<td colspan ='8'></td><td  style='border:1px solid black;'>Cant. Plan. Sobre</td>" +
+                                "<td colspan ='6'></td><td  style='border:1px solid black;'>Cant. Plan. Sobre</td>" +
                                 "<td style='border:1px solid black;'>" + TotalRotCantPlanSobre.ToString() + "</td></tr><tr>" +
-                                "<td colspan ='8'></td><td style='border:1px solid black;'>Cant. Prod. Sobre</td>" +
+                                "<td colspan ='6'></td><td style='border:1px solid black;'>Cant. Prod. Sobre</td>" +
                                 "<td style='border:1px solid black;'>" + TotalRotCantProdSobre.ToString() + "</td></tr><tr>" +
-                                "<td colspan ='8'></td><td style='border:1px solid black;'>Diferencia Sobre</td>" +
+                                "<td colspan ='6'></td><td style='border:1px solid black;'>Diferencia Sobre</td>" +
                                 "<td style='border:1px solid black;'>" + TotalRotCantDifSobre + "</td></tr><tr>" +
-                                "<td colspan ='8'></td><td style='border:1px solid black;'>% Sobre</td>" +
+                                "<td colspan ='6'></td><td style='border:1px solid black;'>% Sobre</td>" +
                                 "<td style='border:1px solid black;'>" + RotPorceCantDifSobre.ToString("N2").Replace("NaN", "0") + "%</td></tr>" +
                                 RotNegativoBajo+"</table></div>";
 
@@ -313,26 +313,26 @@ namespace Intranet.ModuloProduccion.View
             if (TotalPlaCantDifbajo > 0)
             {
                 PlaPorceCantDifBajo = Convert.ToDouble(Convert.ToDouble(TotalPlaCantDifbajo) / Convert.ToDouble(TotalPlaCantPlanBajo)) * 100;
-                PlaNegativoBajo = "<tr><td colspan ='8'></td><td  style='border:1px solid black;'>Cant. Plan. Bajo</td>" +
+                PlaNegativoBajo = "<tr><td colspan ='6'></td><td  style='border:1px solid black;'>Cant. Plan. Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + TotalPlaCantPlanBajo.ToString() + "</td></tr><tr>" +
-                                  "<td colspan ='8'></td><td  style='border:1px solid black;'>Cant. Prod. Bajo</td>" +
+                                  "<td colspan ='6'></td><td  style='border:1px solid black;'>Cant. Prod. Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + TotalPlaCantProdBajo.ToString() + "</td></tr><tr>" +
-                                  "<td colspan ='8'></td><td  style='border:1px solid black;'>Diferencia Bajo</td>" +
+                                  "<td colspan ='6'></td><td  style='border:1px solid black;'>Diferencia Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + TotalPlaCantDifbajo.ToString() + "</td></tr><tr>" +
-                                  "<td colspan ='8'></td><td  style='border:1px solid black;'>% Bajo</td>" +
+                                  "<td colspan ='6'></td><td  style='border:1px solid black;'>% Bajo</td>" +
                                     "<td style='border:1px solid black;'>" + PlaPorceCantDifBajo.ToString() + "%</td></tr>";
             }
             TablaMaquinaPla.Text = "<br/><div align='right'><table><tr>" +
-                                "<td colspan ='8'></td><td  style='border:1px solid black;' colspan ='2'>Plana</td></tr><tr>" +
-                                "<td colspan ='8'></td><td  style='border:1px solid black;'>Total Cant. Plan.</td>" +// colspan ='2'
+                                "<td colspan ='6'></td><td  style='border:1px solid black;' colspan ='2'>Plana</td></tr><tr>" +
+                                "<td colspan ='6'></td><td  style='border:1px solid black;'>Total Cant. Plan.</td>" +// colspan ='2'
                                 "<td style='border:1px solid black;'>" + TotalPlaCantPlan.ToString() + "</td></tr><tr>" +
-                                "<td colspan ='8'></td><td  style='border:1px solid black;'>Cant. Plan. Sobre</td>" +// colspan ='2'
+                                "<td colspan ='6'></td><td  style='border:1px solid black;'>Cant. Plan. Sobre</td>" +// colspan ='2'
                                 "<td style='border:1px solid black;'>" + TotalPlaCantPlanSobre.ToString() + "</div></td></tr><tr>" +
-                                "<td colspan ='8'></td><td style='border:1px solid black;'>Cant. Prod. Sobre</td>" +
+                                "<td colspan ='6'></td><td style='border:1px solid black;'>Cant. Prod. Sobre</td>" +
                                 "<td style='border:1px solid black;'>" + TotalPlaCantProdSobre.ToString() + "</td></tr><tr>" +
-                                "<td colspan ='8'></td><td style='border:1px solid black;'>Diferencia Sobre</td>" +
+                                "<td colspan ='6'></td><td style='border:1px solid black;'>Diferencia Sobre</td>" +
                                 "<td style='border:1px solid black;'>" + TotalPlaCantDifSobre + "</td></tr><tr>" +
-                                "<td colspan ='8'></td><td style='border:1px solid black;'>% Sobre</td>" +
+                                "<td colspan ='6'></td><td style='border:1px solid black;'>% Sobre</td>" +
                                 "<td style='border:1px solid black;'>" + PlaPorceCantDifSobre.ToString("N2") + "%</td></tr>"+
                                 PlaNegativoBajo + "</table></div>";
 
