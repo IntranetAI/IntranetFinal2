@@ -3,3 +3,8 @@ C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Intrane
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Intranet\obj\Debug\Intranet.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Intranet\obj\Debug\Intranet.dll
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Intranet\obj\Debug\Intranet.pdb
+C:\Users\Admin\Desktop\IntranetClone\Intranet\bin\Intranet.dll
+C:\Users\Admin\Desktop\IntranetClone\Intranet\bin\Intranet.pdb
+C:\Users\Admin\Desktop\IntranetClone\Intranet\obj\Debug\Intranet.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\IntranetClone\Intranet\obj\Debug\Intranet.dll
+C:\Users\Admin\Desktop\IntranetClone\Intranet\obj\Debug\Intranet.pdb

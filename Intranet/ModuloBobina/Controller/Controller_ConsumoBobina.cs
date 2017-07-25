@@ -133,7 +133,8 @@ namespace Intranet.ModuloBobina.Controller
                         b.ConsumoBobina = Convert.ToDouble(reader["Consumo"].ToString()).ToString();
                         b.Escarpe = Convert.ToDouble(reader["Escalpe"].ToString()).ToString();
                         b.PorcentajePerdidas = Convert.ToDouble(reader["PorcPerdida"].ToString()).ToString("N2") + "%";
-                        b.MotivoPerdida = "";
+                        b.OrigenPerdida = reader["Origen"].ToString();
+                        b.MotivoPerdida = reader["Motivo"].ToString();
                         lista.Add(b);
                     }
                 }

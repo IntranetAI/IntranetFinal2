@@ -6,3 +6,7 @@ C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Pistola
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Pistola\bin\Pistola.pdb
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Pistola\obj\Debug\Pistola.dll
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Pistola\obj\Debug\Pistola.pdb
+C:\Users\Admin\Desktop\IntranetClone\Pistola\bin\Pistola.dll
+C:\Users\Admin\Desktop\IntranetClone\Pistola\bin\Pistola.pdb
+C:\Users\Admin\Desktop\IntranetClone\Pistola\obj\Debug\Pistola.dll
+C:\Users\Admin\Desktop\IntranetClone\Pistola\obj\Debug\Pistola.pdb

@@ -77,7 +77,6 @@
     <Content Include="ModuloWip\View\Login.aspx" />
     <Content Include="ModuloWip\View\Menu.aspx" />
     <Content Include="ModuloWip\View\Pallet_Encuader.aspx" />
-    <Content Include="PaginaPrueba9.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -168,13 +167,6 @@
     </Compile>
     <Compile Include="ModuloWip\View\Pallet_Encuader.aspx.designer.cs">
       <DependentUpon>Pallet_Encuader.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PaginaPrueba9.aspx.cs">
-      <DependentUpon>PaginaPrueba9.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PaginaPrueba9.aspx.designer.cs">
-      <DependentUpon>PaginaPrueba9.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

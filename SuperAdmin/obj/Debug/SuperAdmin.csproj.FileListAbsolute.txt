@@ -18,3 +18,7 @@ C:\Users\admin\Desktop\Version 29.4 Intranet\SuperAdmin\bin\SuperAdmin.dll
 C:\Users\admin\Desktop\Version 29.4 Intranet\SuperAdmin\bin\SuperAdmin.pdb
 C:\Users\admin\Desktop\Version 29.4 Intranet\SuperAdmin\obj\Debug\SuperAdmin.dll
 C:\Users\admin\Desktop\Version 29.4 Intranet\SuperAdmin\obj\Debug\SuperAdmin.pdb
+C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\bin\SuperAdmin.dll
+C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\bin\SuperAdmin.pdb
+C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\obj\Debug\SuperAdmin.dll
+C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\obj\Debug\SuperAdmin.pdb
