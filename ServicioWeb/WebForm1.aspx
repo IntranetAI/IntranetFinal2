@@ -44,8 +44,6 @@
                      
                                     </tr>
 			</tbody></table>--%>
-            <div>agrego div carlos</div>aa11
-            <div>agrego div carlos</div>aa1234
     </form>
     
 </body>
