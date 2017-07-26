@@ -22,3 +22,5 @@ C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\bin\SuperAdmin.dll
 C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\bin\SuperAdmin.pdb
 C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\obj\Debug\SuperAdmin.dll
 C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\obj\Debug\SuperAdmin.pdb
+C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\bin\SuperAdmin.dll.config
+C:\Users\Admin\Desktop\IntranetClone\SuperAdmin\obj\Debug\SuperAdmin.csprojResolveAssemblyReference.cache
