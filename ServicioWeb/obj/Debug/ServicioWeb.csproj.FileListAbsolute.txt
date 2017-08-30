@@ -38,4 +38,3 @@ C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.pdb
 C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.dll
 C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.pdb
-C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.dll.config
