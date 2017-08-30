@@ -4737,15 +4737,25 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             }
                             mmsg.To.Add("nicolas.makuc@aimpresores.cl");
                             mmsg.To.Add("ignacio.herrera@aimpresores.cl");
+
+                            mmsg.To.Add("julio.salas@aimpresores.cl");
+                            mmsg.To.Add("srubio@aencuadernadores.cl");
+                            mmsg.To.Add("cristopher.tarifeno@aimpresores.cl");
+                            mmsg.To.Add("jefeturno@aimpresores.cl");
+                            mmsg.To.Add("planificacion@aimpresores.cl");
+                            mmsg.To.Add("preprensa@aimpresores.cl");
+                            mmsg.To.Add("gonzalo.vergara@aimpresores.cl");
                             if (OT.Usr_Liberada == "FDS")
                             {
-                                mmsg.To.Add("julio.salas@aimpresores.cl");
-                                mmsg.To.Add("srubio@aencuadernadores.cl");
-                                mmsg.To.Add("cristopher.tarifeno@aimpresores.cl");
-                                mmsg.To.Add("jefeturno@aimpresores.cl");
-                                mmsg.To.Add("planificacion@aimpresores.cl");
-                                mmsg.To.Add("preprensa@aimpresores.cl");
-                                mmsg.To.Add("gonzalo.vergara@aimpresores.cl");
+                                mmsg.To.Add("claudio.ruiztagle @aimpresores.cl");
+                                mmsg.To.Add("david.rivas @aimpresores.cl");
+                                mmsg.To.Add("enzo.velasquez @aimpresores.cl");
+                                mmsg.To.Add("francisco.depablo @aimpresores.cl");
+                                mmsg.To.Add("indigo@aimpresores.cl");
+                                mmsg.To.Add("lpimentel@aencuadernadores.cl");
+                                mmsg.To.Add("manuel.andrade @aimpresores.cl");
+                                mmsg.To.Add("rafael.maroto @aimpresores.cl");
+                                mmsg.To.Add("roxana.galaz @aimpresores.cl");
                             }
                             mmsg.Subject = "Se Informa liberacion de la OT : " + OT.OT;
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
