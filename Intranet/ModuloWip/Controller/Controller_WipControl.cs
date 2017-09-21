@@ -98,21 +98,27 @@ namespace Intranet.ModuloWip.Controller
             SqlCommand cmd = con.AbrirConexionIntranet();
             if (cmd != null)
             {
-                cmd.CommandText = "Wip_List_MaxRegistro";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                try
                 {
-                    string numero = reader["ID_Control"].ToString();
-                    numero = numero.Substring(3,numero.Length-3);
-                    registro = Convert.ToInt32(numero.Substring(1,numero.Length-1));
-                }
-                else
-                {
-                    registro = 0;
-                }
+                    cmd.CommandText = "Wip_List_MaxRegistro";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        string numero = reader["ID_Control"].ToString();
+                        numero = numero.Substring(3, numero.Length - 3);
+                        registro = Convert.ToInt32(numero.Substring(1, numero.Length - 1));
+                    }
+                    else
+                    {
+                        registro = 0;
+                    }
+                }
+                catch
+                {
+
+                }
             }
             con.CerrarConexion();
             return registro;

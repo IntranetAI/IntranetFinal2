@@ -308,67 +308,71 @@ namespace Intranet.Wip.View
                     Model_Wip_Control wip = new Model_Wip_Control();
                     int numero = wipControl.MaxRegistroWip() + 1;
                     string Codigo = "";
-                    if (ddlDestino.SelectedItem.Text == "Almacenamiento Wip")
+                    if (numero > 1)
                     {
-                        Codigo = "WP-00000000";
-                    }
-                    if (ddlDestino.SelectedItem.Text == "Servicio Externo")
-                    {
-                        Codigo = "SE-00000000";
-                    }
-                    if (ddlDestino.SelectedItem.Text == "Directo a Encuadernacion")
-                    {
-                        Codigo = "DE-00000000";
-                    }
-                    wip.ID_Control = Codigo.Substring(0, Codigo.Length - numero.ToString().Length) + numero.ToString();
-                    wip.OT = txtNumeroOT.Text.Trim();
-                    wip.NombreOT = txtNombreOT.Text.Trim();
-                    wip.Maquina = ddlMaquina.SelectedItem.ToString().Trim();
-                    if (!cbxNPliegNew.Checked)
-                    {
-                        if (ddlProgramado.SelectedValue.ToString() != "Seleccione...")
+                        if (ddlDestino.SelectedItem.Text == "Almacenamiento Wip")
                         {
-                            wip.Pliego = ddlProgramado.SelectedItem.ToString().Trim();
+                            Codigo = "WP-00000000";
+                        }
+                        if (ddlDestino.SelectedItem.Text == "Servicio Externo")
+                        {
+                            Codigo = "SE-00000000";
+                        }
+                        if (ddlDestino.SelectedItem.Text == "Directo a Encuadernacion")
+                        {
+                            Codigo = "DE-00000000";
+                        }
+
+                        wip.ID_Control = Codigo.Substring(0, Codigo.Length - numero.ToString().Length) + numero.ToString();
+                        wip.OT = txtNumeroOT.Text.Trim();
+                        wip.NombreOT = txtNombreOT.Text.Trim();
+                        wip.Maquina = ddlMaquina.SelectedItem.ToString().Trim();
+                        if (!cbxNPliegNew.Checked)
+                        {
+                            if (ddlProgramado.SelectedValue.ToString() != "Seleccione...")
+                            {
+                                wip.Pliego = ddlProgramado.SelectedItem.ToString().Trim();
+                            }
+                            else
+                            {
+                                wip.Pliego = ddlPliego.SelectedItem.ToString().Trim();
+                            }
                         }
                         else
                         {
-                            wip.Pliego = ddlPliego.SelectedItem.ToString().Trim();
+                            wip.Pliego = txtPliego_new.Text.Trim();
                         }
-                    }
-                    else
-                    {
-                        wip.Pliego = txtPliego_new.Text.Trim();
-                    }
-                    Double Ejemplares = Convert.ToDouble(txtTotal.Text.ToString().Replace('.', ','));
+                        Double Ejemplares = Convert.ToDouble(txtTotal.Text.ToString().Replace('.', ','));
 
-                    wip.TotalTiraje = Convert.ToInt32(Ejemplares);
-                    if (txtCantidad.Text.Trim() != "")
-                    {
-                        wip.Peso_pallet = Convert.ToDouble(txtCantidad.Text);
-                    }
-                    if (txtEjemplares.Text.Trim() != "")
-                    {
-                        wip.Pliegos_Impresos = Convert.ToInt32(txtEjemplares.Text);
-                    }
-                    if (wip.OT.Substring(0, 1).ToUpper() == "B")
-                    {
-                        wip.Tarea = txtTarea.Text.Trim();
-                        wip.Forma = txtForma.Text.Trim();
-                    }
-                    wip.Usuario = Session["Usuario"].ToString();
-                    wip.Ubicacion = ddlDestino.SelectedItem.ToString();
-                    wip.IDTipoPallet = Convert.ToInt32(ddlTipoPallet.SelectedValue);
-                    wip.TipoPallet = ddlTipoPallet.SelectedItem.ToString();
-                    if (wipControl.Agregar_Pallet_Wip(wip,""))
-                    {
-                        if (ddlProgramado.SelectedValue.ToString() == "Seleccione...")
+                        wip.TotalTiraje = Convert.ToInt32(Ejemplares);
+                        if (txtCantidad.Text.Trim() != "")
                         {
-                            //EnvioCorreo(wip);
+                            wip.Peso_pallet = Convert.ToDouble(txtCantidad.Text);
                         }
-                        lblError.Visible = false;
-                        lblError.Text = wip.ID_Control;
-                        btnImprimir.Visible = true;
-                        btnCerrarPallet.Visible = false;
+                        if (txtEjemplares.Text.Trim() != "")
+                        {
+                            wip.Pliegos_Impresos = Convert.ToInt32(txtEjemplares.Text);
+                        }
+                        if (wip.OT.Substring(0, 1).ToUpper() == "B")
+                        {
+                            wip.Tarea = txtTarea.Text.Trim();
+                            wip.Forma = txtForma.Text.Trim();
+                        }
+                        wip.Usuario = Session["Usuario"].ToString();
+                        wip.Ubicacion = ddlDestino.SelectedItem.ToString();
+                        wip.IDTipoPallet = Convert.ToInt32(ddlTipoPallet.SelectedValue);
+                        wip.TipoPallet = ddlTipoPallet.SelectedItem.ToString();
+                        if (wipControl.Agregar_Pallet_Wip(wip, ""))
+                        {
+                            if (ddlProgramado.SelectedValue.ToString() == "Seleccione...")
+                            {
+                                //EnvioCorreo(wip);
+                            }
+                            lblError.Visible = false;
+                            lblError.Text = wip.ID_Control;
+                            btnImprimir.Visible = true;
+                            btnCerrarPallet.Visible = false;
+                        }
                     }
                 }
             }

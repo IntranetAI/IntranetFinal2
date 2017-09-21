@@ -353,16 +353,16 @@
                     <td rowspan="2" style="width: 260px;">
                     </td>
                     <td align="center">
-                        <strong>Year</strong>
+                        <strong>Año</strong>
                     </td>
                     <td align="center">
-                        <strong>4 Weeks</strong>
+                        <strong>4 Semanas</strong>
                     </td>
                     <td align="center">
-                        <strong>Week</strong>
+                        <strong>Semana</strong>
                     </td>
                     <td align="center" colspan="8">
-                        <strong>Daily</strong>
+                        <strong>Diariamente</strong>
                     </td>
                     <td align="center" colspan="2">
                         <strong>Target</strong>
@@ -453,7 +453,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Makeready Hours
+                        Horas Preparación
                     </td>
                     <td>
                         <asp:Label ID="lblHPrepaAnual" runat="server" Text=""></asp:Label>
@@ -495,7 +495,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Run Hours
+                        Horas Tiraje
                     </td>
                     <td>
                         <asp:Label ID="lblHTirajeAnual" runat="server" Text=""></asp:Label>
@@ -537,7 +537,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Delay Hours
+                        Horas Improductivas
                     </td>
                     <td>
                         <asp:Label ID="lblHImproAnual" runat="server" Text=""></asp:Label>
@@ -579,7 +579,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Gross Impressions
+                        Impresiones (Giros)
                     </td>
                     <td>
                         <asp:Label ID="lblGirosAnual" runat="server" Text=""></asp:Label>
@@ -621,7 +621,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Average Gross Impressions / Week
+                        Promedio Impresiones /Semana
                     </td>
                     <td>
                         <asp:Label ID="lblImpressWeekAnual" runat="server" Text=""></asp:Label>
@@ -655,7 +655,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Net Impressions
+                        Impresiones Netas (Buenos)
                     </td>
                     <td>
                         <asp:Label ID="lblTirajeAnual" runat="server" Text=""></asp:Label>
@@ -697,7 +697,7 @@
                 </tr>
                 <tr>
                     <td>
-                        # of Make-readies
+                        N° Preparaciones
                     </td>
                     <td>
                         <asp:Label ID="lblEntradasAnual" runat="server" Text=""></asp:Label>
@@ -739,7 +739,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Average # Make-readies / Week
+                        Promedio preparaciones /Semana
                     </td>
                     <td>
                         <asp:Label ID="lblMakeWeekAnual" runat="server" Text=""></asp:Label>
@@ -773,7 +773,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Minutes / Make-ready
+                        Minutos/Preparación
                     </td>
                     <td>
                         <asp:Label ID="lblEntradaMinAnual" runat="server" Text=""></asp:Label>
@@ -815,7 +815,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Impressions / Make-ready
+                        Giros /Preparación
                     </td>
                     <td>
                         <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
@@ -1182,7 +1182,7 @@
                 </tr>
                 <tr>
                     <td>
-                        DELAY HOURS Break / Lunch
+                        Colación
                     </td>
                     <td>
                         <asp:Label ID="lblHAlmuerzoAnual" runat="server" Text=""></asp:Label>
@@ -1350,7 +1350,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Maintenance
+                        Mantenimento
                     </td>
                     <td>
                         <asp:Label ID="lblMantencionAnual" runat="server" Text=""></asp:Label>

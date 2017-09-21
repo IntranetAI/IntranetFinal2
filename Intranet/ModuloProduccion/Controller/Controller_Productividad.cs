@@ -24,7 +24,7 @@ namespace Intranet.ModuloProduccion.Controller
                     cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
                     if (Procedimiento == 3)
                     {
-                        cmd.CommandTimeout = 3000000;
+                        cmd.CommandTimeout = 30000;
                     }
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
