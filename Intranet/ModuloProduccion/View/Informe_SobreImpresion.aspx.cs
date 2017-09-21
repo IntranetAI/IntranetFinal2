@@ -120,16 +120,16 @@ namespace Intranet.ModuloProduccion.View
                 gv.HeaderRow.Cells[5].Text = "Cant. Producida";
                 gv.HeaderRow.Cells[6].Text = "Dif.";
                 gv.HeaderRow.Cells[7].Text = "% ";
-                if (Session["Usuario"].ToString().Trim() == "apaillaqueo" || Session["Usuario"].ToString().Trim() == "mandrade")
-                {
-                    gv.HeaderRow.Cells[8].Visible = false;
-                    gv.HeaderRow.Cells[10].Visible = false;
-                }
-                else
-                {
+                //if (Session["Usuario"].ToString().Trim() == "apaillaqueo" || Session["Usuario"].ToString().Trim() == "mandrade")
+                //{
+                //    gv.HeaderRow.Cells[8].Visible = false;
+                //    gv.HeaderRow.Cells[10].Visible = false;
+                //}
+                //else
+                //{
                     gv.HeaderRow.Cells[8].Text = "Control Wip";
                     gv.HeaderRow.Cells[10].Text = "Operador";
-                }
+                //}
                 //gv.HeaderRow.Cells[8].Text = "Control Wip";
                 gv.HeaderRow.Cells[9].Text = "Papeles";
                 gv.HeaderRow.Cells[9].Visible = false;
@@ -153,16 +153,16 @@ namespace Intranet.ModuloProduccion.View
                 for (int contador = 0; contador < gv.Rows.Count; contador++)
                 {
                     GridViewRow row = gv.Rows[contador];
-                    if (Session["Usuario"].ToString().Trim() == "apaillaqueo" || Session["Usuario"].ToString().Trim() == "mandrade")
-                    {
-                        row.Cells[8].Visible = false;
-                        row.Cells[10].Visible = false;
-                    }
-                    else
-                    {
-                        row.Cells[8].Text = row.Cells[11].Text;
-                        row.Cells[10].Text = row.Cells[9].Text;
-                    }
+                    //if (Session["Usuario"].ToString().Trim() == "apaillaqueo" || Session["Usuario"].ToString().Trim() == "mandrade")
+                    //{
+                    //    row.Cells[8].Visible = false;
+                    //    row.Cells[10].Visible = false;
+                    //}
+                    //else
+                    //{
+                       row.Cells[8].Text = row.Cells[11].Text;
+                       row.Cells[10].Text = row.Cells[9].Text;
+                    //}
                     //row.Cells[8].Text = row.Cells[11].Text;
                     //row.Cells[10].Text = row.Cells[9].Text;
                     row.Cells[9].Visible = false;

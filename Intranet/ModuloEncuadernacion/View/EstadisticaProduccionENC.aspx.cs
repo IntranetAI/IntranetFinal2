@@ -15,6 +15,7 @@ namespace Intranet.ModuloEncuadernacion.View
     public partial class EstadisticaProduccionENC : System.Web.UI.Page
     {
         Controller_EstadisticaProduccion ep= new Controller_EstadisticaProduccion();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -102,6 +103,7 @@ namespace Intranet.ModuloEncuadernacion.View
             {
             }
         }
+
         private void ExportToExcel(string nameReport, string Titulo, string Contenido)
         {
             HttpResponse response = Response;
@@ -117,12 +119,13 @@ namespace Intranet.ModuloEncuadernacion.View
             response.Clear();
             response.Buffer = true;
             response.ContentType = "application/vnd.ms-excel";
-            response.AddHeader("Content-Disposition", "attachment;filename=" + nameReport + " " + ddlSector.SelectedValue.ToString() + " " + ddlMes.SelectedValue.ToString() + "/" + ddlAño.SelectedValue.ToString() + ".xls");
+            response.AddHeader("Content-Disposition", "attachment;filename=" + nameReport + "_" + ddlSector.SelectedValue.ToString() + " " + ddlMes.SelectedValue.ToString() + "/" + ddlAño.SelectedValue.ToString() + ".xls");
             response.Charset = "UTF-8";
             response.ContentEncoding = Encoding.Default;
             pageToRender.RenderControl(htw);
             response.Write(sw.ToString());
             response.End();
         }
+
     }
 }
