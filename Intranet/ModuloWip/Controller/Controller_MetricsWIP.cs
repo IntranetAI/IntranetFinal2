@@ -235,5 +235,36 @@ namespace Intranet.ModuloWip.Controller
             con.CerrarConexion();
             return lista;
         }
+
+
+
+        //CREACION ETIQUETAS FOLIOS PSU
+        public List<Folios> FoliosPsuENC(int Procedimiento)
+        {
+            List<Folios> lista = new List<Folios>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                cmd.CommandText = "[ENC_Folios_PSU]";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Folios f = new Folios();
+                    f.Pallet = reader["Pallet"].ToString();
+                    f.Caja = Convert.ToInt32(reader["Caja"].ToString());
+                    f.Desde= Convert.ToInt32(reader["Desde"].ToString());
+                    f.Hasta= Convert.ToInt32(reader["Hasta"].ToString());
+                    f.Asignatura = reader["Asignatura"].ToString();
+                    f.Forma = reader["Forma"].ToString();
+                    lista.Add(f);
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
+
     }
 }

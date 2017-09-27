@@ -464,6 +464,7 @@
     <Content Include="ModuloWip\View\Inventario_Wip.aspx" />
     <Content Include="ModuloWip\View\Mantenedor_Etiqueta.aspx" />
     <Content Include="ModuloWip\View\Mantenedor_Etiqueta_Metrics.aspx" />
+    <Content Include="ModuloWip\View\Mantenedor_Etiqueta_PSU.aspx" />
     <Content Include="ModuloWip\View\Mantenedor_Rack.aspx" />
     <Content Include="ModuloWip\View\Metrics_HistorialPallet.aspx" />
     <Content Include="ModuloWip\View\Metrics_InformeWIP.aspx" />
@@ -2457,6 +2458,7 @@
     </Compile>
     <Compile Include="ModuloWip\Controller\Controller_MetricsWIP.cs" />
     <Compile Include="ModuloWip\Controller\Controller_WipControl.cs" />
+    <Compile Include="ModuloWip\Model\Folios.cs" />
     <Compile Include="ModuloWip\Model\Model_MetricsWIP.cs" />
     <Compile Include="ModuloWip\Model\Model_Wip_Control.cs" />
     <Compile Include="ModuloWip\View\Anular_Pallet.aspx.cs">
@@ -2563,6 +2565,13 @@
     </Compile>
     <Compile Include="ModuloWip\View\Mantenedor_Etiqueta_Metrics.aspx.designer.cs">
       <DependentUpon>Mantenedor_Etiqueta_Metrics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloWip\View\Mantenedor_Etiqueta_PSU.aspx.cs">
+      <DependentUpon>Mantenedor_Etiqueta_PSU.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloWip\View\Mantenedor_Etiqueta_PSU.aspx.designer.cs">
+      <DependentUpon>Mantenedor_Etiqueta_PSU.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloWip\View\Mantenedor_Rack.aspx.cs">
       <DependentUpon>Mantenedor_Rack.aspx</DependentUpon>

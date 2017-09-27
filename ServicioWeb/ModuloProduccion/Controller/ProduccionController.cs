@@ -2292,9 +2292,9 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
                 if (TipoCorreo == "Rotativas")
                 {
-                    mmsg.To.Add("reporte_rotativas@aimpresores.cl");
+                    //mmsg.To.Add("reporte_rotativas@aimpresores.cl");
                     mmsg.To.Add("juan.venegas@aimpresores.cl");
-                    mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                    //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                                 "<br/><br/>Estimado(a):" +
                                 "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta informacion correspondiente al día de ayer." +
@@ -2311,8 +2311,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 else if (TipoCorreo == "Planas")
                 {
-                    mmsg.To.Add("reporte_planas@aimpresores.cl");
-                    mmsg.To.Add("juan.venegas@aimpresores.cl");
+                    //mmsg.To.Add("reporte_planas@aimpresores.cl");
+                    //mmsg.To.Add("juan.venegas@aimpresores.cl");
                     mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                         "<br/><br/>Estimado(a):" +
@@ -2330,8 +2330,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 else if (TipoCorreo == "ENC")
                 {
-                    mmsg.To.Add("reporte_encuadernacion@aencuadernadores.cl");
-                    mmsg.To.Add("juan.venegas@aimpresores.cl");
+                    //mmsg.To.Add("reporte_encuadernacion@aencuadernadores.cl");
+                    //mmsg.To.Add("juan.venegas@aimpresores.cl");
                     mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                         "<br/><br/>Estimado(a):" +
@@ -2349,8 +2349,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 else
                 {
-                    mmsg.To.Add("reporte_produccion@aimpresores.cl");
-                    mmsg.To.Add("juan.venegas@aimpresores.cl");
+                    //mmsg.To.Add("reporte_produccion@aimpresores.cl");
+                    //mmsg.To.Add("juan.venegas@aimpresores.cl");
                     mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                         "<br/><br/>Estimado(a):" +
@@ -2403,6 +2403,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 return "Error Enviado";
             }
         }
+        //FIN CORREO MERMAS Y PRODUCCION
 
         public string GenerarCorreoInformeNotasPendientes()
         {
@@ -3162,16 +3163,16 @@ namespace ServicioWeb.ModuloProduccion.Controller
             {
                 string FI = fi.ToString("dd/MM/yyyy"); string FT = ft.ToString("dd/MM/yyyy");
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add("nicolas.makuc@aimpresores.cl");
-                mmsg.To.Add("osobarzo@aencuadernadores.cl");
-                mmsg.To.Add("ignacio.herrera@aimpresores.cl");
-                mmsg.To.Add("cpradenas@aencuadernadores.cl");
-                mmsg.To.Add("srubio@aencuadernadores.cl");
+                //mmsg.To.Add("nicolas.makuc@aimpresores.cl");
+                //mmsg.To.Add("osobarzo@aencuadernadores.cl");
+                //mmsg.To.Add("ignacio.herrera@aimpresores.cl");
+                //mmsg.To.Add("cpradenas@aencuadernadores.cl");
+                //mmsg.To.Add("srubio@aencuadernadores.cl");
                 mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("javier.ferrada@aimpresores.cl");
-                mmsg.To.Add("dmalagueno@aencuadernadores.cl");
-                mmsg.To.Add("juan.venegas@aimpresores.cl");
-                mmsg.To.Add("claudio.valle@aimpresores.cl");
+                //mmsg.To.Add("javier.ferrada@aimpresores.cl");
+                //mmsg.To.Add("dmalagueno@aencuadernadores.cl");
+                //mmsg.To.Add("juan.venegas@aimpresores.cl");
+                //mmsg.To.Add("claudio.valle@aimpresores.cl");
 
 
 
@@ -3184,7 +3185,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     //"<b><div style='font-size: 20px;'>Producción Prensas Rotativas</div></b>" +
                             Produccion_CorreoScoreCard_ENC("Diario", fi, ft, 0) +
                             "<br/>" +
-                            Produccion_CorreoScoreCard_ENC("Mensual", PrimerDia, ft, 1) +
+                            Produccion_CorreoScoreCard_ENC("Mensual", Convert.ToDateTime("2017-08-01 00:00:00"), Convert.ToDateTime("2017-08-31 23:59:59"), 1) +
                             "<br/>" +
                             "<div style='width:1203px;align=center;'>" +
                             "<br />" +
@@ -3549,7 +3550,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio);
                 cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino);
                 cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader(); 
                 while (reader.Read())
                 {
                     if (SectorAnt == "" || SectorAnt == reader["CodSetor"].ToString())
