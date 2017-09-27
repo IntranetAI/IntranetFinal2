@@ -4399,7 +4399,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
                             if (dt.Proceso == "Insert")
                             {
-                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT + " según O.V.";
+                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT;
                             }
                             else
                             {
