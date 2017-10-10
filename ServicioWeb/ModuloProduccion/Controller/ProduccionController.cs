@@ -2292,9 +2292,9 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
                 if (TipoCorreo == "Rotativas")
                 {
-                    //mmsg.To.Add("reporte_rotativas@aimpresores.cl");
+                    mmsg.To.Add("reporte_rotativas@aimpresores.cl");
                     mmsg.To.Add("juan.venegas@aimpresores.cl");
-                    //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                    mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                                 "<br/><br/>Estimado(a):" +
                                 "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta informacion correspondiente al día de ayer." +
@@ -2311,8 +2311,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 else if (TipoCorreo == "Planas")
                 {
-                    //mmsg.To.Add("reporte_planas@aimpresores.cl");
-                    //mmsg.To.Add("juan.venegas@aimpresores.cl");
+                    mmsg.To.Add("reporte_planas@aimpresores.cl");
+                    mmsg.To.Add("juan.venegas@aimpresores.cl");
                     mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                         "<br/><br/>Estimado(a):" +
@@ -2330,8 +2330,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 else if (TipoCorreo == "ENC")
                 {
-                    //mmsg.To.Add("reporte_encuadernacion@aencuadernadores.cl");
-                    //mmsg.To.Add("juan.venegas@aimpresores.cl");
+                    mmsg.To.Add("reporte_encuadernacion@aencuadernadores.cl");
+                    mmsg.To.Add("juan.venegas@aimpresores.cl");
                     mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                         "<br/><br/>Estimado(a):" +
@@ -2349,8 +2349,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 else
                 {
-                    //mmsg.To.Add("reporte_produccion@aimpresores.cl");
-                    //mmsg.To.Add("juan.venegas@aimpresores.cl");
+                    mmsg.To.Add("reporte_produccion@aimpresores.cl");
+                    mmsg.To.Add("juan.venegas@aimpresores.cl");
                     mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                         "<br/><br/>Estimado(a):" +
@@ -4400,7 +4400,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
                             if (dt.Proceso == "Insert")
                             {
-                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT + " según O.V.";
+                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT;
                             }
                             else
                             {
