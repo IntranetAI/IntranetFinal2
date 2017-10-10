@@ -3185,7 +3185,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     //"<b><div style='font-size: 20px;'>Producción Prensas Rotativas</div></b>" +
                             Produccion_CorreoScoreCard_ENC("Diario", fi, ft, 0) +
                             "<br/>" +
-                            Produccion_CorreoScoreCard_ENC("Mensual", Convert.ToDateTime("2017-08-01 00:00:00"), Convert.ToDateTime("2017-08-31 23:59:59"), 1) +
+                            Produccion_CorreoScoreCard_ENC("Mensual",PrimerDia, ft, 1) +
                             "<br/>" +
                             "<div style='width:1203px;align=center;'>" +
                             "<br />" +
