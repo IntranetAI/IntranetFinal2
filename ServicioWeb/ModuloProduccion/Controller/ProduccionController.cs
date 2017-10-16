@@ -1473,7 +1473,6 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.To.Add("ignacio.herrera@aimpresores.cl");
                 mmsg.To.Add("claudio.valle@aimpresores.cl");
                 mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("juan.venegas@aimpresores.cl");
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta información correspondiente desde el día " + FI + " al " + FT + "." +
@@ -2289,7 +2288,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 string[] FechaInicio = fi.Substring(0, fi.IndexOf(' ')).Split('-');
                 string[] FechaTermino = ft.Substring(0, ft.IndexOf(' ')).Split('-');
                 string FI = FechaInicio[2] + "/" + FechaInicio[1] + "/" + FechaInicio[0];
-                string FT = FechaTermino[2] + "/" + FechaTermino[1] + "/" + FechaTermino[0];
+                string FT = FechaTermino[2] + "/" + FechaTermino[1] + "/" + FechaTermino[0]; 
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
                 if (TipoCorreo == "Rotativas")
                 {
@@ -3171,6 +3170,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.To.Add("srubio@aencuadernadores.cl");
                 mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                 mmsg.To.Add("javier.ferrada@aimpresores.cl");
+                mmsg.To.Add("dmalagueno@aencuadernadores.cl");
                 mmsg.To.Add("juan.venegas@aimpresores.cl");
                 mmsg.To.Add("claudio.valle@aimpresores.cl");
 
@@ -3185,7 +3185,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     //"<b><div style='font-size: 20px;'>Producción Prensas Rotativas</div></b>" +
                             Produccion_CorreoScoreCard_ENC("Diario", fi, ft, 0) +
                             "<br/>" +
-                            Produccion_CorreoScoreCard_ENC("Mensual", Convert.ToDateTime("2017-08-01 00:00:00"), Convert.ToDateTime("2017-08-31 23:59:59"), 1) +
+                            Produccion_CorreoScoreCard_ENC("Mensual",PrimerDia, ft, 1) +
                             "<br/>" +
                             "<div style='width:1203px;align=center;'>" +
                             "<br />" +
@@ -3550,7 +3550,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio);
                 cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino);
                 cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader(); 
                 while (reader.Read())
                 {
                     if (SectorAnt == "" || SectorAnt == reader["CodSetor"].ToString())
@@ -5067,102 +5067,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
             return lista;
         }
 
-        public bool SincronizadorOT()
-        {
-            try
-            {
-                List<SincronizarOT> lista = listaOTSincroOT();
-                List<SincronizarOT> listaSincro = listaOTSincroMetrics();
-                string query = "";
-                if (listaSincro.Where(x => !lista.Any(y => y.OT == x.OT)).Count() > 0)
-                {
-                    foreach (SincronizarOT sincroOT in listaSincro.Where(x => !lista.Any(y => y.OT == x.OT)))
-                    {
-                        query = query + "INSERT INTO Data_P2B.dbo.QGPressJob (QG_RMS_JOB_NBR ,NM ,CTD_TMSTMP ,JOB_STS ,CUST_RUT ,CUST_NM, PRN_ORD_QTY, FECHA_LIQUIDACION) VALUES" +
-                                            "('" + sincroOT.OT.Trim() + "','" + sincroOT.NombreOT.Replace("'", "").Replace('"', ' ') + "','" + sincroOT.FechaCreacion + "'," + sincroOT.Estado + ",'" +
-                                            sincroOT.ClienteRut + "','" + sincroOT.Cliente.Replace("'", "").Replace('"', ' ') + "'," + sincroOT.Tiraje + ",'" + sincroOT.FechaLiquidacion + "');";
-                    }
-                }
-                if (listaSincro.Where(x => !lista.Any(y => y.OT == x.OT && y.NombreOT == x.NombreOT && y.Tiraje == x.Tiraje && y.Estado == x.Estado && y.FechaLiquidacion == x.FechaLiquidacion)).Count() > 0)
-                {
-                    foreach (SincronizarOT sincroOT in listaSincro.Where(x => !lista.Any(y => y.OT == x.OT && y.NombreOT == x.NombreOT && y.Tiraje == x.Tiraje && y.Estado == x.Estado && y.FechaLiquidacion == x.FechaLiquidacion)))
-                    {
-                        query = query + "UPDATE Data_P2B.dbo.QGPressJob SET NM = '" + sincroOT.NombreOT.Replace("'", "").Replace('"', ' ') + "',CUST_RUT = '" + sincroOT.ClienteRut + "'" +
-                                            ",CUST_NM = '" + sincroOT.Cliente.Replace("'", "").Replace('"', ' ') + "',PRN_ORD_QTY = " + sincroOT.Tiraje + ", JOB_STS= " + sincroOT.Estado + ", Fecha_Liquidacion='" + sincroOT.FechaLiquidacion + "' WHERE QG_RMS_JOB_NBR = '" + sincroOT.OT.Trim() + "';";
-                    }
-                }
 
-                if (SincronizadorFechaEntragas(query))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch
-            {
-                return false;
-            }
 
-        }
-
-        public List<SincronizarOT> listaOTSincroOT()
-        {
-            List<SincronizarOT> lista = new List<SincronizarOT>();
-            Conexion con = new Conexion();
-            SqlCommand cmd = con.AbrirConexionDataP2B2000_DataP2B();
-            if (cmd != null)
-            {
-                cmd.CommandText = "select QG_RMS_JOB_NBR QG_RMS_JOB_NBR,NM,CUST_RUT,CUST_NM,PRN_ORD_QTY,JOB_STS,Fecha_Liquidacion from Data_P2B.dbo.QGPressJob where QG_RMS_JOB_NBR not like 'b%'";
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    SincronizarOT sincroOT = new SincronizarOT();
-                    sincroOT.OT = reader["QG_RMS_JOB_NBR"].ToString().Trim();
-                    sincroOT.NombreOT = reader["NM"].ToString();
-                    sincroOT.ClienteRut = reader["CUST_RUT"].ToString();
-                    sincroOT.Cliente = reader["CUST_NM"].ToString();
-                    sincroOT.Tiraje = reader["PRN_ORD_QTY"].ToString();
-                    sincroOT.Estado = reader["JOB_STS"].ToString();
-                    sincroOT.FechaLiquidacion = (reader["Fecha_Liquidacion"].ToString()!="") ? Convert.ToDateTime(reader["Fecha_Liquidacion"].ToString()).ToString("dd-MM-yyyy"): "NULL";
-                    lista.Add(sincroOT);
-                }
-            }
-            con.CerrarConexion();
-            return lista;
-        }
-
-        public List<SincronizarOT> listaOTSincroMetrics()
-        {
-            List<SincronizarOT> lista = new List<SincronizarOT>();
-            Conexion con = new Conexion();
-            SqlCommand cmd = con.AbrirConexionIntranet();
-            if (cmd != null)
-            {
-                cmd.CommandText = "Sincro_ListOTMetrics";
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    SincronizarOT sincroOT = new SincronizarOT();
-                    sincroOT.OT = reader["QG_RMS_JOB_NBR"].ToString().Trim();
-                    sincroOT.NombreOT = reader["NM"].ToString().Replace("'", "");
-                    sincroOT.FechaCreacion = Convert.ToDateTime(reader["CTD_TMSTMP"].ToString()).ToString("dd-MM-yyyy");
-                    sincroOT.Estado = (reader["Status_OP"].ToString() == "A") ? "1" : "2";
-                    sincroOT.ClienteRut = reader["RUT_Cliente"].ToString();
-                    sincroOT.Cliente = reader["Nome_Cliente"].ToString();
-                    sincroOT.Tiraje = reader["Tiraje"].ToString();
-                    sincroOT.FechaLiquidacion = (reader["Fecha_Liquidacion"].ToString() != "") ? Convert.ToDateTime(reader["Fecha_Liquidacion"].ToString()).ToString("dd-MM-yyyy") : "NULL";
-                    lista.Add(sincroOT);
-                }
-            }
-            con.CerrarConexion();
-            return lista;
-        }
 
         public string algo(int valor)
         {

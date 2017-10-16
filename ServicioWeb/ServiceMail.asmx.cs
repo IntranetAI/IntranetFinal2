@@ -164,7 +164,8 @@ namespace ServicioWeb
         {
             ProduccionController controlpro = new ProduccionController();
             string[] str = DateTime.Now.AddDays(-7).ToString("dd/MM/yyyy").Split('/');
-            DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
+             DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
+   
 
             string[] str2 = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy").Split('/');
             DateTime ft = Convert.ToDateTime(str2[2] + "-" + str2[1] + "-" + str2[0] + " 23:59:59");
