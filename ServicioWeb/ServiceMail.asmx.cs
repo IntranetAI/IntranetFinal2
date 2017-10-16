@@ -249,7 +249,13 @@ namespace ServicioWeb
 
         }
 
-
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public string SincronizadorOTs(string Usuario)
+        {
+            ProduccionController controlpro = new ProduccionController();
+            return (controlpro.SincronizadorOT()) ? "OK": "Error";
+        }
 
 
 
