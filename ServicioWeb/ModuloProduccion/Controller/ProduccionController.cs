@@ -5078,16 +5078,16 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 {
                     foreach (SincronizarOT sincro in listaSincro.Where(x => !lista.Any(y => y.OT == x.OT)))
                     {
-                        query = query + "INSERT INTO Data_P2B.dbo.QGPressJob (QG_RMS_JOB_NBR ,NM ,CTD_TMSTMP ,JOB_STS ,CUST_RUT ,CUST_NM, PRN_ORD_QTY,FECHA_LIQUIDACION) VALUES" +
+                        query = query + "INSERT INTO Data_P2B.dbo.QGPressJob (QG_RMS_JOB_NBR ,NM ,CTD_TMSTMP ,JOB_STS ,CUST_RUT ,CUST_NM, PRN_ORD_QTY,FECHA_LIQUIDACION, QG_RMS_TITLE_CD) VALUES" +
                                         "('" + sincro.OT.Trim() + "','" + sincro.NombreOT.Replace("'", "").Replace('"', ' ') + "','" + sincro.FechaCreacion + "'," + sincro.Estado + ",'" + sincro.ClienteRut + "','" +
-                                        sincro.Cliente.Replace("'", "").Replace('"', ' ') + "'," + sincro.Tiraje + ",'" + sincro.FechaLiquidacion + "');";
+                                        sincro.Cliente.Replace("'", "").Replace('"', ' ') + "'," + sincro.Tiraje + ",'" + sincro.FechaLiquidacion + "','Metric');";
                     }
                 }
                 if (listaSincro.Where(x => !lista.Any(y => y.OT == x.OT && y.NombreOT == x.NombreOT && y.Estado == x.Estado && y.FechaLiquidacion == x.FechaLiquidacion && y.Tiraje == x.Tiraje)).Count() > 0)
                 {
                     foreach (SincronizarOT sincro in listaSincro.Where(x => !lista.Any(y => y.OT == x.OT && y.NombreOT == x.NombreOT && y.Estado == x.Estado && y.FechaLiquidacion == x.FechaLiquidacion && y.Tiraje == x.Tiraje)))
                     {
-                        query = query + "UPDATE Data_P2B.dbo.QGPressJob SET NM = '" + sincro.NombreOT.Replace("'", "").Replace('"', ' ') + "',CUST_RUT = '" + sincro.ClienteRut + "','CUST_NM = '" + sincro.Cliente.Replace("'", "").Replace('"', ' ') + 
+                        query = query + "UPDATE Data_P2B.dbo.QGPressJob SET NM = '" + sincro.NombreOT.Replace("'", "").Replace('"', ' ') + "',CUST_RUT = '" + sincro.ClienteRut + "',CUST_NM = '" + sincro.Cliente.Replace("'", "").Replace('"', ' ') + 
                             "',PRN_ORD_QTY = " + sincro.Tiraje + ", JOB_STS= " + sincro.Estado + ", Fecha_Liquidacion='" + sincro.FechaLiquidacion + "' WHERE QG_RMS_JOB_NBR = '" + sincro.OT.Trim() + "';";
                         
                     }
@@ -5102,7 +5102,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     return false;
                 }
             }
-            catch
+            catch (Exception e)
             {
                 return false;
             }
@@ -5127,7 +5127,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     sincroOT.Cliente = reader["CUST_NM"].ToString();
                     sincroOT.Tiraje = reader["PRN_ORD_QTY"].ToString();
                     sincroOT.Estado = reader["JOB_STS"].ToString();
-                    sincroOT.FechaLiquidacion = (reader["Fecha_Liquidacion"].ToString()!="") ? Convert.ToDateTime(reader["Fecha_Liquidacion"].ToString()).ToString("dd-MM-yyyy"): "NULL";
+                    sincroOT.FechaLiquidacion = (reader["Fecha_Liquidacion"].ToString()!="") ? Convert.ToDateTime(reader["Fecha_Liquidacion"].ToString()).ToString("dd-MM-yyyy") : "NULL";
                     lista.Add(sincroOT);
                 }
             }
