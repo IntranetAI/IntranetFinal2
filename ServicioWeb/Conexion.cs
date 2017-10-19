@@ -125,6 +125,24 @@ namespace ServicioWeb
                 return null;
             }
         }
+        public SqlCommand AbrirConexionDataP2B2000_DataP2B()
+        {
+            try
+            {
+                string conectionstring =
+                    ConfigurationManager.ConnectionStrings["CONNECTIONSV2000_DataP2B"].ToString();
+                sqlconection = new SqlConnection(conectionstring);
+                sqlconection.Open();
+
+                SqlCommand cmd = sqlconection.CreateCommand();
+                return cmd;
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public SqlCommand AbrirConexionDespacho()
         {
@@ -163,24 +181,7 @@ namespace ServicioWeb
                 return null;
             }
         }
-        public SqlCommand AbrirConexionDataP2B2000_DataP2B()
-        {
-            try
-            {
-                string conectionstring =
-                    ConfigurationManager.ConnectionStrings["CONNECTIONSV2000_DataP2B"].ToString();
-                sqlconection = new SqlConnection(conectionstring);
-                sqlconection.Open();
-
-                SqlCommand cmd = sqlconection.CreateCommand();
-                return cmd;
-
-            }
-            catch
-            {
-                return null;
-            }
-        }
+        
 
         public SqlCommand AbrirConexionDataP2B2000_PARTES()
         {

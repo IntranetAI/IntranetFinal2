@@ -44,3 +44,4 @@ C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\bin\ServicioWeb.p
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\obj\Debug\ServicioWeb.dll
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\obj\Debug\ServicioWeb.pdb
+C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.dll.config

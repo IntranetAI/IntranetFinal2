@@ -75,6 +75,7 @@
     <Compile Include="ModuloProduccion\Model\Facturacion_ElectronicaSII.cs" />
     <Compile Include="ModuloProduccion\Model\FechaDistribuccion.cs" />
     <Compile Include="ModuloProduccion\Model\OT_Liberadas.cs" />
+    <Compile Include="ModuloProduccion\Model\SincronizarOT.cs" />
     <Compile Include="ServiceMail.asmx.cs">
       <DependentUpon>ServiceMail.asmx</DependentUpon>
       <SubType>Component</SubType>
