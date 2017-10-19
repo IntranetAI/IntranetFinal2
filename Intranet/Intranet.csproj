@@ -668,6 +668,9 @@
     <Content Include="View\CambioClave.aspx" />
     <Content Include="View\Imprimir_CorreoMerma.aspx" />
     <Content Include="View\Imprimir_CorreoScoreCard.aspx" />
+    <Content Include="View\Imprimir_ProduccionENC_Semanal.aspx" />
+    <Content Include="View\Imprimir_ScoreCard_Enc.aspx" />
+    <Content Include="View\Imprimir_ScoreCard_Semanal.aspx" />
     <Content Include="View\jquery.js" />
     <Content Include="View\Login.aspx" />
     <Content Include="View\Mensajeria.aspx" />
@@ -2691,6 +2694,7 @@
     <Compile Include="View\Controller\Controller_Login.cs" />
     <Compile Include="View\Controller\Controller_Registro.cs" />
     <Compile Include="View\Controller\Controller_ResetPassword.cs" />
+    <Compile Include="View\Controller\Controller_ScoreCard_ENC.cs" />
     <Compile Include="View\Imprimir_CorreoMerma.aspx.cs">
       <DependentUpon>Imprimir_CorreoMerma.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2704,6 +2708,27 @@
     </Compile>
     <Compile Include="View\Imprimir_CorreoScoreCard.aspx.designer.cs">
       <DependentUpon>Imprimir_CorreoScoreCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Imprimir_ProduccionENC_Semanal.aspx.cs">
+      <DependentUpon>Imprimir_ProduccionENC_Semanal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Imprimir_ProduccionENC_Semanal.aspx.designer.cs">
+      <DependentUpon>Imprimir_ProduccionENC_Semanal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Imprimir_ScoreCard_Enc.aspx.cs">
+      <DependentUpon>Imprimir_ScoreCard_Enc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Imprimir_ScoreCard_Enc.aspx.designer.cs">
+      <DependentUpon>Imprimir_ScoreCard_Enc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Imprimir_ScoreCard_Semanal.aspx.cs">
+      <DependentUpon>Imprimir_ScoreCard_Semanal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Imprimir_ScoreCard_Semanal.aspx.designer.cs">
+      <DependentUpon>Imprimir_ScoreCard_Semanal.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\index.Master.cs">
       <DependentUpon>index.Master</DependentUpon>

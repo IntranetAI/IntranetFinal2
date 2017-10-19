@@ -14,7 +14,7 @@ namespace ServicioWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             //Label1.Text = DateTime.Now.AddDays(-8).ToString() + "<BR/><BR/><BR/>" + DateTime.Now.AddDays(-14); //pc.Produccion_CorreoComparativo_ConsumoBobinas(DateTime.Now, DateTime.Now, 0);
-            Label1.Text = (Convert.ToInt32(12)).ToString("00");
+          //  Label1.Text = (Convert.ToInt32(12)).ToString("00");
         }
     }
 }
