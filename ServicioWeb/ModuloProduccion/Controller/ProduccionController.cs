@@ -1476,8 +1476,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta información correspondiente desde el día " + FI + " al " + FT + "." +
-                    "<br/><br/>" +
-                    //  "<a href='http://intranet.qgchile.cl/View/Imprimir_CorreoScoreCard.aspx?fi=" + FI + "' target='_blank'>Imprimir</a>" +
+                    "<br/>" +
+                      "<a href='http://intranet.qgchile.cl/View/Imprimir_ScoreCard_Semanal.aspx?fi=" + FI + "&ft="+FT+"' target='_blank'>Imprimir</a>" +
                             "<br/><br/>" +
                     //"<b><div style='font-size: 20px;'>Producción Prensas Rotativas</div></b>" +
                     //Produccion_CorreoScoreCard_V2("Diario", fi, ft, 0) +
@@ -3179,9 +3179,9 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta informacion correspondiente al día de ayer." +
-                    "<br/><br/>" +
-                    //"<a href='http://intranet.qgchile.cl/View/Imprimir_CorreoScoreCard.aspx?fi=" + FI + "' target='_blank'>Imprimir</a>" +
-                    //        "<br/><br/>" +
+                    "<br/>" +
+                    "<a href='http://intranet.qgchile.cl/View/Imprimir_ScoreCard_Enc.aspx?fi=" + FI + "' target='_blank'>Imprimir</a>" +
+                            "<br/><br/>" +
                     //"<b><div style='font-size: 20px;'>Producción Prensas Rotativas</div></b>" +
                             Produccion_CorreoScoreCard_ENC("Diario", fi, ft, 0) +
                             "<br/>" +
@@ -3714,7 +3714,9 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta información correspondiente desde el día <b>" + FI + " al " + FT + "<b>." +
-                    "<br/><br/>" +
+                    "<br/>" +
+                    "<a href='http://intranet.qgchile.cl/View/Imprimir_ProduccionENC_Semanal.aspx?fi=" + FI + "&ft=" + FT + "' target='_blank'>Imprimir</a>" +
+                            "<br/><br/>" +
                      Produccion_SemanalENC(fi, ft, 0) +
                 "<td>" +
                     Produccion_SemanalxTurnosENC(fi, ft, 1) +
