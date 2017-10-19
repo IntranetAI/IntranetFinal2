@@ -3163,18 +3163,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             {
                 string FI = fi.ToString("dd/MM/yyyy"); string FT = ft.ToString("dd/MM/yyyy");
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add("nicolas.makuc@aimpresores.cl");
-                mmsg.To.Add("osobarzo@aencuadernadores.cl");
-                mmsg.To.Add("ignacio.herrera@aimpresores.cl");
-                mmsg.To.Add("cpradenas@aencuadernadores.cl");
-                mmsg.To.Add("srubio@aencuadernadores.cl");
-                mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("javier.ferrada@aimpresores.cl");
-                mmsg.To.Add("dmalagueno@aencuadernadores.cl");
-                mmsg.To.Add("juan.venegas@aimpresores.cl");
-                mmsg.To.Add("claudio.valle@aimpresores.cl");
-
-
+                mmsg.To.Add("generarcorreoscorecard_enc@aimpresores.cl");
 
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
