@@ -140,7 +140,7 @@ namespace Intranet.ModuloWip.View
                     {
                         if (Ubicacion == "SE002")
                         {
-                            proceso = "Sunipac";
+                            proceso = "Sunipac"; 
                             EnvioCorreo(Ubicacion, lblNombre.Text, Codigo, proceso);
                         }
                         else if (Ubicacion == "DSE01")
