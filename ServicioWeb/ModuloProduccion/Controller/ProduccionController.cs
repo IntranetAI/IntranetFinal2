@@ -1467,12 +1467,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             {
                 string FI = fi.ToString("dd/MM/yyyy"); string FT = ft.ToString("dd/MM/yyyy");
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add("alvaro.paillaqueo@aimpresores.cl");
-                mmsg.To.Add("manuel.andrade@aimpresores.cl");
-                mmsg.To.Add("nicolas.makuc@aimpresores.cl");
-                mmsg.To.Add("ignacio.herrera@aimpresores.cl");
-                mmsg.To.Add("claudio.valle@aimpresores.cl");
-                mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                mmsg.To.Add("GenerarCorreoScoreCard_Semanal");
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta información correspondiente desde el día " + FI + " al " + FT + "." +
@@ -1694,8 +1689,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             {
                 string FI = fi.ToString("dd/MM/yyyy"); string FT = ft.ToString("dd/MM/yyyy");
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add("rafael.maroto@aimpresores.cl");
-                mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                mmsg.To.Add("generarcorreodesperdiciopapel@aimpresores.cl");
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de Desperdicio de Papel, siendo esta informacion correspondiente al día de ayer.<br/> La columna motivo solo informara cuando el escarpe sea mayor o igual a 20 kgs." +
@@ -2468,17 +2462,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
 
                         System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                        mmsg.To.Add("carlos.aguirre@aimpresores.cl");
-                        mmsg.To.Add("cecilia.aguirre@aimpresores.cl");
-                        mmsg.To.Add("alejandro.garces@aimpresores.cl");
-                        mmsg.To.Add("claudio.ereche@aimpresores.cl");
-                        mmsg.To.Add("ignacio.henriquez@aimpresores.cl");
-                        mmsg.To.Add("alfred.east@aimpresores.cl");
-                        mmsg.To.Add("andina.cabrini@aimpresores.cl");
-                        mmsg.To.Add("maria.navarrete@aimpresores.cl");
-                        mmsg.To.Add("elizabeth.agurto@aimpresores.cl");
-                        mmsg.To.Add("claudio.valle@aimpresores.cl");
-                        mmsg.To.Add("juan.venegas@aimpresores.cl");
+                        mmsg.To.Add("generarcorreoinformenotaspendientes@aimpresores.cl");
                         mmsg.Body = "<table id='example' style='width: 100%;max-width: 100%;margin-bottom: 20px;border: 1px solid #ddd !important;background-color: transparent; " +
                         "border-collapse: collapse;box-sizing: border-box;font-family: Helvetica Neue, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.42857143;color: #333;box-sizing: border-box;' cellspacing='0'> " +
                             "<thead>" +
@@ -3163,18 +3147,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             {
                 string FI = fi.ToString("dd/MM/yyyy"); string FT = ft.ToString("dd/MM/yyyy");
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add("nicolas.makuc@aimpresores.cl");
-                mmsg.To.Add("osobarzo@aencuadernadores.cl");
-                mmsg.To.Add("ignacio.herrera@aimpresores.cl");
-                mmsg.To.Add("cpradenas@aencuadernadores.cl");
-                mmsg.To.Add("srubio@aencuadernadores.cl");
-                mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("javier.ferrada@aimpresores.cl");
-                mmsg.To.Add("dmalagueno@aencuadernadores.cl");
-                mmsg.To.Add("juan.venegas@aimpresores.cl");
-                mmsg.To.Add("claudio.valle@aimpresores.cl");
-
-
+                mmsg.To.Add("generarcorreoscorecard_enc@aimpresores.cl");
 
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
@@ -3701,16 +3674,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             {
                 string FI = fi.ToString("dd/MM/yyyy"); string FT = ft.ToString("dd/MM/yyyy");
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add("nicolas.makuc@aimpresores.cl");
-                mmsg.To.Add("osobarzo@aencuadernadores.cl");
-                mmsg.To.Add("ignacio.herrera@aimpresores.cl");
-                mmsg.To.Add("cpradenas@aencuadernadores.cl");
-                mmsg.To.Add("srubio@aencuadernadores.cl");
-                mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("javier.ferrada@aimpresores.cl");
-                mmsg.To.Add("dmalagueno@aencuadernadores.cl");
-                mmsg.To.Add("juan.venegas@aimpresores.cl");
-                mmsg.To.Add("claudio.valle@aimpresores.cl");
+                mmsg.To.Add("generarcorreosemanal_enc@aimpresores.cl");
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta información correspondiente desde el día <b>" + FI + " al " + FT + "<b>." +
@@ -3767,15 +3731,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 string PorFacturar = (Convert.ToInt32(fact_2012.Cantidad.ToString()) - Convert.ToInt32(fact_2012.Nfactura.ToString())).ToString();
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
 
-                mmsg.To.Add("carlos.aguirre@aimpresores.cl");
-                mmsg.To.Add("cecilia.aguirre@aimpresores.cl");
-                mmsg.To.Add("claudio.ereche@aimpresores.cl");
-                mmsg.To.Add("alejandro.garces@aimpresores.cl");
-                mmsg.To.Add("andina.cabrini@aimpresores.cl");
-                mmsg.To.Add("vladimir.torres@aimpresores.cl");
-                mmsg.To.Add("claudio.valle@aimpresores.cl");
-                mmsg.To.Add("juan.venegas@aimpresores.cl");
-                mmsg.To.Add("sergio.veloso@aimpresores.cl");
+                mmsg.To.Add("generarcorreoinformefacturacion@aimpresores.cl");
                 switch (mes)
                 {
                     case "01": mes = "Enero"; break;
@@ -4397,8 +4353,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             {
                                 mmsg.To.Add(correouser);
                             }
-                            mmsg.To.Add("gonzalo.vergara@aimpresores.cl");
-                            mmsg.To.Add("gino.hernandez@aimpresores.cl");
+                            mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
 
                             if (dt.Proceso == "Insert")
                             {
@@ -4738,27 +4693,10 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             {
                                 mmsg.To.Add(correouser);
                             }
-                            mmsg.To.Add("nicolas.makuc@aimpresores.cl");
-                            mmsg.To.Add("ignacio.herrera@aimpresores.cl");
-
-                            mmsg.To.Add("julio.salas@aimpresores.cl");
-                            mmsg.To.Add("srubio@aencuadernadores.cl");
-                            mmsg.To.Add("cristopher.tarifeno@aimpresores.cl");
-                            mmsg.To.Add("jefeturno@aimpresores.cl");
-                            mmsg.To.Add("planificacion@aimpresores.cl");
-                            mmsg.To.Add("preprensa@aimpresores.cl");
-                            mmsg.To.Add("gonzalo.vergara@aimpresores.cl");
+                            mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
                             if (OT.Usr_Liberada == "FDS")
                             {
-                                mmsg.To.Add("claudio.ruiztagle @aimpresores.cl");
-                                mmsg.To.Add("david.rivas @aimpresores.cl");
-                                mmsg.To.Add("enzo.velasquez @aimpresores.cl");
-                                mmsg.To.Add("francisco.depablo @aimpresores.cl");
-                                mmsg.To.Add("indigo@aimpresores.cl");
-                                mmsg.To.Add("lpimentel@aencuadernadores.cl");
-                                mmsg.To.Add("manuel.andrade @aimpresores.cl");
-                                mmsg.To.Add("rafael.maroto @aimpresores.cl");
-                                mmsg.To.Add("roxana.galaz @aimpresores.cl");
+                                mmsg.To.Add("correootliberadasgrupo2@aimpresores.cl");
                             }
                             mmsg.Subject = "Se Informa liberacion de la OT : " + OT.OT;
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
