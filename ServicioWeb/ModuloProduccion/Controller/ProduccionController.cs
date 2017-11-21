@@ -1955,7 +1955,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:60px;'>" +
                            CantidadWIP + "</td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:100px;'>" +
-                           reader["Operador"].ToString().Substring(0, reader["Operador"].ToString().Length - 1).ToLower() + "</td>" +
+                          ((reader["Operador"].ToString().Length > 0) ? reader["Operador"].ToString().Substring(0, reader["Operador"].ToString().Length - 1).ToLower() : "") + "</td>" +
                            "</tr>";
                     }
                     MaquinaAnt = reader["CodRecurso"].ToString();

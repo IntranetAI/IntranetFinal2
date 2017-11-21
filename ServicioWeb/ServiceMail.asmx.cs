@@ -95,8 +95,6 @@ namespace ServicioWeb
             return "OK";
         }
 
-
-
         //se envia los jueves. rango de informacion de 7 dias.
         [WebMethod]
         [ScriptMethod(UseHttpGet = true)]
