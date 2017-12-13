@@ -4290,8 +4290,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             conexion.CerrarConexion();
             return Contenido;
         }
-
-
+        
         public List<FechaDistribuccion> FechaDistruccion()
         {
             List<FechaDistribuccion> lista = new List<FechaDistribuccion>();
@@ -4670,8 +4669,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             con.CerrarConexion();
             return retorno;
         }
-
-
+        
         public string Produccion_CorreoAutomatico_OTLiberas()
         {
             string QueryOTLiberacion = "";
