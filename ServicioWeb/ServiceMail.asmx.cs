@@ -64,6 +64,29 @@ namespace ServicioWeb
             {
                 controlpro.GenerarCorreoErrordeEnvio("CorreoProduccion_ScoreCardImpresion", "General", "", "", "No se envió el correo");
             }
+            //string Resultado2 = controlpro.GenerarCorreoScoreCard_ENC(fi, ft, primerdia, diaactual);
+            //if (Resultado2 == "Error")
+            //{
+            //    controlpro.GenerarCorreoErrordeEnvio("CorreoProduccion_ScoreCardImpresion", "General", "", "", "No se envió el correo");
+            //}
+            return "OK";
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public string CorreoProduccion_ScoreCardImpresion_ENC(string Usuario)
+        {
+            ProduccionController controlpro = new ProduccionController();
+            string[] str = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy").Split('/');
+            DateTime fi = Convert.ToDateTime(str[1] + "/" + str[0] + "/" + str[2] + " 00:00:00");
+
+            DateTime primerdia = Convert.ToDateTime(str[1] + "/01/" + str[2] + " 00:00:00");
+            string[] str2 = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy").Split('/');
+            DateTime ft = Convert.ToDateTime(str2[1] + "/" + str2[0] + "/" + str2[2] + " 23:59:59");
+
+            string[] str3 = DateTime.Now.ToString("dd/MM/yyyy").Split('/');
+            DateTime diaactual = Convert.ToDateTime(str3[1] + "/" + str3[0] + "/" + str3[2] + " 23:59:59");
+
             string Resultado2 = controlpro.GenerarCorreoScoreCard_ENC(fi, ft, primerdia, diaactual);
             if (Resultado2 == "Error")
             {
