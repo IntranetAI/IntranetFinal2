@@ -33,11 +33,6 @@ C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\Servici
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.dll
 C:\Users\Admin\Desktop\Combinacion\intranet carlos\Version 29.4 Intranet\ServicioWeb\obj\Debug\ServicioWeb.pdb
-C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.dll
-C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.pdb
-C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
-C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.dll
-C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.pdb
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\bin\ServicioWeb.dll.config
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\bin\ServicioWeb.dll
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\bin\ServicioWeb.pdb
@@ -45,3 +40,8 @@ C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\obj\Debug\Servici
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\obj\Debug\ServicioWeb.dll
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\ServicioWeb\obj\Debug\ServicioWeb.pdb
 C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.dll.config
+C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.dll
+C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\bin\ServicioWeb.pdb
+C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.dll
+C:\Users\Admin\Desktop\IntranetClone\ServicioWeb\obj\Debug\ServicioWeb.pdb
