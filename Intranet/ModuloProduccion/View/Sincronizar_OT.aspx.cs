@@ -36,9 +36,10 @@ namespace Intranet.ModuloProduccion.View
                     Fec_Liquidacion = Convert.ToDateTime(sinOT.Fecha_Liquidacion).ToString("yyyy-dd-MM HH:mm:ss");
                 }
                 int count = lista.Where(o => o.QG_RMS_JOB_NBR.Trim() == sinOT.QG_RMS_JOB_NBR.Trim()).Count();
+                DateTime fecha = Convert.ToDateTime(sinOT.CTD_TMSTMP);
                 if (count == 0)
                 {
-                    DateTime fecha = Convert.ToDateTime(sinOT.CTD_TMSTMP);
+                    
 
                     query = query + "INSERT INTO Data_P2B.dbo.QGPressJob (QG_RMS_JOB_NBR ,NM ,CTD_TMSTMP ,DUE_DT ,JOB_STS ,CUST_RUT ,CUST_NM, QG_RMS_TITLE_CD ," +
                                         " PRN_ORD_QTY,IMPZ_PROD_HGT,IMPZ_PROD_WDT,OPN_WDTH,OPN_HGT,AccountAddress1,AccountAddress2,AccountNeighborhood," +
@@ -52,11 +53,12 @@ namespace Intranet.ModuloProduccion.View
                     int count2  = lista.Where(o=>(o.QG_RMS_JOB_NBR.Trim() == sinOT.QG_RMS_JOB_NBR.Trim())
                                                      && (o.PRN_ORD_QTY == sinOT.PRN_ORD_QTY)
                                                      && (o.JOB_STS == sinOT.JOB_STS)
+                                                     && (o.CTD_TMSTMP == sinOT.CTD_TMSTMP)
                                                      && (o.Fecha_Liquidacion == sinOT.Fecha_Liquidacion)).Count();
                     if (count2 == 0)
                     {
-                        query = query + "UPDATE Data_P2B.dbo.QGPressJob SET NM = '" + sinOT.NM.Replace("'", "").Replace('"', ' ') + "',CUST_RUT = '" + sinOT.CUST_RUT + "'" +
-                                        ",CUST_NM = '" + sinOT.CUST_NM.Replace("'", "").Replace('"', ' ') + "',PRN_ORD_QTY = " + sinOT.PRN_ORD_QTY + ", JOB_STS= " + sinOT.JOB_STS + ", Fecha_Liquidacion='" + Fec_Liquidacion + "' WHERE QG_RMS_JOB_NBR = '" + sinOT.QG_RMS_JOB_NBR.Trim() + "';";
+                        query = query + "UPDATE Data_P2B.dbo.QGPressJob SET NM = '" + sinOT.NM.Replace("'", "").Replace('"', ' ') + "',CUST_RUT = '" + sinOT.CUST_RUT + "',CTD_TMSTMP = '" + fecha.ToString("yyyy-dd-MM HH:mm:ss") +
+                                        "',CUST_NM = '" + sinOT.CUST_NM.Replace("'", "").Replace('"', ' ') + "',PRN_ORD_QTY = " + sinOT.PRN_ORD_QTY + ", JOB_STS= " + sinOT.JOB_STS + ", Fecha_Liquidacion='" + Fec_Liquidacion + "' WHERE QG_RMS_JOB_NBR = '" + sinOT.QG_RMS_JOB_NBR.Trim() + "';";
                         contador++;
                     }
                 }

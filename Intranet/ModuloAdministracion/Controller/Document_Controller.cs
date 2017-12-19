@@ -1178,7 +1178,7 @@ namespace Intranet.ModuloAdministracion.Controller
                                         " tipos_documento, "+
                                         " condiciones_venta, "+
                                         " tipos_cambio tpc "+
-                                        " WHERE pd.referencia_documento_mercantil in (" + Factura + ") " +
+                                        " WHERE pd.referencia_documento_mercantil in (" + Factura + ") and  id_concepto_contable != 27" +
                                         " and referencia_cliente=p.rut_empresa "+
                                         " AND id_documento_mercantil=pd.referencia_documento_mercantil "+
                                         " AND pr.id_producto = pd.referencia_producto "+
