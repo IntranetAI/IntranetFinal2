@@ -1937,7 +1937,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:60px;'>" +
                            "<a title='" + reader["Processo"].ToString() + "'>" + reader["Pliego"].ToString() + "</a></td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:60px;'>" +
-                           reader["Estado"].ToString().Replace("+", "'") + "</td>" +
+                           reader["Estado"].ToString().Replace("+", "'") + "</td>" +      
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:80px;'>" +
                            TeoPrep.ToString("N0").Replace(",", ".") + " (" + TeoricoPrep + "%)</td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:90px;'>" +
@@ -1952,6 +1952,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                            Convert.ToInt32(reader["Giros"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:60px;'>" +
                            Convert.ToInt32(reader["Buenos"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+       
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:60px;'>" +
                            CantidadWIP + "</td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:100px;'>" +

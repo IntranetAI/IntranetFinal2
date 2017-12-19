@@ -221,6 +221,7 @@
     <Content Include="js\jquery-ui-1.10.3.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jquery.reveal.js" />
+    <Content Include="ModuloACR\View\CreaConexion.aspx" />
     <Content Include="ModuloAdministracion\View\Compras.aspx" />
     <Content Include="ModuloAdministracion\View\ConsumoOT.aspx" />
     <Content Include="ModuloAdministracion\View\Consumo_MesOT.aspx" />
@@ -704,6 +705,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloACR\View\CreaConexion.aspx.cs">
+      <DependentUpon>CreaConexion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloACR\View\CreaConexion.aspx.designer.cs">
+      <DependentUpon>CreaConexion.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloAdministracion\Controller\Controller_Compras.cs" />
     <Compile Include="ModuloAdministracion\Controller\Controller_Consumo.cs" />
@@ -2782,6 +2790,8 @@
     <Folder Include="Estructura\Css\" />
     <Folder Include="Intento\Controller\" />
     <Folder Include="Intento\Model\" />
+    <Folder Include="ModuloACR\Controller\" />
+    <Folder Include="ModuloACR\Model\" />
     <Folder Include="ModuloDespacho\View\UploadDocuments\" />
     <Folder Include="ModuloImpresion\Controller\" />
     <Folder Include="ModuloImpresion\Model\" />
