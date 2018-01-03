@@ -470,6 +470,7 @@
     <Content Include="ModuloWip\View\Metrics_HistorialPallet.aspx" />
     <Content Include="ModuloWip\View\Metrics_InformeWIP.aspx" />
     <Content Include="ModuloWip\View\Reimpresion_Etiquetas.aspx" />
+    <Content Include="ModuloWip\View\WebForm1.aspx" />
     <Content Include="ModuloWip\View\Wip_BuscarPallet_OT.aspx" />
     <Content Include="ModuloWip\View\Wip_EtiquetaMult.aspx" />
     <Content Include="ModuloWip\View\Wip_NewLocationPallet.aspx" />
@@ -2611,6 +2612,13 @@
     </Compile>
     <Compile Include="ModuloWip\View\Reimpresion_Etiquetas.aspx.designer.cs">
       <DependentUpon>Reimpresion_Etiquetas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloWip\View\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloWip\View\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloWip\View\Wip_BuscarPallet_OT.aspx.cs">
       <DependentUpon>Wip_BuscarPallet_OT.aspx</DependentUpon>

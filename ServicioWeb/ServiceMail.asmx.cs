@@ -282,7 +282,45 @@ namespace ServicioWeb
         }
 
 
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public string CorreoErrorGuiasDespacho(string IDIntegracion)
+        {
+            System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+            mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
+                        "<br/><br/>Estimado(a):" +
+                        "<br/><br/>Ha ocurrido un error al integrar la guia de despacho" +
+                "<br/>testtt<br/>" +
 
+                        "IdIntr: " + IDIntegracion.ToString() + "<br/>" +
+                        "<br />" +
+                        "Atentamente," +
+                        "<br />" +
+                        "<b>Equipo de desarrollo A Impresores S.A.</b>";
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-CL");
+            mmsg.Subject = "ERROR Integracion con Guias de Despacho";
+            mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+            mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+            mmsg.IsBodyHtml = true;
+            mmsg.From = new System.Net.Mail.MailAddress("sobreimpresiones@aimpresores.cl");
+            System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+            cliente.Credentials =
+                new System.Net.NetworkCredential("sobreimpresiones@aimpresores.cl", "info_sobreimpresiones");
+
+            cliente.Host = "mail.aimpresores.cl";
+            try
+            {
+                cliente.Send(mmsg);
+                return "OK";
+            }
+            catch (System.Net.Mail.SmtpException ex)
+            {
+                return "Error";
+            }
+        
+        }
 
 
     }
