@@ -35,10 +35,11 @@ namespace Intranet.View
                         ft = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 23:59:59");
                     }
 
-                    Contenido = inf.Produccion_CorreoScoreCard_V2("Diario", fi, ft, 0) + //fi, ft, 0
+                    Contenido = //inf.Produccion_CorreoScoreCard_V2("Diario", fi, ft, 0) + //fi, ft, 0
                     inf.Produccion_CorreoScoreCard_V2("Mensual", fi2, ft, 1) +
-                    "<div style='page-break-before: always;'>" + inf.Produccion_CorreoScoreCard_TiempoProduccion_V2("Diario", fi, ft, 3) + "</div>" +
-                    "<div>" + inf.Produccion_CorreoScoreCard_TiempoProduccion_V2("Mensual", fi2, ft, 3) + "</div>";
+                   // "<div style='page-break-before: always;'>" + inf.Produccion_CorreoScoreCard_TiempoProduccion_V2("Diario", fi, ft, 3) + "</div>" +
+                   // "<div>" + inf.Produccion_CorreoScoreCard_TiempoProduccion_V2("Mensual", fi2, ft, 3) + "</div>";
+                   "";
                     Label1.Text = Contenido.ToString();
                 }
                 catch (Exception ex)

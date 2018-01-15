@@ -1467,7 +1467,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             {
                 string FI = fi.ToString("dd/MM/yyyy"); string FT = ft.ToString("dd/MM/yyyy");
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add("GenerarCorreoScoreCard_Semanal");
+                mmsg.To.Add("generarcorreo9scorecard_semanal@aimpresores.cl");
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
                             "<br/><br/>Este informe se obtiene de forma automática desde el control de producción (Metrics Jobtrack), siendo esta información correspondiente desde el día " + FI + " al " + FT + "." +
@@ -4303,6 +4303,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 {
                     cmd.CommandText = "Produccion_FechaDistribuccion_Listar";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 999999999;
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -4324,7 +4325,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         lista.Add(dtDist);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                 }
             }
@@ -4354,7 +4355,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                                 mmsg.To.Add(correouser);
                             }
                             mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
-
+                            //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                             if (dt.Proceso == "Insert")
                             {
                                 mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT;
