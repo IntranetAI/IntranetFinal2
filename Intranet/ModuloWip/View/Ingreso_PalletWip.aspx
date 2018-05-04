@@ -36,7 +36,7 @@
                 document.getElementById("ContentPlaceHolder1_lblTotal").innerHTML = msg.d[2];
             },
             error: function () {
-                alert('¡Ha Ocurrido un Error!');
+                alert('¡Ha Ocurrido un Error11!');
             }
         });
         var ddlTerritory = document.getElementById("<%= ddlProgramado.ClientID %>");
@@ -58,7 +58,7 @@
                 });
             },
             error: function () {
-                alert('¡Ha Ocurrido un Error!');
+                alert('¡Ha Ocurrido un Error2!');
             }
         });
         var ddlTerritory2 = document.getElementById("<%= ddlSinPrograma.ClientID %>");
@@ -80,7 +80,7 @@
                 });
             },
             error: function () {
-                alert('¡Ha Ocurrido un Error!');
+                alert('¡Ha Ocurrido un Error3!');
             }
         });
     }
@@ -112,7 +112,7 @@
 
             },
             error: function () {
-                alert('¡Ha Ocurrido un Error!');
+                alert('¡Ha Ocurrido un Error4!');
             }
         });
     }
@@ -130,7 +130,7 @@
                 document.getElementById("ContentPlaceHolder1_lblRestantes").innerHTML = msg.d[1];
             },
             error: function () {
-                alert('¡Ha Ocurrido un Error!');
+                alert('¡Ha Ocurrido un Error5!');
             }
         });
     }
@@ -234,7 +234,7 @@
                 }
             },
             error: function () {
-                alert('¡Ha Ocurrido un Error!');
+                alert('¡Ha Ocurrido un Error7!');
             }
         });
     }
@@ -305,7 +305,7 @@
                 }
             },
             error: function () {
-                alert('¡Ha Ocurrido un Error!');
+                alert('¡Ha Ocurrido un Error8!');
             }
         });
     }
@@ -397,7 +397,7 @@
                         }
                     },
                     error: function () {
-                        alert('¡Ha Ocurrido un Error!');
+                        alert('¡Ha Ocurrido un Error9!');
                     }
                 });
             }
@@ -501,7 +501,7 @@
                         });
                     },
                     error: function () {
-                        alert('¡Ha Ocurrido un Error!');
+                        alert('¡Ha Ocurrido un Error10!');
                     }
                 });
             }

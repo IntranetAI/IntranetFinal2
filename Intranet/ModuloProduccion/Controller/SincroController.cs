@@ -160,7 +160,7 @@ namespace Intranet.ModuloProduccion.Controller
         {
             System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-            mmsg.To.Add("juan.venegas@aimpresores.cl");
+            //mmsg.To.Add("juan.venegas@aimpresores.cl");
             mmsg.Subject = "ERROR Sincronizacion";
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
             mmsg.Body = "<table style='width:100%;'>" +

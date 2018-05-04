@@ -59,17 +59,22 @@ namespace Intranet.View
                         Controller_Login controlLo = new Controller_Login();
                         sis = controlLo.buscarPorID(txtUsername.Text);
                         string tipousuario = sis.user;
-                        if (sis.estado == 1)
+                    if (sis.estado == 1)
+                    {
+
+                        Session["Estado"] = sis.estado;
+                        Session["Usuario"] = usuario;
+                        Session["Nombre"] = sis.Nombre;
+                        Session["centroCosto"] = sis.CentroCosto;
+                        Session["MenuProduccion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(1));
+                        Session["MenuAdministracion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(6));
+                        Session["Perfil"] = sis.user;
+                        if (usuario.ToUpper() == "KBA")
                         {
-
-                            Session["Estado"] = sis.estado;
-                            Session["Usuario"] = usuario;
-                            Session["Nombre"] = sis.Nombre;
-                            Session["centroCosto"] = sis.CentroCosto;
-                            Session["MenuProduccion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(1));
-                            Session["MenuAdministracion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(6));
-                            Session["Perfil"] = sis.user;
-
+                            Response.Redirect("../ModuloEtiquetasMetricsWIP/view/EtiquetasWip.aspx?id=1");
+                        }
+                        else
+                        {
                             if (tipousuario != "Normal")
                             {
                                 //Response.Redirect("../ModuloProduccion/view/Suscripcion.aspx?id=1");
@@ -80,31 +85,32 @@ namespace Intranet.View
                                 Response.Redirect("../ModuloProduccion/view/EstadoOT.aspx?id=1");
                             }
                         }
-                        else if (sis.estado == 2)
-                        {
-                            string popupScript = "<script language='JavaScript'> alert('Su Cuenta ha sido Deshabilitada.\\n - Ha superado el número de intentos permitidos.\\n\\n * Contactese con el Administrador.');location.href='login.aspx' </script>";
-                            Page.RegisterStartupScript("PopupScript", popupScript);
-                        }
-                        else if (sis.estado == 4)
-                        {
-                            Session["Estado"] = sis.estado;
-                            Session["Usuario"] = usuario;
-                            Session["Nombre"] = sis.Nombre;
-                            Session["centroCosto"] = sis.CentroCosto;
-                            Session["MenuProduccion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(1));
-                            Session["MenuAdministracion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(6));
-                            Session["Perfil"] = sis.user;
+                    }
+                    else if (sis.estado == 2)
+                    {
+                        string popupScript = "<script language='JavaScript'> alert('Su Cuenta ha sido Deshabilitada.\\n - Ha superado el número de intentos permitidos.\\n\\n * Contactese con el Administrador.');location.href='login.aspx' </script>";
+                        Page.RegisterStartupScript("PopupScript", popupScript);
+                    }
+                    else if (sis.estado == 4)
+                    {
+                        Session["Estado"] = sis.estado;
+                        Session["Usuario"] = usuario;
+                        Session["Nombre"] = sis.Nombre;
+                        Session["centroCosto"] = sis.CentroCosto;
+                        Session["MenuProduccion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(1));
+                        Session["MenuAdministracion"] = submenu.CargarSubMenu(sis.Usuario, Convert.ToInt32(6));
+                        Session["Perfil"] = sis.user;
 
-                            if (tipousuario != "Normal")
-                            {
-                               // Response.Redirect("../ModuloProduccion/view/Suscripcion.aspx?id=1");
-                                Response.Redirect("../ModuloProduccion/view/EstadoOT.aspx?id=1");
-                            }
-                            else
-                            {
-                                Response.Redirect("../ModuloProduccion/view/EstadoOT.aspx?id=1");
-                            }
+                        if (tipousuario != "Normal")
+                        {
+                            // Response.Redirect("../ModuloProduccion/view/Suscripcion.aspx?id=1");
+                            Response.Redirect("../ModuloProduccion/view/EstadoOT.aspx?id=1");
                         }
+                        else
+                        {
+                            Response.Redirect("../ModuloProduccion/view/EstadoOT.aspx?id=1");
+                        }
+                    }
                    
                     }
                     else

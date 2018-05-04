@@ -119,6 +119,9 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\highcharts-more.js" />
     <Content Include="js\highcharts.js" />
+    <Content Include="js\jquery-1.3.2.min.js" />
+    <Content Include="js\jquery-barcode.js" />
+    <Content Include="js\jquery-barcode.min.js" />
     <Content Include="js\jquery.leanModal.min.js" />
     <Content Include="js\jquery.PrintArea.js" />
     <Content Include="js\modules\exporting.js" />
@@ -365,6 +368,9 @@
     <Content Include="ModuloEncuadernacion\View\RecepcionProductosTerminados.aspx" />
     <Content Include="ModuloEncuadernacion\View\Reimpresion_Guias.aspx" />
     <Content Include="ModuloEncuadernacion\View\ValidarProductosTerminados.aspx" />
+    <Content Include="ModuloEtiquetasMetricsWIP\View\EtiquetasWip.aspx" />
+    <Content Include="ModuloEtiquetasMetricsWIP\View\MetricsWIP.aspx" />
+    <Content Include="ModuloEtiquetasMetricsWIP\View\_Etiqueta.aspx" />
     <Content Include="ModuloFacturacion\View\ControlEnvioFacturas.aspx" />
     <Content Include="ModuloFacturacion\View\Facturacion_Total.aspx" />
     <Content Include="ModuloFacturacion\View\Vista_FacturaElectronica.aspx" />
@@ -1801,6 +1807,29 @@
     </Compile>
     <Compile Include="ModuloEncuadernacion\View\ValidarProductosTerminados.aspx.designer.cs">
       <DependentUpon>ValidarProductosTerminados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\Controller\EtiquetasController.cs" />
+    <Compile Include="ModuloEtiquetasMetricsWIP\Model\Etiquetas.cs" />
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\EtiquetasWip.aspx.cs">
+      <DependentUpon>EtiquetasWip.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\EtiquetasWip.aspx.designer.cs">
+      <DependentUpon>EtiquetasWip.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\MetricsWIP.aspx.cs">
+      <DependentUpon>MetricsWIP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\MetricsWIP.aspx.designer.cs">
+      <DependentUpon>MetricsWIP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\_Etiqueta.aspx.cs">
+      <DependentUpon>_Etiqueta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\_Etiqueta.aspx.designer.cs">
+      <DependentUpon>_Etiqueta.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloFacturacion\Controller\Controller_Facturacion.cs" />
     <Compile Include="ModuloFacturacion\Model\Facturacion_ElectronicaSII.cs" />

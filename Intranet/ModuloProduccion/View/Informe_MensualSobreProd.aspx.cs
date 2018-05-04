@@ -131,6 +131,7 @@ namespace Intranet.ModuloProduccion.View
                     p.Tipo = RadGrid1.Items[i]["Tipo"].Text;
                     p.Horas = RadGrid1.Items[i]["Horas"].Text;
                     p.Operador = RadGrid1.Items[i]["Operador"].Text;
+                    p.Buenos = RadGrid1.Items[i]["FechaTermino"].Text;
 
                     lista.Add(p);
                 }
@@ -197,12 +198,14 @@ namespace Intranet.ModuloProduccion.View
                 gv.HeaderRow.Cells[12].Text = "Producida Cons. Bajo";
                 gv.HeaderRow.Cells[13].Text = "Diferencia";
                 gv.HeaderRow.Cells[14].Text = "%";
-                gv.HeaderRow.Cells[15].Visible = false;
+                gv.HeaderRow.Cells[15].Text = "Giros";
                 gv.HeaderRow.Cells[16].Visible = false;
                 gv.HeaderRow.Cells[17].Visible = false;
                 gv.HeaderRow.Cells[18].Visible = false;
                 gv.HeaderRow.Cells[19].Visible = false;
                 gv.HeaderRow.Cells[20].Visible = false;
+
+                
                 int TotSectorCantPlanCE = 0;
                 int TotSectorCantProdCE = 0;
                 int TotSectorCantDifeCE = 0;
@@ -234,7 +237,10 @@ namespace Intranet.ModuloProduccion.View
                     row.Cells[13].Text = row.Cells[18].Text;
                     row.Cells[14].Text = row.Cells[19].Text;
 
-                    row.Cells[15].Visible = false;
+                    string a = row.Cells[20].Text + row.Cells[21].Text + row.Cells[22].Text + row.Cells[23].Text + row.Cells[24].Text + 
+                        row.Cells[0].Text + row.Cells[1].Text + row.Cells[2].Text + row.Cells[3].Text + row.Cells[4].Text +
+                        row.Cells[5].Text + row.Cells[6].Text + row.Cells[7].Text + row.Cells[8].Text + row.Cells[9].Text;
+                    // row.Cells[15].Text = row.Cells[15].Text;
                     row.Cells[16].Visible = false;
                     row.Cells[17].Visible = false;
                     row.Cells[18].Visible = false;

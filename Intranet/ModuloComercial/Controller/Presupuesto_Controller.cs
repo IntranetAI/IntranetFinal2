@@ -233,7 +233,7 @@ namespace Intranet.ModuloComercial.Controller
             //mmsg.To.Add("juan.beheran@aimpresores.cl");
             //mmsg.To.Add("natalia.gonzalez@aimpresores.cl");
             mmsg.To.Add("alan.herrera@aimpresores.cl");
-            mmsg.To.Add("juan.venegas@aimpresores.cl");
+            //mmsg.To.Add("juan.venegas@aimpresores.cl");
 
             mmsg.Body = "<div style='font-family: georgia,serif; font-size: 10pt; color: rgb(0, 0, 0);'>Estimados <br/><br/>" +
                         "El contrato con Falabella, establece que el papel deberá ser reajustado trimestralmente de acuerdo a la siguiente condición: <br/><br/>" +

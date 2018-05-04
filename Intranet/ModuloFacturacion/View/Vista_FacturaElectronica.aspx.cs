@@ -413,37 +413,42 @@ namespace Intranet.ModuloFacturacion.View
         #endregion
 
         protected void Button1_Click(object sender, EventArgs e)
-        {
-            Controller_Facturacion controlFact = new Controller_Facturacion();
-            string OC = txtNOrdenCompra.Text.ToString();
-            string fechaOC = txtFechaOC.Text;
-            string evento = "";
-            int TipoDoc = Convert.ToInt32(Request.QueryString["TipoDoc"].ToString());
-            if (TipoDoc >= 4 && TipoDoc <= 9)
+        {try
             {
-                if (ddlRazon.SelectedValue.ToString() != "0")
+                Controller_Facturacion controlFact = new Controller_Facturacion();
+                string OC = txtNOrdenCompra.Text.ToString();
+                string fechaOC = txtFechaOC.Text;
+                string evento = "";
+                int TipoDoc = Convert.ToInt32(Request.QueryString["TipoDoc"].ToString());
+                if (TipoDoc >= 4 && TipoDoc <= 9)
                 {
-                    evento = controlFact.SincronizadorFacturas(Convert.ToInt32(Request.QueryString["Fac"].ToString()), Convert.ToInt32(Request.QueryString["TipoDoc"].ToString()), ddlRazon.SelectedValue.ToString(), Session["Usuario"].ToString(), OC, fechaOC);
+                    if (ddlRazon.SelectedValue.ToString() != "0")
+                    {
+                        evento = controlFact.SincronizadorFacturas(Convert.ToInt32(Request.QueryString["Fac"].ToString()), Convert.ToInt32(Request.QueryString["TipoDoc"].ToString()), ddlRazon.SelectedValue.ToString(), Session["Usuario"].ToString(), OC, fechaOC);
+                    }
+                    else
+                    {
+                        evento = "Debe seleccionar una razón. Intentelo nuevamente";
+                    }
                 }
                 else
                 {
-                    evento = "Debe seleccionar una razón. Intentelo nuevamente";
+                    evento = controlFact.SincronizadorFacturas(Convert.ToInt32(Request.QueryString["Fac"].ToString()), Convert.ToInt32(Request.QueryString["TipoDoc"].ToString()), ddlRazon.SelectedValue.ToString(), Session["Usuario"].ToString(), OC, fechaOC);
+                }
+
+                if (evento == "OK")
+                {
+                    string popupScript = "<script language='JavaScript'> alert(' Actualizacion de Factura Electronicas Realizada Correctamente');opener.location.reload();window.close();</script>";
+                    Page.RegisterStartupScript("PopupScript", popupScript);
+                }
+                else
+                {
+                    string popupScript = "<script language='JavaScript'> alert('" + evento + "');</script>";
+                    Page.RegisterStartupScript("PopupScript", popupScript);
                 }
             }
-            else
+            catch (Exception exx)
             {
-                evento = controlFact.SincronizadorFacturas(Convert.ToInt32(Request.QueryString["Fac"].ToString()), Convert.ToInt32(Request.QueryString["TipoDoc"].ToString()), ddlRazon.SelectedValue.ToString(), Session["Usuario"].ToString(), OC, fechaOC);
-            }
-
-            if (evento == "OK")
-            {
-                string popupScript = "<script language='JavaScript'> alert(' Actualizacion de Factura Electronicas Realizada Correctamente');opener.location.reload();window.close();</script>";
-                Page.RegisterStartupScript("PopupScript", popupScript);
-            }
-            else
-            {
-                string popupScript = "<script language='JavaScript'> alert('" + evento + "');</script>";
-                Page.RegisterStartupScript("PopupScript", popupScript);
             }
         }
 

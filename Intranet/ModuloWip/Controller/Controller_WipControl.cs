@@ -80,11 +80,14 @@ namespace Intranet.ModuloWip.Controller
                 string Pliegos = "";
                 while (reader.Read())
                 {
-                    Model_Wip_Control cont = new Model_Wip_Control();
-                    cont.Forma = reader["tiraje"].ToString();
-                    cont.Prox_Proceso = reader["Pliegos"].ToString();
-                    Pliegos = reader["Pliegos"].ToString();
-                    lista.Add(cont);
+                    if (reader["Pliegos"].ToString() != "")
+                    {
+                        Model_Wip_Control cont = new Model_Wip_Control();
+                        cont.Forma = reader["tiraje"].ToString();
+                        cont.Prox_Proceso = reader["Pliegos"].ToString();
+                        Pliegos = reader["Pliegos"].ToString();
+                        lista.Add(cont);
+                    }
                 }
             }
             con.CerrarConexion();
