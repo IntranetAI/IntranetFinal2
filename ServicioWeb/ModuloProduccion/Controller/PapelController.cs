@@ -18,8 +18,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
 
                 mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("luis.rojas @aimpresores.cl");
-                mmsg.To.Add("francisco.depablo @aimpresores.cl");
+                mmsg.To.Add("luis.rojas@aimpresores.cl");
+                mmsg.To.Add("francisco.depablo@aimpresores.cl");
                 
                 
 

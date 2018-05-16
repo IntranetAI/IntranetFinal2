@@ -114,16 +114,17 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
 
         public string ResultadoFiltro(string OT, string Pliego, string Maquina,int Procedimiento)
         {
-            string result = "";string Encabezado = "<table id='tblRegistro' runat='server' cellspacing='0' cellpadding='0' style='border: 1px solid #CCC; margin: 0 auto; margin-top: 0px; margin-bottom: 15px; width:1090px;margin-left:3px;'>" +
+            string result = "";string Encabezado = "<table id='tblRegistro' runat='server' cellspacing='0' cellpadding='0' style='border: 1px solid #CCC; margin: 0 auto; margin-top: 0px; margin-bottom: 15px; width:1070px;margin-left:3px;'>" +
           "<tbody><tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'>" +
             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>OT</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:250px;'>Nombre OT</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:300px;'>Pliego</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:70px;'>Tiraje</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:70px;'>Buenos</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:80px;'>Maquina</td>" +
+            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:220px;'>Nombre OT</td>" +
+            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:280px;'>Pliego</td>" +
+            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:60px;'>Tiraje</td>" +
+            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:60px;'>Buenos</td>" +
+            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:70px;'>Maquina</td>" +
             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>Fecha Inicio</td>" +
             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:70px;'>Etiquetas Creadas</td>" +
+            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:60px;'>Cantidad Etiquetas</td>" +
             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:70px;'>Accion</td>" +
           "</tr>";
             Conexion conexion = new Conexion();
@@ -140,12 +141,12 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
                 try
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        result = "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                        result = result + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>" +
-                           reader["numordem"].ToString()+ "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:250px;'>" +
+                           reader["numordem"].ToString() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:230px;'>" +
                            reader["descricao"].ToString().ToLower() + "</td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:300px;'>" +
                            reader["processo"].ToString().ToLower() + "</td>" +
@@ -159,8 +160,10 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
                            Convert.ToDateTime(reader["DtHoraInicio"].ToString()).ToString("dd/MM/yyyy HH:mm") + " </td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:70px;'>" +
                            reader["PalletCreados"].ToString() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:60px;'>" +
+                           reader["CantidadCreada"].ToString() + "</td>" +
                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:70px;'>" +
-                           "<a style = 'Color:Blue;text-decoration:none;cursor:pointer;' href = 'javascript:Mostrar(\"" + reader["objid"].ToString() + "\",\"" + reader["numordem"].ToString() + "\",\"" + reader["descricao"].ToString() + "\",\"" + reader["processo"].ToString() + "\")' >Seleccionar</a>"+ "</td>" +
+                           "<a style = 'Color:Blue;text-decoration:none;cursor:pointer;' href = 'javascript:Mostrar(\"" + reader["objid"].ToString() + "\",\"" + reader["numordem"].ToString() + "\",\"" + reader["descricao"].ToString() + "\",\"" + reader["processo"].ToString() + "\",\"" + reader["CantidadCreada"].ToString() + "\",\"" + reader["qtdplanejado"].ToString() + "\")' >Seleccionar</a>" + "</td>" +
 
 
 
@@ -173,6 +176,129 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
             }
             conexion.CerrarConexion();
             return Encabezado + result + "</tbody></table>";
+        }
+
+        public List<Etiquetas> ListaPliegosOT(string OT, string Pliego, string Maquina, int procedimiento)
+        {
+            List<Etiquetas> lista = new List<Etiquetas>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                cmd.CommandText = "[Metrics_Etiquetas_Listado]";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@OT", OT);
+                cmd.Parameters.AddWithValue("@Pliego", Pliego);
+                cmd.Parameters.AddWithValue("@Maquina", Maquina);
+                cmd.Parameters.AddWithValue("@Procedimiento", procedimiento);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Etiquetas d = new Etiquetas();
+                    d.Pliego = reader["Pliego"].ToString();
+                    lista.Add(d);
+                }
+
+            }
+            con.CerrarConexion();
+            return lista;
+        }
+
+        public string HistorialEtiquetas(string OT, string Pliego)
+        {
+            string result = ""; string Encabezado = "<table id='tblRegistro' runat='server' cellspacing='0' cellpadding='0' style='border: 1px solid #CCC; margin: 0 auto; margin-top: 0px; margin-bottom: 15px; width:850px;margin-left:3px;'>" +
+           "<tbody><tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>Nro Pallet</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>Cantidad</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>Peso</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>Pallet</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:170px;'>Fecha Creacion</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:60px;'>Estado</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:100px;'>Usuario</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:220px;'>Local</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>Ubicacion</td>" +
+             "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>Accion</td>" +
+           "</tr>";
+            Conexion conexion = new Conexion();
+            SqlCommand cmd = conexion.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                cmd.CommandText = "[Metrics_Etiquetas_Listado]";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@OT", OT);
+                cmd.Parameters.AddWithValue("@Pliego", Pliego);
+                cmd.Parameters.AddWithValue("@Maquina", "");
+                cmd.Parameters.AddWithValue("@Procedimiento", 1);
+                cmd.CommandTimeout = 9000000;
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        result = result + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>" +
+                           reader["idPalletLabel"].ToString() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:50px;'>" +
+                           reader["Quantity"].ToString().ToLower() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:50px;'>" +
+                           reader["QuantityKG"].ToString().ToLower() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:50px;'>" +
+                           reader["Pallet"].ToString() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:170px;'>" +
+                           Convert.ToDateTime(reader["FechaCreacion"].ToString()).ToString("dd/MM/yyyy HH:mm") + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:60px;'>" +
+                           reader["Estado"].ToString() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:100px;'>" +
+                           reader["InsUser"].ToString() + " </td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:220px;'>" +
+                           reader["Local"].ToString() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:50px;'>" +
+                           reader["Ubicacion"].ToString() + "</td>" +
+                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>" +
+                           "<a style = 'Color:Blue;text-decoration:none;cursor:pointer;' href = 'javascript:HistorialEtiquetas(\"" + reader["idPalletLabel"].ToString() + "\")' >Reimprimir</a>" + "</td>" +
+
+
+
+                           "</tr>";
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            conexion.CerrarConexion();
+            return Encabezado + result + "</tbody></table>";
+        }
+
+        public int CrearEtiquetaxIntranet(int idpallet,string Objid, int Cantidad)
+        {
+            int result = 0;
+            Conexion conexion = new Conexion();
+            SqlCommand cmd = conexion.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                cmd.CommandText = "[Metrics_Etiquetas_CrearenIntranet]";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idpallet", idpallet);
+                cmd.Parameters.AddWithValue("@objid", Objid);
+                cmd.Parameters.AddWithValue("@Cantidad", Cantidad);
+                cmd.Parameters.AddWithValue("@Procedimiento", 0);
+                cmd.CommandTimeout = 9000000;
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        result = Convert.ToInt32(reader["respuesta"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            conexion.CerrarConexion();
+
+            return result;
         }
     }
 }

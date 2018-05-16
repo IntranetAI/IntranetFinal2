@@ -19,12 +19,12 @@
     	}
 	</script>
 </head>
-<body >
+<body onload="window.print();window.close();" >
     <form id="form1" runat="server">
 <br /><br /><br /><input type="text" id="CodigoBarra" style="visibility:hidden;" /><br /><br /><br />                
 		<table border="1" style="height:316mm; width:279mm;font-family:Arial;">
 			<tr>
-				<td align="center" colspan="2" style="font-size:14pt; font-weight:bold"> OP </td>
+				<td align="center" colspan="2" style="font-size:22pt; font-weight:bold"> OP </td>
 				<td align="center"  colspan="2" style="font-size:14pt; font-weight:bold"> Trabajo </td>
 			</tr>
 			<tr>

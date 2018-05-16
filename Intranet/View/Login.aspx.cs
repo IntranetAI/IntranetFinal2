@@ -71,7 +71,7 @@ namespace Intranet.View
                         Session["Perfil"] = sis.user;
                         if (usuario.ToUpper() == "KBA")
                         {
-                            Response.Redirect("../ModuloEtiquetasMetricsWIP/view/EtiquetasWip.aspx?id=1");
+                            Response.Redirect("../ModuloEtiquetasMetricsWIP/view/metricsWip.aspx?id=1&cat=4");
                         }
                         else
                         {

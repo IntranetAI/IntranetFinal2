@@ -371,6 +371,7 @@
     <Content Include="ModuloEtiquetasMetricsWIP\View\EtiquetasWip.aspx" />
     <Content Include="ModuloEtiquetasMetricsWIP\View\MetricsWIP.aspx" />
     <Content Include="ModuloEtiquetasMetricsWIP\View\_Etiqueta.aspx" />
+    <Content Include="ModuloEtiquetasMetricsWIP\View\_HistorialEtiquetas.aspx" />
     <Content Include="ModuloFacturacion\View\ControlEnvioFacturas.aspx" />
     <Content Include="ModuloFacturacion\View\Facturacion_Total.aspx" />
     <Content Include="ModuloFacturacion\View\Vista_FacturaElectronica.aspx" />
@@ -1830,6 +1831,13 @@
     </Compile>
     <Compile Include="ModuloEtiquetasMetricsWIP\View\_Etiqueta.aspx.designer.cs">
       <DependentUpon>_Etiqueta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\_HistorialEtiquetas.aspx.cs">
+      <DependentUpon>_HistorialEtiquetas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloEtiquetasMetricsWIP\View\_HistorialEtiquetas.aspx.designer.cs">
+      <DependentUpon>_HistorialEtiquetas.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloFacturacion\Controller\Controller_Facturacion.cs" />
     <Compile Include="ModuloFacturacion\Model\Facturacion_ElectronicaSII.cs" />
