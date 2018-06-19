@@ -55,16 +55,7 @@
                </td>
             <td class="style9" colspan="4">
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:RadioButton ID="rdDesperdicio" runat="server" GroupName="rdDespericio" 
-                    Text="Ver Consumo Metrics &lt; Desperdicio" />
                 <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:RadioButton ID="rdDiferenciasDesperdicio" runat="server" 
-                    GroupName="rdDespericio" Text="Ver Consumo Metrics &gt; Desperdicio" />
-                <br />
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:RadioButton ID="rdDiferenciasTeorico" runat="server" 
-                    GroupName="rdDespericio" Text="Ver Consumo Metrics &lt; Teorico" />
                </td>
         </tr>
 

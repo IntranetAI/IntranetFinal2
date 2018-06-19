@@ -31,33 +31,6 @@ namespace Intranet.ModuloMateriaPrima.View {
         protected global::System.Web.UI.WebControls.TextBox txtOT;
         
         /// <summary>
-        /// Control rdDesperdicio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdDesperdicio;
-        
-        /// <summary>
-        /// Control rdDiferenciasDesperdicio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdDiferenciasDesperdicio;
-        
-        /// <summary>
-        /// Control rdDiferenciasTeorico.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdDiferenciasTeorico;
-        
-        /// <summary>
         /// Control lblFechaInicio.
         /// </summary>
         /// <remarks>

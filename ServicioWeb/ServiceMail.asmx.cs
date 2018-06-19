@@ -330,17 +330,28 @@ namespace ServicioWeb
         [ScriptMethod(UseHttpGet = true)]
         public string Correo_ConsumoPapel(string Usuario)
         {
-            PapelController pc = new PapelController();
+            PapelController pc = new PapelController();bool otro = false;
             string Resultado = pc.GenerarCorreoConsumoPapel(Usuario);
             if(Resultado == "Error")
             {
-               // controlpro.GenerarCorreoErrordeEnvio("CorreoProduccion_SobreImpresion", "General", "", "", "No se envió el correo");
+                // controlpro.GenerarCorreoErrordeEnvio("CorreoProduccion_SobreImpresion", "General", "", "", "No se envió el correo");
+            }
+            return "OK";
+        }
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public string Correo_ConsumoPapelFL(string Usuario)
+        {
+            PapelController pc = new PapelController();
+            bool Resultado = pc.GenerarCorreoConsumoPapelFL(Usuario);
+            if (Resultado == false)
+            {
+                // controlpro.GenerarCorreoErrordeEnvio("CorreoProduccion_SobreImpresion", "General", "", "", "No se envió el correo");
             }
 
 
             return "OK";
         }
-
 
     }
 } 

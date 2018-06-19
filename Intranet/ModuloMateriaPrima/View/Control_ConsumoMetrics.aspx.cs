@@ -27,11 +27,8 @@ namespace Intranet.ModuloMateriaPrima.View
                     {
                         if (txtFechaInicio.Text != "" && txtFechaTermino.Text != "")
                         {
-                            string[] str = txtFechaInicio.Text.Split('/');
-                            DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
-                            string[] str2 = txtFechaTermino.Text.Split('/');
-                            DateTime ft = Convert.ToDateTime(str2[2] + "-" + str2[1] + "-" + str2[0] + " 23:59:59");
-                            Label11.Text = cc.CargaConsumoMetrics(txtOT.Text, fi, ft, 5);
+                            //PARA OT 108
+                            Label11.Text = cc.CargaConsumoMetricsV2(txtOT.Text,DateTime.Now, DateTime.Now,  -1);
                         }
                         else
                         {
@@ -41,64 +38,21 @@ namespace Intranet.ModuloMateriaPrima.View
                     }
                     else
                     {
-                        Label11.Text = cc.CargaConsumoMetrics(txtOT.Text, DateTime.Now, DateTime.Now, 3);
+                        //OTS NORMALES
+                        Label11.Text = cc.CargaConsumoMetricsV2(txtOT.Text,DateTime.Now, DateTime.Now,  1);
                     }
                 }
-                else if (txtFechaInicio.Text != "" && txtFechaTermino.Text != "")
+                else if(txtFechaInicio.Text != "" && txtFechaTermino.Text != "")
                 {
-                    if (rdDesperdicio.Checked)//chkDesperdicio
-                    {
-                        string[] str = txtFechaInicio.Text.Split('/');
-                        DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
-                        string[] str2 = txtFechaTermino.Text.Split('/');
-                        DateTime ft = Convert.ToDateTime(str2[2] + "-" + str2[1] + "-" + str2[0] + " 23:59:59");
-
-                        string ot = cc.CargaOTS("", fi, ft, 1);
-
-                        Label11.Text = cc.CargaConsumoMetrics(ot, DateTime.Now, DateTime.Now, 4);
-                    }
-
-                    else if (rdDiferenciasDesperdicio.Checked)
-                    {
-                        string[] str = txtFechaInicio.Text.Split('/');
-                        DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
-                        string[] str2 = txtFechaTermino.Text.Split('/');
-                        DateTime ft = Convert.ToDateTime(str2[2] + "-" + str2[1] + "-" + str2[0] + " 23:59:59");
-
-                        string ot = cc.CargaOTS("", fi, ft, 1);
-
-                        Label11.Text = cc.CargaConsumoMetrics(ot, DateTime.Now, DateTime.Now, 6);
-                    }
-                    else if (rdDiferenciasTeorico.Checked)
-                    {
-                        string[] str = txtFechaInicio.Text.Split('/');
-                        DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
-                        string[] str2 = txtFechaTermino.Text.Split('/');
-                        DateTime ft = Convert.ToDateTime(str2[2] + "-" + str2[1] + "-" + str2[0] + " 23:59:59");
-
-                        string ot = cc.CargaOTS("", fi, ft, 1);
-
-                        Label11.Text = cc.CargaConsumoTeoricoVsMetrics2(ot, DateTime.Now, DateTime.Now, 7);
-                    }
-                    else
-                    {
-                        string[] str = txtFechaInicio.Text.Split('/');
-                        DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
-                        string[] str2 = txtFechaTermino.Text.Split('/');
-                        DateTime ft = Convert.ToDateTime(str2[2] + "-" + str2[1] + "-" + str2[0] + " 23:59:59");
-
-                        string ot = cc.CargaOTS("", fi, ft, 1);
-
-                        Label11.Text = cc.CargaConsumoMetrics(ot, fi, ft, 0);
-                    }
-
-
-                }
-                else
-                {
-                    string ot = cc.CargaOTS("", DateTime.Now, DateTime.Now, 2);
-
-                    Label11.Text = cc.CargaConsumoMetrics(ot, DateTime.Now, DateTime.Now, 0);
+                    //OTS POR FECHAS
+                    string[] str = txtFechaInicio.Text.Split('/');
+                    DateTime fi = Convert.ToDateTime(str[2] + "-" + str[1] + "-" + str[0] + " 00:00:00");
+                    string[] str2 = txtFechaTermino.Text.Split('/');
+                    DateTime ft = Convert.ToDateTime(str2[2] + "-" + str2[1] + "-" + str2[0] + " 23:59:59");
+                    //OTS CON CONSUMO EN RANGO DE FECHAS
+                    string ot = cc.CargaOTSV2("", fi, ft, 2);
+                    //BUSCA TODAS LAS OTS DEL RANGO Y TRAE SU CONSUMO INDEPENDIENTE DE SUS FECHAS DE CONSUMOS
+                    Label11.Text = cc.CargaConsumoMetricsV2(ot, DateTime.Now, DateTime.Now, 0);
                 }
             }
             catch
