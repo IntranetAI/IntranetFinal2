@@ -97,6 +97,14 @@
         </table>
         <br />
         <div style="height:600px;width:96%; overflow:auto;margin-left:10px;" >
+         <div style="width:100%" align="right">
+              <a title="Exportar a Excel">
+                <asp:ImageButton ID="ibExcel" runat="server" Height="20px" ImageUrl="~/Images/Excel-icon.png"
+                Width="20px" Visible="True" OnClick="ibExcel_Click" />
+
+              </a>
+         </div>
+
         <asp:Label ID="Label11" runat="server"></asp:Label>
         </div>
 </asp:Content>

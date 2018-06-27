@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using Intranet.ModuloMateriaPrima.Model;
 
 namespace Intranet.ModuloMateriaPrima.Controller
 {
@@ -690,6 +691,50 @@ namespace Intranet.ModuloMateriaPrima.Controller
             return Contenido;
 
         }
+
+
+        //27-06-2018 ADD BOTON EXPORTAR A EXCEL
+        public List<ConsumoBobinasExcel> ListaConsumos(string OTs, DateTime FechaInicio, DateTime FechaTermino, int Procedimiento)
+        {
+            List<ConsumoBobinasExcel> lista = new List<ConsumoBobinasExcel>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                try
+                {
+                    cmd.CommandText = "[BodegaMP_ConsumoBobinasMetrics_V2]";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OT", OTs);
+                    cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ConsumoBobinasExcel c = new ConsumoBobinasExcel();
+                        c.OT = reader["Numordem"].ToString();
+                        c.NombreOT = reader["NombreOT"].ToString();
+                        c.SKU = reader["CodItem"].ToString(); 
+                        c.Papel = reader["Material"].ToString();
+                        c.Gramaje = reader["gramaje"].ToString();
+                        c.Ancho = reader["Ancho"].ToString();
+                        c.SolicitadoKG = reader["ConsumoTeorico"].ToString();
+                        c.ConsumoKG = reader["Cantidad"].ToString();
+                        lista.Add(c);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
+
+
+
 
         public string CargaOTSV2(string OTs, DateTime FechaInicio, DateTime FechaTermino, int Procedimiento)
         {

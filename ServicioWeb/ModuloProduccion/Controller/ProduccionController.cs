@@ -523,230 +523,496 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
         public string Produccion_CorreoScoreCard_V2(string Titulo, DateTime FechaInicio, DateTime FechaTermino, int Procedimiento)
         {
-            string Contenido = ""; string SectorAnt = ""; double TotalPliegos = 0; double TotalGiros = 0; double TotalMermaTiraje = 0; double HorasSinProducir = 0;
-            double TotalMermaPreparacion = 0; double Entradas = 0; double TotalHorasTiraje = 0; double TotalHorasImp = 0; double TotalHorasPrep = 0; double TotalHorasSinProducir = 0;
-            double HorasTiraje = 0; double HorasImp = 0; double HorasPrep = 0; string NombreTitulo = ""; string PromedioHorasPreparacion = ""; string ceros = "00"; double TotalHorasPreparacion = 0;
-            double OTS = 0; double TotalOTS = 0;
-            if (Titulo == "Diario")
-            {
-                NombreTitulo = "Score Card Diario " + FechaInicio.ToString("dd/MM/yyyy");
-            }
-            else if (Titulo == "Semanal")
-            {
-                NombreTitulo = "Score Card Semanal " + FechaInicio.ToString("dd/MM/yyyy") + " al " + FechaTermino.ToString("dd/MM/yyyy");
-            }
-            else
-            {
-                NombreTitulo = "Score Card Mensual " + FechaInicio.ToString("dd/MM/yyyy") + " al " + FechaTermino.ToString("dd/MM/yyyy");
-            }
-            string TirajePromedio = ""; string VelMRD = ""; string Velocidad = ""; string Uptime = ""; string MermaArranque = ""; string Capacidad = "";
-            string MArranque = ""; string MTiraje = "";
-            #region Encabezado;
-            string Encabezado = "<table id='tblRegistro' runat='server' cellspacing='0' cellpadding='0' style='border: 1px solid #CCC; margin: 0 auto; margin-top: 0px; margin-bottom: 15px; width:1172px;margin-left:3px;'>" +
-          "<tbody><tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;'colspan='15'>" + NombreTitulo + "</td></tr>" +
-              "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
-                "Máquinas</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:83px;'>" +
-                "Pliegos<br />&nbsp;16 Pags.</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:83px;'>" +
-                "Giros</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Preparación Promedio</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Tiraje<br />&nbsp;Promedio</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Velocidad<br />(MRD)</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-            "Velocidad</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Uptime</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-            "    Mermas<br />Tiraje</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Mermas Arranque % </td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Mermas Arranque</td>" +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Capacidad</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "Horas Sin Vender</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   Entradas</td> " +
-            "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
-             "   OTs <br />Trabajadas</td> " +
-          "</tr>";
-            #endregion;
-            Conexion conexion = new Conexion();
-            SqlCommand cmd = conexion.AbrirConexionIntranet();
-
-            if (cmd != null)
-            {
-                cmd.CommandText = "[Produccion_CorreoScoreCard]";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Usuario", "");
-                cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio);
-                cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino);
-                cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+           
+                string Contenido = ""; string SectorAnt = ""; double TotalPliegos = 0; double TotalGiros = 0; double TotalMermaTiraje = 0; double HorasSinProducir = 0;
+                double TotalMermaPreparacion = 0; double Entradas = 0; double TotalHorasTiraje = 0; double TotalHorasImp = 0; double TotalHorasPrep = 0; double TotalHorasSinProducir = 0;
+                double HorasTiraje = 0; double HorasImp = 0; double HorasPrep = 0; string NombreTitulo = ""; string PromedioHorasPreparacion = ""; string ceros = "00"; double TotalHorasPreparacion = 0;
+                double OTS = 0; double TotalOTS = 0;
+                if (Titulo == "Diario")
                 {
-                    if (SectorAnt == "" || SectorAnt == reader["CodSetor"].ToString())
+                    NombreTitulo = "Score Card Diario " + FechaInicio.ToString("dd/MM/yyyy");
+                }
+                else if (Titulo == "Semanal")
+                {
+                    NombreTitulo = "Score Card Semanal " + FechaInicio.ToString("dd/MM/yyyy") + " al " + FechaTermino.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    NombreTitulo = "Score Card Mensual " + FechaInicio.ToString("dd/MM/yyyy") + " al " + FechaTermino.ToString("dd/MM/yyyy");
+                }
+                string TirajePromedio = ""; string VelMRD = ""; string Velocidad = ""; string Uptime = ""; string MermaArranque = ""; string Capacidad = "";
+                string MArranque = ""; string MTiraje = "";
+                #region Encabezado;
+                string Encabezado = "<table id='tblRegistro' runat='server' cellspacing='0' cellpadding='0' style='border: 1px solid #CCC; margin: 0 auto; margin-top: 0px; margin-bottom: 15px; width:1172px;margin-left:3px;'>" +
+              "<tbody><tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'>" +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;'colspan='15'>" + NombreTitulo + "</td></tr>" +
+                  "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #003e7e; text-align: left;'> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
+                    "Máquinas</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:83px;'>" +
+                    "Pliegos<br />&nbsp;16 Pags.</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:83px;'>" +
+                    "Giros</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Preparación Promedio</td>" +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Tiraje<br />&nbsp;Promedio</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Velocidad<br />(MRD)</td>" +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                "Velocidad</td>" +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Uptime</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                "    Mermas<br />Tiraje</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Mermas Arranque % </td>" +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Mermas Arranque</td>" +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Capacidad</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "Horas Sin Vender</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   Entradas</td> " +
+                "<td style='font-weight: bold; padding: 4px 0 0 5px; border-right: 1px solid #ccc;text-align:center;width:73px;'>" +
+                 "   OTs <br />Trabajadas</td> " +
+              "</tr>";
+                #endregion;
+                Conexion conexion = new Conexion();
+                SqlCommand cmd = conexion.AbrirConexionIntranet();
+            try
+            {
+                if (cmd != null)
+                {
+                    cmd.CommandText = "[Produccion_CorreoScoreCard]";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio);
+                    cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino);
+                    cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        TotalPliegos += Convert.ToDouble(reader["Buenos"].ToString());
-                        TotalGiros += Convert.ToDouble(reader["Giros"].ToString());
-                        TotalMermaTiraje += Convert.ToDouble(reader["PliegosMalosTiraje"].ToString());
-                        TotalMermaPreparacion += Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString());
-                        TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
-                        TotalHorasPrep += Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
-                        TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
-                        TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
-                        TotalHorasSinProducir += Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
-                        HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
-                        HorasPrep = Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
-                        HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
-                        HorasSinProducir = Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
-                        Entradas += Convert.ToDouble(reader["Entradas"].ToString());
-                        OTS = Convert.ToDouble(reader["OTS"].ToString());
-                        TotalOTS += Convert.ToDouble(reader["OTS"].ToString());
-                        if (Convert.ToInt32(reader["Entradas"].ToString()) > 0)
+                        if (SectorAnt == "" || SectorAnt == reader["CodSetor"].ToString())
                         {
-                            TirajePromedio = (Convert.ToInt32(reader["Giros"].ToString()) / Convert.ToInt32(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
-                        }
-                        else
-                        {
-                            TirajePromedio = "0";
-                        }
-                        if ((HorasPrep + HorasTiraje + HorasImp) > 0)
-                        {
-                            VelMRD = ((Convert.ToDouble(reader["Giros"].ToString())) / (HorasPrep + HorasTiraje + HorasImp)).ToString("N0");
-                        }
-                        else
-                        {
-                            VelMRD = "0";
-                        }
-
-                        if (HorasTiraje > 0)
-                        {
-                            Velocidad = (Convert.ToDouble(reader["Giros"].ToString()) / (HorasTiraje)).ToString("N0");
-                        }
-                        else
-                        {
-                            Velocidad = "0";
-                        }
-                        if ((HorasTiraje + HorasImp) > 0)
-                        {
-                            Uptime = (((HorasTiraje) / (HorasTiraje + HorasImp)) * 100).ToString("N2") + "%";
-                        }
-                        else
-                        {
-                            Uptime = "0";
-                        }
-
-                        if (Convert.ToInt32(reader["Giros"].ToString()) > 0)
-                        {
-                            MermaArranque = ((Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
-                        }
-                        else
-                        {
-                            MermaArranque = "0,00%";
-                        }
-                        if (Titulo == "Diario")
-                        {
-                            Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24)) * 100).ToString("N2") + "%";
-                        }
-                        else
-                        {
-                            Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
-                        }
-                        if (Titulo == "Diario")
-                        {
-                            MArranque = Convert.ToInt32(reader["PliegosMalosPreparacion"].ToString()).ToString("N0").Replace(",", ".");
-                            MTiraje = Convert.ToInt32(reader["PliegosMalosTiraje"].ToString()).ToString("N0").Replace(",", ".");
-                        }
-                        else
-                        {
-                            if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
+                            TotalPliegos += Convert.ToDouble(reader["Buenos"].ToString());
+                            TotalGiros += Convert.ToDouble(reader["Giros"].ToString());
+                            TotalMermaTiraje += Convert.ToDouble(reader["PliegosMalosTiraje"].ToString());
+                            TotalMermaPreparacion += Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString());
+                            TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
+                            TotalHorasPrep += Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
+                            TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
+                            TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
+                            TotalHorasSinProducir += Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
+                            HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
+                            HorasPrep = Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
+                            HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
+                            HorasSinProducir = Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
+                            Entradas += Convert.ToDouble(reader["Entradas"].ToString());
+                            OTS = Convert.ToDouble(reader["OTS"].ToString());
+                            TotalOTS += Convert.ToDouble(reader["OTS"].ToString());
+                            if (Convert.ToInt32(reader["Entradas"].ToString()) > 0)
                             {
-                                MArranque = (Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
+                                TirajePromedio = (Convert.ToInt32(reader["Giros"].ToString()) / Convert.ToInt32(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
                             }
                             else
                             {
-                                MArranque = "0";
+                                TirajePromedio = "0";
+                            }
+                            if ((HorasPrep + HorasTiraje + HorasImp) > 0)
+                            {
+                                VelMRD = ((Convert.ToDouble(reader["Giros"].ToString())) / (HorasPrep + HorasTiraje + HorasImp)).ToString("N0");
+                            }
+                            else
+                            {
+                                VelMRD = "0";
                             }
 
                             if (HorasTiraje > 0)
                             {
-                                MTiraje = ((Convert.ToDouble(reader["PliegosMalosTiraje"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
+                                Velocidad = (Convert.ToDouble(reader["Giros"].ToString()) / (HorasTiraje)).ToString("N0");
                             }
                             else
                             {
-                                MTiraje = "0,00%";
+                                Velocidad = "0";
                             }
-                        }
-                        if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
-                        {
-                            //PromedioHorasPreparacion = ((HorasPrep) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N1");
-                            TimeSpan t2 = TimeSpan.FromSeconds(Convert.ToDouble(reader["HorasPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString()));
-                            int Dias2 = t2.Days * 24;
-                            PromedioHorasPreparacion = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
+                            if ((HorasTiraje + HorasImp) > 0)
+                            {
+                                Uptime = (((HorasTiraje) / (HorasTiraje + HorasImp)) * 100).ToString("N2") + "%";
+                            }
+                            else
+                            {
+                                Uptime = "0";
+                            }
+
+                            if (Convert.ToInt32(reader["Giros"].ToString()) > 0)
+                            {
+                                MermaArranque = ((Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
+                            }
+                            else
+                            {
+                                MermaArranque = "0,00%";
+                            }
+                            if (Titulo == "Diario")
+                            {
+                                Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24)) * 100).ToString("N2") + "%";
+                            }
+                            else
+                            {
+                                Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
+                            }
+                            if (Titulo == "Diario")
+                            {
+                                MArranque = Convert.ToInt32(reader["PliegosMalosPreparacion"].ToString()).ToString("N0").Replace(",", ".");
+                                MTiraje = Convert.ToInt32(reader["PliegosMalosTiraje"].ToString()).ToString("N0").Replace(",", ".");
+                            }
+                            else
+                            {
+                                if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
+                                {
+                                    MArranque = (Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
+                                }
+                                else
+                                {
+                                    MArranque = "0";
+                                }
+
+                                if (HorasTiraje > 0)
+                                {
+                                    MTiraje = ((Convert.ToDouble(reader["PliegosMalosTiraje"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
+                                }
+                                else
+                                {
+                                    MTiraje = "0,00%";
+                                }
+                            }
+                            if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
+                            {
+                                //PromedioHorasPreparacion = ((HorasPrep) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N1");
+                                TimeSpan t2 = TimeSpan.FromSeconds(Convert.ToDouble(reader["HorasPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString()));
+                                int Dias2 = t2.Days * 24;
+                                PromedioHorasPreparacion = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
+                            }
+                            else
+                            {
+                                PromedioHorasPreparacion = "0:00:00";
+                            }
+                            Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
+                               reader["Maquina"].ToString() + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                               Convert.ToInt32(reader["Buenos"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                               Convert.ToInt32(reader["Giros"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               PromedioHorasPreparacion + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               TirajePromedio + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               VelMRD + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Velocidad + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Uptime + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               MTiraje + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               MermaArranque + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               MArranque + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Capacidad + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               (HorasSinProducir).ToString("N1") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Convert.ToInt32(reader["Entradas"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               OTS.ToString("N0").Replace(",", ".") + "</td>" +
+                               "</tr>";
+                            SectorAnt = reader["CodSetor"].ToString();
                         }
                         else
                         {
-                            PromedioHorasPreparacion = "0:00:00";
+                            string Cap = "";
+                            if (Titulo == "Diario")
+                            {
+                                //if (rr == "IMP ROT")
+                                //{
+                                Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 4)) * 100).ToString("N2") + "%";
+                                //}
+                                //else
+                                //{
+                                //    Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 4)) * 100).ToString("N2") + "%";
+                                //}                           
+                            }
+                            else
+                            {
+                                Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 5 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
+                            }
+                            if (Titulo == "Diario")
+                            {
+                                MArranque = (TotalMermaPreparacion).ToString("N0").Replace(",", ".");
+                                MTiraje = (TotalMermaTiraje).ToString("N0").Replace(",", ".");
+                            }
+                            else
+                            {
+                                if (Entradas > 0)
+                                {
+                                    MArranque = (TotalMermaPreparacion / Entradas).ToString("N0").Replace(",", ".");
+                                }
+                                else
+                                {
+                                    MArranque = "0";
+                                }
+                                if (TotalHorasTiraje > 0)
+                                {
+                                    MTiraje = (((TotalMermaTiraje) / TotalGiros) * 100).ToString("N2") + "%";
+                                }
+                                else
+                                {
+                                    MTiraje = "0,00%";
+                                }
+                            }
+                            if (Entradas > 0)
+                            {
+                                //PromedioHorasPreparacion = (TotalHorasPrep / Entradas).ToString("N1");
+                                TimeSpan t2 = TimeSpan.FromSeconds(Convert.ToDouble(TotalHorasPreparacion) / Entradas);
+                                int Dias2 = t2.Days * 24;
+                                PromedioHorasPreparacion = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
+                            }
+                            else
+                            {
+                                PromedioHorasPreparacion = "0:00:00";
+                            }
+                            //Totales
+                            Contenido = Contenido + "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
+                              "<b>TOTAL ROTATIVAS</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                              "<b>" + Convert.ToInt32(TotalPliegos).ToString("N0").Replace(",", ".") + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                              "<b>" + Convert.ToInt32(TotalGiros).ToString("N0").Replace(",", ".") + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + PromedioHorasPreparacion + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + Convert.ToInt32((Convert.ToInt32(TotalGiros)) / (Convert.ToInt32(Entradas))).ToString("N0").Replace(",", ".") + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + ((Convert.ToDouble(TotalGiros)) / (TotalHorasPrep + TotalHorasTiraje + TotalHorasImp)).ToString("N0") + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + ((TotalGiros) / (TotalHorasTiraje)).ToString("N0") + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + (((TotalHorasTiraje) / (TotalHorasTiraje + TotalHorasImp)) * 100).ToString("N2") + "%" + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + MTiraje + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + (((TotalMermaPreparacion) / (TotalGiros)) * 100).ToString("N2") + "%" + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + MArranque + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + Cap + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + (TotalHorasSinProducir).ToString("N1") + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + Convert.ToInt32(Entradas).ToString("N0").Replace(",", ".") + "</b></td>" +
+                              "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                              "<b>" + TotalOTS.ToString("N0").Replace(",", ".") + "</b></td>" +
+                              "</tr>";
+
+                            TotalPliegos = 0; TotalPliegos += Convert.ToDouble(reader["Buenos"].ToString());
+                            TotalGiros = 0; TotalGiros += Convert.ToDouble(reader["Giros"].ToString());
+                            TotalMermaTiraje = 0; TotalMermaTiraje += Convert.ToDouble(reader["PliegosMalosTiraje"].ToString());
+                            TotalMermaPreparacion = 0; TotalMermaPreparacion += Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString());
+                            TotalHorasTiraje = 0; TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
+                            TotalHorasPrep = 0; TotalHorasPrep += Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
+                            TotalHorasPreparacion = 0; TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
+                            TotalHorasImp = 0; TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
+                            TotalHorasSinProducir = 0; TotalHorasSinProducir += Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
+                            HorasSinProducir = 0; HorasSinProducir += Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
+                            HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
+                            HorasPrep = Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
+                            HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
+                            Entradas = 0; Entradas += Convert.ToDouble(reader["Entradas"].ToString());
+                            TotalOTS = 0; TotalOTS += Convert.ToDouble(reader["OTS"].ToString());
+                            OTS = Convert.ToDouble(reader["OTS"].ToString());
+                            if (Convert.ToInt32(reader["Entradas"].ToString()) > 0)
+                            {
+                                TirajePromedio = (Convert.ToInt32(reader["Giros"].ToString()) / Convert.ToInt32(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
+                            }
+                            else
+                            {
+                                TirajePromedio = "0";
+                            }
+                            if ((HorasPrep + HorasTiraje + HorasImp) > 0)
+                            {
+                                VelMRD = ((Convert.ToDouble(reader["Giros"].ToString())) / (HorasPrep + HorasTiraje + HorasImp)).ToString("N0");
+                            }
+                            else
+                            {
+                                VelMRD = "0";
+                            }
+
+                            if (HorasTiraje > 0)
+                            {
+                                Velocidad = (Convert.ToDouble(reader["Giros"].ToString()) / (HorasTiraje)).ToString("N0");
+                            }
+                            else
+                            {
+                                Velocidad = "0";
+                            }
+                            if ((HorasTiraje + HorasImp) > 0)
+                            {
+                                Uptime = (((HorasTiraje) / (HorasTiraje + HorasImp)) * 100).ToString("N2") + "%";
+                            }
+                            else
+                            {
+                                Uptime = "0";
+                            }
+
+                            if (Convert.ToInt32(reader["Giros"].ToString()) > 0)
+                            {
+                                MermaArranque = ((Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
+                            }
+                            else
+                            {
+                                MermaArranque = "0,00%";
+                            }
+
+                            if (Titulo == "Diario")
+                            {
+                                Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24)) * 100).ToString("N2") + "%";
+                            }
+                            else
+                            {
+                                Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
+                            }
+                            if (Titulo == "Diario")
+                            {
+                                MArranque = Convert.ToInt32(reader["PliegosMalosPreparacion"].ToString()).ToString("N0").Replace(",", ".");
+                                MTiraje = Convert.ToInt32(reader["PliegosMalosTiraje"].ToString()).ToString("N0").Replace(",", ".");
+                            }
+                            else
+                            {
+                                if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
+                                {
+                                    MArranque = (Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
+                                }
+                                else
+                                {
+                                    MArranque = "0";
+                                }
+                                if (HorasTiraje > 0)
+                                {
+                                    MTiraje = ((Convert.ToDouble(reader["PliegosMalosTiraje"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
+                                }
+                                else
+                                {
+                                    MTiraje = "0,00%";
+                                }
+                            }
+                            if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
+                            {
+                                //PromedioHorasPreparacion = ((HorasPrep) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N1");
+                                TimeSpan t2 = TimeSpan.FromSeconds(Convert.ToDouble(reader["HorasPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString()));
+                                int Dias2 = t2.Days * 24;
+                                PromedioHorasPreparacion = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
+                            }
+                            else
+                            {
+                                PromedioHorasPreparacion = "0:00:00";
+                            }
+                            Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
+                               reader["Maquina"].ToString() + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                               Convert.ToInt32(reader["Buenos"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                               Convert.ToInt32(reader["Giros"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               PromedioHorasPreparacion + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               TirajePromedio + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               VelMRD + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Velocidad + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Uptime + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               MTiraje + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               MermaArranque + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               MArranque + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Capacidad + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               (HorasSinProducir).ToString("N1") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Convert.ToInt32(reader["Entradas"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               OTS.ToString("N0").Replace(",", ".") + "</td>" +
+                               "</tr>";
+                            SectorAnt = reader["CodSetor"].ToString();
                         }
-                        Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
-                           reader["Maquina"].ToString() + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                           Convert.ToInt32(reader["Buenos"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                           Convert.ToInt32(reader["Giros"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           PromedioHorasPreparacion + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           TirajePromedio + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           VelMRD + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Velocidad + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Uptime + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           MTiraje + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           MermaArranque + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           MArranque + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Capacidad + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           (HorasSinProducir).ToString("N1") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Convert.ToInt32(reader["Entradas"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           OTS.ToString("N0").Replace(",", ".") + "</td>" +
-                           "</tr>";
-                        SectorAnt = reader["CodSetor"].ToString();
                     }
-                    else
+                    if (reader.Read() == false)
                     {
-                        string Cap = "";
+                        string TirajeProm = ""; string MRD = ""; string Vel = ""; string Upt = ""; string tGiros = ""; string Cap = "";
+                        if (Entradas > 0)
+                        {
+                            TirajeProm = Convert.ToInt32((Convert.ToInt32(TotalGiros)) / (Convert.ToInt32(Entradas))).ToString("N0").Replace(",", ".");
+                        }
+                        else
+                        {
+                            TirajeProm = "0";
+                        }
+                        if ((TotalHorasPrep + TotalHorasTiraje + TotalHorasImp) > 0)
+                        {
+                            MRD = ((Convert.ToDouble(TotalGiros)) / (TotalHorasPrep + TotalHorasTiraje + TotalHorasImp)).ToString("N0");
+                        }
+                        else
+                        {
+                            MRD = "0";
+                        }
+                        if ((TotalHorasTiraje) > 0)
+                        {
+                            Vel = ((TotalGiros) / (TotalHorasTiraje)).ToString("N0");
+                        }
+                        else
+                        {
+                            Vel = "0";
+                        }//(TotalHorasTiraje + TotalHorasImp)
+                        if ((TotalHorasTiraje + TotalHorasImp) > 0)
+                        {
+                            Upt = (((TotalHorasTiraje) / (TotalHorasTiraje + TotalHorasImp)) * 100).ToString("N2") + "%";
+                        }
+                        else
+                        {
+                            Upt = "0,00%";
+                        }
+                        if ((TotalGiros) > 0)
+                        {
+                            tGiros = (((TotalMermaPreparacion) / (TotalGiros)) * 100).ToString("N2") + "%";
+                        }
+                        else
+                        {
+                            tGiros = "0,00%";
+                        }
                         if (Titulo == "Diario")
                         {
-                            //if (rr == "IMP ROT")
+                            //if (reader["CodSetor"].ToString() == "IMP ROT")
                             //{
-                            Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 4)) * 100).ToString("N2") + "%";
+                            //    Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 5)) * 100).ToString("N2") + "%";
                             //}
                             //else
                             //{
-                            //    Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 4)) * 100).ToString("N2") + "%";
-                            //}                           
+                            Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 2)) * 100).ToString("N2") + "%";
+                            //}    
                         }
                         else
                         {
-                            Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 5 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
+                            Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 3 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
                         }
                         if (Titulo == "Diario")
                         {
@@ -775,7 +1041,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         if (Entradas > 0)
                         {
                             //PromedioHorasPreparacion = (TotalHorasPrep / Entradas).ToString("N1");
-                            TimeSpan t2 = TimeSpan.FromSeconds(Convert.ToDouble(TotalHorasPreparacion) / Entradas);
+                            TimeSpan t2 = TimeSpan.FromSeconds(TotalHorasPreparacion / Entradas);
                             int Dias2 = t2.Days * 24;
                             PromedioHorasPreparacion = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
                         }
@@ -783,305 +1049,49 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         {
                             PromedioHorasPreparacion = "0:00:00";
                         }
-                        //Totales
                         Contenido = Contenido + "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
-                          "<b>TOTAL ROTATIVAS</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                          "<b>" + Convert.ToInt32(TotalPliegos).ToString("N0").Replace(",", ".") + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                          "<b>" + Convert.ToInt32(TotalGiros).ToString("N0").Replace(",", ".") + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + PromedioHorasPreparacion + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + Convert.ToInt32((Convert.ToInt32(TotalGiros)) / (Convert.ToInt32(Entradas))).ToString("N0").Replace(",", ".") + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + ((Convert.ToDouble(TotalGiros)) / (TotalHorasPrep + TotalHorasTiraje + TotalHorasImp)).ToString("N0") + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + ((TotalGiros) / (TotalHorasTiraje)).ToString("N0") + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + (((TotalHorasTiraje) / (TotalHorasTiraje + TotalHorasImp)) * 100).ToString("N2") + "%" + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + MTiraje + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + (((TotalMermaPreparacion) / (TotalGiros)) * 100).ToString("N2") + "%" + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + MArranque + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + Cap + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + (TotalHorasSinProducir).ToString("N1") + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + Convert.ToInt32(Entradas).ToString("N0").Replace(",", ".") + "</b></td>" +
-                          "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                          "<b>" + TotalOTS.ToString("N0").Replace(",", ".") + "</b></td>" +
-                          "</tr>";
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
+                            "<b>TOTAL PLANAS</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                            "<b>" + Convert.ToInt32(TotalPliegos).ToString("N0").Replace(",", ".") + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
+                            "<b>" + Convert.ToInt32(TotalGiros).ToString("N0").Replace(",", ".") + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + PromedioHorasPreparacion + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + TirajeProm + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + MRD + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + Vel + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + Upt + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + MTiraje + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + tGiros + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + MArranque + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + Cap + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + (TotalHorasSinProducir).ToString("N1") + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + Convert.ToInt32(Entradas).ToString("N0").Replace(",", ".") + "</b></td>" +
+                            "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                            "<b>" + TotalOTS.ToString("N0").Replace(",", ".") + "</b></td>" +
+                            "</tr>";
+                    }
 
-                        TotalPliegos = 0; TotalPliegos += Convert.ToDouble(reader["Buenos"].ToString());
-                        TotalGiros = 0; TotalGiros += Convert.ToDouble(reader["Giros"].ToString());
-                        TotalMermaTiraje = 0; TotalMermaTiraje += Convert.ToDouble(reader["PliegosMalosTiraje"].ToString());
-                        TotalMermaPreparacion = 0; TotalMermaPreparacion += Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString());
-                        TotalHorasTiraje = 0; TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
-                        TotalHorasPrep = 0; TotalHorasPrep += Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
-                        TotalHorasPreparacion = 0; TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
-                        TotalHorasImp = 0; TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
-                        TotalHorasSinProducir = 0; TotalHorasSinProducir += Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
-                        HorasSinProducir = 0; HorasSinProducir += Convert.ToDouble(reader["HorasSinTrabajo"].ToString()) / 3600;
-                        HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString()) / 3600;
-                        HorasPrep = Convert.ToDouble(reader["HorasPreparacion"].ToString()) / 3600;
-                        HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString()) / 3600;
-                        Entradas = 0; Entradas += Convert.ToDouble(reader["Entradas"].ToString());
-                        TotalOTS = 0; TotalOTS += Convert.ToDouble(reader["OTS"].ToString());
-                        OTS = Convert.ToDouble(reader["OTS"].ToString());
-                        if (Convert.ToInt32(reader["Entradas"].ToString()) > 0)
-                        {
-                            TirajePromedio = (Convert.ToInt32(reader["Giros"].ToString()) / Convert.ToInt32(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
-                        }
-                        else
-                        {
-                            TirajePromedio = "0";
-                        }
-                        if ((HorasPrep + HorasTiraje + HorasImp) > 0)
-                        {
-                            VelMRD = ((Convert.ToDouble(reader["Giros"].ToString())) / (HorasPrep + HorasTiraje + HorasImp)).ToString("N0");
-                        }
-                        else
-                        {
-                            VelMRD = "0";
-                        }
-
-                        if (HorasTiraje > 0)
-                        {
-                            Velocidad = (Convert.ToDouble(reader["Giros"].ToString()) / (HorasTiraje)).ToString("N0");
-                        }
-                        else
-                        {
-                            Velocidad = "0";
-                        }
-                        if ((HorasTiraje + HorasImp) > 0)
-                        {
-                            Uptime = (((HorasTiraje) / (HorasTiraje + HorasImp)) * 100).ToString("N2") + "%";
-                        }
-                        else
-                        {
-                            Uptime = "0";
-                        }
-
-                        if (Convert.ToInt32(reader["Giros"].ToString()) > 0)
-                        {
-                            MermaArranque = ((Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
-                        }
-                        else
-                        {
-                            MermaArranque = "0,00%";
-                        }
-
-                        if (Titulo == "Diario")
-                        {
-                            Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24)) * 100).ToString("N2") + "%";
-                        }
-                        else
-                        {
-                            Capacidad = (((HorasTiraje + HorasPrep + HorasImp) / Convert.ToDouble(24 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
-                        }
-                        if (Titulo == "Diario")
-                        {
-                            MArranque = Convert.ToInt32(reader["PliegosMalosPreparacion"].ToString()).ToString("N0").Replace(",", ".");
-                            MTiraje = Convert.ToInt32(reader["PliegosMalosTiraje"].ToString()).ToString("N0").Replace(",", ".");
-                        }
-                        else
-                        {
-                            if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
-                            {
-                                MArranque = (Convert.ToDouble(reader["PliegosMalosPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N0").Replace(",", ".");
-                            }
-                            else
-                            {
-                                MArranque = "0";
-                            }
-                            if (HorasTiraje > 0)
-                            {
-                                MTiraje = ((Convert.ToDouble(reader["PliegosMalosTiraje"].ToString()) / Convert.ToDouble(reader["Giros"].ToString())) * 100).ToString("N2") + "%";
-                            }
-                            else
-                            {
-                                MTiraje = "0,00%";
-                            }
-                        }
-                        if (Convert.ToDouble(reader["Entradas"].ToString()) > 0)
-                        {
-                            //PromedioHorasPreparacion = ((HorasPrep) / Convert.ToDouble(reader["Entradas"].ToString())).ToString("N1");
-                            TimeSpan t2 = TimeSpan.FromSeconds(Convert.ToDouble(reader["HorasPreparacion"].ToString()) / Convert.ToDouble(reader["Entradas"].ToString()));
-                            int Dias2 = t2.Days * 24;
-                            PromedioHorasPreparacion = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
-                        }
-                        else
-                        {
-                            PromedioHorasPreparacion = "0:00:00";
-                        }
-                        Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
-                           reader["Maquina"].ToString() + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                           Convert.ToInt32(reader["Buenos"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                           Convert.ToInt32(reader["Giros"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           PromedioHorasPreparacion + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           TirajePromedio + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           VelMRD + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Velocidad + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Uptime + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           MTiraje + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           MermaArranque + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           MArranque + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Capacidad + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           (HorasSinProducir).ToString("N1") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Convert.ToInt32(reader["Entradas"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           OTS.ToString("N0").Replace(",", ".") + "</td>" +
-                           "</tr>";
-                        SectorAnt = reader["CodSetor"].ToString();
-                    }
-                } if (reader.Read() == false)
-                {
-                    string TirajeProm = ""; string MRD = ""; string Vel = ""; string Upt = ""; string tGiros = ""; string Cap = "";
-                    if (Entradas > 0)
-                    {
-                        TirajeProm = Convert.ToInt32((Convert.ToInt32(TotalGiros)) / (Convert.ToInt32(Entradas))).ToString("N0").Replace(",", ".");
-                    }
-                    else
-                    {
-                        TirajeProm = "0";
-                    }
-                    if ((TotalHorasPrep + TotalHorasTiraje + TotalHorasImp) > 0)
-                    {
-                        MRD = ((Convert.ToDouble(TotalGiros)) / (TotalHorasPrep + TotalHorasTiraje + TotalHorasImp)).ToString("N0");
-                    }
-                    else
-                    {
-                        MRD = "0";
-                    }
-                    if ((TotalHorasTiraje) > 0)
-                    {
-                        Vel = ((TotalGiros) / (TotalHorasTiraje)).ToString("N0");
-                    }
-                    else
-                    {
-                        Vel = "0";
-                    }//(TotalHorasTiraje + TotalHorasImp)
-                    if ((TotalHorasTiraje + TotalHorasImp) > 0)
-                    {
-                        Upt = (((TotalHorasTiraje) / (TotalHorasTiraje + TotalHorasImp)) * 100).ToString("N2") + "%";
-                    }
-                    else
-                    {
-                        Upt = "0,00%";
-                    }
-                    if ((TotalGiros) > 0)
-                    {
-                        tGiros = (((TotalMermaPreparacion) / (TotalGiros)) * 100).ToString("N2") + "%";
-                    }
-                    else
-                    {
-                        tGiros = "0,00%";
-                    }
-                    if (Titulo == "Diario")
-                    {
-                        //if (reader["CodSetor"].ToString() == "IMP ROT")
-                        //{
-                        //    Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 5)) * 100).ToString("N2") + "%";
-                        //}
-                        //else
-                        //{
-                        Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 2)) * 100).ToString("N2") + "%";
-                        //}    
-                    }
-                    else
-                    {
-                        Cap = (((TotalHorasTiraje + TotalHorasPrep + TotalHorasImp) / Convert.ToDouble(24 * 3 * (Convert.ToDouble(FechaTermino.ToString("dd"))))) * 100).ToString("N2") + "%";
-                    }
-                    if (Titulo == "Diario")
-                    {
-                        MArranque = (TotalMermaPreparacion).ToString("N0").Replace(",", ".");
-                        MTiraje = (TotalMermaTiraje).ToString("N0").Replace(",", ".");
-                    }
-                    else
-                    {
-                        if (Entradas > 0)
-                        {
-                            MArranque = (TotalMermaPreparacion / Entradas).ToString("N0").Replace(",", ".");
-                        }
-                        else
-                        {
-                            MArranque = "0";
-                        }
-                        if (TotalHorasTiraje > 0)
-                        {
-                            MTiraje = (((TotalMermaTiraje) / TotalGiros) * 100).ToString("N2") + "%";
-                        }
-                        else
-                        {
-                            MTiraje = "0,00%";
-                        }
-                    }
-                    if (Entradas > 0)
-                    {
-                        //PromedioHorasPreparacion = (TotalHorasPrep / Entradas).ToString("N1");
-                        TimeSpan t2 = TimeSpan.FromSeconds(TotalHorasPreparacion / Entradas);
-                        int Dias2 = t2.Days * 24;
-                        PromedioHorasPreparacion = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
-                    }
-                    else
-                    {
-                        PromedioHorasPreparacion = "0:00:00";
-                    }
-                    Contenido = Contenido + "<tr style='height: 22px; background: #f3f4f9; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:130px;'>" +
-                        "<b>TOTAL PLANAS</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                        "<b>" + Convert.ToInt32(TotalPliegos).ToString("N0").Replace(",", ".") + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:83px;'>" +
-                        "<b>" + Convert.ToInt32(TotalGiros).ToString("N0").Replace(",", ".") + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + PromedioHorasPreparacion + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + TirajeProm + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + MRD + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + Vel + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + Upt + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + MTiraje + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + tGiros + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + MArranque + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + Cap + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + (TotalHorasSinProducir).ToString("N1") + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + Convert.ToInt32(Entradas).ToString("N0").Replace(",", ".") + "</b></td>" +
-                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                        "<b>" + TotalOTS.ToString("N0").Replace(",", ".") + "</b></td>" +
-                        "</tr>";
                 }
-
+                
+            }
+            catch(Exception exx)
+            {
+               
             }
             conexion.CerrarConexion();
+
             return Encabezado + Contenido + "</tbody></table>";
         }
 
@@ -1131,95 +1141,223 @@ namespace ServicioWeb.ModuloProduccion.Controller
             #endregion;
             Conexion conexion = new Conexion();
             SqlCommand cmd = conexion.AbrirConexionIntranet();
-
-            if (cmd != null)
+            try
             {
-                cmd.CommandText = "[Produccion_CorreoScoreCard]";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Usuario", "");
-                cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio);
-                cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino);
-                cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (cmd != null)
                 {
-                    if (SectorAnt == "" || SectorAnt == reader["CodSetor"].ToString())
+                    cmd.CommandText = "[Produccion_CorreoScoreCard]";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio);
+                    cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino);
+                    cmd.Parameters.AddWithValue("@Procedimiento", Procedimiento);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        Entradas = Convert.ToDouble(reader["Entradas"].ToString());
-                        HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString());
-                        HorasPreparacion = Convert.ToDouble(reader["HorasPreparacion"].ToString());
-                        HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString());
-                        HorasSinTrabajo = Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
-                        HorasSinPersonal = Convert.ToDouble(reader["HorasSinPersonal"].ToString());
-                        HorasMantencion = Convert.ToDouble(reader["HorasMantencion"].ToString());
-                        HorasPruebaImpresiom = Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
-                        TotalEntradas += Convert.ToDouble(reader["Entradas"].ToString());
-                        TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString());
-                        TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
-                        TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString());
-                        TotalHorasSinTrabajo += Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
-                        TotalHorasSinPersonal += Convert.ToDouble(reader["HorasSinPersonal"].ToString());
-                        TotalHorasMantencion += Convert.ToDouble(reader["HorasMantencion"].ToString());
-                        TotalHorasPruebaImpresiom += Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
-                        TotalHoras = (HorasTiraje + HorasPreparacion + HorasImp + HorasSinTrabajo + HorasSinPersonal + HorasMantencion + HorasPruebaImpresiom);
+                        if (SectorAnt == "" || SectorAnt == reader["CodSetor"].ToString())
+                        {
+                            Entradas = Convert.ToDouble(reader["Entradas"].ToString());
+                            HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString());
+                            HorasPreparacion = Convert.ToDouble(reader["HorasPreparacion"].ToString());
+                            HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString());
+                            HorasSinTrabajo = Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
+                            HorasSinPersonal = Convert.ToDouble(reader["HorasSinPersonal"].ToString());
+                            HorasMantencion = Convert.ToDouble(reader["HorasMantencion"].ToString());
+                            HorasPruebaImpresiom = Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
+                            TotalEntradas += Convert.ToDouble(reader["Entradas"].ToString());
+                            TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString());
+                            TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
+                            TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString());
+                            TotalHorasSinTrabajo += Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
+                            TotalHorasSinPersonal += Convert.ToDouble(reader["HorasSinPersonal"].ToString());
+                            TotalHorasMantencion += Convert.ToDouble(reader["HorasMantencion"].ToString());
+                            TotalHorasPruebaImpresiom += Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
+                            TotalHoras = (HorasTiraje + HorasPreparacion + HorasImp + HorasSinTrabajo + HorasSinPersonal + HorasMantencion + HorasPruebaImpresiom);
 
-                        TimeSpan t1 = TimeSpan.FromSeconds(HorasTiraje);
-                        int Dias1 = t1.Days * 24;
-                        HorasT = (t1.Hours + Dias1).ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Minutes.ToString().Length) + t1.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Seconds.ToString().Length) + t1.Seconds.ToString();
+                            TimeSpan t1 = TimeSpan.FromSeconds(HorasTiraje);
+                            int Dias1 = t1.Days * 24;
+                            HorasT = (t1.Hours + Dias1).ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Minutes.ToString().Length) + t1.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Seconds.ToString().Length) + t1.Seconds.ToString();
 
-                        TimeSpan t2 = TimeSpan.FromSeconds(HorasPreparacion);
-                        int Dias2 = t2.Days * 24;
-                        HorasP = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
+                            TimeSpan t2 = TimeSpan.FromSeconds(HorasPreparacion);
+                            int Dias2 = t2.Days * 24;
+                            HorasP = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
 
-                        TimeSpan t3 = TimeSpan.FromSeconds(HorasImp);
-                        int Dias3 = t3.Days * 24;
-                        HorasI = (t3.Hours + Dias3).ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Minutes.ToString().Length) + t3.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Seconds.ToString().Length) + t3.Seconds.ToString();
+                            TimeSpan t3 = TimeSpan.FromSeconds(HorasImp);
+                            int Dias3 = t3.Days * 24;
+                            HorasI = (t3.Hours + Dias3).ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Minutes.ToString().Length) + t3.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Seconds.ToString().Length) + t3.Seconds.ToString();
 
-                        TimeSpan t4 = TimeSpan.FromSeconds(HorasSinTrabajo);
-                        int Dias4 = t4.Days * 24;
-                        HorasST = (t4.Hours + Dias4).ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Minutes.ToString().Length) + t4.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Seconds.ToString().Length) + t4.Seconds.ToString();
+                            TimeSpan t4 = TimeSpan.FromSeconds(HorasSinTrabajo);
+                            int Dias4 = t4.Days * 24;
+                            HorasST = (t4.Hours + Dias4).ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Minutes.ToString().Length) + t4.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Seconds.ToString().Length) + t4.Seconds.ToString();
 
-                        TimeSpan t5 = TimeSpan.FromSeconds(HorasSinPersonal);
-                        int Dias5 = t5.Days * 24;
-                        HorasSP = (t5.Hours + Dias5).ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Minutes.ToString().Length) + t5.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Seconds.ToString().Length) + t5.Seconds.ToString();
+                            TimeSpan t5 = TimeSpan.FromSeconds(HorasSinPersonal);
+                            int Dias5 = t5.Days * 24;
+                            HorasSP = (t5.Hours + Dias5).ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Minutes.ToString().Length) + t5.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Seconds.ToString().Length) + t5.Seconds.ToString();
 
-                        TimeSpan t6 = TimeSpan.FromSeconds(HorasMantencion);
-                        int Dias6 = t6.Days * 24;
-                        HorasM = (t6.Hours + Dias6).ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Minutes.ToString().Length) + t6.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Seconds.ToString().Length) + t6.Seconds.ToString();
+                            TimeSpan t6 = TimeSpan.FromSeconds(HorasMantencion);
+                            int Dias6 = t6.Days * 24;
+                            HorasM = (t6.Hours + Dias6).ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Minutes.ToString().Length) + t6.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Seconds.ToString().Length) + t6.Seconds.ToString();
 
-                        TimeSpan t7 = TimeSpan.FromSeconds(HorasPruebaImpresiom);
-                        int Dias7 = t7.Days * 24;
-                        HorasPI = (t7.Hours + Dias7).ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Minutes.ToString().Length) + t7.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Seconds.ToString().Length) + t7.Seconds.ToString();
+                            TimeSpan t7 = TimeSpan.FromSeconds(HorasPruebaImpresiom);
+                            int Dias7 = t7.Days * 24;
+                            HorasPI = (t7.Hours + Dias7).ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Minutes.ToString().Length) + t7.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Seconds.ToString().Length) + t7.Seconds.ToString();
 
-                        TimeSpan t8 = TimeSpan.FromSeconds(TotalHoras);
-                        int Dias8 = t8.Days * 24;
-                        THoras = (t8.Hours + Dias8).ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Minutes.ToString().Length) + t8.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Seconds.ToString().Length) + t8.Seconds.ToString();
+                            TimeSpan t8 = TimeSpan.FromSeconds(TotalHoras);
+                            int Dias8 = t8.Days * 24;
+                            THoras = (t8.Hours + Dias8).ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Minutes.ToString().Length) + t8.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Seconds.ToString().Length) + t8.Seconds.ToString();
 
-                        Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:125px;'>" +
-                           reader["Maquina"].ToString() + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           Entradas.ToString("N0").Replace(",", ".") + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           HorasP + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           HorasT + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           HorasI + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           HorasST + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           HorasSP + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           HorasM + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           HorasPI + "</td>" +
-                           "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                           THoras + "</td>" +
-                           "</tr>";
-                        SectorAnt = reader["CodSetor"].ToString();
+                            Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:125px;'>" +
+                               reader["Maquina"].ToString() + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               Entradas.ToString("N0").Replace(",", ".") + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               HorasP + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               HorasT + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               HorasI + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               HorasST + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               HorasSP + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               HorasM + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               HorasPI + "</td>" +
+                               "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                               THoras + "</td>" +
+                               "</tr>";
+                            SectorAnt = reader["CodSetor"].ToString();
+                        }
+                        else
+                        {
+                            TimeSpan t10 = TimeSpan.FromSeconds(TotalHorasTiraje);
+                            int Dias10 = t10.Days * 24;
+                            HorasT = (t10.Hours + Dias10).ToString() + ":" + ceros.Substring(0, ceros.Length - t10.Minutes.ToString().Length) + t10.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t10.Seconds.ToString().Length) + t10.Seconds.ToString();
+
+                            TimeSpan t20 = TimeSpan.FromSeconds(TotalHorasPreparacion);
+                            int Dias20 = t20.Days * 24;
+                            HorasP = (t20.Hours + Dias20).ToString() + ":" + ceros.Substring(0, ceros.Length - t20.Minutes.ToString().Length) + t20.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t20.Seconds.ToString().Length) + t20.Seconds.ToString();
+
+                            TimeSpan t30 = TimeSpan.FromSeconds(TotalHorasImp);
+                            int Dias30 = t30.Days * 24;
+                            HorasI = (t30.Hours + Dias30).ToString() + ":" + ceros.Substring(0, ceros.Length - t30.Minutes.ToString().Length) + t30.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t30.Seconds.ToString().Length) + t30.Seconds.ToString();
+
+                            TimeSpan t40 = TimeSpan.FromSeconds(TotalHorasSinTrabajo);
+                            int Dias40 = t40.Days * 24;
+                            HorasST = (t40.Hours + Dias40).ToString() + ":" + ceros.Substring(0, ceros.Length - t40.Minutes.ToString().Length) + t40.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t40.Seconds.ToString().Length) + t40.Seconds.ToString();
+
+                            TimeSpan t50 = TimeSpan.FromSeconds(TotalHorasSinPersonal);
+                            int Dias50 = t50.Days * 24;
+                            HorasSP = (t50.Hours + Dias50).ToString() + ":" + ceros.Substring(0, ceros.Length - t50.Minutes.ToString().Length) + t50.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t50.Seconds.ToString().Length) + t50.Seconds.ToString();
+
+                            TimeSpan t60 = TimeSpan.FromSeconds(TotalHorasMantencion);
+                            int Dias60 = t60.Days * 24;
+                            HorasM = (t60.Hours + Dias60).ToString() + ":" + ceros.Substring(0, ceros.Length - t60.Minutes.ToString().Length) + t60.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t60.Seconds.ToString().Length) + t60.Seconds.ToString();
+
+                            TimeSpan t70 = TimeSpan.FromSeconds(TotalHorasPruebaImpresiom);
+                            int Dias70 = t70.Days * 24;
+                            HorasPI = (t70.Hours + Dias70).ToString() + ":" + ceros.Substring(0, ceros.Length - t70.Minutes.ToString().Length) + t70.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t70.Seconds.ToString().Length) + t70.Seconds.ToString();
+                            //Totales
+                            Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:125px;'>" +
+                                        "<b>TOTAL ROTATIVAS</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + TotalEntradas.ToString("N0").Replace(",", ".") + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + HorasP + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + HorasT + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + HorasI + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + HorasST + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + HorasSP + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + HorasM + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "<b>" + HorasPI + "</b></td>" +
+                                        "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                        "</td>" +
+                                        "</tr>";
+
+                            Entradas = 0; Entradas = Convert.ToDouble(reader["Entradas"].ToString());
+                            HorasTiraje = 0; HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString());
+                            HorasPreparacion = 0; HorasPreparacion = Convert.ToDouble(reader["HorasPreparacion"].ToString());
+                            HorasImp = 0; HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString());
+                            HorasSinTrabajo = 0; HorasSinTrabajo = Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
+                            HorasSinPersonal = 0; HorasSinPersonal = Convert.ToDouble(reader["HorasSinPersonal"].ToString());
+                            HorasMantencion = 0; HorasMantencion = Convert.ToDouble(reader["HorasMantencion"].ToString());
+                            HorasPruebaImpresiom = 0; HorasPruebaImpresiom = Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
+                            TotalEntradas = 0; TotalEntradas += Convert.ToDouble(reader["Entradas"].ToString());
+                            TotalHorasTiraje = 0; TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString());
+                            TotalHorasPreparacion = 0; TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
+                            TotalHorasImp = 0; TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString());
+                            TotalHorasSinTrabajo = 0; TotalHorasSinTrabajo += Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
+                            TotalHorasSinPersonal = 0; TotalHorasSinPersonal += Convert.ToDouble(reader["HorasSinPersonal"].ToString());
+                            TotalHorasMantencion = 0; TotalHorasMantencion += Convert.ToDouble(reader["HorasMantencion"].ToString());
+                            TotalHorasPruebaImpresiom = 0; TotalHorasPruebaImpresiom += Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
+                            TotalHoras = (HorasTiraje + HorasPreparacion + HorasImp + HorasSinTrabajo + HorasSinPersonal + HorasMantencion + HorasPruebaImpresiom);
+
+                            TimeSpan t1 = TimeSpan.FromSeconds(HorasTiraje);
+                            int Dias1 = t1.Days * 24;
+                            HorasT = (t1.Hours + Dias1).ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Minutes.ToString().Length) + t1.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Seconds.ToString().Length) + t1.Seconds.ToString();
+
+                            TimeSpan t2 = TimeSpan.FromSeconds(HorasPreparacion);
+                            int Dias2 = t2.Days * 24;
+                            HorasP = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
+
+                            TimeSpan t3 = TimeSpan.FromSeconds(HorasImp);
+                            int Dias3 = t3.Days * 24;
+                            HorasI = (t3.Hours + Dias3).ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Minutes.ToString().Length) + t3.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Seconds.ToString().Length) + t3.Seconds.ToString();
+
+                            TimeSpan t4 = TimeSpan.FromSeconds(HorasSinTrabajo);
+                            int Dias4 = t4.Days * 24;
+                            HorasST = (t4.Hours + Dias4).ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Minutes.ToString().Length) + t4.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Seconds.ToString().Length) + t4.Seconds.ToString();
+
+                            TimeSpan t5 = TimeSpan.FromSeconds(HorasSinPersonal);
+                            int Dias5 = t5.Days * 24;
+                            HorasSP = (t5.Hours + Dias5).ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Minutes.ToString().Length) + t5.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Seconds.ToString().Length) + t5.Seconds.ToString();
+
+                            TimeSpan t6 = TimeSpan.FromSeconds(HorasMantencion);
+                            int Dias6 = t6.Days * 24;
+                            HorasM = (t6.Hours + Dias6).ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Minutes.ToString().Length) + t6.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Seconds.ToString().Length) + t6.Seconds.ToString();
+
+                            TimeSpan t7 = TimeSpan.FromSeconds(HorasPruebaImpresiom);
+                            int Dias7 = t7.Days * 24;
+                            HorasPI = (t7.Hours + Dias7).ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Minutes.ToString().Length) + t7.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Seconds.ToString().Length) + t7.Seconds.ToString();
+
+                            TimeSpan t8 = TimeSpan.FromSeconds(TotalHoras);
+                            int Dias8 = t8.Days * 24;
+                            THoras = (t8.Hours + Dias8).ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Minutes.ToString().Length) + t8.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Seconds.ToString().Length) + t8.Seconds.ToString();
+                            Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:125px;'>" +
+                                       reader["Maquina"].ToString() + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       Entradas.ToString("N0").Replace(",", ".") + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       HorasP + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       HorasT + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       HorasI + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       HorasST + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       HorasSP + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       HorasM + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       HorasPI + "</td>" +
+                                       "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
+                                       THoras + "</td>" +
+                                       "</tr>";
+                            SectorAnt = reader["CodSetor"].ToString();
+                        }
                     }
-                    else
+                    if (reader.Read() == false)
                     {
                         TimeSpan t10 = TimeSpan.FromSeconds(TotalHorasTiraje);
                         int Dias10 = t10.Days * 24;
@@ -1247,8 +1385,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
                         TimeSpan t70 = TimeSpan.FromSeconds(TotalHorasPruebaImpresiom);
                         int Dias70 = t70.Days * 24;
+
                         HorasPI = (t70.Hours + Dias70).ToString() + ":" + ceros.Substring(0, ceros.Length - t70.Minutes.ToString().Length) + t70.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t70.Seconds.ToString().Length) + t70.Seconds.ToString();
-                        //Totales
                         Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
                                     "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:125px;'>" +
                                     "<b>TOTAL ROTATIVAS</b></td>" +
@@ -1271,133 +1409,11 @@ namespace ServicioWeb.ModuloProduccion.Controller
                                     "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
                                     "</td>" +
                                     "</tr>";
-
-                        Entradas = 0; Entradas = Convert.ToDouble(reader["Entradas"].ToString());
-                        HorasTiraje = 0; HorasTiraje = Convert.ToDouble(reader["HorasTiraje"].ToString());
-                        HorasPreparacion = 0; HorasPreparacion = Convert.ToDouble(reader["HorasPreparacion"].ToString());
-                        HorasImp = 0; HorasImp = Convert.ToDouble(reader["HorasImproductivas"].ToString());
-                        HorasSinTrabajo = 0; HorasSinTrabajo = Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
-                        HorasSinPersonal = 0; HorasSinPersonal = Convert.ToDouble(reader["HorasSinPersonal"].ToString());
-                        HorasMantencion = 0; HorasMantencion = Convert.ToDouble(reader["HorasMantencion"].ToString());
-                        HorasPruebaImpresiom = 0; HorasPruebaImpresiom = Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
-                        TotalEntradas = 0; TotalEntradas += Convert.ToDouble(reader["Entradas"].ToString());
-                        TotalHorasTiraje = 0; TotalHorasTiraje += Convert.ToDouble(reader["HorasTiraje"].ToString());
-                        TotalHorasPreparacion = 0; TotalHorasPreparacion += Convert.ToDouble(reader["HorasPreparacion"].ToString());
-                        TotalHorasImp = 0; TotalHorasImp += Convert.ToDouble(reader["HorasImproductivas"].ToString());
-                        TotalHorasSinTrabajo = 0; TotalHorasSinTrabajo += Convert.ToDouble(reader["HorasSinTrabajo"].ToString());
-                        TotalHorasSinPersonal = 0; TotalHorasSinPersonal += Convert.ToDouble(reader["HorasSinPersonal"].ToString());
-                        TotalHorasMantencion = 0; TotalHorasMantencion += Convert.ToDouble(reader["HorasMantencion"].ToString());
-                        TotalHorasPruebaImpresiom = 0; TotalHorasPruebaImpresiom += Convert.ToDouble(reader["HorasMaquinaParada"].ToString());
-                        TotalHoras = (HorasTiraje + HorasPreparacion + HorasImp + HorasSinTrabajo + HorasSinPersonal + HorasMantencion + HorasPruebaImpresiom);
-
-                        TimeSpan t1 = TimeSpan.FromSeconds(HorasTiraje);
-                        int Dias1 = t1.Days * 24;
-                        HorasT = (t1.Hours + Dias1).ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Minutes.ToString().Length) + t1.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t1.Seconds.ToString().Length) + t1.Seconds.ToString();
-
-                        TimeSpan t2 = TimeSpan.FromSeconds(HorasPreparacion);
-                        int Dias2 = t2.Days * 24;
-                        HorasP = (t2.Hours + Dias2).ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Minutes.ToString().Length) + t2.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t2.Seconds.ToString().Length) + t2.Seconds.ToString();
-
-                        TimeSpan t3 = TimeSpan.FromSeconds(HorasImp);
-                        int Dias3 = t3.Days * 24;
-                        HorasI = (t3.Hours + Dias3).ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Minutes.ToString().Length) + t3.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t3.Seconds.ToString().Length) + t3.Seconds.ToString();
-
-                        TimeSpan t4 = TimeSpan.FromSeconds(HorasSinTrabajo);
-                        int Dias4 = t4.Days * 24;
-                        HorasST = (t4.Hours + Dias4).ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Minutes.ToString().Length) + t4.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t4.Seconds.ToString().Length) + t4.Seconds.ToString();
-
-                        TimeSpan t5 = TimeSpan.FromSeconds(HorasSinPersonal);
-                        int Dias5 = t5.Days * 24;
-                        HorasSP = (t5.Hours + Dias5).ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Minutes.ToString().Length) + t5.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t5.Seconds.ToString().Length) + t5.Seconds.ToString();
-
-                        TimeSpan t6 = TimeSpan.FromSeconds(HorasMantencion);
-                        int Dias6 = t6.Days * 24;
-                        HorasM = (t6.Hours + Dias6).ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Minutes.ToString().Length) + t6.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t6.Seconds.ToString().Length) + t6.Seconds.ToString();
-
-                        TimeSpan t7 = TimeSpan.FromSeconds(HorasPruebaImpresiom);
-                        int Dias7 = t7.Days * 24;
-                        HorasPI = (t7.Hours + Dias7).ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Minutes.ToString().Length) + t7.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t7.Seconds.ToString().Length) + t7.Seconds.ToString();
-
-                        TimeSpan t8 = TimeSpan.FromSeconds(TotalHoras);
-                        int Dias8 = t8.Days * 24;
-                        THoras = (t8.Hours + Dias8).ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Minutes.ToString().Length) + t8.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t8.Seconds.ToString().Length) + t8.Seconds.ToString();
-                        Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:125px;'>" +
-                                   reader["Maquina"].ToString() + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   Entradas.ToString("N0").Replace(",", ".") + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   HorasP + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   HorasT + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   HorasI + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   HorasST + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   HorasSP + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   HorasM + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   HorasPI + "</td>" +
-                                   "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                   THoras + "</td>" +
-                                   "</tr>";
-                        SectorAnt = reader["CodSetor"].ToString();
                     }
-                } if (reader.Read() == false)
-                {
-                    TimeSpan t10 = TimeSpan.FromSeconds(TotalHorasTiraje);
-                    int Dias10 = t10.Days * 24;
-                    HorasT = (t10.Hours + Dias10).ToString() + ":" + ceros.Substring(0, ceros.Length - t10.Minutes.ToString().Length) + t10.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t10.Seconds.ToString().Length) + t10.Seconds.ToString();
 
-                    TimeSpan t20 = TimeSpan.FromSeconds(TotalHorasPreparacion);
-                    int Dias20 = t20.Days * 24;
-                    HorasP = (t20.Hours + Dias20).ToString() + ":" + ceros.Substring(0, ceros.Length - t20.Minutes.ToString().Length) + t20.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t20.Seconds.ToString().Length) + t20.Seconds.ToString();
-
-                    TimeSpan t30 = TimeSpan.FromSeconds(TotalHorasImp);
-                    int Dias30 = t30.Days * 24;
-                    HorasI = (t30.Hours + Dias30).ToString() + ":" + ceros.Substring(0, ceros.Length - t30.Minutes.ToString().Length) + t30.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t30.Seconds.ToString().Length) + t30.Seconds.ToString();
-
-                    TimeSpan t40 = TimeSpan.FromSeconds(TotalHorasSinTrabajo);
-                    int Dias40 = t40.Days * 24;
-                    HorasST = (t40.Hours + Dias40).ToString() + ":" + ceros.Substring(0, ceros.Length - t40.Minutes.ToString().Length) + t40.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t40.Seconds.ToString().Length) + t40.Seconds.ToString();
-
-                    TimeSpan t50 = TimeSpan.FromSeconds(TotalHorasSinPersonal);
-                    int Dias50 = t50.Days * 24;
-                    HorasSP = (t50.Hours + Dias50).ToString() + ":" + ceros.Substring(0, ceros.Length - t50.Minutes.ToString().Length) + t50.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t50.Seconds.ToString().Length) + t50.Seconds.ToString();
-
-                    TimeSpan t60 = TimeSpan.FromSeconds(TotalHorasMantencion);
-                    int Dias60 = t60.Days * 24;
-                    HorasM = (t60.Hours + Dias60).ToString() + ":" + ceros.Substring(0, ceros.Length - t60.Minutes.ToString().Length) + t60.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t60.Seconds.ToString().Length) + t60.Seconds.ToString();
-
-                    TimeSpan t70 = TimeSpan.FromSeconds(TotalHorasPruebaImpresiom);
-                    int Dias70 = t70.Days * 24;
-
-                    HorasPI = (t70.Hours + Dias70).ToString() + ":" + ceros.Substring(0, ceros.Length - t70.Minutes.ToString().Length) + t70.Minutes.ToString() + ":" + ceros.Substring(0, ceros.Length - t70.Seconds.ToString().Length) + t70.Seconds.ToString();
-                    Contenido = Contenido + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:125px;'>" +
-                                "<b>TOTAL ROTATIVAS</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + TotalEntradas.ToString("N0").Replace(",", ".") + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + HorasP + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + HorasT + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + HorasI + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + HorasST + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + HorasSP + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + HorasM + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "<b>" + HorasPI + "</b></td>" +
-                                "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:right;width:73px;'>" +
-                                "</td>" +
-                                "</tr>";
                 }
+            }catch(Exception exx)
+            {
 
             }
             conexion.CerrarConexion();

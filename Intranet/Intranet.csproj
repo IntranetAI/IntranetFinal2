@@ -1905,6 +1905,7 @@
     </Compile>
     <Compile Include="ModuloMateriaPrima\Controller\Controller_Consumo.cs" />
     <Compile Include="ModuloMateriaPrima\Model\ConsumoBobinas.cs" />
+    <Compile Include="ModuloMateriaPrima\Model\ConsumoBobinasExcel.cs" />
     <Compile Include="ModuloMateriaPrima\View\Control_Consumo.aspx.cs">
       <DependentUpon>Control_Consumo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
