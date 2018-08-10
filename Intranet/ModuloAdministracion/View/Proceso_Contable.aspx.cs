@@ -72,6 +72,8 @@ namespace Intranet.ModuloAdministracion.View
             {
                 listFolio = listFolio.Substring(0, listFolio.Length - 1);
                 List<Cabecera> lista = docControl.ExportacionExcel(listFolio, txtFechaInicio.Text, txtFechaTermino.Text);
+
+
                 //GridView gv = new GridView();
                 //gv.DataSource = lista;
                 //gv.DataBind();
@@ -166,7 +168,7 @@ namespace Intranet.ModuloAdministracion.View
             //sb.Append("\r\n");
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                for (int k = 0; k < GridView1.Columns.Count; k++)
+                for (int k = 0; k < GridView1.Columns.Count; k++)//GridView1.Columns.Count
                 {
                     //add separator
                     //try 
@@ -178,7 +180,8 @@ namespace Intranet.ModuloAdministracion.View
                     //}
                     //catch
                     //{ agregar perido al ingresar si no existe
-                        sb.Append(GridView1.Rows[i].Cells[k].Text);
+                    string a = GridView1.Rows[i].Cells[38].Text;
+                    sb.Append(GridView1.Rows[i].Cells[k].Text);
                     //}
                 }
                 //append new line

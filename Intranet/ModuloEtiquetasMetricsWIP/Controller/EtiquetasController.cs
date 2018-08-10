@@ -104,6 +104,10 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
                     p.Peso= reader["QuantityKG"].ToString();
                     p.Cantidad = Convert.ToInt32(reader["Quantity"].ToString()).ToString("N0").Replace(",", ".");
                     p.IdPallet= reader["IdPalletLabel"].ToString();
+
+                 
+                    //string tamanopt = p.Actividad.Length > 15 ? "14pt" : "24pt";
+                    //< td align = "center" style = "font-size:"+ tamanopt + "; font-weight:bold" > Pliego </ td >
                 }
 
             }

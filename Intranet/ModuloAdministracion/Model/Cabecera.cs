@@ -45,5 +45,10 @@ namespace Intranet.ModuloAdministracion.Model
         public string LlgDocMtoLocalRete { get; set; }
         public string LlgDocMtoLocalTotal { get; set; }
         public string DocCceDocRef { get; set; }
+        public string LlgDocMtoIvaRec100 { get; set; }
+        public string LlgDocMtoIvaRecPro { get; set; }
+        public string LlgDocMtoIvaNoRec { get; set; }
+        public string ClaIvaId { get; set; }
+
     }
 }

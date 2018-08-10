@@ -50,7 +50,56 @@ namespace Intranet.ModuloWip.View
         public string GeneCodMas(string Pallet,int Caja,int Desde,int Hasta,string Asignatura,string Forma,int contador)
         {
             string Etiqueta = "";
-            //string eti = generadorCodigo(Barcode, contador);
+            string NumDesde = "";
+            switch (Desde.ToString().Count())
+            {
+                case 1:
+                    NumDesde = "00000" + Desde.ToString();
+                    break;
+                case 2:
+                    NumDesde = "0000" + Desde.ToString();
+                    break;
+                case 3:
+                    NumDesde = "000" + Desde.ToString();
+                    break;
+                case 4:
+                    NumDesde = "00" + Desde.ToString();
+                    break;
+                case 5:
+                    NumDesde = "0" + Desde.ToString();
+                    break;
+                case 6:
+                    NumDesde = Desde.ToString();
+                    break;
+                default:
+                    NumDesde = Desde.ToString();
+                    break;
+            }
+            string NumHasta = "";
+            switch (Hasta.ToString().Count())
+            {
+                case 1:
+                    NumHasta = "00000" + Hasta.ToString();
+                    break;
+                case 2:
+                    NumHasta = "0000" + Hasta.ToString();
+                    break;
+                case 3:
+                    NumHasta = "000" + Hasta.ToString();
+                    break;
+                case 4:
+                    NumHasta = "00" + Hasta.ToString();
+                    break;
+                case 5:
+                    NumHasta = "0" + Hasta.ToString();
+                    break;
+                case 6:
+                    NumHasta = Hasta.ToString();
+                    break;
+                default:
+                    NumHasta = Hasta.ToString();
+                    break;
+            }
             if ((contador) <= 1)
             {
                 Etiqueta =
@@ -58,7 +107,7 @@ namespace Intranet.ModuloWip.View
                         "<div style='font-size:40;font-weight:bold;'>" + Forma + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>" + Asignatura + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>CAJA " + Caja + "</div>" +
-                        "<div style='font-size:50;font-weight:bold;'>" + Desde + " - " + Hasta + "</div></div><br />";
+                        "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div><br />";
             }
 
             else
@@ -67,7 +116,7 @@ namespace Intranet.ModuloWip.View
                         "<div style='font-size:40;font-weight:bold;'>" + Forma + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>" + Asignatura + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>CAJA " + Caja + "</div>" +
-                        "<div style='font-size:50;font-weight:bold;'>" + Desde + " - " + Hasta + "</div></div>";
+                        "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div>";
             }
 
             return Etiqueta;

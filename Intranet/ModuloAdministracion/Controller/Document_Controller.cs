@@ -868,7 +868,10 @@ namespace Intranet.ModuloAdministracion.Controller
                         cab.LlgDocMtoImpuIva = llgDocMtoT;
                         cab.LlgDocMtoLocalAfecto = llgDocMtoT;
                         cab.LlgDocMtoLocalNeto = llgDocMtoT;
+
+                        //cambiar aqui
                         cab.LlgDocMtoLocalIva = llgDocMtoT;
+                        
 
                         str = null; str = Convert.ToInt32(valor).ToString("0.0000").Split('.');
                         string[] str123 = dbl2.ToString("0.0000").Split('.');
@@ -901,6 +904,8 @@ namespace Intranet.ModuloAdministracion.Controller
                     {
                         string resultado2 = str[0] + str[1];
                         cab.LlgDocMtoImpuIva = llgDocMtoT.Substring(0, llgDocMtoT.Length - resultado2.Length) + resultado2;
+                        cab.LlgDocMtoLocalIva = cab.LlgDocMtoImpuIva;
+                        // = llgDocMtoT.Substring(0, llgDocMtoT.Length - resultado2.Length) + resultado2;
                         valor = 0; str = null;
                     }
 
@@ -945,9 +950,17 @@ namespace Intranet.ModuloAdministracion.Controller
                     cab.LlgDocMtoLocalRete = llgDocMtoT;
                     cab.LlgDocMtoLocalOtrosImp = llgDocMtoT;
                     cab.DocCceDocRef ="                    ";
+                    cab.LlgDocMtoIvaRec100 = cab.LlgDocMtoImpuIva != "000000000000000000" ? cab.LlgDocMtoImpuIva : "000000000000000000";
+                    cab.LlgDocMtoIvaRecPro = "000000000000000000";
+                    cab.LlgDocMtoIvaNoRec = "000000000000000000";
+                    cab.ClaIvaId = "001";
+
                     lista.Add(cab);
                     contador++;
-                }
+
+
+
+    }
                 
             }
             con.CerrarConexion();

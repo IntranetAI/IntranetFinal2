@@ -436,6 +436,7 @@ namespace Intranet.ModuloFacturacion.View
                     evento = controlFact.SincronizadorFacturas(Convert.ToInt32(Request.QueryString["Fac"].ToString()), Convert.ToInt32(Request.QueryString["TipoDoc"].ToString()), ddlRazon.SelectedValue.ToString(), Session["Usuario"].ToString(), OC, fechaOC);
                 }
 
+
                 if (evento == "OK")
                 {
                     string popupScript = "<script language='JavaScript'> alert(' Actualizacion de Factura Electronicas Realizada Correctamente');opener.location.reload();window.close();</script>";

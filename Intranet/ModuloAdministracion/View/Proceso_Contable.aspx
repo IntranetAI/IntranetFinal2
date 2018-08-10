@@ -193,6 +193,10 @@ return false;
                     <asp:BoundField HeaderText="LlgDocMtoLocalRete" DataField="LlgDocMtoLocalRete" />
                     <asp:BoundField HeaderText="LlgDocMtoLocalTotal" DataField="LlgDocMtoLocalTotal" />
                     <asp:BoundField HeaderText="DocCceDocRef" DataField="DocCceDocRef" />
+                    <asp:BoundField HeaderText="LlgDocMtoIvaRec100" DataField="LlgDocMtoIvaRec100" />
+                    <asp:BoundField HeaderText="LlgDocMtoIvaRecPro" DataField="LlgDocMtoIvaRecPro" />
+                    <asp:BoundField HeaderText="LlgDocMtoIvaNoRec" DataField="LlgDocMtoIvaNoRec" />
+                    <asp:BoundField HeaderText="ClaIvaId" DataField="ClaIvaId" />
                 </Columns>
             </asp:GridView>
             <asp:GridView ID="GridView2" runat="server" Visible="false">

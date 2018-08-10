@@ -18,7 +18,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
 
                 mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("luis.rojas@aimpresores.cl");
+                mmsg.To.Add("claudio.bravo@aimpresores.cl");
                 mmsg.To.Add("francisco.depablo@aimpresores.cl");
                 mmsg.To.Add("consumo.papel.bobinas@aimpresores.cl");
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
@@ -170,9 +170,12 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
 
                 mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                mmsg.To.Add("luis.rojas@aimpresores.cl");
+                mmsg.To.Add("claudio.bravo@aimpresores.cl");
                 mmsg.To.Add("francisco.depablo@aimpresores.cl");
                 mmsg.To.Add("cristopher.tarifeno@aimpresores.cl");
+                mmsg.To.Add("rafael.maroto@aimpresores.cl");
+                mmsg.To.Add("nicolas.makuc@aimpresores.cl");
+                
 
                 mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +

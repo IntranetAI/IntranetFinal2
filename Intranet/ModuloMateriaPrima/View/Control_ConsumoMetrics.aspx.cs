@@ -119,8 +119,8 @@ namespace Intranet.ModuloMateriaPrima.View
                 GridView1.HeaderStyle.ForeColor = System.Drawing.Color.White;
                 ExportToExcel("", GridView1);
             }
-        }
 
+        }
 
         private void ExportToExcel(string nameReport, GridView wControl)
         {

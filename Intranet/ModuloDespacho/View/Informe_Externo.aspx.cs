@@ -34,12 +34,12 @@ namespace Intranet.ModuloDespacho.View
             }
             if (txtFechaInicio.Text.Trim() != "")
             {
-                string[] feInicio = txtFechaInicio.Text.Split('-');
+                string[] feInicio = txtFechaInicio.Text.Replace("/","-").Split('-');
                 f.Ciudad = feInicio[2] + "-" + feInicio[1] + "-" + feInicio[0];
             }
             if (txtFechaTermino.Text.Trim() != "")
             {
-                string[] feTermino = txtFechaTermino.Text.Split('-');
+                string[] feTermino = txtFechaTermino.Text.Replace("/", "-").Split('-');
                 f.Comuna = feTermino[2] + "-" + feTermino[1] + "-" + feTermino[0];
             }
             if (inicio == "comienzo")
@@ -69,12 +69,12 @@ namespace Intranet.ModuloDespacho.View
             }
             if (txtFechaTermino.Text.Trim() != "")
             {
-                string[] feTermino = txtFechaTermino.Text.Split('-');
+                string[] feTermino = txtFechaTermino.Text.Replace("/", "-").Split('-');
                 f.Comuna = feTermino[2] + "-" + feTermino[1] + "-" + feTermino[0];
             }
             if (txtFechaInicio.Text.Trim() != "")
             {
-                string[] feInicio = txtFechaInicio.Text.Split('-');
+                string[] feInicio = txtFechaInicio.Text.Replace("/", "-").Split('-');
                 f.Ciudad = feInicio[2] + "-" + feInicio[1] + "-" + feInicio[0];
             }
             else if (inicio == "comienzo")
@@ -423,7 +423,7 @@ namespace Intranet.ModuloDespacho.View
                 if (txtFechaInicio.Text != "" && txtFechaTermino.Text != "")
                 {
                     string mes = "";
-                    string[] feInicio = txtFechaInicio.Text.Split('-');
+                    string[] feInicio = txtFechaInicio.Text.Replace("/", "-").Split('-');
                     switch (Convert.ToInt32(feInicio[1]))
                     {
                         case 1: mes = "Enero"; break;
@@ -624,7 +624,7 @@ namespace Intranet.ModuloDespacho.View
                 if (txtFechaInicio.Text != "" && txtFechaTermino.Text != "")
                 {
                     string mes = "";
-                    string[] feInicio = txtFechaInicio.Text.Split('-');
+                    string[] feInicio = txtFechaInicio.Text.Replace("/", "-").Split('-');
                     switch (Convert.ToInt32(feInicio[1]))
                     {
                         case 1: mes = "Enero"; break;
