@@ -67,6 +67,10 @@
     <Reference Include="MSCaptcha">
       <HintPath>..\..\Intranet 2014-06-11\Intranet\bin\MSCaptcha.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -412,6 +416,7 @@
     <Content Include="ModuloProduccion\View\InformeProduccion.aspx" />
     <Content Include="ModuloProduccion\View\InformeProgramacionProduccion.aspx" />
     <Content Include="ModuloProduccion\View\InformeScoreCard.aspx" />
+    <Content Include="ModuloProduccion\View\Informe_EstadoOT.aspx" />
     <Content Include="ModuloProduccion\View\Informe_FallaElectricaMecanica.aspx" />
     <Content Include="ModuloProduccion\View\Informe_MensualSobreProd.aspx" />
     <Content Include="ModuloProduccion\View\Informe_Productividad.aspx" />
@@ -684,6 +689,7 @@
     <Content Include="View\Login.aspx" />
     <Content Include="View\Mensajeria.aspx" />
     <Content Include="View\Pagina_Inicio.aspx" />
+    <Content Include="View\Pruebas.aspx" />
     <Content Include="View\Registro.aspx" />
     <Content Include="View\ResetPassword.aspx" />
     <Content Include="Web.config">
@@ -1276,6 +1282,7 @@
     <Compile Include="ModuloDespacho\Model\OrdenCarga.cs" />
     <Compile Include="ModuloDespacho\Model\OTComercial.cs" />
     <Compile Include="ModuloDespacho\Model\ProveedorMod.cs" />
+    <Compile Include="ModuloDespacho\Model\SimpliRoute.cs" />
     <Compile Include="ModuloDespacho\Model\WipSerExt.cs" />
     <Compile Include="ModuloDespacho\View\AnularDevolucion.aspx.cs">
       <DependentUpon>AnularDevolucion.aspx</DependentUpon>
@@ -1981,6 +1988,7 @@
     <Compile Include="ModuloProduccion\Controller\Controller_PartesManuales.cs" />
     <Compile Include="ModuloProduccion\Controller\Controller_Productividad.cs" />
     <Compile Include="ModuloProduccion\Controller\Controller_Requerimientos.cs" />
+    <Compile Include="ModuloProduccion\Controller\EstadoOTController.cs" />
     <Compile Include="ModuloProduccion\Controller\InformeImproductivo_Controller.cs" />
     <Compile Include="ModuloProduccion\Controller\InformeProduccion_Controller.cs" />
     <Compile Include="ModuloProduccion\Controller\OrdenController.cs" />
@@ -1998,6 +2006,7 @@
     <Compile Include="ModuloProduccion\Model\InformeProduccionM.cs" />
     <Compile Include="ModuloProduccion\Model\InformeProgramacion.cs" />
     <Compile Include="ModuloProduccion\Model\InformeSemanal.cs" />
+    <Compile Include="ModuloProduccion\Model\Informe_EstadosOT.cs" />
     <Compile Include="ModuloProduccion\Model\Informe_Produccion_V2.cs" />
     <Compile Include="ModuloProduccion\Model\Maquina.cs" />
     <Compile Include="ModuloProduccion\Model\Orden.cs" />
@@ -2179,6 +2188,13 @@
     </Compile>
     <Compile Include="ModuloProduccion\View\InformeScoreCard.aspx.designer.cs">
       <DependentUpon>InformeScoreCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloProduccion\View\Informe_EstadoOT.aspx.cs">
+      <DependentUpon>Informe_EstadoOT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloProduccion\View\Informe_EstadoOT.aspx.designer.cs">
+      <DependentUpon>Informe_EstadoOT.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloProduccion\View\Informe_FallaElectricaMecanica.aspx.cs">
       <DependentUpon>Informe_FallaElectricaMecanica.aspx</DependentUpon>
@@ -2817,6 +2833,13 @@
     <Compile Include="View\Pagina_Inicio.aspx.designer.cs">
       <DependentUpon>Pagina_Inicio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Pruebas.aspx.cs">
+      <DependentUpon>Pruebas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Pruebas.aspx.designer.cs">
+      <DependentUpon>Pruebas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2850,6 +2873,7 @@
     <None Include="ModuloDespacho\View\UpleadDocumentsSaldos 08092014.xls" />
     <None Include="ModuloDespacho\View\UploadDocumentsDistribuccion.xlsx" />
     <None Include="ModuloDespacho\View\UploadDocumentsLibro1.xlsx" />
+    <Content Include="packages.config" />
     <None Include="PDF\ejemplo saxoprint.pdf" />
     <None Include="Properties\PublishProfiles\Perfil1.pubxml" />
     <None Include="Scripts\jquery-2.0.2.min.map" />

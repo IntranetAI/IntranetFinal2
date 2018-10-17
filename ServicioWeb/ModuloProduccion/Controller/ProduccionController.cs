@@ -4363,15 +4363,19 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     {
                         if (count == 0)
                         {
-                            string[] splitCorreo = dt.Correo.Substring(0, dt.Correo.Length - 1).Split(';');
-                            foreach (string correouser in splitCorreo)
+                            try
                             {
-                                if (!Correos.Contains(correouser.ToLower()))
+                                string[] splitCorreo = dt.Correo.Substring(0, dt.Correo.Length - 1).Split(';');
+                                foreach (string correouser in splitCorreo)
                                 {
-                                    mmsg.To.Add(correouser);
-                                    Correos += correouser;
+                                    if (!Correos.Contains(correouser.ToLower()))
+                                    {
+                                        mmsg.To.Add(correouser);
+                                        Correos += correouser;
+                                    }
                                 }
-                            }
+                            }catch(Exception exx) { }
+                            
                             mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
                             //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                             if (dt.Proceso == "Insert")

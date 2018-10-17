@@ -68,6 +68,7 @@
     </Content>
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
+    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="ModuloProduccion\Model\FechaDistribuccion.cs" />
     <Compile Include="ModuloProduccion\Model\OT_Liberadas.cs" />
     <Compile Include="ModuloProduccion\Model\SincronizarOT.cs" />
+    <Compile Include="ModuloProduccion\Model\WSMetrics.cs" />
     <Compile Include="ServiceMail.asmx.cs">
       <DependentUpon>ServiceMail.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -96,6 +98,10 @@
     </Compile>
     <Compile Include="WebForm2.aspx.designer.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

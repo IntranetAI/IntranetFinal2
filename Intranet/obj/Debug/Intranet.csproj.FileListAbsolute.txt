@@ -15,3 +15,5 @@ C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\Intranet\bin\Intranet.pdb
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\Intranet\obj\Debug\Intranet.csprojResolveAssemblyReference.cache
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\Intranet\obj\Debug\Intranet.dll
 C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\Intranet\obj\Debug\Intranet.pdb
+C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\Intranet\bin\Newtonsoft.Json.dll
+C:\Users\admin\Desktop\IntranetFinal\IntranetFinal\Intranet\bin\Newtonsoft.Json.xml

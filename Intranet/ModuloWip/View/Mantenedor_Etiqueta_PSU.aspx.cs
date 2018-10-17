@@ -33,7 +33,7 @@ namespace Intranet.ModuloWip.View
             foreach (Folios wc in lista)
             {
                 
-                if (contador <= 1)
+                if (contador == 0)
                 {
                     Respuesta = Respuesta + GeneCodMas(wc.Pallet, wc.Caja, wc.Desde, wc.Hasta, wc.Asignatura, wc.Forma, contador);
                     contador++;
@@ -100,12 +100,15 @@ namespace Intranet.ModuloWip.View
                     NumHasta = Hasta.ToString();
                     break;
             }
-            if ((contador) <= 1)
+
+
+            if ((contador) == 0)
             {
                 Etiqueta =
                     "<div style='border-style: solid;text-align:center;width:550px;font-family: Arial Black'>" +
                         "<div style='font-size:40;font-weight:bold;'>" + Forma + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>" + Asignatura + "</div>" +
+                        "<div style='font-size:50;font-weight:bold;'>" + Pallet + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>CAJA " + Caja + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div><br />";
             }
@@ -115,9 +118,31 @@ namespace Intranet.ModuloWip.View
                 Etiqueta = " <div style = 'page-break-after:always;border-style: solid;text-align:center;width:550px;font-family: Arial Black' > " +
                         "<div style='font-size:40;font-weight:bold;'>" + Forma + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>" + Asignatura + "</div>" +
+                        "<div style='font-size:50;font-weight:bold;'>" + Pallet + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>CAJA " + Caja + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div>";
             }
+
+            //if ((contador) == 0)
+            //{
+            //    Etiqueta =
+            //        "<div style='border-style: solid;text-align:center;width:550px;font-family: Arial Black'>" +
+            //            "<div style='font-size:40;font-weight:bold;'>" + Forma + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>" + Asignatura + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>" + Pallet + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>CAJA " + Caja + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div><br />";
+            //}
+
+            //else
+            //{
+            //    Etiqueta = " <div style = 'page-break-after:always;border-style: solid;text-align:center;width:550px;font-family: Arial Black' > " +
+            //            "<div style='font-size:40;font-weight:bold;'>" + Forma + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>" + Asignatura + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>" + Pallet + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>CAJA " + Caja + "</div>" +
+            //            "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div>";
+            //}
 
             return Etiqueta;
         }
@@ -157,4 +182,4 @@ namespace Intranet.ModuloWip.View
             return "./barcodes1/" + Nimagen.ToString();//imgCodigo.ImageUrl = "./barcodes/bc.png";
         }
     }
-}
+} 

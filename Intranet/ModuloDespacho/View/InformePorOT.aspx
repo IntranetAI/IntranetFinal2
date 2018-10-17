@@ -136,7 +136,7 @@
     <asp:ImageButton ID="ibExcel" 
                    runat="server" Height="20px" 
                    ImageUrl="~/Images/Excel-icon.png" Width="20px" 
-        onclick="ibExcel_Click" Visible="False" 
+        onclick="ibExcel_Click" 
                    />
                    </a>
 
