@@ -23,6 +23,7 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Model
         public string Elemento { get; set; }
         public string Actividad { get; set; }
         public string ProximaActividad { get; set; }
+        public string ProximaActividadDesc { get; set; }
         public string Observacion { get; set; }
         public string Operador { get; set; }
         public string Peso { get; set; }

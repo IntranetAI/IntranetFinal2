@@ -98,6 +98,7 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
                     p.Pliego = reader["Pliego"].ToString() + "<br/>" + reader["Elemento"].ToString();//cortado + comp
                     p.Actividad= reader["Processo"].ToString();//replace
                     p.ProximaActividad = reader["ProxActividad"].ToString(); //reader[""].ToString();
+                    p.ProximaActividadDesc = reader["ProxActividadDesc"].ToString();
                     p.Observacion= reader["Obs"].ToString();
                     p.Maquina= reader["Maquina"].ToString();
                     p.Operador= reader["InsUser"].ToString();

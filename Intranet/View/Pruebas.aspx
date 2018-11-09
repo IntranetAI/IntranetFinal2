@@ -49,7 +49,18 @@
               
               
               <ClientSettings EnableRowHoverStyle="true"></ClientSettings><HeaderContextMenu EnableImageSprites="True" CssClass="GridContextMenu GridContextMenu_Default"></HeaderContextMenu></telerik:radgrid>
-    </div>
+    </div><br /><br /><br /><br /><br /><br />
+        <select class="mdb-select md-form" multiple>
+                  <optgroup label="team 1">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                  </optgroup>
+                  <optgroup label="team 2">
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                  </optgroup>
+                </select>
+<button class="btn-save btn btn-primary btn-sm">Save</button>
     </form>
 </body>
 </html>

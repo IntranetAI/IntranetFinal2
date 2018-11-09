@@ -45,6 +45,17 @@ namespace Intranet.ModuloWip.View
         }
         public string CrearEtiqueta(string Bodega,string NombreBodega)
         {
+            //    string Respuesta = "";
+            //    List<Model_MetricsWIP> lista = new List<Model_MetricsWIP>
+            //{
+            //    new Model_MetricsWIP(){ NombreUbicacion = "C150", Barcode="C150" },
+            //    new Model_MetricsWIP(){ NombreUbicacion = "M1016", Barcode="M1016" },
+            //    new Model_MetricsWIP(){ NombreUbicacion = "M2016", Barcode="M2016" },
+            //    new Model_MetricsWIP(){ NombreUbicacion = "M6001", Barcode="M6001" },
+            //    new Model_MetricsWIP(){ NombreUbicacion = "MR408", Barcode="MR408" },
+            //};
+
+            //    int contador = 0;
             string Respuesta = "";
             List<Model_MetricsWIP> lista = w.ListUbicaciones_Metrics(Bodega, 2);
             int contador = 0;

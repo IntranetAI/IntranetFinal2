@@ -98,6 +98,7 @@ namespace Intranet.View
             RadGrid1.DataSource = JsonConvert.DeserializeObject<List<SimpliRoute>>(Label1.Text);
             RadGrid1.DataBind();
 
+
         }
     }
 }

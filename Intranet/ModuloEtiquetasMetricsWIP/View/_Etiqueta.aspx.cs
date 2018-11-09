@@ -27,6 +27,7 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.View
                 lblPliego.Text = et.Pliego;
                 lblActividad.Text = et.Actividad;
                 lblProxActividad.Text = et.ProximaActividad;
+                lblProxActividadDesc.Text = et.ProximaActividadDesc;
                 lblObs.Text = et.Observacion;
                 lblMaquina.Text = et.Maquina;
                 lblOperador.Text = et.Operador;

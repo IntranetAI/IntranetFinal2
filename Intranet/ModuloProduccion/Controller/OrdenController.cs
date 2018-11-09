@@ -180,7 +180,7 @@ namespace Intranet.ModuloProduccion.Controller
             string insert = "";
             foreach (Asignar asi in list)
             {
-                insert = insert + "insert into Produccion.dbo.OTAsignada values('" + asi.NumeroOT + "'," + IDUsuario + "," + asi.Estado + ");";
+                insert = insert + "insert into Produccion.dbo.OTAsignada(NumeroOT,IDUsuario,Estado,Procedencia,Fecha) values('" + asi.NumeroOT + "'," + IDUsuario + "," + asi.Estado + ",'suscripcion',GETDATE());";
             }
             try
             {
@@ -198,7 +198,7 @@ namespace Intranet.ModuloProduccion.Controller
                 }
                 con.CerrarConexion();
             }
-            catch
+            catch(Exception ex)
             {
                 return false;
             }

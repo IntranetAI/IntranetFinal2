@@ -29,7 +29,7 @@ namespace Intranet.ModuloDespacho.View
             string NombreOT = txtNombreOT.Text.Trim();
             string Cliente = txtCliente.Text.Trim();
             List<FechasDistribucion> lista = new List<FechasDistribucion>();
-            if ((txtFechaInicio.Text != "") && (txtFechaTermino.Text != "") && ((txtOT.Text != "") || (txtNombreOT.Text != "") || (txtCliente.Text != "")))
+            if ((txtFechaInicio.Text != "") && (txtFechaTermino.Text != ""))//&& ((txtOT.Text != "") || (txtNombreOT.Text != "") || (txtCliente.Text != ""))
             {
 
                 

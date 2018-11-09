@@ -69,6 +69,8 @@
                 </td>
 				<td align="center" style="font-size:14pt">
                     <asp:Label ID="lblProxActividad" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblProxActividadDesc" runat="server" Font-Bold="True"></asp:Label>
                 </td>
 			</tr>
 			<tr>

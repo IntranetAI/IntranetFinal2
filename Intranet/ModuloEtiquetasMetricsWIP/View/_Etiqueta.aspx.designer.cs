@@ -103,6 +103,15 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.View {
         protected global::System.Web.UI.WebControls.Label lblProxActividad;
         
         /// <summary>
+        /// Control lblProxActividadDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProxActividadDesc;
+        
+        /// <summary>
         /// Control lblObs.
         /// </summary>
         /// <remarks>

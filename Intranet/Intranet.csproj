@@ -431,9 +431,11 @@
     <Content Include="ModuloProduccion\View\PDF.aspx" />
     <Content Include="ModuloProduccion\View\Prod_Agregar_Fecha.aspx" />
     <Content Include="ModuloProduccion\View\ProgramacionProduccion.aspx" />
+    <Content Include="ModuloProduccion\View\ProgramaProduccion_Ext.aspx" />
     <Content Include="ModuloProduccion\View\Sincronizar_OT.aspx" />
     <Content Include="ModuloProduccion\View\SolicitudRequerimientosOP.aspx" />
     <Content Include="ModuloProduccion\View\Suscripcion.aspx" />
+    <Content Include="ModuloProduccion\View\_ProgramaProduccion_Ext.aspx" />
     <Content Include="ModuloProyectos\View\Carga_Proyecto.aspx" />
     <Content Include="ModuloProyectos\View\Crear_Proyectos.aspx" />
     <Content Include="ModuloProyectos\View\DetalleOT.aspx" />
@@ -690,6 +692,7 @@
     <Content Include="View\Mensajeria.aspx" />
     <Content Include="View\Pagina_Inicio.aspx" />
     <Content Include="View\Pruebas.aspx" />
+    <Content Include="View\Prueba_Programa.aspx" />
     <Content Include="View\Registro.aspx" />
     <Content Include="View\ResetPassword.aspx" />
     <Content Include="Web.config">
@@ -1270,6 +1273,7 @@
     <Compile Include="ModuloDespacho\Model\Distribuccion_excel.cs" />
     <Compile Include="ModuloDespacho\Model\EstadoOT_Mejora.cs" />
     <Compile Include="ModuloDespacho\Model\Estado_OT.cs" />
+    <Compile Include="ModuloDespacho\Model\Excel_InformePorOT.cs" />
     <Compile Include="ModuloDespacho\Model\Factura.cs" />
     <Compile Include="ModuloDespacho\Model\FechasDistribucion.cs" />
     <Compile Include="ModuloDespacho\Model\FillRate_Excel.cs" />
@@ -1995,6 +1999,7 @@
     <Compile Include="ModuloProduccion\Controller\Partes.cs" />
     <Compile Include="ModuloProduccion\Controller\Partes_V2.cs" />
     <Compile Include="ModuloProduccion\Controller\ProduccionController.cs" />
+    <Compile Include="ModuloProduccion\Controller\ProgramaProduccion_Controller.cs" />
     <Compile Include="ModuloProduccion\Controller\SeguimientoController.cs" />
     <Compile Include="ModuloProduccion\Controller\SincroController.cs" />
     <Compile Include="ModuloProduccion\Model\Analisis_Produccion_V2.cs" />
@@ -2018,6 +2023,7 @@
     <Compile Include="ModuloProduccion\Model\Produccion.cs" />
     <Compile Include="ModuloProduccion\Model\ProductividadMaquina.cs" />
     <Compile Include="ModuloProduccion\Model\ProgramacionProduccion.cs" />
+    <Compile Include="ModuloProduccion\Model\ProgramaProduccion_Extendido.cs" />
     <Compile Include="ModuloProduccion\Model\Requerimientos.cs" />
     <Compile Include="ModuloProduccion\Model\ScoreCard.cs" />
     <Compile Include="ModuloProduccion\Model\SincronizarOT.cs" />
@@ -2294,6 +2300,13 @@
     <Compile Include="ModuloProduccion\View\ProgramacionProduccion.aspx.designer.cs">
       <DependentUpon>ProgramacionProduccion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ModuloProduccion\View\ProgramaProduccion_Ext.aspx.cs">
+      <DependentUpon>ProgramaProduccion_Ext.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloProduccion\View\ProgramaProduccion_Ext.aspx.designer.cs">
+      <DependentUpon>ProgramaProduccion_Ext.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ModuloProduccion\View\Sincronizar_OT.aspx.cs">
       <DependentUpon>Sincronizar_OT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2314,6 +2327,13 @@
     </Compile>
     <Compile Include="ModuloProduccion\View\Suscripcion.aspx.designer.cs">
       <DependentUpon>Suscripcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloProduccion\View\_ProgramaProduccion_Ext.aspx.cs">
+      <DependentUpon>_ProgramaProduccion_Ext.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloProduccion\View\_ProgramaProduccion_Ext.aspx.designer.cs">
+      <DependentUpon>_ProgramaProduccion_Ext.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloProyectos\Controller\Controller_Proyectos.cs" />
     <Compile Include="ModuloProyectos\Model\ProyectosModelo.cs" />
@@ -2839,6 +2859,13 @@
     </Compile>
     <Compile Include="View\Pruebas.aspx.designer.cs">
       <DependentUpon>Pruebas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Prueba_Programa.aspx.cs">
+      <DependentUpon>Prueba_Programa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Prueba_Programa.aspx.designer.cs">
+      <DependentUpon>Prueba_Programa.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
