@@ -50,7 +50,7 @@
 </div>--%>
 
      <div align="right" style="width: 1097px;padding-top:-10px;">
-         <asp:Button ID="Button1" runat="server" Text="inf. Operario"  /></div>
+         <asp:Button ID="Button1" runat="server" Text="inf. Operario" Visible="False"  /></div>
     
 <asp:Panel ID="pnlResultado" runat="server" Width="1095px">
             
@@ -226,6 +226,8 @@
              <asp:Image ID="imgMensaje" runat="server" />
                 &nbsp;
             <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+               
+                    <asp:Label ID="lblCodAnterior" runat="server" Visible="False"></asp:Label>
                
             </div>
      <asp:Label ID="Label11" runat="server" Text="Detalle OT - Pallet"></asp:Label>

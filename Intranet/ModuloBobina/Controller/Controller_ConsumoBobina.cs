@@ -318,5 +318,83 @@ namespace Intranet.ModuloBobina.Controller
             con.CerrarConexion();
             return lista;
         }
+
+        public List<Bobina_ConsumoLinea_V2> List_BobinasInformeMensual_V3(DateTime FechaInicio, DateTime FechaTermino)
+        {
+            List<Bobina_ConsumoLinea_V2> lista = new List<Bobina_ConsumoLinea_V2>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            double TotalBobinas = 0; double TotalConsumo = 0; double TotalEscarpe = 0; double BobinasConProyecto = 0; double KGConProyecto = 0; double DanoProveedor;
+            double DanoRollero = 0; double DanoAlmacen = 0;
+            if (cmd != null)
+            {
+                try
+                {
+                    //cmd.CommandText = "Bobina_ConsumoLineaMetrics_Mensual_V2";
+                    cmd.CommandText = "[Bobina_ConsumoLineaMetrics_Mensual_V3]";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@FechaInicio", FechaInicio);
+                    cmd.Parameters.AddWithValue("@FechaTermino", FechaTermino);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Bobina_ConsumoLinea_V2 b = new Bobina_ConsumoLinea_V2();
+                        b.Maquina = reader["Maquina"].ToString();
+                        TotalBobinas = Convert.ToDouble(reader["TotalBobinas"].ToString());
+                        TotalConsumo = Convert.ToDouble(reader["Consumo"].ToString());
+                        TotalEscarpe = Convert.ToDouble(reader["Escalpe"].ToString());
+                        BobinasConProyecto = Convert.ToDouble(reader["BobinasConProyecto"].ToString());
+                        KGConProyecto = Convert.ToDouble(reader["KGBobinasConProyecto"].ToString());
+                        DanoProveedor = Convert.ToDouble(reader["DanoProveedor"].ToString());
+                        DanoRollero = Convert.ToDouble(reader["DanoRollero"].ToString());
+                        DanoAlmacen = Convert.ToDouble(reader["DanoAlmacen"].ToString());
+                        b.TotalBobinasConsumidas = TotalBobinas;
+                        b.TotalKGConsumido = TotalConsumo;
+                        b.TotalKGEscarpe = TotalEscarpe;
+                        if (TotalBobinas > 0)
+                        {
+                            b.PromedioEscarpe = (TotalEscarpe / TotalBobinas);
+                        }
+                        else
+                        {
+                            b.PromedioEscarpe = 0;
+                        }
+                        if (TotalConsumo > 0)
+                        {
+                            b.PorcentajeEscarpe = ((TotalEscarpe * 100) / TotalConsumo);
+                        }
+                        else
+                        {
+                            b.PorcentajeEscarpe = 0;
+                        }
+                        b.BobinasBuenas = Convert.ToDouble(reader["BobinasBuenas"].ToString());
+                        b.BobinasMalas = Convert.ToDouble(reader["BobinasMalas"].ToString());
+                        b.BobinasConProyecto = BobinasConProyecto;
+                        b.KGConProyecto = KGConProyecto;
+                        b.BobinasSinProyecto = (TotalBobinas - BobinasConProyecto);
+                        b.KGSinProyecto = (TotalConsumo - KGConProyecto);
+                        b.DanoAlmacen = DanoAlmacen;
+                        b.DanoRollero = DanoRollero;
+                        b.DanoProveedor = DanoProveedor;
+                        if (TotalEscarpe > 0)
+                        {
+                            b.PorcDanoAlmacen = ((DanoAlmacen * 100) / TotalEscarpe);
+                            b.PorcDanoRollero = ((DanoRollero * 100) / TotalEscarpe);
+                            b.PorcDanoProveedor = ((DanoProveedor * 100) / TotalEscarpe);
+                        }
+                        else
+                        {
+                            b.PorcDanoAlmacen = 0; b.PorcDanoRollero = 0; b.PorcDanoProveedor = 0;
+                        }
+                        lista.Add(b);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
     }
 }

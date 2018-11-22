@@ -143,7 +143,7 @@ namespace Intranet.ModuloEncuadernacion.Controller
             return respuesta;
         }
 
-        public bool CerrarPallet(string cod_Pallet)
+        public bool CerrarPallet(string cod_Pallet,string Usuario)
         {
             bool respuesta = true;
             SqlDataReader dr;
@@ -154,6 +154,7 @@ namespace Intranet.ModuloEncuadernacion.Controller
                 cmd.CommandText = "PT_CerrarPallet";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@cod_Pallet", cod_Pallet);
+                cmd.Parameters.AddWithValue("@Usuario", Usuario);
 
 
 

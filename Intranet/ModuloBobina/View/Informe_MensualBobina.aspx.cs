@@ -74,10 +74,38 @@ namespace Intranet.ModuloBobina.View
             {
                 try
                 {
+                    string HoraInicio = "00:00:00";string HoraTermino = "23:59:59";
+                    if (txtFechaInicio.Text == txtFechaTermino.Text)
+                    {
+                        switch (DropDownList1.SelectedValue.ToString())
+                        {
+                            case "0":
+                                HoraInicio = "00:00:00";
+                                HoraTermino = "23:59:59";
+                                break;
+                            case "1":
+                                HoraInicio = "00:00:00";
+                                HoraTermino = "07:59:59";
+                                break;
+                            case "2":
+                                HoraInicio = "08:00:00";
+                                HoraTermino = "15:59:59";
+                                break;
+                            case "3":
+                                HoraInicio = "16:00:00";
+                                HoraTermino = "23:59:59";
+                                break;
+                            default:
+                                break;
+                        }
+                    }else
+                    {
+                        DropDownList1.SelectedIndex = 0;
+                    }
                     string[] splitInicio = txtFechaInicio.Text.Split('/');
                     string[] splitTermino = txtFechaTermino.Text.Split('/');
                     Controller_ConsumoBobina controlbobina = new Controller_ConsumoBobina();
-                    List<Bobina_ConsumoLinea_V2> lista = controlbobina.List_BobinasInformeMensual_V2(splitInicio[2] + "-" + splitInicio[1] + "-" + splitInicio[0], splitTermino[2] + "-" + splitTermino[1] + "-" + splitTermino[0]);
+                    List<Bobina_ConsumoLinea_V2> lista = controlbobina.List_BobinasInformeMensual_V3(Convert.ToDateTime(splitInicio[2] + "-" + splitInicio[1] + "-" + splitInicio[0] + " " + HoraInicio), Convert.ToDateTime(splitTermino[2] + "-" + splitTermino[1] + "-" + splitTermino[0] + " " + HoraTermino));
 
 
                     lblTabla.Text = TablaInforme_V2(lista);

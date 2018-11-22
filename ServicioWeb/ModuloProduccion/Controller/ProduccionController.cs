@@ -4377,7 +4377,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             }catch(Exception exx) { }
                             
                             mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
-                            //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                           // mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                             if (dt.Proceso == "Insert")
                             {
                                 mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT;
@@ -4448,7 +4448,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         string NombreProcedure0 = ex.StackTrace.ToString().Substring(ex.StackTrace.ToString().IndexOf("ProduccionController.") + 21, ex.StackTrace.Length - (ex.StackTrace.ToString().IndexOf("ProduccionController.") + 21));
                         string NombreProcedure = NombreProcedure0.Substring(0, NombreProcedure0.IndexOf("("));
                         GenerarCorreoErrordeEnvio("FechaEntregaEnviodeCorreoAutomatico", "Especifico", NombreProcedure, DateTime.Now.ToString("dd-MM-yyyy"), ex.Message);
-                        return "Error Enviado";
+                        return QueryDtDistribuccion;
                     }
                     count = 0;Correos = "";
                 }
@@ -4497,19 +4497,26 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     //string FechasDistribuccion = "";
                     foreach (OT_Liberadas OT in lista.Where(o => o.OT == NumeroOT))
                     {
+                        if (OT.OT == "116898")
+                        {
+
+                        }
                         if (count == 0)
                         {
-                            string[] splitCorreo = OT.Correo.Split(';');
-                            foreach (string correouser in splitCorreo)
-                            {
-                                mmsg.To.Add(correouser);
-                            }
-                            mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
-                            if (OT.Usr_Liberada == "FDS")
-                            {
-                                mmsg.To.Add("correootliberadasgrupo2@aimpresores.cl");
-                            }
+                             string[] splitCorreo = OT.Correo.Split(';');
+                              foreach (string correouser in splitCorreo)
+                              {
+                                  mmsg.To.Add(correouser);
+                              }
+                              mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
+                              if (OT.Usr_Liberada == "FDS")
+                              {
+                                  mmsg.To.Add("correootliberadasgrupo2@aimpresores.cl");
+                              }
+              
+                         //   mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                             mmsg.Subject = "Se Informa liberacion de la OT : " + OT.OT;
+
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                             count++;
                         }
@@ -4772,7 +4779,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         string NombreProcedure0 = ex.StackTrace.ToString().Substring(ex.StackTrace.ToString().IndexOf("ProduccionController.") + 21, ex.StackTrace.Length - (ex.StackTrace.ToString().IndexOf("ProduccionController.") + 21));
                         string NombreProcedure = NombreProcedure0.Substring(0, NombreProcedure0.IndexOf("("));
                         GenerarCorreoErrordeEnvio("FechaEntregaEnviodeCorreoAutomatico", "Especifico", NombreProcedure, DateTime.Now.ToString("dd-MM-yyyy"), ex.Message);
-                        return "Error Enviado";
+                        // return "Error Enviado";
+                        return QueryOTLiberacion;
                     }
                 }
             }
@@ -4805,7 +4813,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         otLiberada.Situacion = reader["situacao"].ToString();
                         otLiberada.DtLiberacao = Convert.ToDateTime(reader["dtocor"].ToString()).ToString("dd-MM-yyyy HH:mm:ss");
                         otLiberada.Usuario = reader["codusuario"].ToString();
-                        string Correo = reader["Correos"].ToString();
+                        string Correo = reader["Correos"].ToString().Replace("noexiste@aimpresores.cl;", "");
                         otLiberada.Correo = Correo.Substring(0, Correo.Length - 1);
                         lista.Add(otLiberada);
                     }

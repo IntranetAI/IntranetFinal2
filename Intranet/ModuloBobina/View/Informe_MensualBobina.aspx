@@ -104,10 +104,10 @@
             <table class="filterable" style="background-color: #EEE; border: 1px solid #999; padding: 5px; margin-bottom: 5px;
                 border-radius: 10px 10px 10px 10px;" width="945px;">
                 <tr>
-                    <td style="width: 95;">
+                    <td style="width: 95px;">
                         <asp:Label ID="lblFechaInicio" runat="server" Text="Fecha : "></asp:Label>
                     </td>
-                    <td style="width: 134;">
+                    <td style="width: 134px;">
                         <asp:TextBox ID="txtFechaInicio" class="form-control" runat="server" Width="128px"></asp:TextBox>
                         <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtFechaInicio"
                             Format="dd/MM/yyyy">
@@ -116,11 +116,21 @@
                     <td>
                         a
                     </td>
-                    <td style="width: 134;">
+                    <td style="width: 134px;">
                         <asp:TextBox ID="txtFechaTermino" class="form-control" runat="server" Width="128px"></asp:TextBox>
                         <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtFechaTermino"
                             Format="dd/MM/yyyy">
                         </asp:CalendarExtender>
+                    </td>
+                    <td>    <asp:Label ID="Label1"  runat="server" Text="Turno:"></asp:Label></td>
+                    <td>
+
+    <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
+        <asp:ListItem Value="0">Todos</asp:ListItem>
+        <asp:ListItem Value="1">1 - Dia</asp:ListItem>
+        <asp:ListItem Value="2">2 - Tarde</asp:ListItem>
+        <asp:ListItem Value="3">3 - Noche</asp:ListItem>
+                        </asp:DropDownList>
                     </td>
                     <td style="width: 200px;" colspan="2">
                         <div style="margin-left: 17px;">

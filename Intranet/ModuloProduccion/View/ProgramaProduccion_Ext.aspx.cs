@@ -22,6 +22,7 @@ namespace Intranet.ModuloProduccion.View
                 lstFruits.Items.Add(new ListItem("M-600", "M6001"));
                 lstFruits.Items.Add(new ListItem("WEB 1", "M1016"));
                 lstFruits.Items.Add(new ListItem("WEB 2", "M2016"));
+                lstFruits.Items.Add(new ListItem("GOSS", "C-150"));
                 lstFruits.Items.Add(new ListItem("KBA", "KBA"));
                 lstFruits.Items.Add(new ListItem("10P", "SH102"));
                 lstFruits.Items.Add(new ListItem("XL", "SHXL2"));
@@ -261,6 +262,7 @@ namespace Intranet.ModuloProduccion.View
                     lstFruits.Items.Add(new ListItem("M-600", "M6001"));
                     lstFruits.Items.Add(new ListItem("WEB 1", "M1016"));
                     lstFruits.Items.Add(new ListItem("WEB 2", "M2016"));
+                    lstFruits.Items.Add(new ListItem("GOSS", "C-150"));
                     break;
                 case "Planas":
                     lstFruits.Items.Add(new ListItem("KBA", "KBA"));

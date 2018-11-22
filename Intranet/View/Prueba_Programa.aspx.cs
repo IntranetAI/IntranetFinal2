@@ -188,14 +188,14 @@ namespace Intranet.View
             }
 
 
-            Label1.Text = tablacompleta;
-            Label2.Text = FechaInicio.ToString() + "   -   ";
+         //   Label1.Text = tablacompleta;
+         //   Label2.Text = FechaInicio.ToString() + "   -   ";
                 //fecha1.ToString("dddd", new CultureInfo("es-ES")) + "     - " + semanas.ToString();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string message = "";
+           /* string message = "";
             foreach (ListItem item in lstFruits.Items)
             {
                 if (item.Selected)
@@ -204,7 +204,7 @@ namespace Intranet.View
                 }
             }
             Label2.Text = message;
-
+            */
         }
     }
 }

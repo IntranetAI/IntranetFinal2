@@ -35,7 +35,7 @@ namespace Intranet.ModuloEncuadernacion.View
 
             //string r = enc.infMaquinaBobina(Session["Usuario"].ToString());
 
-
+            /*[cjerias_11/12/2018]  Comentado Unificacion despacho Impresion y ENC 
             string r = enc.infMaquinaBobina(Session["Usuario"].ToString());
 
             //valor = valor.AddDays(+1);
@@ -59,8 +59,9 @@ namespace Intranet.ModuloEncuadernacion.View
                 string popupScript = "<script language='JavaScript'> onload(window.open('infOperario.aspx','Procesar Documento','toolbar=no, location=yes,status=no,menubar=no,scrollbars=no,resizable=no, width=380,height=300,left=340,top=200'));</script>";
                 Page.RegisterStartupScript("PopupScript", popupScript);
             }
+            */
         }
-        
+
         protected void btnBuscarPallet_Click(object sender, EventArgs e)
         {
             btnImprimir.Visible = false;
@@ -249,15 +250,22 @@ namespace Intranet.ModuloEncuadernacion.View
   
                 if (lisPT.Count != 0)
                 {
-                    bool respuesta = cPT.CerrarPallet(txtCodigo.Text);
+                    bool respuesta = cPT.CerrarPallet(txtCodigo.Text, Session["Usuario"].ToString());
                     if (respuesta == true)
                     {
                         DivMensaje.Visible = true;
                         imgMensaje.ImageUrl = "../../Images/tick.png";
+                        lblCodAnterior.Text = txtCodigo.Text;
                         lblMensaje.Text = "El Pallet " + txtCodigo.Text + " ha sido Cerrado Correctamente.";
                         lblMensaje.ForeColor = Color.White;
                         DivMensaje.Attributes.Add("style", "background-color:Green");
 
+
+                        if (cPT.CorreoPrimerDespacho(txtOT.Text, "cjerias", 0) == false)
+                        {
+                            bool rrr = cPT.CorreoPrimerDespacho(txtOT.Text.Trim(), "cjerias", 1);
+                            generarCorreo(txtOT.Text, cPT.CargarPalletsCorreo(lblCodAnterior.Text.Trim(), txtOT.Text.Trim(), 2), txtNombreOT.Text);
+                        }
                         //habilita impresion
                         btnImprimir.Attributes.Add("onclick", "window.open('EtiquetaProductosTerminados.aspx?Cod=" + txtCodigo.Text + ",'Procesar Documento','toolbar=no, location=yes,status=no,menubar=no,scrollbars=no,resizable=no, width=730,height=650,left=340,top=200')");
                         btnImprimir.Visible = true;
@@ -341,10 +349,90 @@ namespace Intranet.ModuloEncuadernacion.View
         {
            // Button1.Attributes.Add("onclick", "window.open('EtiquetaProductosTerminados.aspx?Cod=" + txtCodigo.Text + ",'Procesar Documento','toolbar=no, location=yes,status=no,menubar=no,scrollbars=no,resizable=no, width=730,height=650,left=340,top=200')");
 
-            string popupScript = "<script language='JavaScript'> onload(window.open('EtiquetaProductosTerminados.aspx?Cod=" + lblcodigo.Text + "','Procesar Documento','toolbar=no, location=yes,status=no,menubar=no,scrollbars=no,resizable=no, width=730,height=650,left=340,top=200'));</script>";
+           /* [cjerias_12/11/2018]
+            * 
+            * string popupScript = "<script language='JavaScript'> onload(window.open('EtiquetaProductosTerminados.aspx?Cod=" + lblcodigo.Text + "','Procesar Documento','toolbar=no, location=yes,status=no,menubar=no,scrollbars=no,resizable=no, width=730,height=650,left=340,top=200'));</script>";
+            Page.RegisterStartupScript("PopupScript", popupScript);*/
+
+
+            Session["Usuario"] = Session["Usuario"].ToString();
+            string popupScript = "<script language='JavaScript'> onload(window.open('EtiquetaAprobadaPT.aspx?Cod=" + lblCodAnterior.Text + "','Procesar Documento','toolbar=no, location=yes,status=no,menubar=no,scrollbars=no,resizable=no, width=730,height=650,left=340,top=200'));</script>";
             Page.RegisterStartupScript("PopupScript", popupScript);
         }
+        /*[cjerias_14/11/2018 1129] Asignacion correo primeros ejemplares a despacho */
 
+        public bool generarCorreo(string ot, string detalle, string nombreOT)
+        {
+
+
+            DetalleDespachos_Excel de = cPT.CorreosCSRVendedor(ot, "", 3);
+
+            string CSR = de.NombreOT;
+            string Vendedor = de.OT;
+            System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+
+            //Direccion de correo electronico a la que queremos enviar el mensaje
+
+
+               if (CSR != "")
+               {
+                   mmsg.To.Add(CSR);
+               }
+               if (Vendedor != "")
+               {
+                   mmsg.To.Add(Vendedor);
+               }
+            //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            mmsg.Subject = ot.ToUpper() + " - Entrega primeros ejemplares a Despacho.";
+            mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+            //Direccion de correo electronico que queremos que reciba una copia del mensaje
+            //mmsg.Bcc.Add("juan.venegas@aimpresores.cl"); //Opcional
+            mmsg.Body = "<table style='width:100%;'>" +
+            "<tr>" +
+                "<td>" +
+                    "<img src='http://intranet.qgchile.cl/images/Logo color lateral.jpg' width='267px'  height='67px' />" +
+                //"<img src='http://www.qg.com/la/es/images/QG_Tagline_sp.jpg' />" +
+                "</td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>" +
+                    "&nbsp;</td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>" +
+                    "Estimado(a) Usuario:" +
+                    "<br />" +
+                      "<br />Se ha generado la primera entrega de ejemplares a Despacho. OT: " + ot.ToUpper() + " - " + nombreOT +
+                        "<br /><br />" +
+                           detalle +
+                           "<br /><br />" +
+                    "Atentamente," +
+                     "<br />" +
+                    "Equipo de desarrollo A Impresores S.A" +
+                "</td>" +
+            "</tr>" +
+            "</table>";
+
+            mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+            mmsg.IsBodyHtml = true; //Si no queremos que se envíe como HTML
+                                    //Correo electronico desde la que enviamos el menaje
+            mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+            cliente.Credentials =
+                new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+            cliente.Host = "mail.aimpresores.cl";
+            try
+            {
+
+                cliente.Send(mmsg);
+                return true;
+            }
+            catch (System.Net.Mail.SmtpException ex)
+            {
+                return false;
+            }
+
+        }
 
 
 
