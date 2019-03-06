@@ -65,11 +65,11 @@
             </td>
             <td class="style4">
                <asp:DropDownList ID="ddlAño" runat="server" Width="210px" >
-                    <asp:ListItem>Seleccione...</asp:ListItem>
+<%--                    <asp:ListItem>Seleccione...</asp:ListItem>
                     <asp:ListItem Value="2015">2015</asp:ListItem>
                     <asp:ListItem Value="2016">2016</asp:ListItem>
                     <asp:ListItem Value="2017">2017</asp:ListItem>
-                    <asp:ListItem Value="2018">2018</asp:ListItem>
+                    <asp:ListItem Value="2018">2018</asp:ListItem>--%>
                 </asp:DropDownList></td>
             <td class="style4">
 

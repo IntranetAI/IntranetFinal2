@@ -18,7 +18,9 @@ namespace Intranet.ModuloDespacho.View
         {
             if (!IsPostBack)
             {
-                Cargar();
+                // Cargar();
+                RadGrid1.DataSource = "";
+                RadGrid1.DataBind();
             }
         }
         public void Cargar()

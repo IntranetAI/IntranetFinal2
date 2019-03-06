@@ -1097,7 +1097,7 @@ namespace Intranet.ModuloProduccion.Controller
                     pro.Total = b;
 
                     DateTime FV = Convert.ToDateTime(reader["FechaValidacion"].ToString());
-                    pro.FechaValidacion = FV.ToString("dd/MM/yyyy");
+                    pro.FechaValidacion = FV.ToString("dd/MM/yyyy HH:mm");
                     string var = reader["Estado"].ToString();
                     if (var == "4")
                     {

@@ -36,7 +36,7 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
                     p.CantidadPallets= Convert.ToInt32(reader["palletqty"].ToString());
                     p.FechaInicio = Convert.ToDateTime(reader["DtHoraInicio"].ToString()).ToString("dd/MM/yyyy HH:mm");
                     p.Pliego = reader["processo"].ToString().ToLower();
-                    p.Accion = "<a style = 'Color:Blue;text-decoration:none;cursor:pointer;' href = 'javascript:Mostrar(\"" + p.ObjId + "\",\"" + p.OT + "\",\"" + p.NombreOT.ToUpper() +  "\",\"" + p.Pliego.ToUpper() + "\")' >Seleccionar</a>";
+                    p.Accion = "<a style = 'Color:Blue;text-decoration:none;cursor:pointer;' href = 'javascript:Mostrar(\"" + p.ObjId + "\",\"" + p.OT + "\",\"" + p.NombreOT.Replace("'","").ToUpper() +  "\",\"" + p.Pliego.ToUpper() + "\")' >Seleccionar</a>";
                    
                     lista.Add(p);
                 }

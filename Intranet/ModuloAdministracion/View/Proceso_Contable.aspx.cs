@@ -10,6 +10,7 @@ using Intranet.ModuloAdministracion.Model;
 using System.IO;
 using System.Web.UI.HtmlControls;
 using System.Text;
+using System.Threading;
 
 namespace Intranet.ModuloAdministracion.View
 {
@@ -114,34 +115,43 @@ namespace Intranet.ModuloAdministracion.View
 
         protected void btnDetalle_Click(object sender, EventArgs e)
         {
-            Boolean check =false;
-            Document_Controller docControl = new Document_Controller();
-            string listFolio = "";
-            for (int i = 0; i < RadGrid1.Items.Count; i++)
+            string factura = "";
+            try
             {
-                GridDataItem row = RadGrid1.Items[i];
-                bool isChecked = ((CheckBox)row.FindControl("chkSelect")).Checked;
-
-                if (isChecked)
+                Boolean check = false;
+                Document_Controller docControl = new Document_Controller();
+                string listFolio = "";
+                for (int i = 0; i < RadGrid1.Items.Count; i++)
                 {
-                    int Foli = Convert.ToInt32(row["IDDocMercantil"].Text);
-                    listFolio = listFolio + Foli + ",";
-                    check = true;
+                    GridDataItem row = RadGrid1.Items[i];
+                    bool isChecked = ((CheckBox)row.FindControl("chkSelect")).Checked;
+
+                    if (isChecked)
+                    {
+                        int Foli = Convert.ToInt32(row["IDDocMercantil"].Text);
+                        factura = Foli.ToString();
+                        listFolio = listFolio + Foli + ",";
+                        check = true;
+                    }
                 }
-            }
-            if (check != false)
+                if (check != false)
+                {
+                    listFolio = listFolio.Substring(0, listFolio.Length - 1);
+                    List<Detalle> lista = docControl.ListarExpExcelDet(listFolio);
+                    //ExportToExcel("LcoDet", view);
+                    btnExportCSV2_Click(lista, listFolio, txtFechaInicio.Text, txtFechaTermino.Text);
+                    //GridView gv = new GridView();
+                    //gv.DataSource = lista;
+                    //gv.DataBind();
+                    //ExportToExcel("LcoDet", gv);
+                }
+                else
+                {
+
+                }
+            }catch(ThreadAbortException ex)
             {
-                listFolio = listFolio.Substring(0, listFolio.Length - 1);
-                List<Detalle> lista = docControl.ListarExpExcelDet(listFolio);
-                //ExportToExcel("LcoDet", view);
-                btnExportCSV2_Click(lista, listFolio, txtFechaInicio.Text, txtFechaTermino.Text);
-                //GridView gv = new GridView();
-                //gv.DataSource = lista;
-                //gv.DataBind();
-                //ExportToExcel("LcoDet", gv);
-            }
-            else
-            {
+                string a = factura;
 
             }
         }

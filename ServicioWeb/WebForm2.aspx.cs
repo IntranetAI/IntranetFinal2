@@ -11,9 +11,12 @@ namespace ServicioWeb
     public partial class WebForm2 : System.Web.UI.Page
     {
         PapelController pc = new PapelController();
+        ProduccionController pcc = new ProduccionController();
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Text = pc.StockFL(DateTime.Now, DateTime.Now);
+
+            Label2.Text = pcc.OtLiberadas_ItemsPedido("");
         }
     }
 }

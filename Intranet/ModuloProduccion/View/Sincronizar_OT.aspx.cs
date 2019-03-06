@@ -51,6 +51,9 @@ namespace Intranet.ModuloProduccion.View
                 else
                 {
                     int count2  = lista.Where(o=>(o.QG_RMS_JOB_NBR.Trim() == sinOT.QG_RMS_JOB_NBR.Trim())
+                                                     && (o.CUST_NM == sinOT.CUST_NM)
+                                                     && (o.NM == sinOT.NM)
+                                                     && (o.CUST_RUT == sinOT.CUST_RUT)
                                                      && (o.PRN_ORD_QTY == sinOT.PRN_ORD_QTY)
                                                      && (o.JOB_STS == sinOT.JOB_STS)
                                                      && (o.CTD_TMSTMP == sinOT.CTD_TMSTMP)

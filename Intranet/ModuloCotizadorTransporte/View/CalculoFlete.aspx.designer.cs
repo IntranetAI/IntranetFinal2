@@ -7,90 +7,99 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Intranet.ModuloRFrecuencia.View {
+namespace Intranet.ModuloCotizadorTransporte.View {
     
     
-    public partial class Informe_Regional {
+    public partial class CalculoFlete {
         
         /// <summary>
-        /// Control Panel2.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Control lblFechaInicio.
+        /// Control ddlDestino.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaInicio;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDestino;
         
         /// <summary>
-        /// Control txtFechaInicio.
+        /// Control lblKGTotales.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
+        protected global::System.Web.UI.WebControls.Label lblKGTotales;
         
         /// <summary>
-        /// Control CalendarExtender1.
+        /// Control lblRamal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
+        protected global::System.Web.UI.WebControls.Label lblRamal;
         
         /// <summary>
-        /// Control lblFechaTermino.
+        /// Control lblCostoTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaTermino;
+        protected global::System.Web.UI.WebControls.Label lblCostoTotal;
         
         /// <summary>
-        /// Control txtFechaTermino.
+        /// Control lblSalida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaTermino;
+        protected global::System.Web.UI.WebControls.Label lblSalida;
         
         /// <summary>
-        /// Control CalendarExtender2.
+        /// Control lblTotalFletes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender2;
+        protected global::System.Web.UI.WebControls.Label lblTotalFletes;
         
         /// <summary>
-        /// Control btnFiltro.
+        /// Control lblJson.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnFiltro;
+        protected global::System.Web.UI.WebControls.Label lblJson;
         
         /// <summary>
-        /// Control ImageButton2.
+        /// Control lblMensaje.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+        
+        /// <summary>
+        /// Control lblTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotal;
     }
 }

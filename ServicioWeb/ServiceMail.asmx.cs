@@ -221,7 +221,7 @@ namespace ServicioWeb
         public string CorreoFechaDistribucionxOT(string Usuario)
         {
             ProduccionController controlpro = new ProduccionController();
-            string QueryDtEntregas = controlpro.FechaEntregaEnviodeCorreoAutomatico();
+            string QueryDtEntregas = controlpro.FechaEntregaPedidosCorreoAutomatico();
             if (QueryDtEntregas != "")
             {
                 if (QueryDtEntregas == "0")
@@ -243,6 +243,31 @@ namespace ServicioWeb
                 controlpro.GenerarCorreoErrordeEnvio("FechaEntregaEnviodeCorreoAutomatico", "General", "", "", "No se envió el correo");
                 return "Error";
             }
+            /*[cjerias 20190128_1514] Original antes de cambio, fechas sacadas de pedidos (tab 1)*/
+            
+            //ProduccionController controlpro = new ProduccionController();
+            //string QueryDtEntregas = controlpro.FechaEntregaEnviodeCorreoAutomatico();
+            //if (QueryDtEntregas != "")
+            //{
+            //    if (QueryDtEntregas == "0")
+            //    {
+            //        return "NO SE ENVIO";
+            //    }
+            //    else if (controlpro.SincronizadorFechaEntragas(QueryDtEntregas))
+            //    {
+            //        return "OK";
+            //    }
+            //    else
+            //    {
+            //        controlpro.GenerarCorreoErrordeEnvio("FechaEntregaEnviodeCorreoAutomatico", "Sincronizador", "", "", "se envió el correo, pero no ingreso a Intranet2");
+            //        return "Error";
+            //    }
+            //}
+            //else
+            //{
+            //    controlpro.GenerarCorreoErrordeEnvio("FechaEntregaEnviodeCorreoAutomatico", "General", "", "", "No se envió el correo");
+            //    return "Error";
+            //}
 
         }
 

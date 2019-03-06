@@ -120,6 +120,7 @@
     <Content Include="Images\Pallet.png" />
     <Content Include="Images\Pallet_Ocupado.png" />
     <Content Include="Images\sync.png" />
+    <Content Include="Inventario.aspx" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\highcharts-more.js" />
     <Content Include="js\highcharts.js" />
@@ -298,6 +299,11 @@
     <Content Include="ModuloComercial\View\ModuloComercial.aspx" />
     <Content Include="ModuloComercial\View\Presupuestador.aspx" />
     <Content Include="ModuloComercial\View\SolicitudPresupuesto.aspx" />
+    <Content Include="ModuloCotizadorTransporte\View\CalculoFlete.aspx" />
+    <Content Include="ModuloCotizadorTransporte\View\Inicio.aspx" />
+    <Content Include="ModuloCotizadorTransporte\View\Ramal.aspx" />
+    <Content Include="ModuloCotizadorTransporte\View\TarifasTerrestre.aspx" />
+    <Content Include="ModuloCotizadorTransporte\View\TerifasAereo.aspx" />
     <Content Include="ModuloDespacho\View\AnularDevolucion.aspx" />
     <Content Include="ModuloDespacho\View\barcodes\bc.png" />
     <Content Include="ModuloDespacho\View\DetalleDev.aspx" />
@@ -447,6 +453,8 @@
     <Content Include="ModuloRFrecuencia\View\Informe_BobinaDimen.aspx" />
     <Content Include="ModuloRFrecuencia\View\Informe_CorteBanda.aspx" />
     <Content Include="ModuloRFrecuencia\View\Informe_Gemba.aspx" />
+    <Content Include="ModuloRFrecuencia\View\Informe_Inventario.aspx" />
+    <Content Include="ModuloRFrecuencia\View\Informe_Inventario_Listas.aspx" />
     <Content Include="ModuloRFrecuencia\View\Informe_Perdida.aspx" />
     <Content Include="ModuloRFrecuencia\View\Informe_Regional.aspx" />
     <Content Include="ModuloRFrecuencia\View\Informe_Semanal.aspx" />
@@ -723,6 +731,13 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Inventario.aspx.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventario.aspx.designer.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ModuloACR\View\CreaConexion.aspx.cs">
       <DependentUpon>CreaConexion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -932,8 +947,10 @@
       <DependentUpon>Help_DeskFormulario.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloBobina\Controller\Controller_ConsumoBobina.cs" />
+    <Compile Include="ModuloBobina\Controller\InventarioController.cs" />
     <Compile Include="ModuloBobina\Model\Bobina_ConsumoLinea.cs" />
     <Compile Include="ModuloBobina\Model\Bobina_ConsumoLinea_V2.cs" />
+    <Compile Include="ModuloBobina\Model\Inventario_bobinas.cs" />
     <Compile Include="ModuloBobina\View\Informe_MensualBobina.aspx.cs">
       <DependentUpon>Informe_MensualBobina.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1248,6 +1265,47 @@
     </Compile>
     <Compile Include="ModuloComercial\View\SolicitudPresupuesto.aspx.designer.cs">
       <DependentUpon>SolicitudPresupuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\Controller\CotizadorTransporteController.cs" />
+    <Compile Include="ModuloCotizadorTransporte\Model\Aereos.cs" />
+    <Compile Include="ModuloCotizadorTransporte\Model\Flete.cs" />
+    <Compile Include="ModuloCotizadorTransporte\Model\Ramales.cs" />
+    <Compile Include="ModuloCotizadorTransporte\Model\Terrestres.cs" />
+    <Compile Include="ModuloCotizadorTransporte\Model\Usuario.cs" />
+    <Compile Include="ModuloCotizadorTransporte\View\CalculoFlete.aspx.cs">
+      <DependentUpon>CalculoFlete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\CalculoFlete.aspx.designer.cs">
+      <DependentUpon>CalculoFlete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\Ramal.aspx.cs">
+      <DependentUpon>Ramal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\Ramal.aspx.designer.cs">
+      <DependentUpon>Ramal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\TarifasTerrestre.aspx.cs">
+      <DependentUpon>TarifasTerrestre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\TarifasTerrestre.aspx.designer.cs">
+      <DependentUpon>TarifasTerrestre.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\TerifasAereo.aspx.cs">
+      <DependentUpon>TerifasAereo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloCotizadorTransporte\View\TerifasAereo.aspx.designer.cs">
+      <DependentUpon>TerifasAereo.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloDespacho\Controller\Controller_Devoluciones.cs" />
     <Compile Include="ModuloDespacho\Controller\Controller_EstadoOT.cs" />
@@ -2374,6 +2432,7 @@
     <Compile Include="ModuloRFrecuencia\Model\Impreso.cs" />
     <Compile Include="ModuloRFrecuencia\Model\Indigo.cs" />
     <Compile Include="ModuloRFrecuencia\Model\Inf_Regional.cs" />
+    <Compile Include="ModuloRFrecuencia\Model\Inventario_Listado.cs" />
     <Compile Include="ModuloRFrecuencia\Model\OrdenProduccion.cs" />
     <Compile Include="ModuloRFrecuencia\View\Consumo_Bobina.aspx.cs">
       <DependentUpon>Consumo_Bobina.aspx</DependentUpon>
@@ -2423,6 +2482,20 @@
     </Compile>
     <Compile Include="ModuloRFrecuencia\View\Informe_Gemba.aspx.designer.cs">
       <DependentUpon>Informe_Gemba.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloRFrecuencia\View\Informe_Inventario.aspx.cs">
+      <DependentUpon>Informe_Inventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloRFrecuencia\View\Informe_Inventario.aspx.designer.cs">
+      <DependentUpon>Informe_Inventario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloRFrecuencia\View\Informe_Inventario_Listas.aspx.cs">
+      <DependentUpon>Informe_Inventario_Listas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloRFrecuencia\View\Informe_Inventario_Listas.aspx.designer.cs">
+      <DependentUpon>Informe_Inventario_Listas.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModuloRFrecuencia\View\Informe_Perdida.aspx.cs">
       <DependentUpon>Informe_Perdida.aspx</DependentUpon>

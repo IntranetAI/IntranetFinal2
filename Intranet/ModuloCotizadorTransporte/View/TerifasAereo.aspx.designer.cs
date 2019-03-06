@@ -7,90 +7,81 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Intranet.ModuloRFrecuencia.View {
+namespace Intranet.ModuloCotizadorTransporte.View {
     
     
-    public partial class Informe_Regional {
+    public partial class TerifasAereo {
         
         /// <summary>
-        /// Control Panel2.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Control lblFechaInicio.
+        /// Control lblIdAereos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaInicio;
+        protected global::System.Web.UI.WebControls.Label lblIdAereos;
         
         /// <summary>
-        /// Control txtFechaInicio.
+        /// Control idAereoDelete.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
+        protected global::System.Web.UI.WebControls.Label idAereoDelete;
         
         /// <summary>
-        /// Control CalendarExtender1.
+        /// Control lblCiudad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
+        protected global::System.Web.UI.WebControls.Label lblCiudad;
         
         /// <summary>
-        /// Control lblFechaTermino.
+        /// Control lblDe01a03.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaTermino;
+        protected global::System.Web.UI.WebControls.Label lblDe01a03;
         
         /// <summary>
-        /// Control txtFechaTermino.
+        /// Control lblDe04a150.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaTermino;
+        protected global::System.Web.UI.WebControls.Label lblDe04a150;
         
         /// <summary>
-        /// Control CalendarExtender2.
+        /// Control lblDe151a500.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender2;
+        protected global::System.Web.UI.WebControls.Label lblDe151a500;
         
         /// <summary>
-        /// Control btnFiltro.
+        /// Control lblDe501aInf.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnFiltro;
-        
-        /// <summary>
-        /// Control ImageButton2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
+        protected global::System.Web.UI.WebControls.Label lblDe501aInf;
     }
 }

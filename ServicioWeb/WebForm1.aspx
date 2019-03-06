@@ -7602,6 +7602,15 @@
             });
         });
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 175px;
+        }
+        .auto-style2 {
+            width: 178px;
+            height: 174px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -7633,5 +7642,50 @@
     </table>
     </form>
     
+    <table style="width:615px;height:180px;">
+        <tr>
+            <td rowspan="7" class="auto-style1"><img src="http://intranet.qgchile.cl/images/1.jpg" alt="A Impresores" width="178px" height="174px"></td>
+            <td><p style="font-size:150%;"><b>Carlos Jerias Rivera</b></p></td>
+        </tr>
+        <tr>
+            <td><p >Programador</p></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td>+562 2440 5770</td>
+        </tr>
+        <tr>
+            <td>Av. Gladys Marin Millie #6920, Estacion Central</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.instagram.com/aimpresores"><img src="http://intranet.qgchile.cl/images/2.jpg" alt="A Impresores" width="51px" height="49px"></a> <a href="https://www.instagram.com/aimpresores"><img src="http://intranet.qgchile.cl/images/3.jpg" alt="A Impresores" width="51px" height="49px"></a></td>
+        </tr>
+    </table>
+
+
+
+
+
+
+    <table style="width:615px;height:180px;">
+        <tr>
+            <td style="width:179px;"><img src="http://intranet.qgchile.cl/images/1.jpg" alt="A Impresores" width="178px" height="174px"></td>
+            <td>
+                <label style="font-size:20px;font-weight: bold;" >Carlos Jerias Rivera</label><br />
+                <label style="font-size:15px;font-weight: bold;color:grey;" >Programador</label><br /><br />
+                <label >+562 2440 5770</label><br />
+                <label >Av. Gladys Marin Millie #6920, Estacion Central</label><br /><br />
+                <a href="https://www.facebook.com/aimpresores.soluciones"><img src="http://intranet.qgchile.cl/images/2.jpg" alt="A Impresores" width="51px" height="49px"></a> 
+                <a href="https://www.twitter.com/a_impresores"><img src="http://intranet.qgchile.cl/images/3.jpg" alt="A Impresores" width="51px" height="49px"></a>
+                <a href="https://www.instagram.com/aimpresores"><img src="http://intranet.qgchile.cl/images/4.jpg" alt="A Impresores" width="51px" height="49px"></a>
+                <a href="https://www.instagram.com/aimpresores"><img src="http://intranet.qgchile.cl/images/5.jpg" alt="A Impresores" width="51px" height="49px"></a>
+            </td>
+        </tr>
+        </table>
 </body>
 </html>

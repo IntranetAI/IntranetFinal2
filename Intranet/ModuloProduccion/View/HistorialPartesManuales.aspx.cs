@@ -14,6 +14,13 @@ namespace Intranet.ModuloProduccion.View
         Controller_PartesManuales pm = new Controller_PartesManuales();
         protected void Page_Load(object sender, EventArgs e)
         {
+            ddlAño.DataBind();
+            for (int i = 2015; i <= DateTime.Now.Year; i++)
+            {
+                ddlAño.Items.Insert(0, new ListItem(i.ToString(), i.ToString()));
+            }
+
+
             if (!IsPostBack)
             {
                 RadGrid1.DataSource = "";

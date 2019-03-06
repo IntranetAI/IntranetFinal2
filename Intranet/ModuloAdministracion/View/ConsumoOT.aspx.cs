@@ -100,9 +100,19 @@ namespace Intranet.ModuloAdministracion.View
                 TableOtros.Visible = true;
                 foreach (Consumo c in lista.Where(o => o.Tipo == "Otro"))
                 {
-                    Papel.Cons_Otros = (Convert.ToInt32(c.Cons_Otros.Substring(0, c.Cons_Otros.Length - 2).Replace(".", string.Empty)) + Convert.ToInt32(Papel.Cons_Otros)).ToString();
 
-                    Papel.Certif = (Convert.ToDouble(Papel.Certif) + Convert.ToDouble(c.Costtot.Replace(",", string.Empty))).ToString();
+                    if (c.Cons_Otros.Contains("ROLO"))
+                    {
+                        Papel.Cons_Otros ="0";
+                        Papel.Certif = "0";
+                       // Papel.Cons_Otros = (Convert.ToInt32(c.Cons_Otros.Substring(0, c.Cons_Otros.Length - 2).Replace(".", string.Empty)) + Convert.ToInt32(Papel.Cons_Otros)).ToString();
+                    }
+                    else
+                    {
+                        Papel.Cons_Otros = (Convert.ToInt32(c.Cons_Otros.Substring(0, c.Cons_Otros.Length - 2).Replace(".", string.Empty)) + Convert.ToInt32(Papel.Cons_Otros)).ToString();
+                        Papel.Certif = (Convert.ToDouble(Papel.Certif) + Convert.ToDouble(c.Costtot.Replace(",", string.Empty))).ToString();
+                    }
+
                     
                 }
                 

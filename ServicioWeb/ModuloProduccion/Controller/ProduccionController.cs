@@ -4348,15 +4348,52 @@ namespace ServicioWeb.ModuloProduccion.Controller
             con.CerrarConexion();
             return lista;
         }
+        public List<Pedidos> FechaDistruccion2()
+        {
+            List<Pedidos> lista = new List<Pedidos>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                try
+                {
+                    cmd.CommandText = "Metrics_Correo_Pedidos";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.CommandTimeout = 999999999;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Pedidos p = new Pedidos();
+                        p.OT = reader["NumOrdem"].ToString();
+                        p.NombreOT = reader["NombreOT"].ToString();
+                        p.CodProducto= reader["CodProduto"].ToString();
+                        p.Descripcion= reader["Descricao"].ToString();
+                        p.FechaEntrega = Convert.ToDateTime(reader["DtEntrega"].ToString());
+                        p.Total = Convert.ToInt32(reader["QtdTotal"].ToString());
+                        p.CSR = reader["CSR"].ToString();
+                        p.Vendedor = reader["Vendedor"].ToString();
+                        p.Tipo = Convert.ToInt32(reader["Tipo"].ToString());
+                        lista.Add(p);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
 
         public string FechaEntregaEnviodeCorreoAutomatico()
         {
-            string QueryDtDistribuccion = "";
+            string QueryDtDistribuccion = "";string TablaPedidos = "";
             List<FechaDistribuccion> lista = FechaDistruccion();
             if (lista.Count > 0)
             {
                 foreach (string NumeroOT in lista.Select(o => o.OT).Distinct())
                 {
+                    TablaPedidos = OtLiberadas_ItemsPedido(NumeroOT);
                     System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
                     int count = 0; string Contenido = "";string Correos = "";string InsertFechaDistribucion = "";
                     foreach (FechaDistribuccion dt in lista.Where(o => o.OT == NumeroOT))
@@ -4377,7 +4414,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             }catch(Exception exx) { }
                             
                             mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
-                           // mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                            mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                            
                             if (dt.Proceso == "Insert")
                             {
                                 mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT;
@@ -4405,13 +4443,13 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         string[] split1 = dt.FechaPrevista.Split(' ');
                         string[] splitFecha = split1[0].Split('-');
                         InsertFechaDistribucion += "insert into Produccion_FechaDistribuccion( NumOrdem,NombreOT,Cliente,Fecha_Prevista,Cantidad,TipodeReparto,Destinatario,Direccion, " +
-                                                "Observacion,MedioTransporte,Ciudad,Pais) " +
-                                                "values('" + dt.OT + "','" + dt.NombreOT + "','" + dt.Cliente + "','" + splitFecha[2] + "-" + splitFecha[1] + "-" + splitFecha[0] + " " + split1[1] + "','" + dt.Cantidad + "','" + dt.TipoReparto + "','" + dt.Destinatario +
-                                                "','" + dt.Direccion + "','" + dt.Observacion + "','" + dt.MedioTransporte + "','" + dt.Ciudad + "','" + dt.Pais + "')";
+                                                "Observacion,MedioTransporte,Ciudad,Pais,integracion,fechaintegracion) " +
+                                                "values('" + dt.OT + "','" + dt.NombreOT.Replace("'","") + "','" + dt.Cliente.Replace("'", "") + "','" + splitFecha[2] + "-" + splitFecha[1] + "-" + splitFecha[0] + " " + split1[1] + "','" + dt.Cantidad + "','" + dt.TipoReparto.Replace("'", "") + "','" + dt.Destinatario.Replace("'", "") +
+                                                "','" + dt.Direccion.Replace("'", "") + "','" + dt.Observacion.Replace("'", "") + "','" + dt.MedioTransporte.Replace("'", "") + "','" + dt.Ciudad.Replace("'", "") + "','" + dt.Pais.Replace("'", "") + "','intranet',GETDATE())";
                     }
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                             "<br/><br/>Estimado(a):" +
-                            "<br/><br/>Este informe se obtiene de forma automática desde el control de Fecha Distribucción (Metrics Jobtrack)." +
+                            "<br/><br/>Este informe se obtiene de forma automática desde el control de Fecha Distribucción (Metrics)." +
                             "<br/><br/>" +
                             "<table id='tblRegistro' cellspacing='0' cellpadding='0' style='border: 1px solid rgb(204, 204, 204); margin: 0px auto 15px 3px; width: 100%;'><tbody>" +
                             "<tr style='height: 22px; background: rgb(243, 244, 249); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: arial, helvetica, sans-serif; color: rgb(0, 62, 126); text-align: left;'> " +
@@ -4429,6 +4467,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                                 "</tr>" +
                                 Contenido.ToString() + "</table>" +
                             "<br />" +
+                            "<br/>Entregas desde el Pedido de OP (Tab 1)<br/>" + TablaPedidos.ToString() +
                              "Atentamente," +
                             "<br />" +
                             "<b>Equipo de desarrollo A Impresores S.A.</b>";
@@ -4441,7 +4480,13 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     try
                     {
                         cliente.Send(mmsg);
-                        QueryDtDistribuccion += InsertFechaDistribucion;
+                        /*[cjerias_26-11-2018 12:12] Generar insert al momento de enviar el correo, esto corrige los errores de correos multiples enviados*/
+                        bool ins = SincronizadorFechaEntragas(InsertFechaDistribucion);
+                        if ( ins == false)
+                        {
+                            CorreoError_Cjerias("distribucion", InsertFechaDistribucion.ToString());
+                        }
+                        InsertFechaDistribucion = "";
                     }
                     catch (System.Net.Mail.SmtpException ex)
                     {
@@ -4460,6 +4505,111 @@ namespace ServicioWeb.ModuloProduccion.Controller
             return QueryDtDistribuccion;
         }
 
+        /* [cjerias 20190128 1521]cambios desde pedidos a fechas entrega*/
+        public string FechaEntregaPedidosCorreoAutomatico()
+        {
+            string QueryDtDistribuccion = ""; string TablaPedidos = "";
+            List<Pedidos> lista = FechaDistruccion2();
+            if (lista.Count > 0)
+            {
+                foreach (string NumeroOT in lista.Select(o => o.OT).Distinct())
+                {
+                    TablaPedidos = PedidoEntrega_Entragas(NumeroOT);
+                    System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+                    int count = 0; string Contenido = ""; string Correos = ""; string InsertFechaDistribucion = "";
+                    foreach (Pedidos dt in lista.Where(o => o.OT == NumeroOT))
+                    {
+                        if (count == 0)
+                        {
+                            try
+                            {
+                                mmsg.To.Add(dt.CSR);
+                                mmsg.To.Add(dt.Vendedor);
+
+                            }
+                            catch (Exception exx) { }
+
+                            mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
+                            mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+
+                            if (dt.Tipo == 0)//registro nuevo
+                            {
+                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT; ;
+                            }
+                            else
+                            {
+                                mmsg.Subject = "Modificada Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT; ;// + " - " + dt.NombreOT;
+                            }
+                            mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+                            count++;
+                        }
+                        Contenido += "<tr style='height: 22px; background:rgb(255, 255, 255); font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>" +
+                                         dt.CodProducto + "</td>" +
+                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:143px;'>" +
+                                         dt.Descripcion + "</td>" +
+                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:123px;'>" +
+                                         dt.Total + "</td>" +
+                                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:80px;'>" +
+                                         dt.FechaEntrega.ToString("dd/MM/yyyy HH:mm") + "</td>" +
+                                         "</tr>";
+
+                        InsertFechaDistribucion += "insert into Produccion_PedidoEntrega(OT, NombreOT, Sku, Descripcion, FechaEntrega, Cantidad, FechaEnvio) " +
+                                                "values('" + dt.OT + "','" + dt.NombreOT.Replace("'", "") + "','" + dt.CodProducto + "','" + dt.Descripcion.Replace("'", "") + "','" + dt.FechaEntrega + "','" + dt.Total + "',GETDATE())";
+                    }
+                    mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
+                            "<br/><br/>Estimado(a):" +
+                            "<br/><br/>Este informe se obtiene de forma automática desde el control de Fecha Distribucción (Metrics)." +
+                            "<br/><br/>Entregas desde el Pedido de OP (Tab 1)<br/>" +
+                           "<table id='tblRegistro' cellspacing='0' cellpadding='0' style='border: 1px solid rgb(204, 204, 204); margin: 0px auto 15px 3px; width: 100%;'>" +
+                                "<thead>" +
+                                   "<tr style = 'height: 22px; background: rgb(243, 244, 249); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: arial, helvetica, sans-serif; color: rgb(0, 62, 126); text-align: left;' >" +
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 50px;' > Codigo Producto </td>" +
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 143px;' > Descripcion </td>" +
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 123px;' > Total </td>" +
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 80px;' > Fecha Entrega </td>" +
+                                    "</tr></thead><tbody>"+
+                    Contenido.ToString() + "</tbody></table>" +
+                            "<br />" +
+                             TablaPedidos.ToString() +
+                             "Atentamente," +
+                            "<br />" +
+                            "<b>Equipo de desarrollo A Impresores S.A.</b>";
+                    mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+                    mmsg.IsBodyHtml = true; //Si no queremos que se envíe como HTML
+                    mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+                    System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                    cliente.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+                    cliente.Host = "mail.aimpresores.cl";
+                    try
+                    {
+                        cliente.Send(mmsg);
+                        /*[cjerias_26-11-2018 12:12] Generar insert al momento de enviar el correo, esto corrige los errores de correos multiples enviados*/
+                        bool ins = SincronizadorFechaEntragas(InsertFechaDistribucion);
+                        if (ins == false)
+                        {
+                            CorreoError_Cjerias("distribucion", InsertFechaDistribucion.ToString());
+                        }
+                        InsertFechaDistribucion = "";
+                    }
+                    catch (System.Net.Mail.SmtpException ex)
+                    {
+                        string NombreProcedure0 = ex.StackTrace.ToString().Substring(ex.StackTrace.ToString().IndexOf("ProduccionController.") + 21, ex.StackTrace.Length - (ex.StackTrace.ToString().IndexOf("ProduccionController.") + 21));
+                        string NombreProcedure = NombreProcedure0.Substring(0, NombreProcedure0.IndexOf("("));
+                        GenerarCorreoErrordeEnvio("FechaEntregaEnviodeCorreoAutomatico", "Especifico", NombreProcedure, DateTime.Now.ToString("dd-MM-yyyy"), ex.Message);
+                        return QueryDtDistribuccion;
+                    }
+                    count = 0; Correos = "";
+                }
+            }
+            else
+            {
+                QueryDtDistribuccion = "0";
+            }
+            return QueryDtDistribuccion;
+        }
+
+
         public bool SincronizadorFechaEntragas(string Query)
         {
             string Insertquery = Query;
@@ -4476,6 +4626,10 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 catch (Exception e)
                 {
+                    if (Query.ToString() != "No hay registro")
+                    {
+                        CorreoError_Cjerias("insert-distribucion", e.Message.ToString() + "          " + Query.ToString());
+                    }
                     retorno = false;
                 }
             }
@@ -4493,33 +4647,28 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 {
                     System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
                     int count = 0;
-                    string TablaOTLiberadas = "";
+                    string TablaOTLiberadas = ""; string TablaPedidos = "";
                     //string FechasDistribuccion = "";
                     foreach (OT_Liberadas OT in lista.Where(o => o.OT == NumeroOT))
                     {
-                        if (OT.OT == "116898")
-                        {
-
-                        }
                         if (count == 0)
                         {
-                             string[] splitCorreo = OT.Correo.Split(';');
-                              foreach (string correouser in splitCorreo)
-                              {
-                                  mmsg.To.Add(correouser);
-                              }
-                              mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
-                              if (OT.Usr_Liberada == "FDS")
-                              {
-                                  mmsg.To.Add("correootliberadasgrupo2@aimpresores.cl");
-                              }
-              
-                         //   mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                            string[] splitCorreo = OT.Correo.Split(';');
+                            foreach (string correouser in splitCorreo)
+                            {
+                                mmsg.To.Add(correouser);
+                            }
+                            mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
+                            if (OT.Usr_Liberada == "FDS")
+                            {
+                                mmsg.To.Add("correootliberadasgrupo2@aimpresores.cl");
+                            }
+                            //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                             mmsg.Subject = "Se Informa liberacion de la OT : " + OT.OT;
-
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                             count++;
                         }
+                        //TablaPedidos = OtLiberadas_ItemsPedido(OT.OT);
                         TablaOTLiberadas += "<tr style='height: 22px; background: rgb(255, 255, 255); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: arial, helvetica, sans-serif; color: rgb(51, 51, 51); vertical-align: text-top;'>" +
                                                         "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: right; width: 50px;'>" + OT.OT + "</td>" +
                                                         "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 143px;'>" + OT.NombreOT + "</td>" +
@@ -4532,7 +4681,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         string[] split1 = OT.DtLiberacao.Split(' ');
                         string[] splitFecha = split1[0].Split('-');
                         QueryOTLiberacion += "insert into Produccion_OTLiberada_RegistroEnvioCorreo( OT,NombreOT,usr_jfcliberada,Liberacao,Situacao,DtOcor,CodUsuario) " +
-                                                "values('" + OT.OT + "','" + OT.NombreOT + "','" + OT.Usr_Liberada + "','" + OT.Liberada + "','" + OT.Situacion + "','" + splitFecha[2] + "-" + splitFecha[1] + "-" + splitFecha[0] + " " + split1[1] + "','" + OT.Usuario + "')";
+                                                "values('" + OT.OT + "','" + OT.NombreOT.Replace("'","") + "','" + OT.Usr_Liberada + "','" + OT.Liberada + "','" + OT.Situacion + "','" + splitFecha[2] + "-" + splitFecha[1] + "-" + splitFecha[0] + " " + split1[1] + "','" + OT.Usuario + "')";
                     }
                     mmsg.Body = "<html lang='en'><head>" +
 
@@ -4732,6 +4881,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
 
                 " </tbody></table>" +
+
+                //"<br/>Entregas desde el Pedido de OP (Tab 1)<br/>" + TablaPedidos.ToString()+
                 " <!-- Email Body : END -->" +
 
                 " <!-- Email Footer : BEGIN -->" +
@@ -4748,10 +4899,10 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 " <!-- Email Footer : END --> " +
 
                 " <!--[if mso]>" +
-                " </td> " +
-                " </tr> " +
-                " </table> " +
-                " <![endif]--> " +
+                "</td> " +
+                "</tr> " +
+                "</table> " +
+                "<![endif]--> " +
             " </div> " +
         " </center> " +
     " </body></html>";
@@ -4772,6 +4923,12 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     try
                     {
                         cliente.Send(mmsg);
+                        bool ins = SincronizadorFechaEntragas(QueryOTLiberacion);
+                        if (ins == false)
+                        {
+                            CorreoError_Cjerias("FechaEntrega", QueryOTLiberacion.ToString());
+                        }
+                        QueryOTLiberacion = "";
                     }
                     catch (System.Net.Mail.SmtpException ex)
                     {
@@ -4824,6 +4981,95 @@ namespace ServicioWeb.ModuloProduccion.Controller
             }
             con.CerrarConexion();
             return lista;
+        }
+
+        public string OtLiberadas_ItemsPedido(string OT)
+        {
+            string contenido = "";
+            string Encabezado = "<table id='tblRegistro' cellspacing='0' cellpadding='0' style='border: 1px solid rgb(204, 204, 204); margin: 0px auto 15px 3px; width: 100%;'>"+
+                                "<thead>"+
+                                   "<tr style = 'height: 22px; background: rgb(243, 244, 249); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: arial, helvetica, sans-serif; color: rgb(0, 62, 126); text-align: left;' >"+
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 50px;' > Codigo Producto </td>"+
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 143px;' > Descripcion </td>"+        
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 123px;' > Total </td>"+
+                                   "<td style = 'font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 80px;' > Fecha Entrega </td>"+
+                                    "</tr></thead><tbody>";
+            Conexion conexion = new Conexion();
+            SqlCommand cmd = conexion.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                cmd.CommandText = "[Metrics_Correo_LiberacionOT_Items]";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@OT", OT);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    contenido = "<tr style='height: 22px; background:rgb(255, 255, 255); font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +
+                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:50px;'>" +
+                         reader["CodProduto"].ToString() + "</td>" +
+                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:left;width:143px;'>" +
+                         reader["Descricao"].ToString() + "</td>" +
+                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:123px;'>" +
+                         Convert.ToInt32(reader["QtdTotal"].ToString()).ToString("N0").Replace(",", ".") + "</td>" +
+                         "<td style='font-weight: normal; padding: 4px 0 5px 5px; border-right: 1px solid #ccc;text-align:center;width:80px;'>" +
+                         Convert.ToDateTime(reader["DtEntrega"].ToString()).ToString("dd/MM/yyyy HH:mm") + "</td>" +
+                         "</tr>";
+                }
+            }
+            conexion.CerrarConexion();
+            return ((contenido == "") ? "" : Encabezado + contenido + "</tbody></table>");
+        }
+
+        public string PedidoEntrega_Entragas(string OT)
+        {
+            string contenido = "";
+            string Encabezado = "<br/>Entregas desde el Pedido de OP (Tab 4)<br/><table id = 'tblRegistro' cellspacing = '0' cellpadding = '0' style = 'border: 1px solid rgb(204, 204, 204); margin: 0px auto 15px 3px; width: 100%;' ><tbody > " +
+                            "<tr style='height: 22px; background: rgb(243, 244, 249); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: arial, helvetica, sans-serif; color: rgb(0, 62, 126); text-align: left;'> " +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 50px;'>OT</td> " +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 143px;'>Nombre OT</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 123px;'>Cliente</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 80px;'>Tipo de Reparto</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 100px;'>Fecha Entrega</td> " +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 73px;'>Cantidad</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 73px;'>Medio de Transporte</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 73px;'>Destinatario</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 103px;'>Dirección</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 73px;'>Ciudad/Pais</td>" +
+                                "<td style='font-weight: bold; padding: 4px 0px 0px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: center; width: 183px;'>Observación</td>" +
+                                "</tr>";
+            Conexion conexion = new Conexion();
+            SqlCommand cmd = conexion.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                cmd.CommandText = "[Metrics_Correo_LiberacionOT_Items2]";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@OT", OT);
+                SqlDataReader reader = cmd.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        contenido += "<tr style='height: 22px; background: rgb(255, 255, 255); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: arial, helvetica, sans-serif; color: rgb(51, 51, 51); vertical-align: text-top;'>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: right; width: 50px;'>" + reader["NumOrdem"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 143px;'>" + reader["Descricao"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 123px;'>" + reader["NomeCliente"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 80px;'>" + reader["TipoDeReparte"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: right; width: 100px;'>" + Convert.ToDateTime(reader["DtHoraPrevista"].ToString()).ToString("dd/MM/yyyy HH:mm") + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: right; width: 73px;'>" + reader["Quantidade"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 73px;'>" + reader["MeioTransporte"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); width: 73px;'>" + reader["Destinatario"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 103px;'>" + reader["Endereco"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 73px;'>" + reader["Cidade"].ToString() + "/" + reader["Pais"].ToString() + "</td>" +
+                                                            "<td style='font-weight: normal; padding: 4px 0px 5px 5px; border-right: 1px solid rgb(204, 204, 204); text-align: left; width: 183px;'>" + reader["Observacoes"].ToString() + "</td>" +
+                                                     "</tr>";
+                    }
+                }catch(Exception ex)
+                {
+
+                }
+            }
+            conexion.CerrarConexion();
+            return ((contenido == "") ? "" : Encabezado + contenido + "</tbody></table>");
         }
 
         public bool SincronizadorOT()
@@ -4987,6 +5233,50 @@ namespace ServicioWeb.ModuloProduccion.Controller
             catch (Exception e)
             {
                 return "Error";
+            }
+        }
+
+
+
+        public bool CorreoError_Cjerias(string Titulo,string Error)
+        {
+            try
+            {
+                System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+                mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                mmsg.Body = "<br/><br/>Estimado(a):" +
+                            "<br/><br/>Ha ocurrido el siguiente error" + Error.ToString()+
+
+                            "<br/>" +
+                            "<br />" +
+                            "Atentamente," +
+                            "<br />" +
+                            "<b>Equipo de desarrollo A Impresores S.A.</b>";
+
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-CL");
+                mmsg.Subject = "ERROR Correo automatico " + Titulo.ToString();
+                mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+                mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+                mmsg.IsBodyHtml = true;
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                cliente.Credentials =
+                    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+
+                cliente.Host = "mail.aimpresores.cl";
+                try
+                {
+                    cliente.Send(mmsg);
+                    return true;
+                }
+                catch (System.Net.Mail.SmtpException ex)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 

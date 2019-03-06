@@ -78,6 +78,7 @@
     <Compile Include="ModuloProduccion\Model\Facturacion_ElectronicaSII.cs" />
     <Compile Include="ModuloProduccion\Model\FechaDistribuccion.cs" />
     <Compile Include="ModuloProduccion\Model\OT_Liberadas.cs" />
+    <Compile Include="ModuloProduccion\Model\Pedidos.cs" />
     <Compile Include="ModuloProduccion\Model\SincronizarOT.cs" />
     <Compile Include="ModuloProduccion\Model\WSMetrics.cs" />
     <Compile Include="ServiceMail.asmx.cs">
