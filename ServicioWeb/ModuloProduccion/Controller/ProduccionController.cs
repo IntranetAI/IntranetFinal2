@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using ServicioWeb.ModuloProduccion.Model;
+using System.Net.Mail;
+using MySql.Data.MySqlClient;
 
 namespace ServicioWeb.ModuloProduccion.Controller
 {
@@ -61,15 +63,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
             mmsg.BodyEncoding = System.Text.Encoding.UTF8;
             mmsg.IsBodyHtml = true;
 
-            mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
-            System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-            cliente.Credentials =
-                new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+            //mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+            //cliente.Credentials =
+            //    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
 
-            cliente.Host = "mail.aimpresores.cl";
+            //cliente.Host = "mail.aimpresores.cl";
+            SmtpClient _smtpClient = new SmtpClient();
+            _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            _smtpClient.Host = "smtp.office365.com";
+            _smtpClient.Port = 587;
+            _smtpClient.EnableSsl = true;
+            _smtpClient.UseDefaultCredentials = false;
+            _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
             try
             {
-                cliente.Send(mmsg);
+                _smtpClient.Send(mmsg);
                 return true;
             }
             catch (System.Net.Mail.SmtpException ex)
@@ -496,15 +505,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new System.Net.Mail.MailAddress("sobreimpresiones@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("sobreimpresiones@aimpresores.cl", "info_sobreimpresiones");
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");//System.Net.Mail.MailAddress("sobreimpresiones@aimpresores.cl");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("sobreimpresiones@aimpresores.cl", "info_sobreimpresiones");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -1452,15 +1468,19 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new System.Net.Mail.MailAddress("scorecard.produccion@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("scorecard.produccion@aimpresores.cl", "abcdsco222.");
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
 
-                cliente.Host = "mail.aimpresores.cl";
+
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -1475,6 +1495,33 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 GenerarCorreoErrordeEnvio("GenerarCorreoScoreCard", "Especifico", NombreProcedure, fi.ToString("dd-MM-yyy HH:mm:ss") + "," + ft.ToString("dd-MM-yyy HH:mm:ss") + "," + PrimerDia + "," + DiaActual, e.Message);
                 return "Error Enviado";
             }
+        }
+
+        public string correo_nuevo()
+        {
+            SmtpClient _smtpClient = new SmtpClient();
+
+            _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            _smtpClient.Host = "smtp.office365.com";
+            _smtpClient.Port = 587;
+            _smtpClient.EnableSsl = true;
+            _smtpClient.UseDefaultCredentials = false;
+            _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
+
+            System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+            //  mmsg.To.Add("reporte_produccion@aimpresores.cl");
+            //mmsg.To.Add("juan.venegas@aimpresores.cl");
+            mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            mmsg.Body = "correo desde 365";
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-CL");
+            mmsg.Subject = "Informe ScoreCard Diario ";
+            mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+            mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+            mmsg.IsBodyHtml = true;
+            mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            _smtpClient.Send(mmsg);
+            return "";
         }
 
         public string GenerarCorreoScoreCard_Semanal(DateTime fi, DateTime ft)
@@ -1507,15 +1554,23 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new System.Net.Mail.MailAddress("scorecard.produccion@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("scorecard.produccion@aimpresores.cl", "abcdsco222.");
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");//System.Net.Mail.MailAddress("scorecard.produccion@aimpresores.cl");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("scorecard.produccion@aimpresores.cl", "abcdsco222.");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -1726,14 +1781,21 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
                 mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -2341,7 +2403,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
                 else if (TipoCorreo == "ENC")
                 {
-                    mmsg.To.Add("reporte_encuadernacion@aencuadernadores.cl");
+                    mmsg.To.Add("reporte_encuadernacion@aimpresores.cl");
                     //mmsg.To.Add("juan.venegas@aimpresores.cl");
                     mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                     mmsg.Body = "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
@@ -2384,19 +2446,26 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         "<b>Equipo de desarrollo A Impresores S.A.</b>";
                 }
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-CL");
-                mmsg.Subject = "Informe de Mermas y Producción " + fi;//.ToString("dd/MM/yyyy");
+                mmsg.Subject = "Informe de Mermas y Producción " + fi.Replace(" 00:00:00", "");//.ToString("dd/MM/yyyy");
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new System.Net.Mail.MailAddress("mermas.produccion@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("mermas.produccion@aimpresores.cl", "abcd55..");
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("mermas.produccion@aimpresores.cl", "abcd55..");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -2479,7 +2548,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
 
                         System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                        mmsg.To.Add("generarcorreoinformenotaspendientes@aimpresores.cl");
+                        //mmsg.To.Add("generarcorreoinformenotaspendientes@aimpresores.cl");
+                        mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                         mmsg.Body = "<table id='example' style='width: 100%;max-width: 100%;margin-bottom: 20px;border: 1px solid #ddd !important;background-color: transparent; " +
                         "border-collapse: collapse;box-sizing: border-box;font-family: Helvetica Neue, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.42857143;color: #333;box-sizing: border-box;' cellspacing='0'> " +
                             "<thead>" +
@@ -2523,15 +2593,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                         mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                         mmsg.IsBodyHtml = true;
-                        mmsg.From = new System.Net.Mail.MailAddress("reporte.facturacion@aimpresores.cl");
-                        System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                        cliente.Credentials =
-                            new System.Net.NetworkCredential("reporte.facturacion@aimpresores.cl", "fac66--");
+                        mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");//System.Net.Mail.MailAddress("reporte.facturacion@aimpresores.cl");
+                        //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                        //cliente.Credentials =
+                        //    new System.Net.NetworkCredential("reporte.facturacion@aimpresores.cl", "fac66--");
 
-                        cliente.Host = "mail.aimpresores.cl";
+                        //cliente.Host = "mail.aimpresores.cl";
+                        SmtpClient _smtpClient = new SmtpClient();
+                        _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        _smtpClient.Host = "smtp.office365.com";
+                        _smtpClient.Port = 587;
+                        _smtpClient.EnableSsl = true;
+                        _smtpClient.UseDefaultCredentials = false;
+                        _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                         try
                         {
-                            cliente.Send(mmsg);
+                            _smtpClient.Send(mmsg);
                             return "OK";
                         }
                         catch (System.Net.Mail.SmtpException ex)
@@ -3188,15 +3265,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new System.Net.Mail.MailAddress("scorecard.produccion@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("scorecard.produccion@aimpresores.cl", "abcdsco222.");
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");//System.Net.Mail.MailAddress("scorecard.produccion@aimpresores.cl");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("scorecard.produccion@aimpresores.cl", "abcdsco222.");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -3713,14 +3797,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
                 mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -3749,6 +3841,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
 
                 mmsg.To.Add("generarcorreoinformefacturacion@aimpresores.cl");
+                mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
                 switch (mes)
                 {
                     case "01": mes = "Enero"; break;
@@ -3817,15 +3910,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new System.Net.Mail.MailAddress("reporte.facturacion@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("reporte.facturacion@aimpresores.cl", "fac66--");
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");//System.Net.Mail.MailAddress("reporte.facturacion@aimpresores.cl");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("reporte.facturacion@aimpresores.cl", "fac66--");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -4338,6 +4438,8 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         dtDist.Pais = reader["Pais"].ToString();
                         dtDist.Correo = reader["Correos"].ToString();
                         dtDist.Proceso = reader["Proceso"].ToString();
+                        dtDist.FechaGV = Convert.ToDateTime(reader["FechaGV"].ToString());
+                        dtDist.FechaGVFinal = Convert.ToDateTime(reader["FechaGV"].ToString());
                         lista.Add(dtDist);
                     }
                 }
@@ -4374,6 +4476,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         p.CSR = reader["CSR"].ToString();
                         p.Vendedor = reader["Vendedor"].ToString();
                         p.Tipo = Convert.ToInt32(reader["Tipo"].ToString());
+                        p.FechaGV = Convert.ToDateTime(reader["FechaGV"].ToString());
                         lista.Add(p);
                     }
                 }
@@ -4415,14 +4518,19 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             
                             mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
                             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                            string msjGV = "";
+                            if (DateTime.Now.Date == dt.FechaGV.Date)
+                            {
+                                msjGV = "- Modificada por G.Vergara " + dt.FechaGV.ToString("dd/MM/yyyy HH:mm");
+                            }
                             
                             if (dt.Proceso == "Insert")
                             {
-                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT;
+                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT +msjGV;
                             }
                             else
                             {
-                                mmsg.Subject = "Modificada Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT;
+                                mmsg.Subject = "Modificada Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT + msjGV;
                             }
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                             count++;
@@ -4474,12 +4582,19 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                     mmsg.IsBodyHtml = true; //Si no queremos que se envíe como HTML
                     mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
-                    System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                    cliente.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
-                    cliente.Host = "mail.aimpresores.cl";
+                    //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                    //cliente.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+                    //cliente.Host = "mail.aimpresores.cl";
+                    SmtpClient _smtpClient = new SmtpClient();
+                    _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    _smtpClient.Host = "smtp.office365.com";
+                    _smtpClient.Port = 587;
+                    _smtpClient.EnableSsl = true;
+                    _smtpClient.UseDefaultCredentials = false;
+                    _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                     try
                     {
-                        cliente.Send(mmsg);
+                        _smtpClient.Send(mmsg);
                         /*[cjerias_26-11-2018 12:12] Generar insert al momento de enviar el correo, esto corrige los errores de correos multiples enviados*/
                         bool ins = SincronizadorFechaEntragas(InsertFechaDistribucion);
                         if ( ins == false)
@@ -4532,13 +4647,16 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             mmsg.To.Add("correofechadistribucionxot@aimpresores.cl");
                             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
 
+                            string msjGV = ((DateTime.Now.Date == dt.FechaGV.Date) ? "- Modificada por G.Vergara " + dt.FechaGV.ToString("dd/MM/yyyy HH:mm") : "");
+
+
                             if (dt.Tipo == 0)//registro nuevo
                             {
-                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT; ;
+                                mmsg.Subject = "Se Informa Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT + msjGV;
                             }
                             else
                             {
-                                mmsg.Subject = "Modificada Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT; ;// + " - " + dt.NombreOT;
+                                mmsg.Subject = "Modificada Fecha de Distribución de la OT : " + dt.OT + " - " + dt.NombreOT + msjGV;// + " - " + dt.NombreOT;
                             }
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                             count++;
@@ -4571,19 +4689,26 @@ namespace ServicioWeb.ModuloProduccion.Controller
                                     "</tr></thead><tbody>"+
                     Contenido.ToString() + "</tbody></table>" +
                             "<br />" +
-                             TablaPedidos.ToString() +
+                             //TablaPedidos.ToString() +
                              "Atentamente," +
                             "<br />" +
                             "<b>Equipo de desarrollo A Impresores S.A.</b>";
                     mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                     mmsg.IsBodyHtml = true; //Si no queremos que se envíe como HTML
                     mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
-                    System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                    cliente.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
-                    cliente.Host = "mail.aimpresores.cl";
+                    //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                    //cliente.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+                    //cliente.Host = "mail.aimpresores.cl";
+                    SmtpClient _smtpClient = new SmtpClient();
+                    _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    _smtpClient.Host = "smtp.office365.com";
+                    _smtpClient.Port = 587;
+                    _smtpClient.EnableSsl = true;
+                    _smtpClient.UseDefaultCredentials = false;
+                    _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                     try
                     {
-                        cliente.Send(mmsg);
+                        _smtpClient.Send(mmsg);
                         /*[cjerias_26-11-2018 12:12] Generar insert al momento de enviar el correo, esto corrige los errores de correos multiples enviados*/
                         bool ins = SincronizadorFechaEntragas(InsertFechaDistribucion);
                         if (ins == false)
@@ -4658,13 +4783,14 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             {
                                 mmsg.To.Add(correouser);
                             }
-                            mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
+                            //mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
+                            mmsg.To.Add("liberado@aimpresores.cl");
                             if (OT.Usr_Liberada == "FDS")
                             {
                                 mmsg.To.Add("correootliberadasgrupo2@aimpresores.cl");
                             }
-                            //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
-                            mmsg.Subject = "Se Informa liberacion de la OT : " + OT.OT;
+                            mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                            mmsg.Subject = "Se Informa liberacion de la OT : " + OT.OT + " - " + OT.NombreOT;
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                             count++;
                         }
@@ -4913,16 +5039,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
 
 
 
-                    System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                    cliente.Credentials =
-                        new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+                    //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                    //cliente.Credentials =
+                    //    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
 
 
-                    cliente.Host = "mail.aimpresores.cl";
-
+                    //cliente.Host = "mail.aimpresores.cl";
+                    SmtpClient _smtpClient = new SmtpClient();
+                    _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    _smtpClient.Host = "smtp.office365.com";
+                    _smtpClient.Port = 587;
+                    _smtpClient.EnableSsl = true;
+                    _smtpClient.UseDefaultCredentials = false;
+                    _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                     try
                     {
-                        cliente.Send(mmsg);
+                        _smtpClient.Send(mmsg);
                         bool ins = SincronizadorFechaEntragas(QueryOTLiberacion);
                         if (ins == false)
                         {
@@ -4975,7 +5107,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         lista.Add(otLiberada);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                 }
             }
@@ -5214,15 +5346,22 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new System.Net.Mail.MailAddress("sobreimpresiones@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("sobreimpresiones@aimpresores.cl", "info_sobreimpresiones");
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");//System.Net.Mail.MailAddress("sobreimpresiones@aimpresores.cl");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("sobreimpresiones@aimpresores.cl", "info_sobreimpresiones");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return "OK";
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -5259,14 +5398,21 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
                 mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
-                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
-                cliente.Credentials =
-                    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "SI2013.");
 
-                cliente.Host = "mail.aimpresores.cl";
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
                 try
                 {
-                    cliente.Send(mmsg);
+                    _smtpClient.Send(mmsg);
                     return true;
                 }
                 catch (System.Net.Mail.SmtpException ex)
@@ -5275,10 +5421,30 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 }
             }
             catch (Exception e)
-            {
+            { 
                 return false;
             }
         }
+
+        public string algoooo()
+        {
+
+            MySqlConnection connection = new MySqlConnection("Database=suitecrmdb;Data Source=172.16.1.8;User Id=root;Password=daco2018.");
+            connection.Open();
+            int contador = 0;
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "select * from cjr_Oportunidades limit 0,10";
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                contador++;
+                //reader.GetString(0)
+                //reader["column_name"].ToString()
+            }
+            reader.Close();
+            return "";
+        }
+
 
     }
 }

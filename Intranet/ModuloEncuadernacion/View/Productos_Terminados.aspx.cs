@@ -382,7 +382,8 @@ namespace Intranet.ModuloEncuadernacion.View
                {
                    mmsg.To.Add(Vendedor);
                }
-            //mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            //
+            mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
             mmsg.Subject = ot.ToUpper() + " - Entrega primeros ejemplares a Despacho.";
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
             //Direccion de correo electronico que queremos que reciba una copia del mensaje
@@ -390,7 +391,7 @@ namespace Intranet.ModuloEncuadernacion.View
             mmsg.Body = "<table style='width:100%;'>" +
             "<tr>" +
                 "<td>" +
-                    "<img src='http://intranet.qgchile.cl/images/Logo color lateral.jpg' width='267px'  height='67px' />" +
+                    "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                 //"<img src='http://www.qg.com/la/es/images/QG_Tagline_sp.jpg' />" +
                 "</td>" +
             "</tr>" +

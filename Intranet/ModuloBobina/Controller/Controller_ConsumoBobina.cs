@@ -130,7 +130,10 @@ namespace Intranet.ModuloBobina.Controller
                         b.TipoPapel = reader["DescPapel"].ToString().ToLower();
                         b.PesoInicial = Convert.ToDouble(reader["PesoInicial"].ToString()).ToString();
                         b.OT = reader["NumOrdem"].ToString();
-                        b.ConsumoBobina = Convert.ToDouble(reader["Consumo"].ToString()).ToString();
+
+
+                        b.ConsumoBobina = ((reader["NumOrdem"].ToString() == "112") ? Convert.ToDouble(reader["PesoInicial2"].ToString()).ToString() : Convert.ToDouble(reader["Consumo"].ToString()).ToString());
+                        //b.ConsumoBobina= Convert.ToDouble(reader["Consumo"].ToString()).ToString();
                         b.Escarpe = Convert.ToDouble(reader["Escalpe"].ToString()).ToString();
                         b.PorcentajePerdidas = Convert.ToDouble(reader["PorcPerdida"].ToString()).ToString("N2") + "%";
                         b.OrigenPerdida = reader["Origen"].ToString();

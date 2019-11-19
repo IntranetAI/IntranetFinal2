@@ -31,7 +31,7 @@ namespace Intranet.ModuloProduccion.View
             foreach (SincronizarOT sinOT in listaSincro)
             {
                 string Fec_Liquidacion = "NULL";
-                if (sinOT.Fecha_Liquidacion != "1900-01-01 00:00:00.000")
+                if (sinOT.Fecha_Liquidacion != "1900-01-01 00:00:00.000" && sinOT.Fecha_Liquidacion != "1899-12-30 00:00:00.000")
                 {
                     Fec_Liquidacion = Convert.ToDateTime(sinOT.Fecha_Liquidacion).ToString("yyyy-dd-MM HH:mm:ss");
                 }
@@ -39,13 +39,13 @@ namespace Intranet.ModuloProduccion.View
                 DateTime fecha = Convert.ToDateTime(sinOT.CTD_TMSTMP);
                 if (count == 0)
                 {
-                    
+
 
                     query = query + "INSERT INTO Data_P2B.dbo.QGPressJob (QG_RMS_JOB_NBR ,NM ,CTD_TMSTMP ,DUE_DT ,JOB_STS ,CUST_RUT ,CUST_NM, QG_RMS_TITLE_CD ," +
                                         " PRN_ORD_QTY,IMPZ_PROD_HGT,IMPZ_PROD_WDT,OPN_WDTH,OPN_HGT,AccountAddress1,AccountAddress2,AccountNeighborhood," +
-                                        " AccountRegion,AccountCountry,AccountCity ,FullIssueName,FECHA_LIQUIDACION) VALUES" +
+                                        " AccountRegion,AccountCountry,AccountCity ,FullIssueName,FECHA_LIQUIDACION,VENDEDOR) VALUES" +
                                         "('" + sinOT.QG_RMS_JOB_NBR.Trim() + "','" + sinOT.NM.Replace("'", "").Replace('"', ' ') + "','" + fecha.ToString("yyyy-dd-MM HH:mm:ss") + "',NULL," + sinOT.JOB_STS + ",'" + sinOT.CUST_RUT + "','" +
-                                        sinOT.CUST_NM.Replace("'", "").Replace('"', ' ') + "','" + sinOT.QG_RMS_TITLE_CD + "'," + sinOT.PRN_ORD_QTY + ",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'" + Fec_Liquidacion + "');";
+                                        sinOT.CUST_NM.Replace("'", "").Replace('"', ' ') + "','" + sinOT.QG_RMS_TITLE_CD + "'," + sinOT.PRN_ORD_QTY + ",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'" + Fec_Liquidacion + "','" + sinOT.Vendedor.ToString() + "');";
                     contador++;
                 }
                 else
@@ -53,6 +53,7 @@ namespace Intranet.ModuloProduccion.View
                     int count2  = lista.Where(o=>(o.QG_RMS_JOB_NBR.Trim() == sinOT.QG_RMS_JOB_NBR.Trim())
                                                      && (o.CUST_NM == sinOT.CUST_NM)
                                                      && (o.NM == sinOT.NM)
+                                                     && (o.Vendedor == sinOT.Vendedor)
                                                      && (o.CUST_RUT == sinOT.CUST_RUT)
                                                      && (o.PRN_ORD_QTY == sinOT.PRN_ORD_QTY)
                                                      && (o.JOB_STS == sinOT.JOB_STS)
@@ -61,7 +62,7 @@ namespace Intranet.ModuloProduccion.View
                     if (count2 == 0)
                     {
                         query = query + "UPDATE Data_P2B.dbo.QGPressJob SET NM = '" + sinOT.NM.Replace("'", "").Replace('"', ' ') + "',CUST_RUT = '" + sinOT.CUST_RUT + "',CTD_TMSTMP = '" + fecha.ToString("yyyy-dd-MM HH:mm:ss") +
-                                        "',CUST_NM = '" + sinOT.CUST_NM.Replace("'", "").Replace('"', ' ') + "',PRN_ORD_QTY = " + sinOT.PRN_ORD_QTY + ", JOB_STS= " + sinOT.JOB_STS + ", Fecha_Liquidacion='" + Fec_Liquidacion + "' WHERE QG_RMS_JOB_NBR = '" + sinOT.QG_RMS_JOB_NBR.Trim() + "';";
+                                        "',CUST_NM = '" + sinOT.CUST_NM.Replace("'", "").Replace('"', ' ') + "',PRN_ORD_QTY = " + sinOT.PRN_ORD_QTY + ", JOB_STS= " + sinOT.JOB_STS + ", Fecha_Liquidacion='" + Fec_Liquidacion + "', VENDEDOR='" + sinOT.Vendedor.ToString() + "' WHERE QG_RMS_JOB_NBR = '" + sinOT.QG_RMS_JOB_NBR.Trim() + "';";
                         contador++;
                     }
                 }

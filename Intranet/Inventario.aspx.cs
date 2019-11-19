@@ -34,7 +34,7 @@ namespace Intranet
         {
             if (txtCodigo.Text != "")
             {
-                if (ic.insertInventario(txtCodigo.Text, Convert.ToInt32(Label7.Text)) > 0)
+                if (ic.insertInventario(txtCodigo.Text.Replace("-",""), Convert.ToInt32(Label7.Text)) > 0)
                 {
                     lblTabla.Text = ic.tablaInventario(Convert.ToInt32(Label7.Text));
                 }
@@ -87,7 +87,7 @@ namespace Intranet
         {
             if (txtCodigo0.Text != "" && txtCodigo0.Text !=null  && Label10.Text != "" && Label10.Text != "0")
             {
-                if (ic.insertInventario(txtCodigo0.Text, Convert.ToInt32(Label10.Text)) > 0)
+                if (ic.insertInventario(txtCodigo0.Text.Replace("-", ""), Convert.ToInt32(Label10.Text)) > 0)
                 {
                     lblTabla.Text = ic.tablaInventario(Convert.ToInt32(Label10.Text));
                 }

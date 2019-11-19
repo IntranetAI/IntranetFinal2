@@ -16,6 +16,7 @@ namespace Intranet.ModuloProduccion.Model
         public string QG_RMS_TITLE_CD { get; set; }
         public string PRN_ORD_QTY { get; set; }
         public string Fecha_Liquidacion { get; set; }
+        public string Vendedor { get; set; }
 
         /*[QG_RMS_JOB_NBR]
 [NM]

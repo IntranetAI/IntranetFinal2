@@ -98,7 +98,7 @@
     }
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
     <div class="container">
         <div align="center">
             <table class="filterable" style="background-color: #EEE; border: 1px solid #999; padding: 5px; margin-bottom: 5px;

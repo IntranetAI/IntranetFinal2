@@ -15,6 +15,10 @@
     
     </div>
         <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+ 
+
+
     </form>
+    <iframe width="482" height="500" scrolling="no" frameborder="0" id="paymentFrame" src=" https://testing.aimpresores.cl"></iframe>
 </body>
 </html>

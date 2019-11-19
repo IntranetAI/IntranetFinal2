@@ -107,7 +107,7 @@ namespace Intranet.ModuloBobina.View
                     Controller_ConsumoBobina controlbobina = new Controller_ConsumoBobina();
                     List<Bobina_ConsumoLinea_V2> lista = controlbobina.List_BobinasInformeMensual_V3(Convert.ToDateTime(splitInicio[2] + "-" + splitInicio[1] + "-" + splitInicio[0] + " " + HoraInicio), Convert.ToDateTime(splitTermino[2] + "-" + splitTermino[1] + "-" + splitTermino[0] + " " + HoraTermino));
 
-
+                     
                     lblTabla.Text = TablaInforme_V2(lista);
 
                     string popupScript = "<script language='JavaScript'>divPiePagina();</script>";
@@ -914,6 +914,8 @@ namespace Intranet.ModuloBobina.View
             double PorcRolleroLithoman = 0; double PorcRolleroM600 = 0; double PorcRolleroWeb1 = 0; double PorcRolleroWeb2 = 0; double PorcRolleroGoss = 0; double PorcRolleroDimensionadora = 0; double PorcRolleroTotal = 0;
             double KGProveedorLithoman = 0; double KGProveedorM600 = 0; double KGProveedorWeb1 = 0; double KGProveedorWeb2 = 0; double KGProveedorGoss = 0; double KGProveedorDimensionadora = 0; double KGProveedorTotal = 0;
             double PorcProveedorLithoman = 0; double PorcProveedorM600 = 0; double PorcProveedorWeb1 = 0; double PorcProveedorWeb2 = 0; double PorcProveedorGoss = 0; double PorcProveedorDimensionadora = 0; double PorcProveedorTotal = 0;
+            double PorcRotativaDimensionadora = 0;double KGRotativaDimensionadora = 0; double PorcRotativaGOSS = 0; double KGRotativaGOSS = 0; double PorcRotativaM600 = 0; double KGRotativaM600 = 0; double PorcRotativaLITHO = 0; double KGRotativaLITHO = 0;
+            double PorcRotativaWEB1 = 0; double KGRotativaWEB1 = 0; double PorcRotativaWEB2 = 0; double KGRotativaWEB2 = 0;double PorcTotalRotativa = 0;double KGTotalRotativa = 0;
             foreach (string Maquina in lista.Select(o => o.Maquina).Distinct())
             {
                 foreach (Bobina_ConsumoLinea_V2 bob in lista.Where(o => o.Maquina == Maquina))
@@ -1059,7 +1061,49 @@ namespace Intranet.ModuloBobina.View
             KGProveedorTotal = (KGProveedorLithoman + KGProveedorM600 + KGProveedorWeb1 + KGProveedorWeb2 + KGProveedorGoss + KGProveedorDimensionadora);
             PorcProveedorTotal = ((KGProveedorTotal * 100) / EscarpeTotal);
 
+            PorcRotativaDimensionadora = ((EscarpeDimensionadora - KGAlmacenDimensionadora - KGRolleroDimensionadora - KGProveedorDimensionadora) > 0 ? (((EscarpeDimensionadora - KGAlmacenDimensionadora - KGRolleroDimensionadora - KGProveedorDimensionadora) / KGConsumidoTOTAL) * 100) : 0);
+            PorcRotativaLITHO = ((EscarpeLithoman - KGAlmacenLithoman - KGRolleroLithoman - KGProveedorLithoman) > 0 ? (((EscarpeLithoman - KGAlmacenLithoman - KGRolleroLithoman - KGProveedorLithoman) / KGConsumidoTOTAL) * 100) : 0);
+            PorcRotativaM600 = ((EscarpeM600 - KGAlmacenM600 - KGRolleroM600 - KGProveedorM600) > 0 ? (((EscarpeM600 - KGAlmacenM600 - KGRolleroM600 - KGProveedorM600) / KGConsumidoTOTAL) * 100) : 0);
+            PorcRotativaWEB1 = ((EscarpeWeb1 - KGAlmacenWeb1 - KGRolleroWeb1 - KGProveedorWeb1) > 0 ? (((EscarpeWeb1 - KGAlmacenWeb1 - KGRolleroWeb1 - KGProveedorWeb1) / KGConsumidoTOTAL) * 100) : 0);
+            PorcRotativaWEB2 = ((EscarpeWeb2 - KGAlmacenWeb2 - KGRolleroWeb2 - KGProveedorWeb2) > 0 ? (((EscarpeWeb2 - KGAlmacenWeb2 - KGRolleroWeb2 - KGProveedorWeb2) / KGConsumidoTOTAL) * 100) : 0);
+            PorcRotativaGOSS = ((EscarpeGoss - KGAlmacenGoss - KGRolleroGoss - KGProveedorGoss) > 0 ? (((EscarpeGoss - KGAlmacenGoss - KGRolleroGoss - KGProveedorGoss) / KGConsumidoTOTAL) * 100) : 0);
 
+            PorcProveedorDimensionadora = ((KGConsumidoTOTAL > 0) ? ((KGProveedorDimensionadora / KGConsumidoTOTAL) * 100) : 0);
+            PorcProveedorLithoman = ((KGConsumidoTOTAL > 0) ? ((KGProveedorLithoman / KGConsumidoTOTAL) * 100) : 0);
+            PorcProveedorM600 = ((KGConsumidoTOTAL > 0) ? ((KGProveedorM600 / KGConsumidoTOTAL) * 100) : 0);
+            PorcProveedorWeb1 = ((KGConsumidoTOTAL > 0) ? ((KGProveedorWeb1 / KGConsumidoTOTAL) * 100) : 0);
+            PorcProveedorWeb2 = ((KGConsumidoTOTAL > 0) ? ((KGProveedorWeb2 / KGConsumidoTOTAL) * 100) : 0);
+            PorcProveedorGoss = ((KGConsumidoTOTAL > 0) ? ((KGProveedorGoss / KGConsumidoTOTAL) * 100) : 0);
+            
+            PorcRolleroDimensionadora = ((KGConsumidoTOTAL > 0) ? ((KGRolleroDimensionadora / KGConsumidoTOTAL) * 100) : 0);
+            PorcRolleroLithoman = ((KGConsumidoTOTAL > 0) ? ((KGRolleroLithoman / KGConsumidoTOTAL) * 100) : 0);
+            PorcRolleroM600 = ((KGConsumidoTOTAL > 0) ? ((KGRolleroM600 / KGConsumidoTOTAL) * 100) : 0);
+            PorcRolleroWeb1 = ((KGConsumidoTOTAL > 0) ? ((KGRolleroWeb1 / KGConsumidoTOTAL) * 100) : 0);
+            PorcRolleroWeb2 = ((KGConsumidoTOTAL > 0) ? ((KGRolleroWeb2 / KGConsumidoTOTAL) * 100) : 0);
+            PorcRolleroGoss = ((KGConsumidoTOTAL > 0) ? ((KGRolleroGoss / KGConsumidoTOTAL) * 100) : 0);
+
+            PorcAlmacenDimensionadora = ((KGConsumidoTOTAL > 0) ? ((KGAlmacenDimensionadora / KGConsumidoTOTAL) * 100) : 0);
+            PorcAlmacenLithoman = ((KGConsumidoTOTAL > 0) ? ((KGAlmacenLithoman / KGConsumidoTOTAL) * 100) : 0);
+            PorcAlmacenM600 = ((KGConsumidoTOTAL > 0) ? ((KGAlmacenM600 / KGConsumidoTOTAL) * 100) : 0);
+            PorcAlmacenWeb1 = ((KGConsumidoTOTAL > 0) ? ((KGAlmacenWeb1 / KGConsumidoTOTAL) * 100) : 0);
+            PorcAlmacenWeb2 = ((KGConsumidoTOTAL > 0) ? ((KGAlmacenWeb2 / KGConsumidoTOTAL) * 100) : 0);
+            PorcAlmacenGoss = ((KGConsumidoTOTAL > 0) ? ((KGAlmacenGoss / KGConsumidoTOTAL) * 100) : 0);
+
+
+            KGRotativaDimensionadora = (EscarpeDimensionadora - KGAlmacenDimensionadora - KGRolleroDimensionadora - KGProveedorDimensionadora);
+            KGRotativaLITHO = (EscarpeLithoman - KGAlmacenLithoman - KGRolleroLithoman - KGProveedorLithoman);
+            KGRotativaM600 = (EscarpeM600 - KGAlmacenM600 - KGRolleroM600 - KGProveedorM600);
+            KGRotativaWEB1 = (EscarpeWeb1 - KGAlmacenWeb1 - KGRolleroWeb1 - KGProveedorWeb1);
+            KGRotativaWEB2 = (EscarpeWeb2 - KGAlmacenWeb2 - KGRolleroWeb2 - KGProveedorWeb2);
+            KGRotativaGOSS = (EscarpeGoss - KGAlmacenGoss - KGRolleroGoss - KGProveedorGoss);
+            KGTotalRotativa = (KGRotativaDimensionadora + KGRotativaLITHO + KGRotativaM600 + KGRotativaWEB1 + KGRotativaWEB2 + KGRotativaGOSS);
+
+
+
+            PorcTotalRotativa = ((KGConsumidoTOTAL > 0) ? ((KGTotalRotativa / KGConsumidoTOTAL) * 100) : 0);
+            PorcProveedorTotal = ((KGConsumidoTOTAL > 0) ? ((KGProveedorTotal / KGConsumidoTOTAL) * 100) : 0);
+            PorcRolleroTotal = ((KGConsumidoTOTAL > 0) ? ((KGRolleroTotal / KGConsumidoTOTAL) * 100) : 0);
+            PorcAlmacenTotal = ((KGConsumidoTOTAL > 0) ? ((KGAlmacenTotal / KGConsumidoTOTAL) * 100) : 0);
 
             stgTotalBobinasConsumidas = "<tr><th>Total Bobinas Consumidas</th>" +
                                           "<td style='text-align:right;'>" + TotalBobinasLithoman.ToString("N0").Replace(",",".") +"</td>" +
@@ -1111,7 +1155,7 @@ namespace Intranet.ModuloBobina.View
                                         "<td style='text-align:right;'>" + BobinasBuenasM600.ToString("N0").Replace(",", ".") + "</td>" +
                                         "<td style='text-align:right;'>" + BobinasBuenasWeb1.ToString("N0").Replace(",", ".") + "</td>" +
                                         "<td style='text-align:right;'>" + BobinasBuenasWeb2.ToString("N0").Replace(",", ".") + "</td>" +
-                                        "<td style='text-align:right;'>" + BobinasBuenasM600.ToString("N0").Replace(",", ".") + "</td>" +
+                                        "<td style='text-align:right;'>" + BobinasBuenasGoss.ToString("N0").Replace(",", ".") + "</td>" +
                                         "<td style='text-align:right;'>" + BobinasBuenasDimensionadora.ToString("N0").Replace(",", ".") + "</td>" +
                                         "<td style='text-align:right;'>" + BobinasBuenasTotal.ToString("N0").Replace(",", ".") + "</td>" +
                                         "</tr>";
@@ -1216,8 +1260,28 @@ namespace Intranet.ModuloBobina.View
                                         "<td style='text-align:right;'>" + PorcProveedorDimensionadora.ToString("N2") + "%</td>" +
                                         "<td style='text-align:right;'>" + PorcProveedorTotal.ToString("N2") + "%</td>" +
                                         "</tr>";
+            string stgDañoRotativas =
+                                        "<tr><th>Kg Escarpe Rotativa</th>" +
+                                        "<td style='text-align:right;'>" + KGRotativaLITHO.ToString("N2") + "</td>" +
+                                        "<td style='text-align:right;'>" + KGRotativaM600.ToString("N2") + "</td>" +
+                                        "<td style='text-align:right;'>" + KGRotativaWEB1.ToString("N2") + "</td>" +
+                                        "<td style='text-align:right;'>" + KGRotativaWEB2.ToString("N2") + "</td>" +
+                                        "<td style='text-align:right;'>" + KGRotativaGOSS.ToString("N2") + "</td>" +
+                                        "<td style='text-align:right;'>" + KGRotativaDimensionadora.ToString("N2") + "</td>" +
+                                        "<td style='text-align:right;'>" + KGTotalRotativa.ToString("N2") + "</td>" +
+                                        "</tr>" +
+                                        "<tr><th>% Escarpe Rotativa</th>" +
+                                        "<td style='text-align:right;'>" + PorcRotativaLITHO.ToString("N2") + "%</td>" +
+                                        "<td style='text-align:right;'>" + PorcRotativaM600.ToString("N2") + "%</td>" +
+                                        "<td style='text-align:right;'>" + PorcRotativaWEB1.ToString("N2") + "%</td>" +
+                                        "<td style='text-align:right;'>" + PorcRotativaWEB2.ToString("N2") + "%</td>" +
+                                        "<td style='text-align:right;'>" + PorcRotativaGOSS.ToString("N2") + "%</td>" +
+                                        "<td style='text-align:right;'>" + PorcRotativaDimensionadora.ToString("N2") + "%</td>" +
+                                        "<td style='text-align:right;'>" + PorcTotalRotativa.ToString("N2") + "%</td>" +
+                                        "</tr>";
+
             Tabla += stgTotalBobinasConsumidas + stgTotalkilosConsumidos + stgTotalkilosEscarpe + stgPromedioEscarpexbobina + stgPorcentajeescarpe + stgBobinasBuenas + stgBobinasMalas + stgBobinasConProyecto +
-                     stgBobinasSinProyecto + stgKGEscarpeAlmacen + stgKGEscarpeRollero + stgKGEscarpeProveedor;
+                     stgBobinasSinProyecto + stgKGEscarpeAlmacen + stgKGEscarpeRollero + stgKGEscarpeProveedor+stgDañoRotativas;
             return Tabla;
         }
     }

@@ -60,7 +60,15 @@ namespace Intranet.View.Controller
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    subMenu = subMenu + "<li><a href=" + reader["Url_Modulo"].ToString() + "?id=" + IDArea + ">" + reader["Nombre_Modulo"].ToString() + "</a></li>";
+                    
+                    if (reader["Nombre_Modulo"].ToString() == "Dashboard")
+                    {
+                        subMenu = subMenu + "<li><a target='_blank' href=" + reader["Url_Modulo"].ToString() + "?id=" + IDArea + ">" + reader["Nombre_Modulo"].ToString() + "</a></li>";
+                    }
+                    else
+                    {
+                        subMenu = subMenu + "<li><a href=" + reader["Url_Modulo"].ToString() + "?id=" + IDArea + ">" + reader["Nombre_Modulo"].ToString() + "</a></li>";
+                    }
 
                 }
                 subMenu = subMenu + "</ul>";

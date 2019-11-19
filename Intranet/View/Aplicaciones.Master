@@ -78,7 +78,7 @@
 <body class="nada">
 <div class="total">
 <br />
-    <form id="form1" runat="server"  defaultbutton="ctl00$ContentPlaceHolder1$btnFiltro">
+    <form id="form1" runat="server"  defaultbutton="ctl00$ContentPlaceHolder1$btnFiltro" autocomplete="off">
 
 
 

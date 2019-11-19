@@ -265,7 +265,7 @@
         </table>
     </div>
     <div align="center">
-        <asp:Button ID="Button1" runat="server" Text="Cargar A SII" OnClick="Button1_Click" />&nbsp;
+        <asp:Button ID="Button1" runat="server" Text="Cargar A SII" OnClick="Button1_Click" style="height: 26px" />&nbsp;
         <asp:Button ID="Button2" runat="server" Text="Salir" onclick="Button2_Click" />
     </div>
     </form>

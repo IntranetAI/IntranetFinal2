@@ -62,6 +62,7 @@ namespace Intranet.ModuloBobina.View
         {
             try
             {
+                double TotEscarpeAlmacen = 0;double TotEscarpeRollero = 0;double TotEscarpeProveedor = 0;double TotEscarpeRotativa = 0;
                 List<Bobina_ConsumoLinea> lista = new List<Bobina_ConsumoLinea>();
                 for (int i = 0; i < RadGrid1.Items.Count; i++)
                 {
@@ -81,9 +82,27 @@ namespace Intranet.ModuloBobina.View
                     p.Cantidad = "";
                     p.Saldo = "";
                     p.TipoPerdida = "";
+                    if (p.OrigenPerdida == "ROLLERO")
+                    {
+                        TotEscarpeRollero += Convert.ToDouble(RadGrid1.Items[i]["Escarpe"].Text);
+                    }
+                    else if (p.OrigenPerdida == "ALMACÉN")
+                    {
+                        TotEscarpeAlmacen += Convert.ToDouble(RadGrid1.Items[i]["Escarpe"].Text);
+                    }
+                    else if (p.OrigenPerdida == "PROVEEDOR" || p.OrigenPerdida == "TRANSPORTE")
+                    {
+                        TotEscarpeProveedor += Convert.ToDouble(RadGrid1.Items[i]["Escarpe"].Text);
+                    }
+                    else
+                    {
+                        TotEscarpeRotativa += Convert.ToDouble(RadGrid1.Items[i]["Escarpe"].Text);
+
+                    }
+                    
                     lista.Add(p);
                 }
-                ExportToExcel("Informe War-Rom " + txtFechaInicio.Text, lista, txtFechaInicio.Text);
+                ExportToExcel("Informe War-Rom " + txtFechaInicio.Text, lista, txtFechaInicio.Text,TotEscarpeAlmacen,TotEscarpeRollero,TotEscarpeProveedor,TotEscarpeRotativa);
             }
             catch (Exception ex)
             {
@@ -92,7 +111,7 @@ namespace Intranet.ModuloBobina.View
             }
         }
 
-        private void ExportToExcel(string nameReport, List<Bobina_ConsumoLinea> lista, string fInicio)
+        private void ExportToExcel(string nameReport, List<Bobina_ConsumoLinea> lista, string fInicio,double TotEscarpeAlmacen, double TotEscarpeRollero, double TotEscarpeProveedor, double TotEscarpeRotativa)
         {
             try
             {
@@ -164,7 +183,7 @@ namespace Intranet.ModuloBobina.View
                     row.Cells[3].Text = row.Cells[4].Text;
                     row.Cells[4].Text = row.Cells[5].Text;
                     row.Cells[5].Text = row.Cells[9].Text.Replace(".", ",");
-                    PesoConsumo += Convert.ToInt32(row.Cells[5].Text);
+                    PesoConsumo += Convert.ToInt32(row.Cells[5].Text);//aqui
                     TotalPesoConsumo += Convert.ToInt32(row.Cells[5].Text);
 
                     row.Cells[6].Text = row.Cells[10].Text;
@@ -247,13 +266,18 @@ namespace Intranet.ModuloBobina.View
 
             Label TablaTotal = new Label();
 
-            double TotalpromedioBobinasBuenaTotal = Convert.ToDouble(Convert.ToDouble(TotalBobinaBuenEstado * 100) / (TotalBobinaBuenEstado + TotalBobinaMalEstado));
-            double TotalpromedioBobinasMalasTotal = Convert.ToDouble(Convert.ToDouble(TotalBobinaMalEstado * 100) / (TotalBobinaBuenEstado + TotalBobinaMalEstado));
-            double TotalpromedioEscarpeCantidadBobinas = (TotalEscarpe) / (TotalBobinaBuenEstado + TotalBobinaMalEstado);
-            double TotalporcentajeEscarpePesoInicial = Convert.ToDouble(Convert.ToDouble(TotalEscarpe * 100) / (TotalPesoConsumo));
-            double PorcentajeConProyecto = Convert.ToDouble(Convert.ToDouble(EscarpeConProyect * 100) / PesoBobinaConProyect);
-            double PorcentajeSinProyecto = Convert.ToDouble(Convert.ToDouble(EscarpeSinProyect * 100) / PesoBobinaSinProyect);
-
+            //double TotalpromedioBobinasBuenaTotal = Convert.ToDouble(Convert.ToDouble(TotalBobinaBuenEstado * 100) / (TotalBobinaBuenEstado + TotalBobinaMalEstado));
+            //double TotalpromedioBobinasMalasTotal = Convert.ToDouble(Convert.ToDouble(TotalBobinaMalEstado * 100) / (TotalBobinaBuenEstado + TotalBobinaMalEstado));
+            //double TotalpromedioEscarpeCantidadBobinas = (TotalEscarpe) / (TotalBobinaBuenEstado + TotalBobinaMalEstado);
+            //double TotalporcentajeEscarpePesoInicial = Convert.ToDouble(Convert.ToDouble(TotalEscarpe * 100) / (TotalPesoConsumo));
+            //double PorcentajeConProyecto = Convert.ToDouble(Convert.ToDouble(EscarpeConProyect * 100) / PesoBobinaConProyect);
+            //double PorcentajeSinProyecto =  Convert.ToDouble(Convert.ToDouble(EscarpeSinProyect * 100) / PesoBobinaSinProyect);
+            double TotalpromedioBobinasBuenaTotal = (((TotalBobinaBuenEstado + TotalBobinaMalEstado)) > 0 ? Convert.ToDouble(Convert.ToDouble(TotalBobinaBuenEstado * 100) / (TotalBobinaBuenEstado + TotalBobinaMalEstado)) : 0);
+            double TotalpromedioBobinasMalasTotal = (((TotalBobinaBuenEstado + TotalBobinaMalEstado)) > 0 ? Convert.ToDouble(Convert.ToDouble(TotalBobinaMalEstado * 100) / (TotalBobinaBuenEstado + TotalBobinaMalEstado)) : 0);
+            double TotalpromedioEscarpeCantidadBobinas = (((TotalBobinaBuenEstado + TotalBobinaMalEstado)) > 0 ? ((TotalEscarpe) / (TotalBobinaBuenEstado + TotalBobinaMalEstado)) : 0);
+            double TotalporcentajeEscarpePesoInicial = ((TotalPesoConsumo) > 0 ? Convert.ToDouble(Convert.ToDouble(TotalEscarpe * 100) / (TotalPesoConsumo)) : 0);
+            double PorcentajeConProyecto = ((PesoBobinaConProyect) > 0 ? Convert.ToDouble(Convert.ToDouble(EscarpeConProyect * 100) / PesoBobinaConProyect) : 0);
+            double PorcentajeSinProyecto = ((PesoBobinaSinProyect) > 0 ? Convert.ToDouble(Convert.ToDouble(EscarpeSinProyect * 100) / PesoBobinaSinProyect) : 0);
             TablaTotal.Text = "<br/><table><tr>" +
                                     "<td colspan ='7'></td><td  style='border:1px solid black;' colspan ='3' align='center'>General</td></tr><tr>" +
                                     "<td colspan ='7'></td><td  style='border:1px solid black;' colspan ='2'>Total Bobinas Consumidas</td>" +
@@ -277,17 +301,19 @@ namespace Intranet.ModuloBobina.View
                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>Bobinas Con Proyecto</td>" +
                                     "<td style='border:1px solid black;'>" + CantidadBobinaProyecto.ToString() + "</td></tr><tr>" +
                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>Bobinas Sin Proyecto</td>" +
-                                    "<td style='border:1px solid black;'>" + CantidadBobinaSinProyecto.ToString() + "</td></tr><tr>" +
+                                    "<td style='border:1px solid black;'>" + CantidadBobinaSinProyecto.ToString("N0") + "</td></tr><tr>" +
                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>% Con Proyecto</td>" +
                                     "<td style='border:1px solid black;'>" + PorcentajeConProyecto.ToString("N2") + "%</td></tr><tr>" +
                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>% Sin Proyecto</td>" +
                                     "<td style='border:1px solid black;'>" + PorcentajeSinProyecto.ToString("N2") + "%</td></tr><tr>" +
                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>Escarpe Almacen</td>" +
-                                    "<td style='border:1px solid black;'>" + "0" + "%</td></tr><tr>" +
+                                    "<td style='border:1px solid black;'>" + ((TotalPesoConsumo > 0)?((TotEscarpeAlmacen/(double)TotalPesoConsumo) *100).ToString("N2"):"0") + "%</td></tr><tr>" +
                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>Escarpe Rollero</td>" +
-                                    "<td style='border:1px solid black;'>" + "0" + "%</td></tr><tr>" +
+                                    "<td style='border:1px solid black;'>" + ((TotalPesoConsumo > 0) ? ((TotEscarpeRollero / (double)TotalPesoConsumo) * 100).ToString("N2") : "0") + "%</td></tr><tr>" +
                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>Escarpe Proveedor</td>" +
-                                    "<td style='border:1px solid black;'>" + "0" + "%</td></tr></table>";
+                                    "<td style='border:1px solid black;'>" + ((TotalPesoConsumo > 0) ? ((TotEscarpeProveedor / (double)TotalPesoConsumo) * 100).ToString("N2") : "0") + "%</td></tr>"+
+                                     "<td colspan ='7'></td><td style='border:1px solid black;' colspan ='2'>Escarpe Rotativas</td>" +
+                                    "<td style='border:1px solid black;'>" + ((TotalPesoConsumo > 0) ? ((TotEscarpeRotativa / (double)TotalPesoConsumo) * 100).ToString("N2") : "0") + "%</td></tr></table>";
 
             form.Controls.Add(TablaTotal);
 

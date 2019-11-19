@@ -105,6 +105,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\dataTables.bootstrap.min.css" />
+    <Content Include="Dashboard\View\Dashboard.aspx" />
     <Content Include="Estructura\Javascript\canvasjs.min.js" />
     <Content Include="Images\cargando.gif" />
     <Content Include="Images\fondo-menu.jpg" />
@@ -716,6 +717,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="Dashboard\Controller\DashboardController.cs" />
+    <Compile Include="Dashboard\Model\DashboardProd.cs" />
+    <Compile Include="Dashboard\View\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\View\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Estructura\Controller\Controller_MenuSecundario.cs" />
     <Compile Include="Estructura\View\MasterAplicaciones.Master.cs">
       <DependentUpon>MasterAplicaciones.Master</DependentUpon>

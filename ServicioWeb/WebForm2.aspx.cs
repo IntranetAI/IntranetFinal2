@@ -14,9 +14,9 @@ namespace ServicioWeb
         ProduccionController pcc = new ProduccionController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Text = pc.StockFL(DateTime.Now, DateTime.Now);
+          //  Label1.Text = pc.StockFL(DateTime.Now, DateTime.Now);
 
-            Label2.Text = pcc.OtLiberadas_ItemsPedido("");
+            //Label2.Text = pcc.OtLiberadas_ItemsPedido("");
         }
     }
 }

@@ -115,6 +115,7 @@ namespace Intranet.ModuloAdministracion.View
 
         protected void btnDetalle_Click(object sender, EventArgs e)
         {
+            
             string factura = "";
             try
             {

@@ -4,7 +4,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" autocomplete="off">
     <div runat="server" id="divbotones" style="text-align: right; width: 940px; margin-top: -20px;
         margin-left: -10px;">
        <a title="Exportar a Excel">

@@ -17,5 +17,6 @@ namespace ServicioWeb.ModuloProduccion.Model
         public string CSR { get; set; }
         public string Vendedor { get; set; }
         public string Suscritos { get; set; }
+        public DateTime FechaGV { get; set; }
     }
 }

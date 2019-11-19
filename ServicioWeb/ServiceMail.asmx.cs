@@ -50,6 +50,9 @@ namespace ServicioWeb
         public string CorreoProduccion_ScoreCardImpresion(string Usuario)
         {
             ProduccionController controlpro = new ProduccionController();
+
+            //string algo = controlpro.correo_nuevo();
+
             string[] str = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy").Split('/');
             DateTime fi = Convert.ToDateTime(str[1] + "/" + str[0] + "/" + str[2] + " 00:00:00");
 
@@ -374,6 +377,17 @@ namespace ServicioWeb
                 // controlpro.GenerarCorreoErrordeEnvio("CorreoProduccion_SobreImpresion", "General", "", "", "No se envió el correo");
             }
 
+
+            return "OK";
+        }
+
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public string PruebaCorreoMysql()
+        {
+            ProduccionController controlpro = new ProduccionController();
+            string algo = controlpro.algoooo();
 
             return "OK";
         }

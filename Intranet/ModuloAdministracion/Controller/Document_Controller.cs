@@ -982,7 +982,7 @@ namespace Intranet.ModuloAdministracion.Controller
             {
                 FechaVen = FechaIni.AddDays(60).ToString("yyyy/MM/dd");
             }
-            if (ID_Cond_ventas == 4 || ID_Cond_ventas == 13 || ID_Cond_ventas == 8 || ID_Cond_ventas == 10)
+            if (ID_Cond_ventas == 4 || ID_Cond_ventas == 13 || ID_Cond_ventas == 8 || ID_Cond_ventas == 10 || ID_Cond_ventas==31)
             {
                 FechaVen = FechaIni.AddDays(90).ToString("yyyy/MM/dd");
             }
@@ -1020,6 +1020,7 @@ namespace Intranet.ModuloAdministracion.Controller
             DateTime fec90 = fechaInicio.AddDays(90);
             DateTime fec120 = fechaInicio.AddDays(120);
             DateTime fec150 = fechaInicio.AddDays(150);
+            DateTime fec180 = fechaInicio.AddDays(180);
 
             string resultado = "";
             if (ID_Cond_ventas == 2||ID_Cond_ventas == 26)
@@ -1046,11 +1047,11 @@ namespace Intranet.ModuloAdministracion.Controller
             {
                 resultado = "1," + fec65.ToString("yyyy/MM/dd");
             }
-            if (ID_Cond_ventas == 8)
+            if (ID_Cond_ventas == 8 || ID_Cond_ventas == 31)
             {
                 resultado = "1," + fec90.ToString("yyyy/MM/dd");
             }
-            if (ID_Cond_ventas == 9||ID_Cond_ventas == 20||ID_Cond_ventas == 24)
+            if (ID_Cond_ventas == 9||ID_Cond_ventas == 20||ID_Cond_ventas == 24 )
             {
                 resultado = "1," + fec60.ToString("yyyy/MM/dd");
             }
@@ -1098,6 +1099,11 @@ namespace Intranet.ModuloAdministracion.Controller
             {
                 resultado = "3," + fec30.ToString("yyyy/MM/dd") + "," + fec45.ToString("yyyy/MM/dd") + "," + fec60.ToString("yyyy/MM/dd");
             }
+            if (ID_Cond_ventas == 30)
+            {
+                resultado = "1," + fec180.ToString("yyyy/MM/dd");
+            }
+
             return resultado;
         }
 
@@ -1347,6 +1353,7 @@ namespace Intranet.ModuloAdministracion.Controller
 
                         string cuotas = Condicion_venta(Convert.ToDateTime(detalles.CabOpeFecha),Condicion_ventas_values);
                         string[] str = cuotas.Split(',');
+                        string vaaaalor = str[0];
                         int val = Convert.ToInt32(str[0]);
                         for (int x = 1; x <= val; x++)
                         {
@@ -1749,6 +1756,8 @@ namespace Intranet.ModuloAdministracion.Controller
                     {
                         lista.Add(detalles);
                     }
+                    string aaa = detalles.CabOpeFecha;
+                    int aaaadf = Condicion_ventas_values;
                     string cuotas = Condicion_venta(Convert.ToDateTime(detalles.CabOpeFecha),Condicion_ventas_values);
                     string[] str = cuotas.Split(',');
                     int val = Convert.ToInt32(str[0]);

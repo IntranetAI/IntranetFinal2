@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperAdmin", "SuperAdmin\Su
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistolaRF", "Pistola\PistolaRF.csproj", "{B9780522-0C4B-4436-B852-53785FF57BD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicioWeb2", "ServicioWeb2\ServicioWeb2.csproj", "{8A992393-7BE1-4BE1-995D-05639C6977DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B9780522-0C4B-4436-B852-53785FF57BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9780522-0C4B-4436-B852-53785FF57BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9780522-0C4B-4436-B852-53785FF57BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A992393-7BE1-4BE1-995D-05639C6977DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A992393-7BE1-4BE1-995D-05639C6977DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A992393-7BE1-4BE1-995D-05639C6977DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A992393-7BE1-4BE1-995D-05639C6977DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

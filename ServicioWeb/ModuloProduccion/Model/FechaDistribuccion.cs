@@ -22,5 +22,7 @@ namespace ServicioWeb.ModuloProduccion.Model
         public string Pais { get; set; }
         public string Correo { get; set; }
         public string Proceso { get; set; }
+        public DateTime FechaGV { get; set; }
+        public DateTime FechaGVFinal { get; set; }
     }
 }

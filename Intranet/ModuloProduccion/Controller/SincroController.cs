@@ -69,6 +69,7 @@ namespace Intranet.ModuloProduccion.Controller
                     sincroOT.QG_RMS_TITLE_CD = "Metric";
                     sincroOT.PRN_ORD_QTY = reader["Tiraje"].ToString();
                     sincroOT.Fecha_Liquidacion = reader["Fecha_Liquidacion"].ToString();
+                    sincroOT.Vendedor = reader["Vendedor"].ToString();
                     lista.Add(sincroOT);
                 }
             }

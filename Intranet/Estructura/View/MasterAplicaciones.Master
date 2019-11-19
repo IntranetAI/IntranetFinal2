@@ -282,7 +282,7 @@
 </head>
 <body style="background-image: url(../../images/fondointento.jpg);" onresize="CambiodeAlturascreen()">
     <div id="PantallaCompleta" class="total">
-        <form id="form1" runat="server" defaultbutton="ctl00$ContentPlaceHolder1$btnFiltro">
+        <form id="form1" runat="server" defaultbutton="ctl00$ContentPlaceHolder1$btnFiltro" autocomplete="off">
         <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
         </asp:ToolkitScriptManager>
         <div id="divcental" style="background: #fff;">

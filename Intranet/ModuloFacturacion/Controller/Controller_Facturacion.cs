@@ -264,7 +264,7 @@ namespace Intranet.ModuloFacturacion.Controller
                         {
                             contadorDocuRefe++;
                             query += " INSERT INTO Factura_Electronica.dbo.DTE_DOCU_REFE(CODI_EMPR,TIPO_DOCU,FOLI_DOCU,NUME_REFE,TIPO_REFE,FOLI_REFE,FECH_REFE) VALUES (1," + reader["TIPODOC"] + "," + reader["ID_FOLIO_FACTURA"] +
-                                ",1,801,'" + reader["HES"] + "','" + FECHA_HES + "');";
+                                ",1,802,'" + reader["HES"] + "','" + FECHA_HES + "');";
                         }
                         if ((reader["TIPODOC"].ToString() == "61") || (reader["TIPODOC"].ToString() == "56"))
                         {
