@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para PAGINAS:&#xA; 12365p1.pdf&#xA; Donde 12365 Corresponde al numero de OT, p indica que forma parte de las PAGINAS y 1 indica la posicion dentro de estas.&#xA; PAGINAS mide 122 mm de ancho y 211 mm de alto, con una cantidad de 234.&#xA; &#xA; Para tapas:&#xA; 12365tapas1.pdf&#xA; Donde 12365 Corresponde al numero de OT, tapas indica que forma parte de las tapas y 1 indica la posicion dentro de estas.&#xA; tapas mide 210 mm de ancho y 275 mm de alto, con una cantidad de 4.&#xA; &#xA; Para folleto:&#xA; 12365folleto1.pdf&#xA; Donde 12365 Corresponde al numero de OT, folleto indica que forma parte de las folleto y 1 indica la posicion dentro de estas.&#xA; folleto mide 210 mm de ancho y 215 mm de alto, con una cantidad de 14.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="A Impresores S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;12365p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINAS[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINAS[%].p[#PgPosition].pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;12365tapas[#PgPosition].p1.pdf&quot; &quot;tapas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;tapas[%].p[#PgPosition].p1.pdf&quot; &quot;tapas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;tapas[%].p[#PgPosition].pdf&quot; &quot;tapas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;12365folleto[#PgPosition].p1.pdf&quot; &quot;folleto&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;folleto[%].p[#PgPosition].p1.pdf&quot; &quot;folleto&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;folleto[%].p[#PgPosition].pdf&quot; &quot;folleto&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="OT NO CREADA EN METRICS" CSR="Label" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINAS</NombreGrupoPaginas>
+    <CantidadPaginas>234</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>344-348</X>
+    <Y>596-600</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>tapas</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>778-782</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>folleto</NombreGrupoPaginas>
+    <CantidadPaginas>14</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>607-611</Y>
+    <Prefijo>r</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

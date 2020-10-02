@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para DELO1:&#xA; 122751DELO11.pdf&#xA; Donde 122751 Corresponde al numero de OT, DELO1 indica que forma parte de las DELO1 y 1 indica la posicion dentro de estas.&#xA; DELO1 mide 140 mm de ancho y 210 mm de alto, con una cantidad de 2.&#xA; &#xA; Para DELO2:&#xA; 122751DELO21.pdf&#xA; Donde 122751 Corresponde al numero de OT, DELO2 indica que forma parte de las DELO2 y 1 indica la posicion dentro de estas.&#xA; DELO2 mide 140 mm de ancho y 210 mm de alto, con una cantidad de 2.&#xA; &#xA; Para DELO3:&#xA; 122751DELO31.pdf&#xA; Donde 122751 Corresponde al numero de OT, DELO3 indica que forma parte de las DELO3 y 1 indica la posicion dentro de estas.&#xA; DELO3 mide 140 mm de ancho y 210 mm de alto, con una cantidad de 2.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="SERVICIO ELECTORAL" ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;122751DELO1[#PgPosition].p1.pdf&quot; &quot;DELO1&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DELO1[%].p[#PgPosition].p1.pdf&quot; &quot;DELO1&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DELO1[%].p[#PgPosition].pdf&quot; &quot;DELO1&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;122751DELO2[#PgPosition].p1.pdf&quot; &quot;DELO2&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DELO2[%].p[#PgPosition].p1.pdf&quot; &quot;DELO2&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DELO2[%].p[#PgPosition].pdf&quot; &quot;DELO2&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;122751DELO3[#PgPosition].p1.pdf&quot; &quot;DELO3&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DELO3[%].p[#PgPosition].p1.pdf&quot; &quot;DELO3&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DELO3[%].p[#PgPosition].pdf&quot; &quot;DELO3&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="VOL.PLEBISCITO NACIONAL 2020 (3 MODS) - SERVEL" CSR="" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>DELO1</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>395-399</X>
+    <Y>593-597</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>DELO2</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>395-399</X>
+    <Y>593-597</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>DELO3</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>395-399</X>
+    <Y>593-597</Y>
+    <Prefijo>r</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

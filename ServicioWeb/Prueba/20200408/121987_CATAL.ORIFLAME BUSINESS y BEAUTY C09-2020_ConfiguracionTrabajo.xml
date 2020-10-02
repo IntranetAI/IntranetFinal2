@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para Paginas:&#xA; 121987p1.pdf&#xA; Donde 121987 Corresponde al numero de OT, p indica que forma parte de las Paginas y 1 indica la posicion dentro de estas.&#xA; Paginas mide 205 mm de ancho y 275 mm de alto, con una cantidad de 32.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="ORIFLAME DE CHILE S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;121987p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="CATAL.ORIFLAME BUSINESS y BEAUTY C09-2020" CSR="Pablo Gutierrez" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Paginas</NombreGrupoPaginas>
+    <CantidadPaginas>32</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>579-583</X>
+    <Y>778-782</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>lwc</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

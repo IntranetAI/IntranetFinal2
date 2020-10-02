@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para ICHE:&#xA; 122752ICHE1.pdf&#xA; Donde 122752 Corresponde al numero de OT, ICHE indica que forma parte de las ICHE y 1 indica la posicion dentro de estas.&#xA; ICHE mide 360 mm de ancho y 540 mm de alto, con una cantidad de 2.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="SERVICIO ELECTORAL" ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;122752ICHE[#PgPosition].p1.pdf&quot; &quot;ICHE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;ICHE[%].p[#PgPosition].p1.pdf&quot; &quot;ICHE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;ICHE[%].p[#PgPosition].pdf&quot; &quot;ICHE&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="AF.PLEBISCITO NACIONAL 2020 - SERVEL" CSR="" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>ICHE</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>1018-1022</X>
+    <Y>1529-1533</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

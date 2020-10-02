@@ -5,7 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using ServicioWeb.ModuloProduccion.Model;
 using System.Net.Mail;
-using MySql.Data.MySqlClient;
+ 
 
 namespace ServicioWeb.ModuloProduccion.Controller
 {
@@ -4778,18 +4778,38 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     {
                         if (count == 0)
                         {
-                            string[] splitCorreo = OT.Correo.Split(';');
-                            foreach (string correouser in splitCorreo)
+                            if (OT.Correo != "")
                             {
-                                mmsg.To.Add(correouser);
+                                try
+                                {
+                                    string[] splitCorreo = OT.Correo.Split(';'); string Correos = "";
+                                    foreach (string correouser in splitCorreo)
+                                    {
+                                        if (correouser != "noexiste@aimpresores.cl" || correouser != "daniel.gajardo@aimpresores.cl" || correouser != "pablo.gutierrez@aimpresores.cl")
+                                        {
+                                            if (!Correos.Contains(correouser.ToLower()))
+                                            {
+                                                mmsg.To.Add(correouser);
+                                                Correos += correouser;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                catch (Exception es)
+                                {
+
+                                }
                             }
-                            //mmsg.To.Add("correootliberadasgrupo1@aimpresores.cl");
-                            mmsg.To.Add("liberado@aimpresores.cl");
+                            
                             if (OT.Usr_Liberada == "FDS")
                             {
                                 mmsg.To.Add("correootliberadasgrupo2@aimpresores.cl");
                             }
+                            mmsg.To.Add("liberado@aimpresores.cl");
                             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                            mmsg.To.Add("daniel.gajardo@aimpresores.cl");
+                            mmsg.To.Add("pablo.gutierrez@aimpresores.cl");
                             mmsg.Subject = "Se Informa liberacion de la OT : " + OT.OT + " - " + OT.NombreOT;
                             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                             count++;
@@ -5103,7 +5123,13 @@ namespace ServicioWeb.ModuloProduccion.Controller
                         otLiberada.DtLiberacao = Convert.ToDateTime(reader["dtocor"].ToString()).ToString("dd-MM-yyyy HH:mm:ss");
                         otLiberada.Usuario = reader["codusuario"].ToString();
                         string Correo = reader["Correos"].ToString().Replace("noexiste@aimpresores.cl;", "");
-                        otLiberada.Correo = Correo.Substring(0, Correo.Length - 1);
+                        try
+                        {
+                            otLiberada.Correo = Correo.Substring(0, Correo.Length - 1);
+                        }catch(Exception exx)
+                        {
+                            otLiberada.Correo = "";
+                        }
                         lista.Add(otLiberada);
                     }
                 }
@@ -5425,26 +5451,65 @@ namespace ServicioWeb.ModuloProduccion.Controller
                 return false;
             }
         }
+        
 
-        public string algoooo()
+        public string GenerarCorreOTsinEstructura(string OT,string nombreot,string Estructura,string Cliente)
         {
-
-            MySqlConnection connection = new MySqlConnection("Database=suitecrmdb;Data Source=172.16.1.8;User Id=root;Password=daco2018.");
-            connection.Open();
-            int contador = 0;
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "select * from cjr_Oportunidades limit 0,10";
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                contador++;
-                //reader.GetString(0)
-                //reader["column_name"].ToString()
-            }
-            reader.Close();
-            return "";
-        }
+                System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+                string errores = "";
+                if (Estructura == "")
+                {
+                    errores += "<b>- OT sin estructura</b><br/>";
+                }
+                if (Cliente == "Error Cliente")
+                {
+                    errores += "<b>- Cliente no encontrado en Prinergy o no homologado</b>";
+                }
+                    mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+                    mmsg.Body = "<img src='http://copesa.aimpresores.cl/imagenes/logo_a.png' alt='A Impresores'  width='267px'  height='67px'  />" +
+                                "<br/><br/>Estimado(a):" +
+                                "<br/><br/>Se ha producido el siguiente error al crear la carpeta automatica:<br/><br/>" +
+                                    errores+
+                                "<br/><br/>" + "<br/><br/>" +
+                                "Atentamente," +
+                                "<br />" +
+                                "<b>Equipo de desarrollo A Impresores S.A.</b>";
+               
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-CL");
+                mmsg.Subject = "Prinergy - Error creacion automatica OT "+ OT+"-"+nombreot;//.ToString("dd/MM/yyyy");
+                mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+                mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+                mmsg.IsBodyHtml = true;
+                mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+                //System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+                //cliente.Credentials =
+                //    new System.Net.NetworkCredential("mermas.produccion@aimpresores.cl", "abcd55..");
 
+                //cliente.Host = "mail.aimpresores.cl";
+                SmtpClient _smtpClient = new SmtpClient();
+                _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                _smtpClient.Host = "smtp.office365.com";
+                _smtpClient.Port = 587;
+                _smtpClient.EnableSsl = true;
+                _smtpClient.UseDefaultCredentials = false;
+                _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
+                try
+                {
+                    _smtpClient.Send(mmsg);
+                    return "OK";
+                }
+                catch (System.Net.Mail.SmtpException ex)
+                {
+                    return "Error";
+                }
+            }
+            catch (Exception e)
+            {
+                return "Error";
+            }
+        }
 
     }
 }

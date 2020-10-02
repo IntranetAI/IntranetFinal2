@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para DIPTICO:&#xA; 121790DIPTICO1.pdf&#xA; Donde 121790 Corresponde al numero de OT, DIPTICO indica que forma parte de las DIPTICO y 1 indica la posicion dentro de estas.&#xA; DIPTICO mide  mm de ancho y  mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="Copesa (Club La Tercera)" ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;121790DIPTICO[#PgPosition].p1.pdf&quot; &quot;DIPTICO&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DIPTICO[%].p[#PgPosition].p1.pdf&quot; &quot;DIPTICO&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;DIPTICO[%].p[#PgPosition].pdf&quot; &quot;DIPTICO&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="FOLL.DIP.CLINICA SANTA MARIA JUNIO-LA TERCERA" CSR="" CorreoCSR="" ClienteNuevo="No">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>DIPTICO</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>792-796</X>
+    <Y>1067-1071</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel></ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

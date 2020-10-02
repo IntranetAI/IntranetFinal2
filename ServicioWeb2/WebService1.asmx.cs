@@ -187,6 +187,7 @@ namespace ServicioWeb2
 
             System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            mmsg.To.Add("claudio.valle@aimpresores.cl");
             mmsg.Body =// "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                 "<img src='http://copesa.aimpresores.cl/imagenes/logo_a.png' alt='A Impresores'  width='267px'  height='67px'  />" +
             "<br/>Estimado(a):" +
@@ -205,14 +206,16 @@ namespace ServicioWeb2
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
             mmsg.BodyEncoding = System.Text.Encoding.UTF8;
             mmsg.IsBodyHtml = true;
-            mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+           // mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            mmsg.From = new System.Net.Mail.MailAddress("carlos.jerias.r@aimpresores.cl");
             SmtpClient _smtpClient = new SmtpClient();
             _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             _smtpClient.Host = "smtp.office365.com";
             _smtpClient.Port = 587;
             _smtpClient.EnableSsl = true;
             _smtpClient.UseDefaultCredentials = false;
-            _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
+           // _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Noviembre2019");
+            _smtpClient.Credentials = new System.Net.NetworkCredential("carlos.jerias.r@aimpresores.cl", "09021991CRX0901.");
             try
             {
                 _smtpClient.Send(mmsg);
@@ -232,6 +235,8 @@ namespace ServicioWeb2
 
             System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            mmsg.To.Add("claudio.valle@aimpresores.cl");
+
             mmsg.Body =// "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                 "<img src='http://copesa.aimpresores.cl/imagenes/logo_a.png' alt='A Impresores'  width='267px'  height='67px'  />" +
             "<br/>Estimado(a):" +
@@ -248,14 +253,16 @@ namespace ServicioWeb2
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
             mmsg.BodyEncoding = System.Text.Encoding.UTF8;
             mmsg.IsBodyHtml = true;
-            mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            // mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            mmsg.From = new System.Net.Mail.MailAddress("carlos.jerias.r@aimpresores.cl");
             SmtpClient _smtpClient = new SmtpClient();
             _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             _smtpClient.Host = "smtp.office365.com";
             _smtpClient.Port = 587;
             _smtpClient.EnableSsl = true;
             _smtpClient.UseDefaultCredentials = false;
-            _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
+            // _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Noviembre2019");
+            _smtpClient.Credentials = new System.Net.NetworkCredential("carlos.jerias.r@aimpresores.cl", "09021991CRX0901.");
             try
             {
                 _smtpClient.Send(mmsg);
@@ -274,6 +281,7 @@ namespace ServicioWeb2
 
             System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            mmsg.To.Add("claudio.valle@aimpresores.cl");
             mmsg.Body =// "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                 "<img src='http://copesa.aimpresores.cl/imagenes/logo_a.png' alt='A Impresores'  width='267px'  height='67px'  />" +
             "<br/>Estimado(a):" +
@@ -290,14 +298,15 @@ namespace ServicioWeb2
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
             mmsg.BodyEncoding = System.Text.Encoding.UTF8;
             mmsg.IsBodyHtml = true;
-            mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            mmsg.From = new System.Net.Mail.MailAddress("carlos.jerias.r@aimpresores.cl");
             SmtpClient _smtpClient = new SmtpClient();
             _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             _smtpClient.Host = "smtp.office365.com";
             _smtpClient.Port = 587;
             _smtpClient.EnableSsl = true;
             _smtpClient.UseDefaultCredentials = false;
-            _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
+            // _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Noviembre2019");
+            _smtpClient.Credentials = new System.Net.NetworkCredential("carlos.jerias.r@aimpresores.cl", "09021991CRX0901.");
             try
             {
                 _smtpClient.Send(mmsg);
@@ -316,6 +325,7 @@ namespace ServicioWeb2
 
             System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
             mmsg.To.Add("carlos.jerias.r@aimpresores.cl");
+            mmsg.To.Add("claudio.valle@aimpresores.cl");
             mmsg.Body =// "<img src='http://intranet.qgchile.cl/Images/LOGO%20A.png' width='267px'  height='67px' />" +
                 "<img src='http://copesa.aimpresores.cl/imagenes/logo_a.png' alt='A Impresores'  width='267px'  height='67px'  />" +
             "<br/>Estimado(a):" +
@@ -332,14 +342,15 @@ namespace ServicioWeb2
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
             mmsg.BodyEncoding = System.Text.Encoding.UTF8;
             mmsg.IsBodyHtml = true;
-            mmsg.From = new System.Net.Mail.MailAddress("sistema.intranet@aimpresores.cl");
+            mmsg.From = new System.Net.Mail.MailAddress("carlos.jerias.r@aimpresores.cl");
             SmtpClient _smtpClient = new SmtpClient();
             _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             _smtpClient.Host = "smtp.office365.com";
             _smtpClient.Port = 587;
             _smtpClient.EnableSsl = true;
             _smtpClient.UseDefaultCredentials = false;
-            _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Octubre2019");
+            // _smtpClient.Credentials = new System.Net.NetworkCredential("sistema.intranet@aimpresores.cl", "Noviembre2019");
+            _smtpClient.Credentials = new System.Net.NetworkCredential("carlos.jerias.r@aimpresores.cl", "09021991CRX0901.");
             try
             {
                 _smtpClient.Send(mmsg);

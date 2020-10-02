@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistolaRF", "Pistola\Pistol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicioWeb2", "ServicioWeb2\ServicioWeb2.csproj", "{8A992393-7BE1-4BE1-995D-05639C6977DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integracion", "Integracion\Integracion.csproj", "{05C159D8-7075-48F2-83E5-67751F81B49D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8A992393-7BE1-4BE1-995D-05639C6977DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A992393-7BE1-4BE1-995D-05639C6977DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A992393-7BE1-4BE1-995D-05639C6977DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C159D8-7075-48F2-83E5-67751F81B49D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C159D8-7075-48F2-83E5-67751F81B49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C159D8-7075-48F2-83E5-67751F81B49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C159D8-7075-48F2-83E5-67751F81B49D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

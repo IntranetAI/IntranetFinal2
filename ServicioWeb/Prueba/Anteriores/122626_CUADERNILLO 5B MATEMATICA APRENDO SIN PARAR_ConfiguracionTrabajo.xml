@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para Paginas:&#xA; 122626p1.pdf&#xA; Donde 122626 Corresponde al numero de OT, p indica que forma parte de las Paginas y 1 indica la posicion dentro de estas.&#xA; Paginas mide 165 mm de ancho y 216 mm de alto, con una cantidad de 124.&#xA; &#xA; Para TAPAS:&#xA; 122626TAPAS1.pdf&#xA; Donde 122626 Corresponde al numero de OT, TAPAS indica que forma parte de las TAPAS y 1 indica la posicion dentro de estas.&#xA; TAPAS mide 165 mm de ancho y 216 mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="SUBSECRETARIA DEL MINISTERIO DE EDUCACION PUBLICA" ColorFlow="Ink Opt Fogra 29 _v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;122626p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;122626TAPAS[#PgPosition].p1.pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="CUADERNILLO 5B MATEMATICA APRENDO SIN PARAR" CSR="" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Paginas</NombreGrupoPaginas>
+    <CantidadPaginas>124</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>466-470</X>
+    <Y>610-614</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPAS</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>466-470</X>
+    <Y>610-614</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Cartulina</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

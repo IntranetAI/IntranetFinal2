@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para Paginas:&#xA; 122676p1.pdf&#xA; Donde 122676 Corresponde al numero de OT, p indica que forma parte de las Paginas y 1 indica la posicion dentro de estas.&#xA; Paginas mide 170 mm de ancho y 235 mm de alto, con una cantidad de 252.&#xA; &#xA; Para TAPA:&#xA; 122676TAPA1.pdf&#xA; Donde 122676 Corresponde al numero de OT, TAPA indica que forma parte de las TAPA y 1 indica la posicion dentro de estas.&#xA; TAPA mide 170 mm de ancho y 235 mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="CORPORACION DE LA EDUCACION APTUS CHILE" ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;122676p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;122676TAPA[#PgPosition].p1.pdf&quot; &quot;TAPA&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="LIB.LA MENTE LECTORA" CSR="José Nuñez" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Paginas</NombreGrupoPaginas>
+    <CantidadPaginas>252</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>480-484</X>
+    <Y>664-668</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPA</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>480-484</X>
+    <Y>664-668</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

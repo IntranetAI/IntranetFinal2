@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para Paginas:&#xA; 121491p1.pdf&#xA; Donde 121491 Corresponde al numero de OT, p indica que forma parte de las Paginas y 3 indica la posicion dentro de estas.&#xA; Paginas mide 210 mm de ancho y 270 mm de alto, con una cantidad de 32.&#xA; &#xA; Para TAPAS:&#xA; 121491TAPAS1.pdf&#xA; Donde 121491 Corresponde al numero de OT, TAPAS indica que forma parte de las TAPAS y 1 indica la posicion dentro de estas.&#xA; TAPAS mide 210 mm de ancho y 270 mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="Copesa (Mas Decoracion)" ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;121491p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Paginas[%].p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Paginas[%].p[#PgPosition].pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;121491TAPAS[#PgPosition].p1.pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPAS[%].p[#PgPosition].p1.pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPAS[%].p[#PgPosition].pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="REV.MAS DECORACION 889" CSR="Daniel Gajardo" CorreoCSR="" ClienteNuevo="No">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Paginas</NombreGrupoPaginas>
+    <CantidadPaginas>32</CantidadPaginas>
+    <InicioGrupo>3</InicioGrupo>
+    <X>593-597</X>
+    <Y>763-767</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel></ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPAS</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>763-767</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel></ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

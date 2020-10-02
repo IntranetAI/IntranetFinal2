@@ -79,6 +79,7 @@ namespace Intranet.ModuloFacturacion.Controller
                     cmd.CommandText = Insertquery;
                     cmd.ExecuteNonQuery();
                     retorno = "OK";
+
                 }
                 catch (Exception e)
                 {

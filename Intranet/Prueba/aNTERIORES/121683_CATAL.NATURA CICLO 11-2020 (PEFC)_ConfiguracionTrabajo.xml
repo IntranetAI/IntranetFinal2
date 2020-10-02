@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para Paginas:&#xA; 121683p1.pdf&#xA; Donde 121683 Corresponde al numero de OT, p indica que forma parte de las Paginas y 1 indica la posicion dentro de estas.&#xA; Paginas mide  mm de ancho y  mm de alto, con una cantidad de 132.&#xA; &#xA; Para Tapas:&#xA; 121683Tapas1.pdf&#xA; Donde 121683 Corresponde al numero de OT, Tapas indica que forma parte de las Tapas y 1 indica la posicion dentro de estas.&#xA; Tapas mide  mm de ancho y  mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="NATURA COSMETICOS S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;121683p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Paginas[%].p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Paginas[%].p[#PgPosition].pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;[%]_[%]_[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;121683Tapas[#PgPosition].p1.pdf&quot; &quot;Tapas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Tapas[%].p[#PgPosition].p1.pdf&quot; &quot;Tapas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Tapas[%].p[#PgPosition].pdf&quot; &quot;Tapas&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="CATAL.NATURA CICLO 11-2020 (PEFC)" CSR="Felipe Aguilar" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Paginas</NombreGrupoPaginas>
+    <CantidadPaginas>132</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>480-484</X>
+    <Y>593-597</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Tapas</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>480-484</X>
+    <Y>593-597</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

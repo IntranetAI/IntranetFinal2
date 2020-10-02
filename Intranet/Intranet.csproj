@@ -399,6 +399,9 @@
     <Content Include="ModuloPresupuesto\View\Solicitud_PPTO.aspx" />
     <Content Include="ModuloPresupuesto\View\Solicitud_Presupuesto.aspx" />
     <Content Include="ModuloPresupuesto\View\Sol_PPTO.aspx" />
+    <Content Include="ModuloPrinergy\View\ParteManual.aspx" />
+    <Content Include="ModuloPrinergy\View\Scripts\dashboard.css" />
+    <Content Include="ModuloPrinergy\View\Scripts\dashboard.js" />
     <Content Include="ModuloProduccion\View\AnalisisProduccion.aspx" />
     <Content Include="ModuloProduccion\View\csr.aspx" />
     <Content Include="ModuloProduccion\View\DetalleInformeProduccion.aspx" />
@@ -2052,6 +2055,16 @@
     <Compile Include="ModuloPresupuesto\View\Sol_PPTO.aspx.designer.cs">
       <DependentUpon>Sol_PPTO.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ModuloPrinergy\Controller\Controller_XML.cs" />
+    <Compile Include="ModuloPrinergy\Model\Homologacion.cs" />
+    <Compile Include="ModuloPrinergy\Model\XMLFormato.cs" />
+    <Compile Include="ModuloPrinergy\View\ParteManual.aspx.cs">
+      <DependentUpon>ParteManual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloPrinergy\View\ParteManual.aspx.designer.cs">
+      <DependentUpon>ParteManual.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ModuloProduccion\Controller\Controller_EstadisticasProduccion.cs" />
     <Compile Include="ModuloProduccion\Controller\Controller_InformeProduccion_V2.cs" />
     <Compile Include="ModuloProduccion\Controller\Controller_InformeSemanal.cs" />
@@ -2865,6 +2878,7 @@
     <Compile Include="View\Controller\ControllerSubMenu.cs" />
     <Compile Include="View\Controller\Controller_Conexion.cs" />
     <Compile Include="View\Controller\Controller_Login.cs" />
+    <Compile Include="View\Controller\Controller_Preprensa.cs" />
     <Compile Include="View\Controller\Controller_Registro.cs" />
     <Compile Include="View\Controller\Controller_ResetPassword.cs" />
     <Compile Include="View\Controller\Controller_ScoreCard_ENC.cs" />
@@ -2974,6 +2988,7 @@
     <Folder Include="ModuloDespacho\View\UploadDocuments\" />
     <Folder Include="ModuloImpresion\Controller\" />
     <Folder Include="ModuloImpresion\Model\" />
+    <Folder Include="ModuloPrinergy\View\Prueba\" />
     <Folder Include="ModuloUsuario\View\Uploads\" />
   </ItemGroup>
   <ItemGroup>

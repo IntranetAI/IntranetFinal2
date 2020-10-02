@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para PAGINASPAWPATROL:&#xA; 123000p1.pdf&#xA; Donde 123000 Corresponde al numero de OT, p indica que forma parte de las PAGINASPAWPATROL y 1 indica la posicion dentro de estas.&#xA; PAGINASPAWPATROL mide  mm de ancho y  mm de alto, con una cantidad de 16.&#xA; &#xA; Para TAPASPAWPATROL:&#xA; 123000TAPASPAWPATROL1.pdf&#xA; Donde 123000 Corresponde al numero de OT, TAPASPAWPATROL indica que forma parte de las TAPASPAWPATROL y 1 indica la posicion dentro de estas.&#xA; TAPASPAWPATROL mide  mm de ancho y  mm de alto, con una cantidad de 4.&#xA; &#xA; Para PAGINASMINNIE:&#xA; 123000p1.pdf&#xA; Donde 123000 Corresponde al numero de OT, p indica que forma parte de las PAGINASMINNIE y 1 indica la posicion dentro de estas.&#xA; PAGINASMINNIE mide  mm de ancho y  mm de alto, con una cantidad de 16.&#xA; &#xA; Para TAPASMINNIE:&#xA; 123000TAPASMINNIE1.pdf&#xA; Donde 123000 Corresponde al numero de OT, TAPASMINNIE indica que forma parte de las TAPASMINNIE y 1 indica la posicion dentro de estas.&#xA; TAPASMINNIE mide  mm de ancho y  mm de alto, con una cantidad de 4.&#xA; &#xA; Para PAGINASMINIONS:&#xA; 123000p1.pdf&#xA; Donde 123000 Corresponde al numero de OT, p indica que forma parte de las PAGINASMINIONS y 1 indica la posicion dentro de estas.&#xA; PAGINASMINIONS mide  mm de ancho y  mm de alto, con una cantidad de 16.&#xA; &#xA; Para TAPASMINIONS:&#xA; 123000TAPASMINIONS1.pdf&#xA; Donde 123000 Corresponde al numero de OT, TAPASMINIONS indica que forma parte de las TAPASMINIONS y 1 indica la posicion dentro de estas.&#xA; TAPASMINIONS mide  mm de ancho y  mm de alto, con una cantidad de 4.&#xA; &#xA; Para PAGINASMICKEY:&#xA; 123000p1.pdf&#xA; Donde 123000 Corresponde al numero de OT, p indica que forma parte de las PAGINASMICKEY y 1 indica la posicion dentro de estas.&#xA; PAGINASMICKEY mide  mm de ancho y  mm de alto, con una cantidad de 16.&#xA; &#xA; Para TAPASMICKEY:&#xA; 123000TAPASMICKEY1.pdf&#xA; Donde 123000 Corresponde al numero de OT, TAPASMICKEY indica que forma parte de las TAPASMICKEY y 1 indica la posicion dentro de estas.&#xA; TAPASMICKEY mide  mm de ancho y  mm de alto, con una cantidad de 4.&#xA; &#xA; Para PAGINASFROZEN:&#xA; 123000p1.pdf&#xA; Donde 123000 Corresponde al numero de OT, p indica que forma parte de las PAGINASFROZEN y 1 indica la posicion dentro de estas.&#xA; PAGINASFROZEN mide  mm de ancho y  mm de alto, con una cantidad de 16.&#xA; &#xA; Para TAPASFROZEN:&#xA; 123000TAPASFROZEN1.pdf&#xA; Donde 123000 Corresponde al numero de OT, TAPASFROZEN indica que forma parte de las TAPASFROZEN y 1 indica la posicion dentro de estas.&#xA; TAPASFROZEN mide  mm de ancho y  mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="THE GARAGE COMPANY SpA" ColorFlow="Ink Opt Fogra 29 _v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;123000p[#PgPosition].p1.pdf&quot; &quot;PAGINASPAWPATROL&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASPAWPATROL[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINASPAWPATROL&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASPAWPATROL[%].p[#PgPosition].pdf&quot; &quot;PAGINASPAWPATROL&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000TAPASPAWPATROL[#PgPosition].p1.pdf&quot; &quot;TAPASPAWPATROL&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASPAWPATROL[%].p[#PgPosition].p1.pdf&quot; &quot;TAPASPAWPATROL&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASPAWPATROL[%].p[#PgPosition].pdf&quot; &quot;TAPASPAWPATROL&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000p[#PgPosition].p1.pdf&quot; &quot;PAGINASMINNIE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASMINNIE[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINASMINNIE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASMINNIE[%].p[#PgPosition].pdf&quot; &quot;PAGINASMINNIE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000TAPASMINNIE[#PgPosition].p1.pdf&quot; &quot;TAPASMINNIE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASMINNIE[%].p[#PgPosition].p1.pdf&quot; &quot;TAPASMINNIE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASMINNIE[%].p[#PgPosition].pdf&quot; &quot;TAPASMINNIE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000p[#PgPosition].p1.pdf&quot; &quot;PAGINASMINIONS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASMINIONS[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINASMINIONS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASMINIONS[%].p[#PgPosition].pdf&quot; &quot;PAGINASMINIONS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000TAPASMINIONS[#PgPosition].p1.pdf&quot; &quot;TAPASMINIONS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASMINIONS[%].p[#PgPosition].p1.pdf&quot; &quot;TAPASMINIONS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASMINIONS[%].p[#PgPosition].pdf&quot; &quot;TAPASMINIONS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000p[#PgPosition].p1.pdf&quot; &quot;PAGINASMICKEY&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASMICKEY[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINASMICKEY&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASMICKEY[%].p[#PgPosition].pdf&quot; &quot;PAGINASMICKEY&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000TAPASMICKEY[#PgPosition].p1.pdf&quot; &quot;TAPASMICKEY&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASMICKEY[%].p[#PgPosition].p1.pdf&quot; &quot;TAPASMICKEY&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASMICKEY[%].p[#PgPosition].pdf&quot; &quot;TAPASMICKEY&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000p[#PgPosition].p1.pdf&quot; &quot;PAGINASFROZEN&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASFROZEN[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINASFROZEN&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINASFROZEN[%].p[#PgPosition].pdf&quot; &quot;PAGINASFROZEN&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123000TAPASFROZEN[#PgPosition].p1.pdf&quot; &quot;TAPASFROZEN&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASFROZEN[%].p[#PgPosition].p1.pdf&quot; &quot;TAPASFROZEN&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPASFROZEN[%].p[#PgPosition].pdf&quot; &quot;TAPASFROZEN&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="LIB.PARA PINTAR (7 MODS)" CSR="" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINASPAWPATROL</NombreGrupoPaginas>
+    <CantidadPaginas>16</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPASPAWPATROL</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>LWC</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINASMINNIE</NombreGrupoPaginas>
+    <CantidadPaginas>16</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>r</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPASMINNIE</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>s</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINASMINIONS</NombreGrupoPaginas>
+    <CantidadPaginas>16</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>t</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPASMINIONS</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>u</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINASMICKEY</NombreGrupoPaginas>
+    <CantidadPaginas>16</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>v</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPASMICKEY</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>w</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINASFROZEN</NombreGrupoPaginas>
+    <CantidadPaginas>16</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>x</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPASFROZEN</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>848-852</X>
+    <Y>1189-1193</Y>
+    <Prefijo>y</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

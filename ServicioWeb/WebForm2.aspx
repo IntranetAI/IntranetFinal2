@@ -18,7 +18,11 @@
  
 
 
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+ 
+
+
     </form>
-    <iframe width="482" height="500" scrolling="no" frameborder="0" id="paymentFrame" src=" https://testing.aimpresores.cl"></iframe>
+   
 </body>
 </html>

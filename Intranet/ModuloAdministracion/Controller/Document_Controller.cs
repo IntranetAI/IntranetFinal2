@@ -835,6 +835,7 @@ namespace Intranet.ModuloAdministracion.Controller
                     cab.EntRutTer = RutDefecto;
                     cab.EntSucNumeroTer = "0000";
                     cab.LlgDocFecha = f3;
+                    string aaaaaaa = reader["referencia_condicion_venta"].ToString();
                     cab.LlgDocFechaVenc = FechaVencimiento(fecha, Convert.ToInt32(reader["referencia_condicion_venta"].ToString()));
                     if (es_elect == "2")
                     {
@@ -1006,6 +1007,10 @@ namespace Intranet.ModuloAdministracion.Controller
             {
                 FechaVen = FechaIni.AddDays(150).ToString("yyyy/MM/dd");
             }
+            if (ID_Cond_ventas == 30)
+            {
+                FechaVen = FechaIni.AddDays(180).ToString("yyyy/MM/dd");
+            }
 
             return FechaVen;
         }
@@ -1166,6 +1171,7 @@ namespace Intranet.ModuloAdministracion.Controller
                                         " WHEN pc.referencia_cuenta_contable = 510202 THEN 420201"+
                                         " WHEN pc.referencia_cuenta_contable = 510201 THEN 420106"+
                                         " WHEN pc.referencia_cuenta_contable = 520101 THEN 420301"+
+                                        //      510101
                                         " ELSE 0"+
                                         " END AS id_cuenta_contable_nueva,"+
                                         " nombre_cuenta_contable,"+
@@ -1224,8 +1230,7 @@ namespace Intranet.ModuloAdministracion.Controller
                                         " valor_iva , valor_total, valor_flete order by id_folio_factura";
                     
                 SqlDataReader reader = cmd.ExecuteReader();
-                int contadorregisto = 0;
-                int contadorFactura = 1;
+                int contadorregisto = 0; int contadorFactura = 1;
                 int factura = 0;
                 double ivaTotal = 0;
                 string rutCliente = "";
@@ -1864,7 +1869,8 @@ namespace Intranet.ModuloAdministracion.Controller
             }
 
             con.CerrarConexion();
-            return lista;
+            List<Detalle> pruebadetalle = lista;
+            return lista; 
         }
 
         public bool UpdateExport(string idFactura, string FechaInicio, string FechaTermino)
@@ -1876,6 +1882,25 @@ namespace Intranet.ModuloAdministracion.Controller
                 cmd.CommandText = "update documentos_mercantil set referencia_estado_documento=8 " +
                                   " where fecha_emision between '" + FechaInicio + "' and '" + FechaTermino +"' "+
                                   " and referencia_estado_documento in(7,5)" +
+                                   " and id_documento_mercantil  in (" + idFactura + ")";
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            con.CerrarConexion();
+        }
+
+        public bool UpdateEstado7(string idFactura)
+        {
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionDataP2B2000();
+            if (cmd != null)
+            {
+                cmd.CommandText = "update documentos_mercantil set referencia_estado_documento=7 " +
+                                  " where referencia_estado_documento in(5)" +
                                    " and id_documento_mercantil  in (" + idFactura + ")";
                 cmd.ExecuteNonQuery();
                 return true;

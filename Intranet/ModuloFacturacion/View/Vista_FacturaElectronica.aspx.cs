@@ -8,6 +8,7 @@ using Intranet.ModuloFacturacion.Controller;
 using Intranet.ModuloFacturacion.Model;
 using System.Globalization;
 using System.Text;
+using Intranet.ModuloAdministracion.Controller;
 
 namespace Intranet.ModuloFacturacion.View
 {
@@ -439,8 +440,16 @@ namespace Intranet.ModuloFacturacion.View
 
                 if (evento == "OK")
                 {
-                    string popupScript = "<script language='JavaScript'> alert(' Actualizacion de Factura Electronicas Realizada Correctamente');opener.location.reload();window.close();</script>";
-                    Page.RegisterStartupScript("PopupScript", popupScript);
+                    Document_Controller dcc = new Document_Controller();
+                    if (dcc.UpdateEstado7(Request.QueryString["Fac"].ToString()) == true)
+                    {
+                        string popupScript = "<script language='JavaScript'> alert(' Actualizacion de Factura Electronicas Realizada Correctamente');opener.location.reload();window.close();</script>";
+                        Page.RegisterStartupScript("PopupScript", popupScript);
+                    }else
+                    {
+                        string popupScript = "<script language='JavaScript'> alert(' Ha ocurrido un error, vuelva a intentarlo');</script>";
+                        Page.RegisterStartupScript("PopupScript", popupScript);
+                    }
                 }
                 else
                 {

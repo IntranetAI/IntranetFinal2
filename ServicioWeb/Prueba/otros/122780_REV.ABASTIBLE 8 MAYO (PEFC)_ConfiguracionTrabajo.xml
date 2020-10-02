@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para Paginas:&#xA; 122780p1.pdf&#xA; Donde 122780 Corresponde al numero de OT, p indica que forma parte de las Paginas y 1 indica la posicion dentro de estas.&#xA; Paginas mide 216 mm de ancho y 280 mm de alto, con una cantidad de 32.&#xA; &#xA; Para TAPA:&#xA; 122780TAPA1.pdf&#xA; Donde 122780 Corresponde al numero de OT, TAPA indica que forma parte de las TAPA y 1 indica la posicion dentro de estas.&#xA; TAPA mide 216 mm de ancho y 280 mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="SANCHEZ Y BARCELO PERIODISMO Y COMUNICACIONES LTDA." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;122780p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Paginas[%].p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;Paginas[%].p[#PgPosition].pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;122780TAPA[#PgPosition].p1.pdf&quot; &quot;TAPA&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPA[%].p[#PgPosition].p1.pdf&quot; &quot;TAPA&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPA[%].p[#PgPosition].pdf&quot; &quot;TAPA&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="REV.ABASTIBLE 8 MAYO (PEFC)" CSR="Pablo Gutierrez" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Paginas</NombreGrupoPaginas>
+    <CantidadPaginas>32</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>610-614</X>
+    <Y>792-796</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPA</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>610-614</X>
+    <Y>792-796</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

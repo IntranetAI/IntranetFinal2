@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para Paginas:&#xA; 121938p1.pdf&#xA; Donde 121938 Corresponde al numero de OT, p indica que forma parte de las Paginas y 1 indica la posicion dentro de estas.&#xA; Paginas mide 205 mm de ancho y 275 mm de alto, con una cantidad de 80.&#xA; &#xA; Para TAPAS_2MOD:&#xA; 121938TAPAS_2MOD1.pdf&#xA; Donde 121938 Corresponde al numero de OT, TAPAS_2MOD indica que forma parte de las TAPAS_2MOD y 1 indica la posicion dentro de estas.&#xA; TAPAS_2MOD mide 205 mm de ancho y 275 mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="EDICIONES FINANCIERAS S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;121938p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;121938TAPAS_2MOD[#PgPosition].p1.pdf&quot; &quot;TAPAS_2MOD&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="REV.CAPITAL 526" CSR="" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>Paginas</NombreGrupoPaginas>
+    <CantidadPaginas>80</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>579-583</X>
+    <Y>778-782</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPAS_2MOD</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>579-583</X>
+    <Y>778-782</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

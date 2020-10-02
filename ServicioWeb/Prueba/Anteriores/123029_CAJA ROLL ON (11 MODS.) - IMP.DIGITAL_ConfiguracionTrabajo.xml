@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para CAJA1:&#xA; 123029CAJA11.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA1 indica que forma parte de las CAJA1 y 1 indica la posicion dentro de estas.&#xA; CAJA1 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA2:&#xA; 123029CAJA21.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA2 indica que forma parte de las CAJA2 y 1 indica la posicion dentro de estas.&#xA; CAJA2 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA3:&#xA; 123029CAJA31.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA3 indica que forma parte de las CAJA3 y 1 indica la posicion dentro de estas.&#xA; CAJA3 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA4:&#xA; 123029CAJA41.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA4 indica que forma parte de las CAJA4 y 1 indica la posicion dentro de estas.&#xA; CAJA4 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA5:&#xA; 123029CAJA51.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA5 indica que forma parte de las CAJA5 y 1 indica la posicion dentro de estas.&#xA; CAJA5 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA6:&#xA; 123029CAJA61.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA6 indica que forma parte de las CAJA6 y 1 indica la posicion dentro de estas.&#xA; CAJA6 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA7:&#xA; 123029CAJA71.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA7 indica que forma parte de las CAJA7 y 1 indica la posicion dentro de estas.&#xA; CAJA7 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA8:&#xA; 123029CAJA81.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA8 indica que forma parte de las CAJA8 y 1 indica la posicion dentro de estas.&#xA; CAJA8 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA9:&#xA; 123029CAJA91.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA9 indica que forma parte de las CAJA9 y 1 indica la posicion dentro de estas.&#xA; CAJA9 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA10:&#xA; 123029CAJA101.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA10 indica que forma parte de las CAJA10 y 1 indica la posicion dentro de estas.&#xA; CAJA10 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; Para CAJA11:&#xA; 123029CAJA111.pdf&#xA; Donde 123029 Corresponde al numero de OT, CAJA11 indica que forma parte de las CAJA11 y 1 indica la posicion dentro de estas.&#xA; CAJA11 mide 111 mm de ancho y 132 mm de alto, con una cantidad de 2.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="MARIA SILVIA ANDUEZA CASTRO" ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;123029CAJA1[#PgPosition].p1.pdf&quot; &quot;CAJA1&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA1[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA1&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA1[%].p[#PgPosition].pdf&quot; &quot;CAJA1&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA2[#PgPosition].p1.pdf&quot; &quot;CAJA2&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA2[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA2&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA2[%].p[#PgPosition].pdf&quot; &quot;CAJA2&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA3[#PgPosition].p1.pdf&quot; &quot;CAJA3&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA3[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA3&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA3[%].p[#PgPosition].pdf&quot; &quot;CAJA3&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA4[#PgPosition].p1.pdf&quot; &quot;CAJA4&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA4[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA4&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA4[%].p[#PgPosition].pdf&quot; &quot;CAJA4&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA5[#PgPosition].p1.pdf&quot; &quot;CAJA5&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA5[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA5&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA5[%].p[#PgPosition].pdf&quot; &quot;CAJA5&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA6[#PgPosition].p1.pdf&quot; &quot;CAJA6&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA6[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA6&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA6[%].p[#PgPosition].pdf&quot; &quot;CAJA6&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA7[#PgPosition].p1.pdf&quot; &quot;CAJA7&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA7[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA7&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA7[%].p[#PgPosition].pdf&quot; &quot;CAJA7&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA8[#PgPosition].p1.pdf&quot; &quot;CAJA8&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA8[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA8&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA8[%].p[#PgPosition].pdf&quot; &quot;CAJA8&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA9[#PgPosition].p1.pdf&quot; &quot;CAJA9&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA9[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA9&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA9[%].p[#PgPosition].pdf&quot; &quot;CAJA9&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA10[#PgPosition].p1.pdf&quot; &quot;CAJA10&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA10[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA10&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA10[%].p[#PgPosition].pdf&quot; &quot;CAJA10&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;123029CAJA11[#PgPosition].p1.pdf&quot; &quot;CAJA11&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA11[%].p[#PgPosition].p1.pdf&quot; &quot;CAJA11&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;CAJA11[%].p[#PgPosition].pdf&quot; &quot;CAJA11&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="CAJA ROLL ON (11 MODS.) - IMP.DIGITAL" CSR="" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA1</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA2</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA3</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>r</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA4</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>s</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA5</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>t</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA6</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>u</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA7</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>v</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA8</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>w</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA9</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>x</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA10</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>y</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>CAJA11</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>313-317</X>
+    <Y>372-376</Y>
+    <Prefijo>z</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

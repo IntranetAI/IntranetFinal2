@@ -78,7 +78,7 @@ namespace Intranet.ModuloAdministracion.View
                 //GridView gv = new GridView();
                 //gv.DataSource = lista;
                 //gv.DataBind();
-                //ExportToExcel("LcoCab", gv);
+                //ExportToExcel("LcoCab", gv);anasskd  askhbflin akjsdl
                 btnExportCSV_Click(lista);
             }
             else

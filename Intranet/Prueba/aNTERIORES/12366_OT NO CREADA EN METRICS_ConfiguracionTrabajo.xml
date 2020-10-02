@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para PAGINAS:&#xA; 12366p1.pdf&#xA; Donde 12366 Corresponde al numero de OT, p indica que forma parte de las PAGINAS y 1 indica la posicion dentro de estas.&#xA; PAGINAS mide 122 mm de ancho y 122 mm de alto, con una cantidad de 123.&#xA; &#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="A Impresores S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;12366p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINAS[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINAS[%].p[#PgPosition].pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="OT NO CREADA EN METRICS" CSR="Label" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINAS</NombreGrupoPaginas>
+    <CantidadPaginas>123</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>344-348</X>
+    <Y>344-348</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

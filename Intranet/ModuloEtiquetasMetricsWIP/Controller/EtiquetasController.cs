@@ -228,16 +228,18 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.Controller
             SqlCommand cmd = conexion.AbrirConexionIntranet();
             if (cmd != null)
             {
-                cmd.CommandText = "[Metrics_Etiquetas_Listado]";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@OT", OT);
-                cmd.Parameters.AddWithValue("@Pliego", Pliego);
-                cmd.Parameters.AddWithValue("@Maquina", "");
-                cmd.Parameters.AddWithValue("@Procedimiento", 1);
-                cmd.CommandTimeout = 9000000;
                 try
                 {
+                    cmd.CommandText = "[Metrics_Etiquetas_Listado]";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OT", OT);
+                    cmd.Parameters.AddWithValue("@Pliego", Pliego);
+                    cmd.Parameters.AddWithValue("@Maquina", "");
+                    cmd.Parameters.AddWithValue("@Procedimiento", 1);
+
                     SqlDataReader reader = cmd.ExecuteReader();
+                    cmd.CommandTimeout = 9000000;
+
                     while (reader.Read())
                     {
                         result = result + "<tr style='height: 22px; background: #fff; font: 11px Arial, Helvetica, sans-serif; color: #333;  vertical-align: text-top;'>" +

@@ -47,6 +47,10 @@
       <HintPath>..\packages\MySql.Data.6.7.9\lib\net20\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -63,7 +67,9 @@
   <ItemGroup>
     <Content Include="ServiceMail.asmx" />
     <Content Include="tex.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -72,19 +78,29 @@
     </Content>
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
+    <Content Include="WebForm3.aspx" />
     <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="ModuloProduccion\Controller\LithoController.cs" />
     <Compile Include="ModuloProduccion\Controller\PapelController.cs" />
     <Compile Include="ModuloProduccion\Controller\ProduccionController.cs" />
+    <Compile Include="ModuloProduccion\Controller\XMLController.cs" />
+    <Compile Include="ModuloProduccion\Model\ACR.cs" />
     <Compile Include="ModuloProduccion\Model\Factura.cs" />
     <Compile Include="ModuloProduccion\Model\Facturacion_ElectronicaSII.cs" />
     <Compile Include="ModuloProduccion\Model\FechaDistribuccion.cs" />
+    <Compile Include="ModuloProduccion\Model\JsonHistorial_Entrada.cs" />
+    <Compile Include="ModuloProduccion\Model\JsonHistorial_Salida.cs" />
+    <Compile Include="ModuloProduccion\Model\JsonLitho.cs" />
     <Compile Include="ModuloProduccion\Model\OT_Liberadas.cs" />
     <Compile Include="ModuloProduccion\Model\Pedidos.cs" />
+    <Compile Include="ModuloProduccion\Model\PliegosFinalizados.cs" />
     <Compile Include="ModuloProduccion\Model\SincronizarOT.cs" />
     <Compile Include="ModuloProduccion\Model\WSMetrics.cs" />
+    <Compile Include="ModuloProduccion\Model\XMLMetrics.cs" />
+    <Compile Include="Prueba\Prueba.cs" />
     <Compile Include="ServiceMail.asmx.cs">
       <DependentUpon>ServiceMail.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -104,6 +120,13 @@
     <Compile Include="WebForm2.aspx.designer.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -111,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="PruebaPapeles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -22,7 +22,9 @@ namespace Intranet.ModuloAdministracion.View
             if (!IsPostBack)
             {
                 try {   System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Request.UserLanguages[0]);  }
-                catch { System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-CL"); }
+                catch { //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-CL");
+
+                }
                 RadGridRF.DataSource = "";
                 RadGridRF.DataBind();
                 RadGridPlanchas.DataSource = "";

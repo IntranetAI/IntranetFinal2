@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para PAGINAS:&#xA; 12368p1.pdf&#xA; Donde 12368 Corresponde al numero de OT, p indica que forma parte de las PAGINAS y 1 indica la posicion dentro de estas.&#xA; PAGINAS mide 210 mm de ancho y 275 mm de alto, con una cantidad de 100.&#xA; &#xA; Para TAPAS:&#xA; 12368TAPAS1.pdf&#xA; Donde 12368 Corresponde al numero de OT, TAPAS indica que forma parte de las TAPAS y 1 indica la posicion dentro de estas.&#xA; TAPAS mide 210 mm de ancho y 275 mm de alto, con una cantidad de 4.&#xA; &#xA; Para LAMINAS:&#xA; 12368LAMINAS1.pdf&#xA; Donde 12368 Corresponde al numero de OT, LAMINAS indica que forma parte de las LAMINAS y 1 indica la posicion dentro de estas.&#xA; LAMINAS mide 210 mm de ancho y 275 mm de alto, con una cantidad de 1.&#xA; &#xA; SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)&#xA; Para PAGINAS: El PDF anidado debe llamarse PAGINAS.pdf&#xA; Para TAPAS: El PDF anidado debe llamarse TAPAS.pdf&#xA; Para LAMINAS: El PDF anidado debe llamarse LAMINAS.pdf&#xA; &#xA; &#xA; En caso de dudas contacese con su reprentante de servicio al cliente." Cliente="303 EDITORIALES S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;12368p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINAS[%].p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;PAGINAS[%].p[#PgPosition].pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;12368TAPAS[#PgPosition].p1.pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPAS[%].p[#PgPosition].p1.pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;TAPAS[%].p[#PgPosition].pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;12368LAMINAS[#PgPosition].p1.pdf&quot; &quot;LAMINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;LAMINAS[%].p[#PgPosition].p1.pdf&quot; &quot;LAMINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;LAMINAS[%].p[#PgPosition].pdf&quot; &quot;LAMINAS&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="OT DE PRUEBA - ELIMINAR" CSR="Label" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINAS</NombreGrupoPaginas>
+    <CantidadPaginas>100</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>778-782</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPAS</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>778-782</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>LAMINAS</NombreGrupoPaginas>
+    <CantidadPaginas>1</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>778-782</Y>
+    <Prefijo>r</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

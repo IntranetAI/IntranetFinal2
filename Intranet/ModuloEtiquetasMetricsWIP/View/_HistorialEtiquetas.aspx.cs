@@ -22,7 +22,7 @@ namespace Intranet.ModuloEtiquetasMetricsWIP.View
                 lblOT.Text = ot;
                 lblNombreOT.Text = nOT;
                 lblPliego.Text = pliego;
-                lblTabla.Text = ec.HistorialEtiquetas(ot, pliego);
+                lblTabla.Text = ec.HistorialEtiquetas(ot.Trim(), pliego.Trim());
             }
         }
     }
