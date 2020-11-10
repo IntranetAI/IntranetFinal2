@@ -202,6 +202,33 @@ namespace Intranet.ModuloPrinergy.View {
         protected global::System.Web.UI.WebControls.TextBox txtFormatoY;
         
         /// <summary>
+        /// Control ddlTiro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTiro;
+        
+        /// <summary>
+        /// Control ddlRetiro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRetiro;
+        
+        /// <summary>
+        /// Control ddlColorEspecial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlColorEspecial;
+        
+        /// <summary>
         /// Control DropDownList1.
         /// </summary>
         /// <remarks>

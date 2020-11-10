@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente:&#xA; &#xA; La nomenclatura a utilizar en sus archivos es la siguiente:&#xA; &#xA; Para DESPLEGABLE:&#xA; DESPLEGABLE1.pdf&#xA; Donde  Corresponde al numero de OT, DESPLEGABLE indica que forma parte de las DESPLEGABLE y 1 indica la posicion dentro de estas.&#xA; DESPLEGABLE mide 834 mm de ancho y 270 mm de alto, con una cantidad de 2.&#xA; &#xA; &#xA; En caso de dudas, contáctese con su representante de servicio al cliente." Cliente="EASY RETAIL S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;124027DESPLEGABLE[#PgPosition].p1.pdf&quot; &quot;DESPLEGABLE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;124027DESPLEGABLE.p[#PgPosition].p1.pdf&quot; &quot;DESPLEGABLE&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;124027DESPLEGABLE.p[#PgPosition].pdf&quot; &quot;DESPLEGABLE&quot; [#PgPosition] 1&#xA; " Username="Araxi" NombreTrabajo="FOLL.DESPL.EASY NAVIDAD (PEFC)" CSR="Daniel Gajardo" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>DESPLEGABLE</NombreGrupoPaginas>
+    <CantidadPaginas>2</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>2362-2366</X>
+    <Y>763-767</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+    <RefinarCon>2 CMYK CF COUCHE</RefinarCon>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

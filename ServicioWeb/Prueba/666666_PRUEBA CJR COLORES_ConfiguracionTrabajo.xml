@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; Su trabajo tiene una estructura, que se descompone en distintos grupos de páginas, los que se muestran y explican a continuación:&#xA; &#xA; Estructura del trabajo&#xA;   INTERIOR mide 180 mm de ancho y 245 mm de alto, con una cantidad de 144.&#xA;   TAPAS mide 180 mm de ancho y 245 mm de alto, con una cantidad de 4.&#xA; &#xA; &#xA; La carga de archivos se realiza por cada grupo de páginas de la estructura. La nomenclatura a utilizar para cargar sus archivos es la siguiente:&#xA; &#xA; SI CARGA ARCHIVOS ANIDADOS(1 solo PDF con todas las páginas del grupo)&#xA;   Para INTERIOR: 666666INTERIOR.p1.pdf Donde p1 indica la posición de la página.&#xA;   Para TAPAS: 666666TAPAS.p1.pdf Donde p1 indica la posición de la página.&#xA; &#xA; &#xA; SI CARGA ARCHIVOS SEPARADOS (1 PDF por página)&#xA;   Para INTERIOR: El PDF anidado debe llamarse 666666INTERIOR.pdf&#xA;   Para TAPAS: El PDF anidado debe llamarse 666666TAPAS.pdf&#xA; &#xA; &#xA; En caso de dudas, contáctese con su representante de servicio al cliente." Cliente="Pruebacjr Cliente12" ColorFlow="Ink Opt Fogra 29 _v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;666666p[#PgPosition].p1.pdf&quot; &quot;INTERIOR&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;666666INTERIOR.p[#PgPosition].p1.pdf&quot; &quot;INTERIOR&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;666666INTERIOR.p[#PgPosition].pdf&quot; &quot;INTERIOR&quot; [#PgPosition]+2 1&#xA; ASSIGN= &quot;666666TAPAS[#PgPosition].p1.pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;666666TAPAS.p[#PgPosition].p1.pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;666666TAPAS.p[#PgPosition].pdf&quot; &quot;TAPAS&quot; [#PgPosition] 1&#xA; " Username="cjerias" NombreTrabajo="PRUEBA CJR COLORES" CSR="" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>INTERIOR</NombreGrupoPaginas>
+    <CantidadPaginas>144</CantidadPaginas>
+    <InicioGrupo>3</InicioGrupo>
+    <X>508-512</X>
+    <Y>692-696</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+    <RefinarCon>1 CMYK CF BOND</RefinarCon>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPAS</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>508-512</X>
+    <Y>692-696</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+    <RefinarCon>6 CMYK CF COUCHE PLANOS</RefinarCon>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

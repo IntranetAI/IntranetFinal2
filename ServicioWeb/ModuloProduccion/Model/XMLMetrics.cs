@@ -31,6 +31,11 @@ namespace ServicioWeb.ModuloProduccion.Model
         public int Ynota { get; set; }
         public string ColorFlow { get; set; }
         public bool MultiplePapel { get; set; }
+        public int Colores { get; set; }
+        public int ColorTiro { get; set; }
+        public int ColorRetiro { get; set; }
+        public int ColoresEspeciales { get; set; }
+        public string RefinarCon { get; set; }
     }
     public class Homologacion
     {
@@ -50,6 +55,12 @@ namespace ServicioWeb.ModuloProduccion.Model
         public string Cliente { get; set; }
         public string Keyword { get; set; }
         public string APA { get; set; }
+    }
+    public class NotasAntiguas
+    {
+        public int Id { get; set; }
+        public string Cliente { get; set; }
+
     }
  
 }

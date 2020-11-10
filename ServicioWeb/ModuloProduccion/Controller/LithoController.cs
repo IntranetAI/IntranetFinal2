@@ -37,6 +37,34 @@ namespace ServicioWeb.ModuloProduccion.Controller
             con.CerrarConexion();
             return lista;
         }
+        public bool InsertConsumo(ConsumoEnergia consu)
+        {
+            bool respuesta = false;
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                try
+                {
+                    cmd.CommandText = "[Litho_ConsumoEnergia]";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdApontamento", consu.IdApontamento);
+                    cmd.Parameters.AddWithValue("@Consumo", consu.Consumo);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        respuesta = Convert.ToBoolean(reader["respuesta"].ToString());
+                    }
+                }
+                catch(Exception ex)
+                {
+                    respuesta = false;
+                }
+            }
+            con.CerrarConexion();
+            return respuesta;
+        }
         public List<PliegosFinalizados> PliegosFinalizados(DateTime FI,DateTime FT,int Procedimiento)
         {
             List<PliegosFinalizados> lista = new List<PliegosFinalizados>();

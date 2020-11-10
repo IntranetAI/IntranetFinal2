@@ -88,6 +88,7 @@
     <Compile Include="ModuloProduccion\Controller\ProduccionController.cs" />
     <Compile Include="ModuloProduccion\Controller\XMLController.cs" />
     <Compile Include="ModuloProduccion\Model\ACR.cs" />
+    <Compile Include="ModuloProduccion\Model\ConsumoEnergia.cs" />
     <Compile Include="ModuloProduccion\Model\Factura.cs" />
     <Compile Include="ModuloProduccion\Model\Facturacion_ElectronicaSII.cs" />
     <Compile Include="ModuloProduccion\Model\FechaDistribuccion.cs" />

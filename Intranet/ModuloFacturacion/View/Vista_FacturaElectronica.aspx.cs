@@ -459,6 +459,8 @@ namespace Intranet.ModuloFacturacion.View
             }
             catch (Exception exx)
             {
+                string popupScript = "<script language='JavaScript'> alert('" + exx.Message.ToString() + "');</script>";
+                Page.RegisterStartupScript("PopupScript", popupScript);
             }
         }
 

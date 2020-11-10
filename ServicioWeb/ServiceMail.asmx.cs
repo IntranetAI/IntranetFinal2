@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using ServicioWeb.ModuloProduccion.Model;
 using Newtonsoft.Json;
 using System.Net.Mail;
+using System.Net;
 
 namespace ServicioWeb
 {
@@ -432,6 +433,28 @@ namespace ServicioWeb
             }
             //return "OK";
         }
+        [WebMethod] 
+        public string ConsumoEnergia(string IdApont)
+        {
+            LithoController lc = new LithoController();
+            var url = "http://192.168.4.100/lithoman_ea.php";
+
+            var syncClient = new WebClient();
+            var content = syncClient.DownloadString(url);
+            ConsumoEnergia ce = new ConsumoEnergia();
+ 
+
+            string[] contenido = content.ToString().Split(',');
+            string var1 = contenido[0].Replace("\r\n\"energia_activa:", "").Trim();
+            double consumo = Convert.ToDouble(var1);
+            ce.IdApontamento = IdApont;
+            ce.Consumo = consumo;
+
+            bool insert = lc.InsertConsumo(ce);
+
+            return "OK";
+        }
+
 
 
         [WebMethod]
@@ -445,7 +468,7 @@ namespace ServicioWeb
             /*LISTA PAGINAS DE INICIO Y APA ESPECIAL*/
             List<PaginasInicio> listadoPaginasInicio = xc.CleintesPaginaInicio3();
             List<APA_Clientes> listadoAPAClientes = xc.ClientesAPA();
-            string miXML = "";string miXMLenc = ""; string Notas = "";  string PrimerColorFlow = "";string UltimoColorFlow = "";bool MultiplePapel = false;string NotasAnidadas = "";
+            string miXML = "";string miXMLenc = ""; string Notas = "";  string PrimerColorFlow = "";string UltimoColorFlow = "";bool MultiplePapel = false;string NotasAnidadas = ""; string NotasEstructura = "";
 
             foreach (var item in ListadoOTs)
             {
@@ -521,12 +544,15 @@ namespace ServicioWeb
                                                     "<ColorPapel>" + Papel + "</ColorPapel>" +
                                                     "<ColorFlow>" + it.ColorFlow + "</ColorFlow>" +
                                               "</GrupoPaginas>";
-
-                            Notas += "Para " + it.Proceso + ":<br/>" +
-                                       it.OT + Prefijo + "1.pdf<br/>" +
-                                       "Donde " + it.OT + " Corresponde al numero de OT, " + Prefijo + " indica que forma parte de las " + it.Proceso + " y " + Inicio + " indica la posicion dentro de estas.<br/>" +
-                                       it.Proceso + " mide " + it.Xnota + " mm de ancho y " + it.Ynota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/><br/>";
-                            NotasAnidadas += "Para " +it.Proceso+": El PDF anidado debe llamarse "+it.Proceso+ ".pdf<br/>";
+                            //NOTAS ANTIGUAS MODIFICADO EL 20201005_1119
+                            //Notas += "Para " + it.Proceso + ":<br/>" +
+                            //           it.OT + Prefijo + "1.pdf<br/>" +
+                            //           "Donde " + it.OT + " Corresponde al numero de OT, " + Prefijo + " indica que forma parte de las " + it.Proceso + " y " + Inicio + " indica la posicion dentro de estas.<br/>" +
+                            //           it.Proceso + " mide " + it.Xnota + " mm de ancho y " + it.Ynota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/><br/>";
+                           // NotasAnidadas += "Para " +it.Proceso+": El PDF anidado debe llamarse "+it.Proceso+ ".pdf<br/>";
+                            NotasEstructura += "  " + it.Proceso + " mide " + it.Xnota + " mm de ancho y " + it.Ynota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/>";
+                            Notas += "  Para " + it.Proceso + ": " + item.OT + it.Proceso + ".p1.pdf Donde p1 indica la posición de la página.<br/>";
+                            NotasAnidadas += "  Para " + it.Proceso + ": El PDF anidado debe llamarse " + item.OT + it.Proceso + ".pdf<br/>";
 
                             if (it.Proceso.ToLower().Contains("pagina") && listadoAPAClientes.Where(x => x.Cliente == item.Cliente).Count() > 0)
                             {
@@ -535,8 +561,8 @@ namespace ServicioWeb
                             }
                             APA += "ASSIGN= &quot;" + item.OT + Prefijo + "[#PgPosition].p1.pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition] 1<br/>";
                             /*APA PARA CARGA DE ARCHIVOS ANIDADOS*/
-                            APA += "ASSIGN= &quot;"+it.Proceso+"[%].p[#PgPosition].p1.pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition] 1<br/>";
-                            APA += "ASSIGN= &quot;" + it.Proceso + "[%].p[#PgPosition].pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition]" + ((Inicio == "3") ? "+2" : "") + " 1<br/>";
+                            APA += "ASSIGN= &quot;"+item.OT+it.Proceso+".p[#PgPosition].p1.pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition] 1<br/>";
+                            APA += "ASSIGN= &quot;" + item.OT+it.Proceso + ".p[#PgPosition].pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition]" + ((Inicio == "3") ? "+2" : "") + " 1<br/>";
                             //APA Especial para NATURA
                             //if(item.Cliente.ToLower().Contains("natura") && item.NombreOT.ToLower().Contains("catal") && it.Proceso.ToLower().Contains("pagina"))
                             //{
@@ -550,11 +576,14 @@ namespace ServicioWeb
                         {
                             if (miXML != "")
                             {
-                                string NotaCompleta = Notas + "SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
-                                miXMLenc = "<ConfiguracionTrabajo NOTA='Estimado Cliente: <br/><br/><br/>La nomenclatura a utilizar en sus archivos es la siguiente:<br/><br/>" + NotaCompleta.Replace("<br/>", "&#xA;\n") + "<br/><br/>En caso de dudas contacese con su reprentante de servicio al cliente.' Cliente='" + item.Cliente.Trim() + "' ColorFlow='" + (PrimerColorFlow != "" ? PrimerColorFlow : UltimoColorFlow) + "' APA='!APA 1.0 <br/>" +
-                                                //"ASSIGN= &quot;000001p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1<br/>" +
-                                                //"ASSIGN= &quot;000001Tapa[#PgPosition].p1.pdf&quot; &quot;Tapa&quot; [#PgPosition] 1<br/>" +
-                                                APA +
+                                string NotaCompleta = "Estimado Cliente: <br/><br/><br/>Estructura del trabajo<br/>" + NotasEstructura + "<br/><br/>La nomenclatura a utilizar para cargar sus archivos es la siguiente:<br/><br/>SI CARGA ARCHIVOS SEPARADOS (PDF generados de 1 a 1)<br/>" + Notas + "<br/>SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
+                                miXMLenc = "<ConfiguracionTrabajo NOTA='" + NotaCompleta.Replace("<br/>", "&#xA;\n") + "<br/><br/>En caso de dudas contacese con su reprentante de servicio al cliente.' Cliente='" + item.Cliente.Trim() + "' ColorFlow='" + (PrimerColorFlow != "" ? PrimerColorFlow : UltimoColorFlow) + "' APA='!APA 1.0 <br/>" +
+
+                                                        //string NotaCompleta = Notas + "SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
+                                                        //miXMLenc = "<ConfiguracionTrabajo NOTA='Estimado Cliente: <br/><br/><br/>La nomenclatura a utilizar en sus archivos es la siguiente:<br/><br/>" + NotaCompleta.Replace("<br/>", "&#xA;\n") + "<br/><br/>En caso de dudas contacese con su reprentante de servicio al cliente.' Cliente='" + item.Cliente.Trim() + "' ColorFlow='" + (PrimerColorFlow != "" ? PrimerColorFlow : UltimoColorFlow) + "' APA='!APA 1.0 <br/>" +
+                                                        //                //"ASSIGN= &quot;000001p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1<br/>" +
+                                                        //"ASSIGN= &quot;000001Tapa[#PgPosition].p1.pdf&quot; &quot;Tapa&quot; [#PgPosition] 1<br/>" +
+                                                        APA +
                                                 "' Username='cjerias' NombreTrabajo='" + item.NombreOT.Trim() + "' CSR='" + item.CSR + "' CorreoCSR='" + item.CorreoCSR + "' ClienteNuevo='" + item.EstadoCliente + "'>";
 
                                 miXML += "</ConfiguracionTrabajo>";
@@ -574,10 +603,10 @@ namespace ServicioWeb
 
                                 XMLController xm = new XMLController();
                                 string ale = xm.InsertSincronizacion(item.OT.Trim(), item.NombreOT.Trim(), item.Cliente.Trim(), "Creada", 1, "Automatica", 0);
-                                int ultimavs = xm.InsertUltimaVersion(item.OT, "", 0, 0, 0, 0, "", 2);
+                                int ultimavs = xm.InsertUltimaVersion(item.OT, "", 0, 0, 0, 0, "", 2,0,0,0);
                                 foreach (var est in fil1)
                                 {
-                                    int algo = xm.InsertEstructura(est.OT.Trim(), est.Proceso, est.Paginas, 1, Convert.ToInt32(est.Xnota), Convert.ToInt32(est.Ynota), est.Papel, ultimavs.ToString(), 1);
+                                    int algo = xm.InsertEstructura(est.OT.Trim(), est.Proceso, est.Paginas, 1, Convert.ToInt32(est.Xnota), Convert.ToInt32(est.Ynota), est.Papel, ultimavs.ToString(), 1,0,0,0);
                                 }
 
 
@@ -726,6 +755,190 @@ namespace ServicioWeb
 
             }
             return "Error";
+        }
+
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public string Prinergy_OTAutomatica_Colores(string Usuario)
+        {
+            XMLController xc = new XMLController();
+            List<XMLMetrics> ListadoOTs = xc.OTSEmitidas_Colores();
+            List<XMLMetrics_Detalle> ListadoEstructuras = xc.EstructurasEmitidas_Colores();
+            List<XMLMetrics_Detalle> ListadoEstructurasEmitidas = xc.EstructurasEmitidasPreviamente();
+            /*LISTA PAGINAS DE INICIO Y APA ESPECIAL*/
+            List<PaginasInicio> listadoPaginasInicio = xc.CleintesPaginaInicio3();
+            List<APA_Clientes> listadoAPAClientes = xc.ClientesAPA();
+            List<NotasAntiguas> ListadoClientesNA = xc.Clientes_NotasAntiguas();
+            string miXML = ""; string miXMLenc = ""; string Notas = ""; string PrimerColorFlow = ""; string UltimoColorFlow = ""; bool MultiplePapel = false; string NotasAnidadas = ""; string NotasEstructura = "";
+
+            foreach (var item in ListadoOTs)
+            {
+                if (ListadoEstructuras.Where(x => x.OT == item.OT).Count() > 0)
+                {
+                    List<XMLMetrics_Detalle> fil1 = ListadoEstructuras.Where(x => x.OT == item.OT).ToList();
+                    List<XMLMetrics_Detalle> fil2 = ListadoEstructurasEmitidas.Where(x => x.OT == item.OT).ToList();
+                    string Cambios = "";
+                    if (fil2.Count > 0)
+                    {
+                        foreach (var cons in fil1)
+                        {
+                            if (fil2.Where(x => x.Proceso == cons.Proceso).Where(p => p.Paginas == cons.Paginas).Where(p => p.X == cons.X).Where(p => p.Y == cons.Y).Where(p => p.Papel == cons.Papel).Count() == 0)
+                            {
+                                Cambios = "Si";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Cambios = "Si";
+                    }
+
+                    if (Cambios == "Si")
+                    {
+                        #region RECORREROTS;
+                        //Recorrer numero de paginas
+                        string arregloPrefijo = "p,q,r,s,t,u,v,w,x,y,z,a,b,c,d,e,f,g,h,j,k,p,q,r,s,t,u,v,w,x,y,z,a,b,c,d,e,f,g,h,j,k,p,q,r,s,t,u,v,w,x,y,z,a,b,c,d,e,f,g,h,j,k"; string APA = "";
+                        int largo = 0;
+                        foreach (var it in fil1)
+                        {
+                            #region CrearXML;
+                            if (it.MultiplePapel == true)
+                            {
+                                MultiplePapel = true;
+                            }
+                            if (it.Proceso.ToLower().Contains("interior"))
+                            {
+                                PrimerColorFlow = it.ColorFlow;
+                            }
+                            if (UltimoColorFlow == "")
+                            {
+                                UltimoColorFlow = it.ColorFlow;
+                            }
+                            string Papel = ((item.Cliente.ToLower().Contains("copesa")) ? "" : it.Papel);
+                            string Inicio = "1";
+                            if (it.Proceso.ToLower() == "interior")
+                            {
+                                int pagina = listadoPaginasInicio.Where(x => x.Cliente == item.Cliente && item.NombreOT.Trim().ToLower().Contains(x.Keyword.ToLower())).Select(p => p.Pagina).FirstOrDefault();
+                                if (pagina > 0)
+                                {
+                                    Inicio = pagina.ToString();
+                                } 
+                            }
+                            string Prefijo = (it.Proceso.ToLower().Contains("interior") ? "p" : it.Proceso + "");
+                            string Prefijoxml = "";
+                            Prefijoxml = arregloPrefijo.Substring(0, 2);
+
+
+                            miXML += "<GrupoPaginas>" +
+                                                    "<NombreGrupoPaginas>" + it.Proceso + "</NombreGrupoPaginas>" +
+                                                    "<CantidadPaginas>" + it.Paginas.ToString() + "</CantidadPaginas>" +
+                                                    "<InicioGrupo>" + Inicio + "</InicioGrupo>" +
+                                                    "<X>" + it.X + "</X>" +
+                                                    "<Y>" + it.Y + "</Y>" +
+                                                    "<Prefijo>" + Prefijoxml.Replace(",", "") + "</Prefijo>" +
+                                                    "<ColorPapel>" + Papel + "</ColorPapel>" +
+                                                    "<ColorFlow>" + it.ColorFlow + "</ColorFlow>" +
+                                                    "<RefinarCon>" + it.RefinarCon + "</RefinarCon>" +
+                                              "</GrupoPaginas>";
+
+                            var Clie = ListadoClientesNA.Where(x => x.Cliente == item.Cliente).FirstOrDefault();
+                            if (Clie != null)
+                            {
+                                //NOTAS ANTIGUAS MODIFICADO EL 20201005_1119
+                                Notas += "Para " + it.Proceso + ":<br/>" +
+                                           it.OT + Prefijo + "1.pdf<br/>" +
+                                           "Donde " + it.OT + " Corresponde al numero de OT, " + Prefijo + " indica que forma parte de las " + it.Proceso + " y " + Inicio + " indica la posicion dentro de estas.<br/>" +
+                                           it.Proceso + " mide " + it.Xnota + " mm de ancho y " + it.Ynota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/><br/>";
+                            }
+                            else
+                            {
+                                //Notas Nuevas
+                                NotasEstructura += "  " + it.Proceso + " mide " + it.Xnota + " mm de ancho y " + it.Ynota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/>";
+                                Notas += "  Para " + it.Proceso + ": " + item.OT + it.Proceso + ".p1.pdf Donde p1 indica la posición de la página.<br/>";
+                                NotasAnidadas += "  Para " + it.Proceso + ": El PDF anidado debe llamarse " + item.OT + it.Proceso + ".pdf<br/>";
+                            }
+                            
+
+
+                            if (it.Proceso.ToLower().Contains("interior") && listadoAPAClientes.Where(x => x.Cliente == item.Cliente).Count() > 0)
+                            {
+                                string miApa = listadoAPAClientes.Where(x => x.Cliente == item.Cliente && item.NombreOT.Trim().ToLower().Contains(x.Keyword.ToLower())).Select(p => p.APA).FirstOrDefault();
+                                APA += "ASSIGN= &quot;" + miApa + "&quot; &quot;" + it.Proceso + "&quot; [#PgPosition] 1<br/>";
+                            }
+                            APA += "ASSIGN= &quot;" + item.OT + Prefijo + "[#PgPosition].p1.pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition] 1<br/>";
+                           
+                            /*APA PARA CARGA DE ARCHIVOS ANIDADOS*/
+                            APA += "ASSIGN= &quot;" + item.OT + it.Proceso + ".p[#PgPosition].p1.pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition] 1<br/>";
+                            APA += "ASSIGN= &quot;" + item.OT + it.Proceso + ".p[#PgPosition].pdf&quot; &quot;" + it.Proceso + "&quot; [#PgPosition]" + ((Inicio == "3") ? "+2" : "") + " 1<br/>";
+
+
+                            arregloPrefijo = arregloPrefijo.Substring(2, arregloPrefijo.Length - 2);  // arregloPrefijo.Replace(Prefijoxml, "");
+                            #endregion
+                        }
+                        try
+                        {
+                            if (miXML != "")
+                            {
+                                string NotaAntigua = "Estimado Cliente:<br/><br/>La nomenclatura a utilizar en sus archivos es la siguiente:<br/><br/>"+Notas+ "<br/>En caso de dudas, contáctese con su representante de servicio al cliente.";
+                                string NotaNueva = "Estimado Cliente: <br/><br/>Su trabajo tiene una estructura, que se descompone en distintos grupos de páginas, los que se muestran y explican a continuación:" +
+                                    "<br/><br/>Estructura del trabajo<br/>" + NotasEstructura + "<br/><br/>" +
+                                   "La carga de archivos se realiza por cada grupo de páginas de la estructura. La nomenclatura a utilizar para cargar sus archivos es la siguiente:"+
+                                   "<br/><br/>SI CARGA ARCHIVOS ANIDADOS(1 solo PDF con todas las páginas del grupo)<br/>"+ NotasAnidadas +
+                                   "<br/><br/>SI CARGA ARCHIVOS SEPARADOS (1 PDF por página)<br/>"+Notas+ "<br/><br/>En caso de dudas, contáctese con su representante de servicio al cliente.";
+                                //string NotaCompleta = "Estimado Cliente: <br/><br/><br/>Estructura del trabajo<br/>" + NotasEstructura + "<br/><br/>La nomenclatura a utilizar para cargar sus archivos es la siguiente:<br/><br/>SI CARGA ARCHIVOS SEPARADOS (PDF generados de 1 a 1)<br/>" + Notas + "<br/>SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
+                                var Clien = ListadoClientesNA.Where(x => x.Cliente == item.Cliente).FirstOrDefault();
+
+                                miXMLenc = "<ConfiguracionTrabajo NOTA='" + ((Clien != null) ? NotaAntigua : NotaNueva).Replace("<br/>", "&#xA;\n") + "' Cliente='" + item.Cliente.Trim() + "' ColorFlow='" + (PrimerColorFlow != "" ? PrimerColorFlow : UltimoColorFlow) + "' APA='!APA 1.0 <br/>" +
+                                             APA +
+                                             "' Username='Araxi' NombreTrabajo='" + item.NombreOT.Trim() + "' CSR='" + item.CSR + "' CorreoCSR='" + item.CorreoCSR + "' ClienteNuevo='" + item.EstadoCliente + "'>";
+
+                                miXML += "</ConfiguracionTrabajo>";
+                                XElement xml = XElement.Parse(miXMLenc.Replace("<br/>", "&#xA;\n") + miXML);
+
+                                XDocument pruebaXml = new XDocument(xml);
+                                if (MultiplePapel == false)
+                                {
+                                    string a = HttpContext.Current.Server.MapPath("~/Prueba/" + item.OT.Trim() + "_" + item.NombreOT.Trim() + "_ConfiguracionTrabajo.xml");
+                                    pruebaXml.Save(a);
+                                }
+                                else
+                                {
+                                    string a = HttpContext.Current.Server.MapPath("~/PruebaPapeles/" + item.OT.Trim() + "_" + item.NombreOT.Trim() + "_ConfiguracionTrabajo.xml");
+                                    pruebaXml.Save(a);
+                                }
+
+                                XMLController xm = new XMLController();
+                                string ale = xm.InsertSincronizacion(item.OT.Trim(), item.NombreOT.Trim(), item.Cliente.Trim(), "Creada", 1, "Automatica", 0);
+                                int ultimavs = xm.InsertUltimaVersion(item.OT, "", 0, 0, 0, 0, "", 2,0,0,0);
+                                foreach (var est in fil1)
+                                {
+                                    int algo = xm.InsertEstructura(est.OT.Trim(), est.Proceso, est.Paginas, 1, Convert.ToInt32(est.Xnota), Convert.ToInt32(est.Ynota), est.Papel, ultimavs.ToString(), 1,est.ColorTiro,est.ColorRetiro,est.ColoresEspeciales);
+                                }
+
+
+                                miXML = "";
+                                Notas = "";
+                                NotasAnidadas = "";
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            string errorrr = ex.Message.ToString();
+                        }
+                        miXML = "";
+                        Notas = "";
+                        NotasAnidadas = "";
+                        MultiplePapel = false;
+                        #endregion
+                    }
+
+
+                }
+            }
+
+            return "";
         }
     }
 } 

@@ -18,9 +18,9 @@ namespace Intranet.ModuloProduccion.Controller
             SqlCommand cmd = con.AbrirConexionDataP2B2000_DataP2B();
             if (cmd != null)
             {
-                cmd.CommandText = "select QG_RMS_JOB_NBR QG_RMS_JOB_NBR,NM,CTD_TMSTMP,CUST_RUT,CUST_NM,PRN_ORD_QTY,JOB_STS,Fecha_Liquidacion from Data_P2B.dbo.QGPressJob where QG_RMS_JOB_NBR not like 'b%' and QG_RMS_JOB_NBR='AI000007'";// like 9/
+                cmd.CommandText = "select QG_RMS_JOB_NBR QG_RMS_JOB_NBR,NM,CTD_TMSTMP,CUST_RUT,CUST_NM,PRN_ORD_QTY,JOB_STS,Fecha_Liquidacion from Data_P2B.dbo.QGPressJob where QG_RMS_JOB_NBR not like 'b%' and QG_RMS_JOB_NBR!='AI000007' and ISNUMERIC(QG_RMS_JOB_NBR)=1";// like 9/
                 SqlDataReader reader = cmd.ExecuteReader();
-
+                try { 
                 while (reader.Read())
                 {
                     SincronizarOT sincroOT = new SincronizarOT();
@@ -33,6 +33,11 @@ namespace Intranet.ModuloProduccion.Controller
                     sincroOT.JOB_STS = reader["JOB_STS"].ToString();
                     sincroOT.Fecha_Liquidacion = reader["Fecha_Liquidacion"].ToString();
                     lista.Add(sincroOT);
+                }
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
             con.CerrarConexion();

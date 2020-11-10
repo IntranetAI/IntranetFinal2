@@ -73,6 +73,50 @@
                                  </div>
                             </div>
                             <div class="row" style="margin:1px;">
+                                 <div class="col-md-4">Colores:</div>
+                                 <div class="col-md-4">
+                                     <div class="input-group">
+                                     <asp:DropDownList ID="ddlTiro" runat="server" class="form-control">
+                                         <asp:ListItem>0</asp:ListItem>
+                                         <asp:ListItem>1</asp:ListItem>
+                                         <asp:ListItem>2</asp:ListItem>
+                                         <asp:ListItem>3</asp:ListItem>
+                                         <asp:ListItem>4</asp:ListItem>
+                                         <asp:ListItem>5</asp:ListItem>
+                                         <asp:ListItem>6</asp:ListItem>
+                                         <asp:ListItem>7</asp:ListItem>
+                                         <asp:ListItem>8</asp:ListItem>
+                                     </asp:DropDownList>&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;<asp:DropDownList ID="ddlRetiro" runat="server"  class="form-control">
+                                         <asp:ListItem>0</asp:ListItem>
+                                         <asp:ListItem>1</asp:ListItem>
+                                         <asp:ListItem>2</asp:ListItem>
+                                         <asp:ListItem>3</asp:ListItem>
+                                         <asp:ListItem>4</asp:ListItem>
+                                         <asp:ListItem>5</asp:ListItem>
+                                         <asp:ListItem>6</asp:ListItem>
+                                         <asp:ListItem>7</asp:ListItem>
+                                         <asp:ListItem>8</asp:ListItem>
+                                     </asp:DropDownList>
+                                         </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="input-group">
+                                     Colores especiales:&nbsp;&nbsp;
+                                    <asp:DropDownList ID="ddlColorEspecial" runat="server" class="form-control">
+                                         <asp:ListItem>0</asp:ListItem>
+                                         <asp:ListItem>1</asp:ListItem>
+                                         <asp:ListItem>2</asp:ListItem>
+                                         <asp:ListItem>3</asp:ListItem>
+                                         <asp:ListItem>4</asp:ListItem>
+                                         <asp:ListItem>5</asp:ListItem>
+                                         <asp:ListItem>6</asp:ListItem>
+                                         <asp:ListItem>7</asp:ListItem>
+                                         <asp:ListItem>8</asp:ListItem>
+                                     </asp:DropDownList>
+                                         </div>
+                                 </div>
+                            </div>
+                            <div class="row" style="margin:1px;">
                                  <div class="col-md-4">Papel:</div>
                                  <div class="col-md-8"> <asp:DropDownList ID="DropDownList1" runat="server" Class="form-control">
                                      <asp:ListItem>Couche</asp:ListItem>
@@ -103,10 +147,10 @@
                      <telerik:GridBoundColumn DataField="NombreGrupo" HeaderText="NombreGrupo"  ReadOnly="True" UniqueName="NombreGrupo" ItemStyle-Width="30px">
                       </telerik:GridBoundColumn>
                                          
-                      <telerik:GridBoundColumn DataField="Paginas" HeaderText="Paginas"  ReadOnly="True" UniqueName="Paginas" ItemStyle-Width="250px">
+                      <telerik:GridBoundColumn DataField="Paginas" HeaderText="Paginas"  ReadOnly="True" UniqueName="Paginas" ItemStyle-Width="50px">
                       </telerik:GridBoundColumn>
                                          
-                      <telerik:GridBoundColumn DataField="Inicio" HeaderText="Inicio"  ReadOnly="True" UniqueName="Inicio" ItemStyle-Width="250px">
+                      <telerik:GridBoundColumn DataField="Inicio" HeaderText="Inicio"  ReadOnly="True" UniqueName="Inicio" ItemStyle-Width="50px">
                       </telerik:GridBoundColumn>
                                          
                       <telerik:GridBoundColumn DataField="Formato" HeaderText="Formato" ItemStyle-HorizontalAlign="Right"  ReadOnly="True" UniqueName="Formato" ItemStyle-Width="50px">
@@ -117,6 +161,17 @@
                           <telerik:GridBoundColumn DataField="FormatoY" HeaderText="FormatoY" ItemStyle-HorizontalAlign="Right"  ReadOnly="True" UniqueName="FormatoY" ItemStyle-Width="50px">
                       </telerik:GridBoundColumn>
                       <telerik:GridBoundColumn DataField="Papel" HeaderText="Papel"  ReadOnly="True" UniqueName="Papel" ItemStyle-Width="90px">
+                      </telerik:GridBoundColumn>
+                      <telerik:GridBoundColumn DataField="Colores" HeaderText="Colores"  ReadOnly="True" UniqueName="Colores" ItemStyle-Width="90px">
+                      </telerik:GridBoundColumn>
+
+                      <telerik:GridBoundColumn DataField="ColorEspecial" HeaderText="ColorEspecial"  ReadOnly="True" UniqueName="ColorEspecial" ItemStyle-Width="90px">
+                      </telerik:GridBoundColumn>
+
+                            <telerik:GridBoundColumn DataField="ColorTiro" HeaderText="ColorTiro"  ReadOnly="True" UniqueName="ColorTiro" ItemStyle-Width="30px" Visible="false">
+                      </telerik:GridBoundColumn>
+
+                            <telerik:GridBoundColumn DataField="ColorRetiro" HeaderText="ColorRetiro"  ReadOnly="True" UniqueName="ColorRetiro" ItemStyle-Width="30px" Visible="false">
                       </telerik:GridBoundColumn>
 
                       <telerik:GridTemplateColumn UniqueName="TemplateColumn">

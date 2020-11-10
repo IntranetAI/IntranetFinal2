@@ -110,7 +110,7 @@ namespace Intranet.ModuloWip.View
                         "<div style='font-size:50;font-weight:bold;'>" + Asignatura + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>" + Pallet + "</div>" +
                         "<div style='font-size:50;font-weight:bold;'>CAJA " + Caja + "</div>" +
-                        "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div><br />";
+                        "<div style='font-size:50;font-weight:bold;'>" + NumDesde + " - " + NumHasta + "</div></div><br /><br /><br /><br /><br /><br />";
             }
 
             else

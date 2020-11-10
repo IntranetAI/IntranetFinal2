@@ -33,6 +33,10 @@ namespace Intranet.ModuloPrinergy.Controller
                     cmd.Parameters.AddWithValue("@Formato", "");
                     cmd.Parameters.AddWithValue("@Papel", "");
                     cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@ColorTiro", 0);
+                    cmd.Parameters.AddWithValue("@ColorRetiro", 0);
+                    cmd.Parameters.AddWithValue("@ColorEspecial", 0);
+                    cmd.Parameters.AddWithValue("@RefinarCon", "");
                     cmd.Parameters.AddWithValue("@Procedimiento", 0);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -145,6 +149,10 @@ namespace Intranet.ModuloPrinergy.Controller
                     cmd.Parameters.AddWithValue("@Formato", "");
                     cmd.Parameters.AddWithValue("@Papel", "");
                     cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@ColorTiro", 0);
+                    cmd.Parameters.AddWithValue("@ColorRetiro", 0);
+                    cmd.Parameters.AddWithValue("@ColorEspecial", 0);
+                    cmd.Parameters.AddWithValue("@RefinarCon", "");
                     cmd.Parameters.AddWithValue("@Procedimiento", 12);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -183,6 +191,10 @@ namespace Intranet.ModuloPrinergy.Controller
                     cmd.Parameters.AddWithValue("@Formato", "");
                     cmd.Parameters.AddWithValue("@Papel", "");
                     cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@ColorTiro", 0);
+                    cmd.Parameters.AddWithValue("@ColorRetiro", 0);
+                    cmd.Parameters.AddWithValue("@ColorEspecial", 0);
+                    cmd.Parameters.AddWithValue("@RefinarCon", "");
                     cmd.Parameters.AddWithValue("@Procedimiento", 13);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -197,6 +209,12 @@ namespace Intranet.ModuloPrinergy.Controller
                         p.FormatoX = Convert.ToInt32(reader["X"].ToString());
                         p.FormatoY = Convert.ToInt32(reader["Y"].ToString());
                         p.Papel= reader["Papel"].ToString();
+                        int ColorTiro = Convert.ToInt32(reader["ColorTiro"].ToString());
+                        int ColorRetiro = Convert.ToInt32(reader["ColorRetiro"].ToString());
+                        p.ColorTiro = ColorTiro;
+                        p.ColorRetiro = ColorRetiro;
+                        p.Colores = ((ColorTiro > ColorRetiro) ? ColorTiro : ColorRetiro);
+                        p.ColorEspecial = Convert.ToInt32(reader["ColorEspecial"].ToString());
 
                         lista.Add(p);
                     }
@@ -209,7 +227,7 @@ namespace Intranet.ModuloPrinergy.Controller
             conexion.CerrarConexion();
             return lista;
         }
-        public int InsertEstructura(string OT,string NombreGrupo,int Paginas,int Inicio, int FormatoX,int FormatoY,string Papel,string version, int Procedimiento)
+        public int InsertEstructura(string OT,string NombreGrupo,int Paginas,int Inicio, int FormatoX,int FormatoY,string Papel,string version, int Procedimiento, int ColorTiro,int ColorRetiro,int ColorEspecial)
         {
             int Resp = 0;
             Conexion conexion = new Conexion();
@@ -231,6 +249,10 @@ namespace Intranet.ModuloPrinergy.Controller
                     cmd.Parameters.AddWithValue("@Formato", "");
                     cmd.Parameters.AddWithValue("@Papel", Papel);
                     cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@ColorTiro", ColorTiro);
+                    cmd.Parameters.AddWithValue("@ColorRetiro", ColorRetiro);
+                    cmd.Parameters.AddWithValue("@ColorEspecial", ColorEspecial);
+                    cmd.Parameters.AddWithValue("@RefinarCon", "");
                     cmd.Parameters.AddWithValue("@Procedimiento", 1);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -247,7 +269,7 @@ namespace Intranet.ModuloPrinergy.Controller
             conexion.CerrarConexion();
             return Resp;
         }
-        public int InsertUltimaVersion(string OT, string NombreGrupo, int Paginas, int Inicio, int FormatoX, int FormatoY, string Papel, int Procedimiento)
+        public int InsertUltimaVersion(string OT, string NombreGrupo, int Paginas, int Inicio, int FormatoX, int FormatoY, string Papel, int Procedimiento, int ColorTiro, int ColorRetiro, int ColorEspecial)
         {
             int Resp = 0;
             Conexion conexion = new Conexion();
@@ -269,6 +291,10 @@ namespace Intranet.ModuloPrinergy.Controller
                     cmd.Parameters.AddWithValue("@Formato", "");
                     cmd.Parameters.AddWithValue("@Papel", Papel);
                     cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@ColorTiro", ColorTiro);
+                    cmd.Parameters.AddWithValue("@ColorRetiro", ColorRetiro);
+                    cmd.Parameters.AddWithValue("@ColorEspecial", ColorEspecial);
+                    cmd.Parameters.AddWithValue("@RefinarCon", "");
                     cmd.Parameters.AddWithValue("@Procedimiento", 2);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -343,6 +369,37 @@ namespace Intranet.ModuloPrinergy.Controller
                         dtDist.APA = reader["APA"].ToString();
 
                         lista.Add(dtDist);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
+        public List<NotasAntiguas> Clientes_NotasAntiguas()
+        {
+            List<NotasAntiguas> lista = new List<NotasAntiguas>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                try
+                {
+                    cmd.CommandText = "Prinergy_XMLMetrics";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OT", "");
+                    cmd.Parameters.AddWithValue("@Procedimiento", 22);
+                    cmd.CommandTimeout = 999999999;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        NotasAntiguas dt = new NotasAntiguas();
+
+                        dt.Id = Convert.ToInt32(reader["Id"].ToString().Trim());
+                        dt.Cliente = reader["Cliente"].ToString().Trim();
+                        lista.Add(dt);
                     }
                 }
                 catch (Exception ex)

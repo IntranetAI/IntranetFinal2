@@ -97,6 +97,57 @@ namespace ServicioWeb.ModuloProduccion.Controller
             return lista;
         }
 
+        public List<XMLMetrics> OTSEmitidas_Colores()
+        {
+            List<XMLMetrics> lista = new List<XMLMetrics>();
+            List<Homologacion> Lhom = ListadoHomologacion();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                try
+                {
+                    cmd.CommandText = "Prinergy_XMLMetrics";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OT", "");
+                    cmd.Parameters.AddWithValue("@Procedimiento", 21);//CAMBIAR AL 10 AL SALIR A PRODUCCION... CAMBIOS PARA PRUEBAS
+                    cmd.CommandTimeout = 999999999;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        XMLMetrics dtDist = new XMLMetrics();
+                        dtDist.OT = reader["NumOrdem"].ToString();
+                        string nOT = reader["Descricao"].ToString();
+                        dtDist.NombreOT = Regex.Replace(nOT, @"[^\w\s.!@$%^&*()\-\/]+", "").Replace("&", "y").Replace("/", "").Replace("_", " ");
+                        string aaa = reader["NomeCliente"].ToString();
+                        dtDist.Cliente = reader["NomeCliente"].ToString().Replace("&", "y");
+                        dtDist.EnvioCorreo = Convert.ToInt32(reader["EnvioCorreo"].ToString());
+                        dtDist.CSR = reader["CSR"].ToString();
+                        dtDist.CorreoCSR = reader["CorreoCSR"].ToString();
+
+                        /*      CONSULTA CLIENTES A HOMOLOGAR COPESA Y CENCOSUD     */
+                        if (Lhom.Where(x => x.ClienteMetrics == reader["NomeCliente"].ToString()).Count() > 0)
+                        {
+                            var ooo = Lhom.Where(x => x.ClienteMetrics == reader["NomeCliente"].ToString()).ToList();
+
+                            dtDist.Cliente = Lhom.Where(x => x.ClienteMetrics == reader["NomeCliente"].ToString() && dtDist.NombreOT.ToLower().Contains(x.Keyword.ToLower())).Select(p => p.ClientePrinergy).FirstOrDefault();
+                            dtDist.EstadoCliente = "No";
+                        }
+                        else
+                        {
+                            dtDist.EstadoCliente = "Si";
+                        } 
+
+                        lista.Add(dtDist);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
         /* CAMBIOS PROGRMAACION MODO SINCRONIZACION AUTOMATICA*/
         public List<XMLMetrics_Detalle> EstructurasEmitidas()
         {
@@ -145,6 +196,112 @@ namespace ServicioWeb.ModuloProduccion.Controller
                             dtDist.ColorFlow = "Ink Opt Papel diario";
                         }
 
+                        lista.Add(dtDist);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
+
+        public List<XMLMetrics_Detalle> EstructurasEmitidas_Colores()
+        {
+            List<XMLMetrics_Detalle> lista = new List<XMLMetrics_Detalle>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet(); int ContadorPaginas = 0; string PapelMayor = ""; int SumaPaginas = 0;
+            if (cmd != null)
+            {
+                try
+                {
+                    cmd.CommandText = "Prinergy_XMLMetrics";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OT", "");
+                    cmd.Parameters.AddWithValue("@Procedimiento", 20);//reemplazar por 11-13 al momento de entrar a produccion
+                    cmd.CommandTimeout = 999999999;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        XMLMetrics_Detalle dtDist = new XMLMetrics_Detalle();
+
+                        dtDist.OT = reader["OT"].ToString().Trim();
+                        dtDist.Proceso = reader["Proceso"].ToString().Trim();
+                        dtDist.Papel = reader["Papel"].ToString();
+                        dtDist.Paginas = Convert.ToInt32(reader["Paginas"].ToString());
+                        dtDist.ModeloTracado = reader["PCodModeloTracado"].ToString();
+                        dtDist.X = Math.Round((Convert.ToDouble(reader["X"].ToString()) * 2.8346) - 2).ToString() + "-" + Math.Round((Convert.ToDouble(reader["X"].ToString()) * 2.8346) + 2).ToString();
+                        dtDist.Y = Math.Round((Convert.ToDouble(reader["Y"].ToString()) * 2.8346) - 2).ToString() + "-" + Math.Round((Convert.ToDouble(reader["Y"].ToString()) * 2.8346) + 2).ToString();
+                        dtDist.Xnota = Convert.ToInt32(reader["X"].ToString());
+                        dtDist.Ynota = Convert.ToInt32(reader["Y"].ToString());
+                        dtDist.MultiplePapel = (Convert.ToInt32(reader["Componentes"].ToString()) > 1 ? true : false);
+                        int Negro = Convert.ToInt32(reader["ColorNegro"].ToString());
+                        dtDist.Colores =(( Convert.ToInt32(reader["ColorF"]) >= Convert.ToInt32(reader["ColorV"])) ? Convert.ToInt32(reader["ColorF"]) : Convert.ToInt32(reader["ColorV"]));
+                        dtDist.ColoresEspeciales = Convert.ToInt32(reader["ColoresEspeciales"].ToString());
+                        dtDist.ColorTiro = Convert.ToInt32(reader["ColorF"]);
+                        dtDist.ColorRetiro = Convert.ToInt32(reader["ColorV"]);
+
+
+                        if (dtDist.Papel.ToLower().Contains("couche"))
+                        {
+                            dtDist.ColorFlow = "Ink Opt Fogra_39_v2";
+                        }
+                        else if (dtDist.Papel.ToLower().Contains("bond"))
+                        {
+                            dtDist.ColorFlow = "Ink Opt Fogra 29 _v2";
+                        }
+                        else if (dtDist.Papel.ToLower().Contains("lwc") || dtDist.Papel.ToLower().Contains("cartulina"))
+                        {
+                            dtDist.ColorFlow = "Ink Opt Fogra_39_v2";//perfil de couche
+                        }
+                        else
+                        {
+                            dtDist.ColorFlow = "Ink Opt Papel diario";
+                        }
+
+                        string Refinado = "4 CMYK";
+                        if(dtDist.Colores==4 && dtDist.ColoresEspeciales == 0)
+                        {
+                            switch (dtDist.Papel.ToLower())
+                            {
+                                case "bond":
+                                    Refinado = "1 CMYK CF BOND"; break;
+                                case "couche":
+                                    Refinado = "2 CMYK CF COUCHE"; break;
+                                case "diario":
+                                    Refinado = "3 CMYK CF DIARIO"; break;
+                                default:
+                                    Refinado = "4 CMYK";break;
+                            }
+                        }
+                        else if (dtDist.Colores >= 4 && dtDist.ColoresEspeciales >= 1)
+                        {
+                            switch (dtDist.Papel.ToLower())
+                            {
+                                case "bond":
+                                    Refinado = "5 CMYK CF BOND PLANOS"; break;
+                                case "couche":
+                                    Refinado = "6 CMYK CF COUCHE PLANOS"; break;
+                                case "diario":
+                                    Refinado = "7 CMYK CF DIARIO PLANOS"; break;
+                                default:
+                                    Refinado = "4 CMYK"; break;
+                            }
+                        }
+                        else if (dtDist.Colores <= 3 && dtDist.ColoresEspeciales == 0)
+                        {
+                            Refinado = "4 CMYK";
+                        }
+                        else if (dtDist.Colores == 1 && dtDist.ColoresEspeciales == 0 && Negro>=1)
+                        {
+                            Refinado = "8 ESCALA GRISES";
+                        }
+                        else
+                        {
+                            Refinado = "4 CMYK"; 
+                        }
+                        dtDist.RefinarCon = Refinado;
                         lista.Add(dtDist);
                     }
                 }
@@ -212,8 +369,38 @@ namespace ServicioWeb.ModuloProduccion.Controller
             con.CerrarConexion();
             return lista;
         }
+        public List<NotasAntiguas> Clientes_NotasAntiguas()
+        {
+            List<NotasAntiguas> lista = new List<NotasAntiguas>();
+            Conexion con = new Conexion();
+            SqlCommand cmd = con.AbrirConexionIntranet();
+            if (cmd != null)
+            {
+                try
+                {
+                    cmd.CommandText = "Prinergy_XMLMetrics";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OT", "");
+                    cmd.Parameters.AddWithValue("@Procedimiento", 22);
+                    cmd.CommandTimeout = 999999999;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        NotasAntiguas dt = new NotasAntiguas();
 
-        public int InsertEstructura(string OT, string NombreGrupo, int Paginas, int Inicio, int FormatoX, int FormatoY, string Papel, string version, int Procedimiento)
+                        dt.Id = Convert.ToInt32(reader["Id"].ToString().Trim());
+                        dt.Cliente = reader["Cliente"].ToString().Trim(); 
+                        lista.Add(dt);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            con.CerrarConexion();
+            return lista;
+        }
+        public int InsertEstructura(string OT, string NombreGrupo, int Paginas, int Inicio, int FormatoX, int FormatoY, string Papel, string version, int Procedimiento, int ColorTiro, int ColorRetiro, int ColorEspecial)
         {
             int Resp = 0;
             Conexion conexion = new Conexion();
@@ -235,6 +422,10 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     cmd.Parameters.AddWithValue("@Formato", "");
                     cmd.Parameters.AddWithValue("@Papel", Papel);
                     cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@ColorTiro", ColorTiro);
+                    cmd.Parameters.AddWithValue("@ColorRetiro", ColorRetiro);
+                    cmd.Parameters.AddWithValue("@ColorEspecial", ColorEspecial);
+                    cmd.Parameters.AddWithValue("@RefinarCon", "");
                     cmd.Parameters.AddWithValue("@Procedimiento", 1);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -252,7 +443,7 @@ namespace ServicioWeb.ModuloProduccion.Controller
             return Resp;
         }
 
-        public int InsertUltimaVersion(string OT, string NombreGrupo, int Paginas, int Inicio, int FormatoX, int FormatoY, string Papel, int Procedimiento)
+        public int InsertUltimaVersion(string OT, string NombreGrupo, int Paginas, int Inicio, int FormatoX, int FormatoY, string Papel, int Procedimiento, int ColorTiro,int ColorRetiro, int ColorEspecial)
         {
             int Resp = 0;
             Conexion conexion = new Conexion();
@@ -274,6 +465,10 @@ namespace ServicioWeb.ModuloProduccion.Controller
                     cmd.Parameters.AddWithValue("@Formato", "");
                     cmd.Parameters.AddWithValue("@Papel", Papel);
                     cmd.Parameters.AddWithValue("@Usuario", "");
+                    cmd.Parameters.AddWithValue("@ColorTiro", ColorTiro);
+                    cmd.Parameters.AddWithValue("@ColorRetiro", ColorRetiro);
+                    cmd.Parameters.AddWithValue("@ColorEspecial", ColorEspecial);
+                    cmd.Parameters.AddWithValue("@RefinarCon", "");
                     cmd.Parameters.AddWithValue("@Procedimiento", 2);
                     SqlDataReader reader = cmd.ExecuteReader();
 

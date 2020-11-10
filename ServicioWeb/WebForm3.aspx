@@ -12,7 +12,9 @@
     <div>
     
     </div>
-    </form>
     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-</body>
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+    </form>
+    </body>
 </html>

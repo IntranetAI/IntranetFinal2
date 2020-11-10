@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfiguracionTrabajo NOTA="Estimado Cliente: &#xA; &#xA; Su trabajo tiene una estructura, que se descompone en distintos grupos de páginas, los que se muestran y explican a continuación:&#xA; &#xA; Estructura del trabajo&#xA;   INTERIOR mide 210 mm de ancho y 275 mm de alto, con una cantidad de 4.&#xA;   TAPA mide 210 mm de ancho y 275 mm de alto, con una cantidad de 4.&#xA;   PAGINAS mide 210 mm de ancho y 275 mm de alto, con una cantidad de 123.&#xA;   PAGINAS232 mide 121 mm de ancho y 12 mm de alto, con una cantidad de 123.&#xA; &#xA; &#xA; La carga de archivos se realiza por cada grupo de páginas de la estructura. La nomenclatura a utilizar para cargar sus archivos es la siguiente:&#xA; &#xA; SI CARGA ARCHIVOS ANIDADOS(1 solo PDF con todas las páginas del grupo)&#xA;   Para INTERIOR: El PDF anidado debe llamarse 99036INTERIOR.pdf&#xA;   Para TAPA: El PDF anidado debe llamarse 99036TAPA.pdf&#xA;   Para PAGINAS: El PDF anidado debe llamarse 99036PAGINAS.pdf&#xA;   Para PAGINAS232: El PDF anidado debe llamarse 99036PAGINAS232.pdf&#xA; &#xA; &#xA; SI CARGA ARCHIVOS SEPARADOS (1 PDF por página)&#xA;   Para INTERIOR: 99036INTERIOR.p1.pdf Donde p1 indica la posición de la página.&#xA;   Para TAPA: 99036TAPA.p1.pdf Donde p1 indica la posición de la página.&#xA;   Para PAGINAS: 99036PAGINAS.p1.pdf Donde p1 indica la posición de la página.&#xA;   Para PAGINAS232: 99036PAGINAS232.p1.pdf Donde p1 indica la posición de la página.&#xA; &#xA; &#xA; En caso de dudas, contáctese con su representante de servicio al cliente." Cliente="FALABELLA RETAIL S.A." ColorFlow="Ink Opt Fogra_39_v2" APA="!APA 1.0 &#xA; ASSIGN= &quot;99036INTERIOR[#PgPosition].p1.pdf&quot; &quot;INTERIOR&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036INTERIOR.p[#PgPosition].p1.pdf&quot; &quot;INTERIOR&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036INTERIOR.p[#PgPosition].pdf&quot; &quot;INTERIOR&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036TAPA[#PgPosition].p1.pdf&quot; &quot;TAPA&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036TAPA.p[#PgPosition].p1.pdf&quot; &quot;TAPA&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036TAPA.p[#PgPosition].pdf&quot; &quot;TAPA&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036PAGINAS.p[#PgPosition].p1.pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036PAGINAS.p[#PgPosition].pdf&quot; &quot;PAGINAS&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036p[#PgPosition].p1.pdf&quot; &quot;PAGINAS232&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036PAGINAS232.p[#PgPosition].p1.pdf&quot; &quot;PAGINAS232&quot; [#PgPosition] 1&#xA; ASSIGN= &quot;99036PAGINAS232.p[#PgPosition].pdf&quot; &quot;PAGINAS232&quot; [#PgPosition] 1&#xA; " Username="Araxi" NombreTrabajo="REV. FALABELLA ITS ON NOVIEMBRE C2C3 (PEFC)" CSR="Fernanda Albarracin" CorreoCSR="" ClienteNuevo="Si">
+  <GrupoPaginas>
+    <NombreGrupoPaginas>INTERIOR</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>778-782</Y>
+    <Prefijo>p</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+    <RefinarCon>6 CMYK CF COUCHE PLANOS</RefinarCon>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>TAPA</NombreGrupoPaginas>
+    <CantidadPaginas>4</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>778-782</Y>
+    <Prefijo>q</Prefijo>
+    <ColorPapel>Bond</ColorPapel>
+    <ColorFlow>Ink Opt Fogra 29 _v2</ColorFlow>
+    <RefinarCon>1 CMYK CF BOND</RefinarCon>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINAS</NombreGrupoPaginas>
+    <CantidadPaginas>123</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>593-597</X>
+    <Y>778-782</Y>
+    <Prefijo>r</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+    <RefinarCon>6 CMYK CF COUCHE PLANOS</RefinarCon>
+  </GrupoPaginas>
+  <GrupoPaginas>
+    <NombreGrupoPaginas>PAGINAS232</NombreGrupoPaginas>
+    <CantidadPaginas>123</CantidadPaginas>
+    <InicioGrupo>1</InicioGrupo>
+    <X>341-345</X>
+    <Y>32-36</Y>
+    <Prefijo>s</Prefijo>
+    <ColorPapel>Couche</ColorPapel>
+    <ColorFlow>Ink Opt Fogra_39_v2</ColorFlow>
+    <RefinarCon>4 CMYK</RefinarCon>
+  </GrupoPaginas>
+</ConfiguracionTrabajo>

@@ -115,6 +115,10 @@ namespace Intranet.ModuloPrinergy.View
                 xm.FormatoX = Convert.ToInt32(RadGrid1.Items[i]["FormatoX"].Text);
                 xm.FormatoY = Convert.ToInt32(RadGrid1.Items[i]["FormatoY"].Text);
                 xm.Papel = RadGrid1.Items[i]["Papel"].Text;
+                xm.ColorTiro = Convert.ToInt32(RadGrid1.Items[i]["ColorTiro"].Text);
+                xm.ColorRetiro = Convert.ToInt32(RadGrid1.Items[i]["ColorRetiro"].Text);
+                xm.Colores = Convert.ToInt32(RadGrid1.Items[i]["Colores"].Text);
+                xm.ColorEspecial = Convert.ToInt32(RadGrid1.Items[i]["ColorEspecial"].Text);
                 listaFormato.Add(xm);
             }
             if (txtNombreGrupo.Text != "" && txtPaginas.Text != "" && txtInicio.Text != "" && txtFormatoX.Text != "" && txtFormatoY.Text != "")
@@ -132,6 +136,10 @@ namespace Intranet.ModuloPrinergy.View
                 xf.FormatoX = Convert.ToInt32(txtFormatoX.Text);
                 xf.FormatoY = Convert.ToInt32(txtFormatoY.Text);
                 xf.Papel = DropDownList1.SelectedValue.ToString();
+                xf.ColorTiro = Convert.ToInt32(ddlTiro.SelectedValue);
+                xf.ColorRetiro = Convert.ToInt32(ddlRetiro.SelectedValue);
+                xf.Colores = ((Convert.ToInt32(ddlTiro.SelectedValue) > Convert.ToInt32(ddlRetiro.SelectedValue)) ? Convert.ToInt32(ddlTiro.SelectedValue) : Convert.ToInt32(ddlRetiro.SelectedValue));
+                xf.ColorEspecial= Convert.ToInt32(ddlColorEspecial.SelectedValue);
                 listaFormato.Add(xf);
 
                 RadGrid1.DataSource = listaFormato;
@@ -195,6 +203,7 @@ namespace Intranet.ModuloPrinergy.View
                 Controller_XML xc = new Controller_XML();
                 List<XMLFormato> ListaGrupos = new List<XMLFormato>();
                 List<APA_Clientes> listadoAPAClientes = xc.ClientesAPA();
+                List<NotasAntiguas> ListadoClientesNA = xc.Clientes_NotasAntiguas();
                 for (int i = 0; i < RadGrid1.Items.Count; i++)
                 {
                     XMLFormato xm = new XMLFormato();
@@ -205,6 +214,10 @@ namespace Intranet.ModuloPrinergy.View
                     xm.X = Math.Round((Convert.ToDouble(RadGrid1.Items[i]["FormatoX"].Text.ToString()) * 2.8346) - 2).ToString() + "-" + Math.Round((Convert.ToDouble(RadGrid1.Items[i]["FormatoX"].Text.ToString()) * 2.8346) + 2).ToString();
                     xm.Y = Math.Round((Convert.ToDouble(RadGrid1.Items[i]["FormatoY"].Text.ToString()) * 2.8346) - 2).ToString() + "-" + Math.Round((Convert.ToDouble(RadGrid1.Items[i]["FormatoY"].Text.ToString()) * 2.8346) + 2).ToString();
                     xm.Papel = RadGrid1.Items[i]["Papel"].Text;
+                    xm.ColorTiro = Convert.ToInt32(RadGrid1.Items[i]["ColorTiro"].Text);
+                    xm.ColorRetiro = Convert.ToInt32(RadGrid1.Items[i]["ColorRetiro"].Text);
+                    xm.Colores = Convert.ToInt32(RadGrid1.Items[i]["Colores"].Text);
+                    xm.ColorEspecial = Convert.ToInt32(RadGrid1.Items[i]["ColorEspecial"].Text);
 
                     if (xm.Papel == "Couche" || xm.Papel == "LWC" || xm.Papel == "Cartulina")
                     {
@@ -221,10 +234,53 @@ namespace Intranet.ModuloPrinergy.View
                     xm.XNota = RadGrid1.Items[i]["FormatoX"].Text.ToString();
                     xm.YNota = RadGrid1.Items[i]["FormatoY"].Text.ToString();
 
+                    string Refinado = "4 CMYK";
+                    if (xm.Colores == 4 && xm.ColorEspecial == 0)
+                    {
+                        switch (xm.Papel.ToLower())
+                        {
+                            case "bond":
+                                Refinado = "1 CMYK CF BOND"; break;
+                            case "couche":
+                                Refinado = "2 CMYK CF COUCHE"; break;
+                            case "diario":
+                                Refinado = "3 CMYK CF DIARIO"; break;
+                            default:
+                                Refinado = "4 CMYK"; break;
+                        }
+                    }
+                    else if (xm.Colores >= 4 && xm.ColorEspecial >= 1)
+                    {
+                        switch (xm.Papel.ToLower())
+                        {
+                            case "bond":
+                                Refinado = "5 CMYK CF BOND PLANOS"; break;
+                            case "couche":
+                                Refinado = "6 CMYK CF COUCHE PLANOS"; break;
+                            case "diario":
+                                Refinado = "7 CMYK CF DIARIO PLANOS"; break;
+                            default:
+                                Refinado = "4 CMYK"; break;
+                        }
+                    }
+                    else if (xm.Colores <= 3 && xm.ColorEspecial == 0)
+                    {
+                        Refinado = "4 CMYK";
+                    }
+                    else if (xm.Colores == 1 && xm.ColorEspecial == 0) // && Negro >= 1
+                    {
+                        Refinado = "8 ESCALA GRISES";
+                    }
+                    else
+                    {
+                        Refinado = "4 CMYK";
+                    }
+                    xm.RefinarCon = Refinado;
+
                     ListaGrupos.Add(xm);
                 }
 
-                string miXML = ""; string miXMLenc = ""; string Notas = ""; string NotasAnidadas = "";
+                string miXML = ""; string miXMLenc = ""; string Notas = ""; string NotasAnidadas = "";string NotasEstructura = "";
 
                 //Recorrer numero de paginas
                 string arregloPrefijo = "p,q,r,s,t,u,v,w,x,y,z,a,b,c,d,e,f,g,h,j,k,p,q,r,s,t,u,v,w,x,y,z,a,b,c,d,e,f,g,h,j,k,p,q,r,s,t,u,v,w,x,y,z,a,b,c,d,e,f,g,h,j,k"; string APA = "";
@@ -250,22 +306,37 @@ namespace Intranet.ModuloPrinergy.View
                                             "<Prefijo>" + Prefijoxml.Replace(",", "") + "</Prefijo>" +
                                             "<ColorPapel>" + Papel + "</ColorPapel>" +
                                             "<ColorFlow>" + it.ColorFlow + "</ColorFlow>" +
+                                            "<RefinarCon>" + it.RefinarCon + "</RefinarCon>" +
                                       "</GrupoPaginas>";
 
-                    Notas += "Para " + it.NombreGrupo + ":<br/>" +
-                               OT + Prefijo + "1.pdf<br/>" +
-                               "Donde " + OT + " Corresponde al numero de OT, " + Prefijo + " indica que forma parte de las " + it.NombreGrupo + " y " + it.Inicio + " indica la posicion dentro de estas.<br/>" +
-                               it.NombreGrupo + " mide " + it.XNota + " mm de ancho y " + it.YNota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/><br/>";
-                    NotasAnidadas += "Para " + it.NombreGrupo + ": El PDF anidado debe llamarse " + it.NombreGrupo + ".pdf<br/>";
+                    var Clie = ListadoClientesNA.Where(x => x.Cliente == Cliente).FirstOrDefault();
+                    if (Clie != null)
+                    {
+                        //NOTAS ANTIGUAS MODIFICADO EL 20201005_1119
+                        Notas += "Para " + it.NombreGrupo + ":<br/>" +
+                                   it.OT + Prefijo + "1.pdf<br/>" +
+                                   "Donde " + it.OT + " Corresponde al numero de OT, " + Prefijo + " indica que forma parte de las " + it.NombreGrupo + " y " + it.Inicio + " indica la posicion dentro de estas.<br/>" +
+                                   it.NombreGrupo + " mide " + it.XNota + " mm de ancho y " + it.YNota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/><br/>";
+                    }
+                    else
+                    {
+                        //Notas Nuevas
+                        NotasEstructura += "  " + it.NombreGrupo + " mide " + it.XNota + " mm de ancho y " + it.YNota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/>";
+                        Notas += "  Para " + it.NombreGrupo + ": " + OT + it.NombreGrupo + ".p1.pdf Donde p1 indica la posición de la página.<br/>";
+                        NotasAnidadas += "  Para " + it.NombreGrupo + ": El PDF anidado debe llamarse " + OT + it.NombreGrupo + ".pdf<br/>";
+                    }
+                    //NotasEstructura += "  "+it.NombreGrupo + " mide " + it.XNota + " mm de ancho y " + it.YNota + " mm de alto, con una cantidad de " + it.Paginas + ".<br/>";
+                    //Notas += "  Para " + it.NombreGrupo + ": "+it.NombreGrupo+ ".p1.pdf Donde p1 indica la posición de la página.<br/>";
+                    //NotasAnidadas += "  Para " + it.NombreGrupo + ": El PDF anidado debe llamarse " + it.NombreGrupo + ".pdf<br/>";
 
-                    if (it.NombreGrupo.ToLower().Contains("pagina") && listadoAPAClientes.Where(x => x.Cliente == Cliente).Count() > 0)
+                    if (it.NombreGrupo.ToLower().Contains("interior") && listadoAPAClientes.Where(x => x.Cliente == Cliente).Count() > 0)
                     {
                         string miApa = listadoAPAClientes.Where(x => x.Cliente == Cliente && NombreOT.ToLower().Contains(x.Keyword.ToLower())).Select(p => p.APA).FirstOrDefault();
                         APA += "ASSIGN= &quot;" + miApa + "&quot; &quot;" + it.NombreGrupo + "&quot; [#PgPosition] 1<br/>";
                     }
                     APA += "ASSIGN= &quot;" + OT + Prefijo + "[#PgPosition].p1.pdf&quot; &quot;" + it.NombreGrupo + "&quot; [#PgPosition] 1<br/>";
-                    APA += "ASSIGN= &quot;" + it.NombreGrupo + "[%].p[#PgPosition].p1.pdf&quot; &quot;" + it.NombreGrupo + "&quot; [#PgPosition] 1<br/>";
-                    APA += "ASSIGN= &quot;" + it.NombreGrupo + "[%].p[#PgPosition].pdf&quot; &quot;" + it.NombreGrupo + "&quot; [#PgPosition] 1<br/>";
+                    APA += "ASSIGN= &quot;" + OT + it.NombreGrupo + ".p[#PgPosition].p1.pdf&quot; &quot;" + it.NombreGrupo + "&quot; [#PgPosition] 1<br/>";
+                    APA += "ASSIGN= &quot;" + OT + it.NombreGrupo + ".p[#PgPosition].pdf&quot; &quot;" + it.NombreGrupo + "&quot; [#PgPosition] 1<br/>";
 
                     //APA Especial para NATURA
                     //if (Cliente.ToLower().Contains("natura") && NombreOT.ToLower().Contains("catal")&& it.NombreGrupo.ToLower().Contains("pagina"))
@@ -279,12 +350,22 @@ namespace Intranet.ModuloPrinergy.View
                 {
                     if (miXML != "")
                     {
-                        string NotaCompleta = Notas + "SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
-                        miXMLenc = "<ConfiguracionTrabajo NOTA='Estimado Cliente: <br/><br/><br/>La nomenclatura a utilizar en sus archivos es la siguiente:<br/><br/>" + NotaCompleta.Replace("<br/>", "&#xA;\n") + "<br/><br/>En caso de dudas contacese con su reprentante de servicio al cliente.' Cliente='" + Cliente.Trim() + "' ColorFlow='" + (PrimerColorFlow != "" ? PrimerColorFlow : UltimoColorFlow) + "' APA='!APA 1.0 <br/>" +
+                        string NotaAntigua = "Estimado Cliente:<br/><br/>La nomenclatura a utilizar en sus archivos es la siguiente:<br/><br/>" + Notas + "<br/>En caso de dudas, contáctese con su representante de servicio al cliente.";
+                        string NotaNueva = "Estimado Cliente: <br/><br/>Su trabajo tiene una estructura, que se descompone en distintos grupos de páginas, los que se muestran y explican a continuación:" +
+                            "<br/><br/>Estructura del trabajo<br/>" + NotasEstructura + "<br/><br/>" +
+                           "La carga de archivos se realiza por cada grupo de páginas de la estructura. La nomenclatura a utilizar para cargar sus archivos es la siguiente:" +
+                           "<br/><br/>SI CARGA ARCHIVOS ANIDADOS(1 solo PDF con todas las páginas del grupo)<br/>" + NotasAnidadas +
+                           "<br/><br/>SI CARGA ARCHIVOS SEPARADOS (1 PDF por página)<br/>" + Notas  + "<br/><br/>En caso de dudas, contáctese con su representante de servicio al cliente.";
+                        //string NotaCompleta = "Estimado Cliente: <br/><br/><br/>Estructura del trabajo<br/>" + NotasEstructura + "<br/><br/>La nomenclatura a utilizar para cargar sus archivos es la siguiente:<br/><br/>SI CARGA ARCHIVOS SEPARADOS (PDF generados de 1 a 1)<br/>" + Notas + "<br/>SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
+                        var Clien = ListadoClientesNA.Where(x => x.Cliente ==Cliente).FirstOrDefault();
+                        //string NotaCompleta = "Estimado Cliente: <br/><br/><br/>Estructura del trabajo<br/>"+NotasEstructura+ "<br/><br/>La nomenclatura a utilizar para cargar sus archivos es la siguiente:<br/><br/>SI CARGA ARCHIVOS SEPARADOS (PDF generados de 1 a 1)<br/>" + Notas + "<br/>SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
+                        miXMLenc = "<ConfiguracionTrabajo NOTA='" + ((Clien != null) ? NotaAntigua : NotaNueva).Replace("<br/>", "&#xA;\n") + "' Cliente='" + Cliente.Trim() + "' ColorFlow='" + (PrimerColorFlow != "" ? PrimerColorFlow : UltimoColorFlow) + "' APA='!APA 1.0 <br/>" +
+                                        //string NotaCompleta = Notas + "SI CARGA PAGINAS ANIDADAS(1 solo PDF con todas las paginas)<br/>" + NotasAnidadas;
+                                        //miXMLenc = "<ConfiguracionTrabajo NOTA='Estimado Cliente: <br/><br/><br/>La nomenclatura a utilizar en sus archivos es la siguiente:<br/><br/>" + NotaCompleta.Replace("<br/>", "&#xA;\n") + "<br/><br/>En caso de dudas contacese con su reprentante de servicio al cliente.' Cliente='" + Cliente.Trim() + "' ColorFlow='" + (PrimerColorFlow != "" ? PrimerColorFlow : UltimoColorFlow) + "' APA='!APA 1.0 <br/>" +
                                         //"ASSIGN= &quot;000001p[#PgPosition].p1.pdf&quot; &quot;Paginas&quot; [#PgPosition] 1<br/>" +
                                         //"ASSIGN= &quot;000001Tapa[#PgPosition].p1.pdf&quot; &quot;Tapa&quot; [#PgPosition] 1<br/>" +
                                         APA +
-                                        "' Username='cjerias' NombreTrabajo='" + NombreOT.Trim() + "' CSR='" + lblCSR.Text + "' CorreoCSR='' ClienteNuevo='Si'>";
+                                        "' Username='Araxi' NombreTrabajo='" + NombreOT.Trim() + "' CSR='" + lblCSR.Text + "' CorreoCSR='' ClienteNuevo='Si'>";
                         //"' Username='cjerias' NombreTrabajo='" + NombreOT + "' CSR='" + item.CSR + "' CorreoCSR='" + item.CorreoCSR + "' ClienteNuevo='" + item.EstadoCliente + "'>";
 
                         miXML += "</ConfiguracionTrabajo>";
@@ -315,12 +396,12 @@ namespace Intranet.ModuloPrinergy.View
 
                         //INSERT ESTRUCTURA
                         Controller_XML xxml = new Controller_XML();
-                        int ultimavrsion = xxml.InsertUltimaVersion(OT, "", 0, 0, 0, 0, "", 2);
+                        int ultimavrsion = xxml.InsertUltimaVersion(OT, "", 0, 0, 0, 0, "", 2,0,0,0);
                         if (ultimavrsion >= 1)
                         {
                             for (int i = 0; i < RadGrid1.Items.Count; i++)
                             {
-                                int ALGO = xxml.InsertEstructura(OT, RadGrid1.Items[i]["NombreGrupo"].Text, Convert.ToInt32(RadGrid1.Items[i]["Paginas"].Text), Convert.ToInt32(RadGrid1.Items[i]["Inicio"].Text), Convert.ToInt32(RadGrid1.Items[i]["FormatoX"].Text.ToString()), Convert.ToInt32(RadGrid1.Items[i]["FormatoY"].Text.ToString()), RadGrid1.Items[i]["Papel"].Text, ultimavrsion.ToString(), 1);
+                                int ALGO = xxml.InsertEstructura(OT, RadGrid1.Items[i]["NombreGrupo"].Text, Convert.ToInt32(RadGrid1.Items[i]["Paginas"].Text), Convert.ToInt32(RadGrid1.Items[i]["Inicio"].Text), Convert.ToInt32(RadGrid1.Items[i]["FormatoX"].Text.ToString()), Convert.ToInt32(RadGrid1.Items[i]["FormatoY"].Text.ToString()), RadGrid1.Items[i]["Papel"].Text, ultimavrsion.ToString(), 1, Convert.ToInt32(RadGrid1.Items[i]["ColorTiro"].Text.ToString()), Convert.ToInt32(RadGrid1.Items[i]["ColorRetiro"].Text.ToString()), Convert.ToInt32(RadGrid1.Items[i]["ColorEspecial"].Text.ToString()));
                             }
                         }
 
@@ -364,6 +445,10 @@ namespace Intranet.ModuloPrinergy.View
                 xm.FormatoX = Convert.ToInt32(RadGrid1.Items[i]["FormatoX"].Text);
                 xm.FormatoY = Convert.ToInt32(RadGrid1.Items[i]["FormatoY"].Text);
                 xm.Papel = RadGrid1.Items[i]["Papel"].Text;
+                xm.ColorTiro = Convert.ToInt32(RadGrid1.Items[i]["ColorTiro"].Text);
+                xm.ColorRetiro = Convert.ToInt32(RadGrid1.Items[i]["ColorRetiro"].Text);
+                xm.Colores = Convert.ToInt32(RadGrid1.Items[i]["Colores"].Text);
+                xm.ColorEspecial = Convert.ToInt32(RadGrid1.Items[i]["ColorEspecial"].Text);
                 listaFormato.Add(xm);
             }
             if (e.CommandName == "CustomDelete")
@@ -391,7 +476,10 @@ namespace Intranet.ModuloPrinergy.View
                 txtInicio.Text = item["Inicio"].Text;
                 txtFormatoX.Text = item["FormatoX"].Text;
                 txtFormatoY.Text= item["FormatoY"].Text;
-                DropDownList1.SelectedItem.Text= item["Papel"].Text;
+                DropDownList1.SelectedItem.Text = item["Papel"].Text;
+                ddlTiro.SelectedValue = item["ColorTiro"].Text;
+                ddlRetiro.SelectedValue = item["ColorRetiro"].Text;
+                ddlColorEspecial.SelectedValue = item["ColorEspecial"].Text;
                 btnAgregar.Visible = false;
                 btnModificar.Visible = true;
             } 
@@ -412,6 +500,10 @@ namespace Intranet.ModuloPrinergy.View
                 xm.FormatoX = Convert.ToInt32(RadGrid1.Items[i]["FormatoX"].Text);
                 xm.FormatoY = Convert.ToInt32(RadGrid1.Items[i]["FormatoY"].Text);
                 xm.Papel = RadGrid1.Items[i]["Papel"].Text;
+                xm.ColorTiro = Convert.ToInt32(RadGrid1.Items[i]["ColorTiro"].Text);
+                xm.ColorRetiro = Convert.ToInt32(RadGrid1.Items[i]["ColorRetiro"].Text);
+                xm.Colores = Convert.ToInt32(RadGrid1.Items[i]["Colores"].Text);
+                xm.ColorEspecial = Convert.ToInt32(RadGrid1.Items[i]["ColorEspecial"].Text);
                 listaFormato.Add(xm);
             }
             if (txtNombreGrupo.Text != "" && txtPaginas.Text != "" && txtInicio.Text != "" && txtFormatoX.Text != "" && txtFormatoY.Text != "")
@@ -426,7 +518,10 @@ namespace Intranet.ModuloPrinergy.View
                     obj.FormatoX = Convert.ToInt32(txtFormatoX.Text);
                     obj.FormatoY = Convert.ToInt32(txtFormatoY.Text);
                     obj.Papel = DropDownList1.SelectedItem.ToString();
-
+                    obj.ColorTiro =Convert.ToInt32(ddlTiro.SelectedValue);
+                    obj.ColorRetiro = Convert.ToInt32(ddlRetiro.SelectedValue);
+                    obj.Colores = ((Convert.ToInt32(ddlTiro.SelectedValue) > Convert.ToInt32(ddlRetiro.SelectedValue)) ? Convert.ToInt32(ddlTiro.SelectedValue) : Convert.ToInt32(ddlRetiro.SelectedValue));
+                    obj.ColorEspecial = Convert.ToInt32(ddlColorEspecial.SelectedValue);
                     txtNombreGrupo.Text = "";
                     txtPaginas.Text = "";
                 }
